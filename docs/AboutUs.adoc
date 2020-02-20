@@ -13,7 +13,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Ashleigh Aathar
-image::placeholder.png[width="150", align="left"]
+image::ashleigh.png[width="150", align="left"]
 {empty}[https://github.com/airshhlay[Github]] [<<ashleigh#, portfolio>>]
 
 Role: Developer +
@@ -31,7 +31,7 @@ Responsibilities: Undo + Redo and Detect Duplicates
 '''
 
 === Qiu Jing Ying
-image::JingYing.png[width="300", align="left"]
+image::jingying.png[width="150", align="left"]
 {empty}[http://github.com/haveaqiupill[Github]] [<<jingying#, portfolio>>]
 
 Role: Developer + 
