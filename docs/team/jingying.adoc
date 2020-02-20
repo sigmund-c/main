@@ -1,4 +1,4 @@
-= John Doe - Project Portfolio
+= Jing Ying - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
