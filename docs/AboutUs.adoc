@@ -13,45 +13,37 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Ashleigh Aathar
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
+image::placeholder.png[width="150", align="left"]
+{empty}[https://github.com/airshhlay[Github]] [<<ashleigh#, portfolio>>]
 
-Role: Project Advisor
+Role: Developer +
+Responsibilities: Prioritising + Testing Self
 
 '''
 
 === Phaedra Tan
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
+image::placeholder.png[width="150", align="left"]
+{empty}[http://github.com/phaebaez[Github]] [<<phaedra#, portfolio>>]
 
-Role: Team Lead +
-Responsibilities: UI
+Role: Developer +
+Responsibilities: Undo + Redo and Detect Duplicates
 
 '''
 
 === Qiu Jing Ying
-image::JingYing.png[width="150", align="left"]
-{empty}[http://github.com/haveaqiupill[github]] [<<jingying#, portfolio>>]
+image::JingYing.png[width="300", align="left"]
+{empty}[http://github.com/haveaqiupill[Github]] [<<jingying#, portfolio>>]
 
-Role: Developer, UI Designer + 
-Responsibilities: Finding/Filtering of Sub-topics/Main topics
+Role: Developer + 
+Responsibilities: Finding/Filtering of Sub-topics/Main topics and UI
 
 '''
 
 === Sigmund Chianasta
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+image::placeholder.png[width="150", align="left"]
+{empty}[http://github.com/sigmund-c[Github]] [<<sigmund#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Dev Ops + Threading
-
-'''
-
-=== Benson Meier
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
-
-Role: Developer +
-Responsibilities: UI
+Responsibilities: Inheritance of Cards from Deck + Statistics
 
 '''
