@@ -34,7 +34,7 @@ Responsibilities: Undo + Redo and Detect Duplicates
 image::jingying.png[width="150", align="left"]
 {empty}[http://github.com/haveaqiupill[Github]] [<<jingying#, portfolio>>]
 
-Role: Developer + 
+Role: Developer +
 Responsibilities: Finding/Filtering of Sub-topics/Main topics and UI
 
 '''
