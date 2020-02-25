@@ -13,8 +13,8 @@
 <li><a href="#quick-start">2. Quick Start</a></li>
 <li><a href="#Features">3. Features</a>
 <ul class="sectlevel2">
-<li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
-<li><a href="#adding-a-person-code-add-code">3.2. Adding a person: <code>add</code></a></li>
+<li><a href="#basic-features">3.1. Basic Features</a></li>
+<li><a href="#app-wide-features">3.2. App-wide Features</a></li>
 <li><a href="#listing-all-persons-code-list-code">3.3. Listing all persons : <code>list</code></a></li>
 <li><a href="#editing-a-person-code-edit-code">3.4. Editing a person : <code>edit</code></a></li>
 <li><a href="#locating-persons-by-name-code-find-code">3.5. Locating persons by name: <code>find</code></a></li>
@@ -117,17 +117,158 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></h3>
+<h3 id="basic-features"><a class="link" href="#basic-features">3.1. Basic Features</a></h3>
+<div class="sect3">
+<h4 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.1.1. Viewing help : <code>help</code></a></h4>
 <div class="paragraph">
-<p>Format: <code>help</code></p>
+<p>Lists all the available commands that a user can enter.<br>
+Format: <code>help</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="saving-data"><a class="link" href="#saving-data">3.1.2. Saving data</a></h4>
+<div class="paragraph">
+<p>The data is automatically saved into the hard disk after the user enters any command that changes the data</p>
+</div>
+<div class="paragraph">
+<p>There is no need to save manually.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="exiting-program-code-exit-code"><a class="link" href="#exiting-program-code-exit-code">3.1.3. Exiting program: <code>exit</code></a></h4>
+<div class="paragraph">
+<p>Exits the program.
+Format: <code>exit</code></p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">3.2. Adding a person: <code>add</code></a></h3>
+<h3 id="app-wide-features"><a class="link" href="#app-wide-features">3.2. App-wide Features</a></h3>
+<div class="sect3">
+<h4 id="searching-all-decks-code-search-all-code"><a class="link" href="#searching-all-decks-code-search-all-code">3.2.1. Searching all decks: <code>search all</code></a></h4>
 <div class="paragraph">
-<p>Adds a person to the address book<br>
-Format: <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
+<p>Searches across all decks and returns all decks and flashcards that contain any of the given keywords.<br>
+Format: <code>search all KEYWORD</code> [MORE_KEYWORDS]</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g cs2040 will match CS2040</p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. Science Module will match Module Science</p>
+</li>
+<li>
+<p>For decks, only the deck title is searched. For flashcards, both the question and answer are searched.</p>
+</li>
+<li>
+<p>The keyword does not need to match a word within the deck’s title exactly . e.g. cs will match with cs2030</p>
+</li>
+<li>
+<p>Decks with titles or flashcards with questions or answers that match at least one of the keywords will be returned.<br>
+e.g. Java notes will return Java notes, Javascript notes, C++ notes.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>search all cs2106</code><br>
+Returns <code>cs2106 (deck)</code> and <code>is cs2106 a core mod in the school of computing? (flashcard)</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="listing-all-decks-code-list-all-code"><a class="link" href="#listing-all-decks-code-list-all-code">3.2.2. Listing all decks: <code>list all</code></a></h4>
+<div class="paragraph">
+<p>Shows a list of all the decks in the library.<br>
+Format: <code>list all</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="clearing-all-decks-code-clear-all-code"><a class="link" href="#clearing-all-decks-code-clear-all-code">3.2.3. Clearing all decks: <code>clear all</code></a></h4>
+<div class="paragraph">
+<p>Clears all entries (both decks and cards)  from the library.<br>
+Format: <code>clear all</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="filtering-by-tag-code-filter-tag-code"><a class="link" href="#filtering-by-tag-code-filter-tag-code">3.2.4. Filtering by tag: <code>filter tag</code></a></h4>
+<div class="paragraph">
+<p>Filters across all decks and only displays the decks with the specific tag.
+Format: <code>filter tag t/TAG_TITLE</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Filtering by tag is case insensitive. e.g <code>cs2040</code> will match <code>CS2040</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>filter tag t/Computing</code><br>
+Returns <code>cs2040</code>, <code>cs3223</code> and <code>cs1101s</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="filtering-by-keyword-code-filter-keyword-code"><a class="link" href="#filtering-by-keyword-code-filter-keyword-code">3.2.5. Filtering by keyword: <code>filter keyword</code></a></h4>
+<div class="paragraph">
+<p>Filters across all decks and only displays the cards with questions or answers that contain the specific keyword.<br>
+Format: <code>filter keyword KEYWORD</code></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Filtering by keyword is case insensitive. e.g programming will match Programming</p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. Javascript programming language will match with programming language Javascript.</p>
+</li>
+<li>
+<p>The keyword does not need to match a word within the question or answer exactly. e.g. Java will match with Javascript.</p>
+</li>
+<li>
+<p>Flashcards that match at least one of the keywords will be returned. e.g. searching the word programming will return object-oriented programming… and Java programming language…</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>filter keyword language</code><br>
+Returns all cards that contain the word <code>language</code> in the question, answer or both.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="undoing-command-code-undo-code"><a class="link" href="#undoing-command-code-undo-code">3.2.6. Undoing command: <code>undo</code></a></h4>
+<div class="paragraph">
+<p>Undoes latest command.
+Format: <code>undo</code></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="redoing-command-code-redo-code"><a class="link" href="#redoing-command-code-redo-code">3.2.7. Redoing command: <code>redo</code></a></h4>
+<div class="paragraph">
+<p>Redoes latest command.
+Format: <code>redo</code></p>
+</div>
+<hr>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -152,6 +293,7 @@ A person can have any number of tags (including 0)
 <p><code>add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal</code></p>
 </li>
 </ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -363,4 +505,4 @@ e.g. <code>find James Jake</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-02-25 09:11:17 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-02-25 09:32:14 UTC</div></div></div></body></html>
