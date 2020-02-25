@@ -276,16 +276,38 @@ Refer to the guide <<DevOps#, here>>.
 
 [appendix]
 == Product Scope
+*Target users*: NUS School of Computing students
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+
+* enrolled in content-heavy modules in university
+* has a need for an effective way to revise and memorise content
+* values efficiency
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*:
+
+1. Time efficient
+* It is easier for fast typers to add and delete flashcards
+* Unlike regular GUI apps in the market, minimal navigation and clicking is required
+* Faster loading time for CLI applications
+
+2. No steep learning curve
+* Command words are intuitive and uncomplicated
+* Easy for computing students to learn and remember
+
+3. Prioritises cards
+* More tests for flashcards that the student got wrong
+
+4. Flexible answering
+* Students can paraphrase their answers, and manually evaluate if their answers are correct
+* No need for word-for-word answers
+* Accommodates different module types and scenarios eg. having to describe a situation, or a diagram
+* Paraphrasing is also a much more effective way to learn, compared to rote memorisation
 
 [appendix]
 == User Stories
@@ -358,8 +380,32 @@ _{More to be added}_
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
+[[test-session]] Test Session::
+A session started by the user when the user types `test INDEX`. Shows the question on each flashcard in the deck at `INDEX` sequentially to the user, and requires the user to input an answer before proceeding to the next flashcard.
+
+[[flashcard]] Flash Card::
+A card created by the user to test themselves. Contains a question and an answer.
+
+Example
+
+ Question: `Give the code to create a new ArrayList containing Integers`
+ Answer: `ArrayList<Integer> lst = new ArrayList<>();`
+
+[[deck]] Deck::
+A group containing flashcards belonging to the same category, both of which are created and defined by the user.
+
+Example
+
+ A deck named "CS2103T" contains the flashcards testing CS2103T content.
+
+[[tag]] Tag::
+A single word that can be attached to a deck. Typically describes the category the deck belongs to, and is used to filter and organise the user's flashcards.
+
+Example
+
+ A tag called "computing" can be assigned to decks named "CS2103T", "CS2101" and "CS3223". When the user filters their deck by the tag "computing", these 3 decks will be shown. (These 3 modules are read in the School of Computing)
+
+
 
 [appendix]
 == Product Survey
