@@ -93,26 +93,26 @@ Returns a new deck titled `cs1101s` with the tags `Hard` and `CS`
 Creates a new card to be added to the deck.
 Format: `add card n/DECK_TITLE n/CARD_TYPE`
 
-* The variable CARD_TYPE can only take the values of ‘MCQ’, ‘True/False’ or ‘Short Answer’ or ‘Matching’. Any other values will cause the application to display an error message. 
-* When a card is created, the question field of the card will be set to the default value of ‘Please type your question here’. 
-* Depending on the CARD_TYPE inputted by the user, the answer field of the card will be set to different default values. 
-* For ‘MCQ’, the answer field will contain 4 options labelled ‘A’, ‘B’, ‘C’ and ‘D’, and an additional label that reads ‘You can also enter your answer in the command field’. 
+* The variable CARD_TYPE can only take the values of ‘MCQ’, ‘True/False’ or ‘Short Answer’ or ‘Matching’. Any other values will cause the application to display an error message.
+* When a card is created, the question field of the card will be set to the default value of ‘Please type your question here’.
+* Depending on the CARD_TYPE inputted by the user, the answer field of the card will be set to different default values.
+* For ‘MCQ’, the answer field will contain 4 options labelled ‘A’, ‘B’, ‘C’ and ‘D’, and an additional label that reads ‘You can also enter your answer in the command field’.
 * For ‘True/False’, the answer field will contain 2 options labelled ‘True’ and ‘False’, and an additional label that reads ‘You can also enter your answer in the command field’.
-* For ‘Short Answer’, the answer field will contain a label that reads ‘You can also enter your answer in the command field’. 
+* For ‘Short Answer’, the answer field will contain a label that reads ‘You can also enter your answer in the command field’.
 
 Examples:
 
 * `add card n/cs1101s n/MCQ` +
 Returns a new card belonging to the deck `cs1101s` and of the type `MCQ`
 
-=== Editing 
+=== Editing
 
 ==== Editing a deck: `edit deck`
 
 Edits an existing deck in the library.
 Format: `edit deck INDEX [ n/TITLE] [t/TAG]…`
 
-* Edits the decks at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …​
+* Edits the decks at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the deck will be removed i.e adding of tags is not cumulative.
@@ -131,7 +131,7 @@ Edits the title of the 2nd deck to be `cs2040` and clears all existing tags.
 Edits an existing card in the deck.
 Format: `edit card INDEX [q/QUESTION] [a/ANSWER] [t/TAG]…`
 
-* Edits the card at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …​
+* Edits the card at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the card will be removed i.e adding of tags is not cumulative.
@@ -145,7 +145,7 @@ Edits the question of the 1st card to be `What does MVC stand for?`.
 * `edit card 2 a/cs2040 t/` +
 Edits the answer of the 2nd card to be `cs2040` and clears all existing tags.
 
-=== Listing 
+=== Listing
 
 ==== Listing all decks: `list all`
 
@@ -157,7 +157,7 @@ Format: `list all`
 Shows a list of all the cards in a particular deck. This command is only valid after you enter a deck.
 Format: `list deck`
 
-=== Clearing 
+=== Clearing
 
 ==== Clearing all decks: `clear all`
 
@@ -171,7 +171,7 @@ Format: `clear deck n/DECK_TITLE`
 
 Examples:
 
-* `clear deck n/cs2105` + 
+* `clear deck n/cs2105` +
 Clears all the cards in the deck `cs2105`
 
 === Deleting
@@ -183,7 +183,7 @@ Format: `delete deck INDEX`
 
 * Deletes the deck at the specified INDEX.
 * The index refers to the index number shown in the complete list of decks.
-* The index must be a positive integer 1, 2, 3, …​
+* The index must be a positive integer 1, 2, 3, …
 
 Examples:
 
@@ -195,7 +195,7 @@ Deletes the 2nd deck in the library.
 `delete deck 1` +
 Deletes the 1st deck in the results of the search command.
 
-=== Searching 
+=== Searching
 
 ==== Searching all decks: `search all`
 
@@ -205,7 +205,7 @@ Format: `search all KEYWORD` [MORE_KEYWORDS]
 * The search is case insensitive. e.g cs2040 will match CS2040
 * The order of the keywords does not matter. e.g. Science Module will match Module Science
 * For decks, only the deck title is searched. For flashcards, both the question and answer are searched.
-* The keyword does not need to match a word within the deck’s title exactly . e.g. cs will match with cs2030
+* The keyword does not need to match a word within the deck’s title exactly . e.g. cs will match with cs2030.
 * Decks with titles or flashcards with questions or answers that match at least one of the keywords will be returned. +
 e.g. Java notes will return Java notes, Javascript notes, C++ notes.
 
@@ -223,7 +223,7 @@ Format: `search deck KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. Science Module will match Module Science
 * Only the title is searched.
 * The keyword does not need to match a word within the deck’s title exactly . e.g. cs will match with cs2030
-* Decks with titles that match at least one of the keywords will be returned. e.g. Java notes will return Java notes, Javascript notes, C++ notes. 
+* Decks with titles that match at least one of the keywords will be returned. e.g. Java notes will return Java notes, Javascript notes, C++ notes.
 
 Examples:
 
@@ -238,11 +238,11 @@ Returns `cs2040` and `cs2030`
 Finds the cards with a question that contain any of the given keywords.
 Format: `search card KEYWORD [MORE_KEYWORDS]`
 
-* The search is case insensitive. e.g programming will match Programming 
+* The search is case insensitive. e.g programming will match Programming.
 * The order of the keywords does not matter. e.g. Javascript programming language will match with programming language Javascript.
-* Both the question and the answer can be searched. As long as the flashcard has a question or answer that contains the keyword, that flashcard will be returned. 
+* Both the question and the answer can be searched. As long as the flashcard has a question or answer that contains the keyword, that flashcard will be returned.
 * The keyword does not need to match a word within the question or answer exactly. e.g. Java will match with Javascript.
-* Flashcards with questions or answers that match at least one of the keywords will be returned. e.g. searching the word programming will return object-oriented programming… and Java programming language… 
+* Flashcards with questions or answers that match at least one of the keywords will be returned. e.g. searching the word programming will return object-oriented programming… and Java programming language…
 
 Examples:
 
@@ -259,26 +259,26 @@ Format: `delete INDEX n/DECK_TITLE`
 
 * Deletes the card at the specified INDEX of the deck.
 * The index refers to the index number shown in the complete list of flashcards in the deck.
-* The index must be a positive integer 1, 2, 3, …​
+* The index must be a positive integer 1, 2, 3, …
 
 Examples:
 
-* `list cards` + 
-`delete card 2` n/2030 + 
+* `list cards` +
+`delete card 2` n/2030 +
 Deletes the 2nd flash card in the `cs2030` deck.
 
-* `search card java` + 
+* `search card java` +
 `delete card 1` +
 Deletes the 1st card in the results of the search card command.
 
-=== Replacing image 
+=== Replacing image
 
 ==== Replacing a deck image: `replace deck image`
 
 Replaces the photo of an existing deck in the library. By default, all decks will have a default logo as shown in our wireframe.
 Format: `replace deck photo INDEX n/PHOTO_PATH`
 
-* Replaces the photo of the deck at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …​
+* Replaces the photo of the deck at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
 * The application will display a text label that reads ‘You can enter the path of your image into the command field or drag and drop your image into the command field.’
 
 Examples:
@@ -291,7 +291,7 @@ Replaces the photo of the 1st deck to the photo that the file path directs to.
 Replaces the photo of an existing card in a specified deck. By default, all cards will have a default image as shown in our wireframe.
 Format: `replace card image n/DECK_TITLE INDEX n/PHOTO_PATH`
 
-* Replaces the photo of the card belonging to the deck with that DECK_TITLE, whereby the card is at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …​
+* Replaces the photo of the card belonging to the deck with that DECK_TITLE, whereby the card is at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
 * The application will display a text label that reads ‘You can enter the path of your image into the command field or drag and drop your image into the command field.’
 
 Examples:
@@ -299,11 +299,11 @@ Examples:
 * `replace card image n/cs3230 1 n/src/resources/images/img.PNG.` +
 Replaces the photo of the 1st card of the `cs3230` deck with the photo that the file path directs to.
 
-=== Filtering 
+=== Filtering
 
 ==== Filtering by tag: `filter tag`
 
-Filters across all decks and only displays the decks with the specific tag. 
+Filters across all decks and only displays the decks with the specific tag.
 Format: `filter tag t/TAG_TITLE`
 
 * Filtering by tag is case insensitive. e.g cs2040 will match CS2040
@@ -311,50 +311,50 @@ Format: `filter tag t/TAG_TITLE`
 Examples:
 
 * `filter tag t/Computing` +
-Returns `cs2040`, `cs3223` and `cs1101s`. 
+Returns `cs2040`, `cs3223` and `cs1101s`.
 
 
 ==== Filtering by keyword: `filter keyword`
 
-Filters across all decks and only displays the cards with questions or answers that contain the specific keyword.  
+Filters across all decks and only displays the cards with questions or answers that contain the specific keyword.
 Format: `filter keyword KEYWORD`
 
-* Filtering by keyword is case insensitive. e.g programming will match Programming 
+* Filtering by keyword is case insensitive. e.g programming will match Programming.
 * The order of the keywords does not matter. e.g. Javascript programming language will match with programming language Javascript.
 * The keyword does not need to match a word within the question or answer exactly. e.g. Java will match with Javascript.
-* Flashcards that match at least one of the keywords will be returned. e.g. searching the word programming will return object-oriented programming… and Java programming language… 
+* Flashcards that match at least one of the keywords will be returned. e.g. searching the word programming will return object-oriented programming… and Java programming language…
 
 Examples:
 
 * `filter keyword language` +
-Returns all cards that contain the word *language* in the question, answer or both. 
+Returns all cards that contain the word *language* in the question, answer or both.
 
 === Prioritising
 
-Cards that the user has answered wrongly to (user input does not match with answer) is automatically moved to the back of the testing session. The user will be able to reattempt the same flashcard again later in the testing session.  
+Cards that the user has answered wrongly to (user input does not match with answer) is automatically moved to the back of the testing session. The user will be able to reattempt the same flashcard again later in the testing session.
 
 There is no need to prioritise manually.
 
-=== Testing 
+=== Testing
 
-==== Testing deck: test deck 
+==== Testing deck: test deck
 
-Creates a test session that comprises all the questions of the flash card belonging to the specific deck. 
+Creates a test session that comprises all the questions of the flash card belonging to the specific deck.
 Format: `test deck INDEX`
 
-* Creates a test session of the deck at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …​
-* Users are to input the answer in the command line. 
-* If the user input does not match the answer of the flashcard, the answer will be marked as ‘WRONG’ and the flash card will be added to the back of the test session. 
-* If the user input matches the answer of the flashcard, the answer will be marked as ‘CORRECT’ and the flash card will be removed from the current test session. 
-* Test session also comes with an inbuilt timer. If the user is unable to answer all the questions before the timer counts down to 0, the questions that have not been answered will all be marked as wrong. The test session will end and the final grades will be displayed on the screen. 
-* Test session data is saved automatically. Even if user quits the test session halfway, the current data will not be lost. 
+* Creates a test session of the deck at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
+* Users are to input the answer in the command line.
+* If the user input does not match the answer of the flashcard, the answer will be marked as ‘WRONG’ and the flash card will be added to the back of the test session.
+* If the user input matches the answer of the flashcard, the answer will be marked as ‘CORRECT’ and the flash card will be removed from the current test session.
+* Test session also comes with an inbuilt timer. If the user is unable to answer all the questions before the timer counts down to 0, the questions that have not been answered will all be marked as wrong. The test session will end and the final grades will be displayed on the screen.
+* Test session data is saved automatically. Even if user quits the test session halfway, the current data will not be lost.
 
 Examples:
 
-* `test deck 1` + 
+* `test deck 1` +
 Creates a test session for the 1st deck.
 
-=== Undo/Redo 
+=== Undo/Redo
 
 ==== Undoing command: `undo`
 
@@ -370,37 +370,37 @@ Format: `redo`
 
 ==== Detecting duplicate deck
 
-Upon adding a new deck, the application automatically checks if there are any existing decks with the same title. Only decks with unique titles can be successfully added. 
+Upon adding a new deck, the application automatically checks if there are any existing decks with the same title. Only decks with unique titles can be successfully added.
 
 ==== Detecting duplicate card
 
-Upon adding a new card to a specific deck, the application automatically checks if there are any existing cards with the same question in that deck. Only cards with unique questions can be successfully added. 
+Upon adding a new card to a specific deck, the application automatically checks if there are any existing cards with the same question in that deck. Only cards with unique questions can be successfully added.
 
-If there is a card with the same question but it is in a different deck, the card can still be successfully added. 
+If there is a card with the same question but it is in a different deck, the card can still be successfully added.
 
-=== Statistics 
+=== Statistics
 
 ==== Displaying all statistics: `stats all`
 
-Displays the statistics across all decks. 
+Displays the statistics across all decks.
 Format: `stats all`
 
-* Average time spent on each deck, average number of questions completed per week, total number of questions completed for that week and the number of decks associated with each tag. 
-* A graphical display in the form of a pie chart will also be used to represent the statistics. 
+* Average time spent on each deck, average number of questions completed per week, total number of questions completed for that week and the number of decks associated with each tag.
+* A graphical display in the form of a pie chart will also be used to represent the statistics.
 
 ==== Displaying deck statistics: `stats deck`
 
-Displays the statistics of a specific deck. 
+Displays the statistics of a specific deck.
 Format: `stats deck`
 
-* Displayed statistics consists of average time spent on the deck, total number of questions in that deck completed in that week, time spend on the test session for that deck. 
-* A graphical display in the form of a pie chart will also be used to represent the statistics. 
+* Displayed statistics consists of average time spent on the deck, total number of questions in that deck completed in that week, time spend on the test session for that deck.
+* A graphical display in the form of a pie chart will also be used to represent the statistics.
 
 === Syncing across multiple platforms: sync [coming in v2.0]
 
-=== Playing memory games: game [coming in v2.0] 
+=== Playing memory games: game [coming in v2.0]
 
-=== Customising flashcards: custom [coming in v2.0] 
+=== Customising flashcards: custom [coming in v2.0]
 
 == FAQ
 
