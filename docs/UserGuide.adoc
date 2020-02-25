@@ -52,7 +52,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
-=== Basic Features 
+=== Basic Features
 
 ==== Viewing help : `help`
 
@@ -70,7 +70,7 @@ There is no need to save manually.
 Exits the program.
 Format: `exit`
 
-=== App-wide Features 
+=== App-wide Features
 
 ==== Searching all decks: `search all`
 
@@ -79,10 +79,10 @@ Format: `search all KEYWORD` [MORE_KEYWORDS]
 
 * The search is case insensitive. e.g cs2040 will match CS2040
 * The order of the keywords does not matter. e.g. Science Module will match Module Science
-* For decks, only the deck title is searched. For flashcards, both the question and answer are searched. 
+* For decks, only the deck title is searched. For flashcards, both the question and answer are searched.
 * The keyword does not need to match a word within the deck’s title exactly . e.g. cs will match with cs2030
 * Decks with titles or flashcards with questions or answers that match at least one of the keywords will be returned. +
-e.g. Java notes will return Java notes, Javascript notes, C++ notes. 
+e.g. Java notes will return Java notes, Javascript notes, C++ notes.
 
 Examples:
 
@@ -101,25 +101,25 @@ Format: `clear all`
 
 ==== Filtering by tag: `filter tag`
 
-Filters across all decks and only displays the decks with the specific tag. 
+Filters across all decks and only displays the decks with the specific tag.
 Format: `filter tag t/TAG_TITLE`
 
 * Filtering by tag is case insensitive. e.g `cs2040` will match `CS2040`
- 
+
 Examples:
 
 * `filter tag t/Computing` +
-Returns `cs2040`, `cs3223` and `cs1101s`. 
+Returns `cs2040`, `cs3223` and `cs1101s`.
 
 ==== Filtering by keyword: `filter keyword`
 
 Filters across all decks and only displays the cards with questions or answers that contain the specific keyword. +
 Format: `filter keyword KEYWORD`
 
-* Filtering by keyword is case insensitive. e.g programming will match Programming 
+* Filtering by keyword is case insensitive. e.g programming will match Programming
 * The order of the keywords does not matter. e.g. Javascript programming language will match with programming language Javascript.
 * The keyword does not need to match a word within the question or answer exactly. e.g. Java will match with Javascript.
-* Flashcards that match at least one of the keywords will be returned. e.g. searching the word programming will return object-oriented programming… and Java programming language… 
+* Flashcards that match at least one of the keywords will be returned. e.g. searching the word programming will return object-oriented programming… and Java programming language…
 
 Examples:
 
@@ -128,12 +128,12 @@ Returns all cards that contain the word `language` in the question, answer or bo
 
 ==== Undoing command: `undo`
 
-Undoes latest command. 
+Undoes latest command.
 Format: `undo`
 
 ==== Redoing command: `redo`
 
-Redoes latest command. 
+Redoes latest command.
 Format: `redo`
 
 
