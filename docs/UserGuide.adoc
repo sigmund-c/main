@@ -70,7 +70,7 @@ There is no need to save manually.
 Exits the program.
 Format: `exit`
 
-=== Adding 
+=== Adding
 
 ==== Adding a deck: `add deck`
 
@@ -79,7 +79,7 @@ Format: `add deck n/TITLE [t/TAG]…`
 
 [Tip]
 A deck can have any number of tags (including 0)
- 
+
 Examples:
 
 * `add n/cs2103T` +
@@ -307,7 +307,7 @@ Filters across all decks and only displays the decks with the specific tag.
 Format: `filter tag t/TAG_TITLE`
 
 * Filtering by tag is case insensitive. e.g cs2040 will match CS2040
- 
+
 Examples:
 
 * `filter tag t/Computing` +
