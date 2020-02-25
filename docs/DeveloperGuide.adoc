@@ -380,8 +380,6 @@ _{More to be added}_
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[test-session]] Test Session::
-A session started by the user when the user types `test INDEX`. Shows the question on each flashcard in the deck at `INDEX` sequentially to the user, and requires the user to input an answer before proceeding to the next flashcard.
 
 [[flashcard]] Flash Card::
 A card created by the user to test themselves. Contains a question and an answer.
@@ -405,7 +403,8 @@ Example
 
  A tag called "computing" can be assigned to decks named "CS2103T", "CS2101" and "CS3223". When the user filters their deck by the tag "computing", these 3 decks will be shown. (These 3 modules are read in the School of Computing)
 
-
+[[test-session]] Test Session::
+A session started by the user when the user wishes to test themselves on the contents of a deck. Each flashcard in the deck specified by the user is shown sequentially, and can only proceed when the user enters the answer to the question.
 
 [appendix]
 == Product Survey
