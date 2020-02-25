@@ -1,4 +1,4 @@
-= AddressBook Level 3 - User Guide
+= CardiB - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level3
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team 10-2`      Since: `Jan 2020`      Licence: `MIT`
 
 == Introduction
 
@@ -70,7 +70,123 @@ There is no need to save manually.
 Exits the program.
 Format: `exit`
 
-=== App-wide Features
+=== Adding 
+
+==== Adding a deck: `add deck`
+
+Creates a new deck to be added to the library.
+Format: `add deck n/TITLE [t/TAG]…`
+
+[Tip]
+A deck can have any number of tags (including 0)
+ 
+Examples:
+* `add n/cs2103T` +
+Returns a new deck titled `cs2103T`
+* `add n/cs1101s t/Hard t/CS` +
+Returns a new deck titled `cs1101s` with the tags `Hard` and `CS`
+
+==== Adding a card: `add card`
+
+Creates a new card to be added to the deck.
+Format: `add card n/DECK_TITLE n/CARD_TYPE`
+
+* The variable CARD_TYPE can only take the values of ‘MCQ’, ‘True/False’ or ‘Short Answer’ or ‘Matching’. Any other values will cause the application to display an error message. 
+* When a card is created, the question field of the card will be set to the default value of ‘Please type your question here’. 
+* Depending on the CARD_TYPE inputted by the user, the answer field of the card will be set to different default values. 
+* For ‘MCQ’, the answer field will contain 4 options labelled ‘A’, ‘B’, ‘C’ and ‘D’, and an additional label that reads ‘You can also enter your answer in the command field’. 
+* For ‘True/False’, the answer field will contain 2 options labelled ‘True’ and ‘False’, and an additional label that reads ‘You can also enter your answer in the command field’.
+* For ‘Short Answer’, the answer field will contain a label that reads ‘You can also enter your answer in the command field’. 
+
+Examples:
+* `add card n/cs1101s n/MCQ` +
+Returns a new card belonging to the deck `cs1101s` and of the type `MCQ`
+
+=== Editing 
+
+==== Editing a deck: `edit deck`
+
+Edits an existing deck in the library.
+Format: `edit deck INDEX [ n/TITLE] [t/TAG]…`
+
+* Edits the decks at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the deck will be removed i.e adding of tags is not cumulative.
+* You can remove all the deck’s tags by typing t/ without specifying any tags after it.
+
+Examples:
+* `edit 1 n/cs2103T` +
+Edits the title of the 1st deck to be `cs2103T`.
+* `edit 2 n/cs2040 t/` +
+Edits the title of the 2nd deck to be `cs2040` and clears all existing tags.
+
+==== Editing a card: `edit card`
+
+Edits an existing card in the deck.
+Format: `edit card INDEX [q/QUESTION] [a/ANSWER] [t/TAG]…`
+
+* Edits the card at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the card will be removed i.e adding of tags is not cumulative.
+* You can remove all the card’s tags by typing t/ without specifying any tags after it.
+
+Examples:
+* `edit card 1 q/What does MVC stand for?` +
+Edits the question of the 1st card to be `What does MVC stand for?`.
+edit card 2 a/cs2040 t/
+Edits the answer of the 2nd card to be `cs2040` and clears all existing tags.
+
+=== Listing 
+
+==== Listing all decks: `list all`
+
+Shows a list of all the decks in the library. +
+Format: `list all`
+
+==== Listing all cards in a deck: `list deck`
+
+Shows a list of all the cards in a particular deck. This command is only valid after you enter a deck.
+Format: `list deck`
+
+=== Clearing 
+
+==== Clearing all decks: `clear all`
+
+Clears all entries (both decks and cards)  from the library. +
+Format: `clear all`
+
+==== Clearing all cards in a deck: `clear deck`
+
+Clears all the cards from the specified deck.
+Format: `clear deck n/DECK_TITLE`
+
+Examples:
+* `clear deck n/cs2105` + 
+Clears all the cards in the deck `cs2105`
+
+=== Deleting
+
+==== Deleting a deck: `delete deck`
+
+Deletes the specified deck from the library.
+Format: `delete deck INDEX`
+
+* Deletes the deck at the specified INDEX.
+* The index refers to the index number shown in the complete list of decks.
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+
+* `list decks` +
+`delete deck 2` +
+Deletes the 2nd deck in the library.
+* `search deck cs2030` +
+`delete deck 1` +
+Deletes the 1st deck in the results of the search command.
+
+=== Searching 
 
 ==== Searching all decks: `search all`
 
@@ -89,15 +205,92 @@ Examples:
 * `search all cs2106` +
 Returns `cs2106 (deck)` and `is cs2106 a core mod in the school of computing? (flashcard)`
 
-==== Listing all decks: `list all`
+==== Searching for a deck: `search deck`
 
-Shows a list of all the decks in the library. +
-Format: `list all`
+Searches for the decks with titles that contain any of the given keywords.
+Format: `search deck KEYWORD [MORE_KEYWORDS]`
 
-==== Clearing all decks: `clear all`
+* The search is case insensitive. e.g cs2040 will match CS2040
+* The order of the keywords does not matter. e.g. Science Module will match Module Science
+* Only the title is searched.
+* The keyword does not need to match a word within the deck’s title exactly . e.g. cs will match with cs2030
+* Decks with titles that match at least one of the keywords will be returned. e.g. Java notes will return Java notes, Javascript notes, C++ notes. 
 
-Clears all entries (both decks and cards)  from the library. +
-Format: `clear all`
+Examples:
+* `search deck cs2106` +
+Returns `cs2106`
+* `search deck cs2040 cs2030` +
+Returns `cs2040` and `cs2030`
+
+==== Searching for a card: `search card`
+
+Finds the cards with a question that contain any of the given keywords.
+Format: `search card KEYWORD [MORE_KEYWORDS]`
+
+* The search is case insensitive. e.g programming will match Programming 
+* The order of the keywords does not matter. e.g. Javascript programming language will match with programming language Javascript.
+* Both the question and the answer can be searched. As long as the flashcard has a question or answer that contains the keyword, that flashcard will be returned. 
+* The keyword does not need to match a word within the question or answer exactly. e.g. Java will match with Javascript.
+* Flashcards with questions or answers that match at least one of the keywords will be returned. e.g. searching the word programming will return object-oriented programming… and Java programming language… 
+
+Examples:
+* `search card cs2106` +
+Returns `cs2106`
+* `search deck cs2040 cs2030` +
+Returns `cs2040` and `cs2030`
+
+==== Deleting a card: `delete card`
+
+Deletes the specified card from a specific deck.
+Format: `delete INDEX n/DECK_TITLE`
+
+* Deletes the card at the specified INDEX of the deck.
+* The index refers to the index number shown in the complete list of flashcards in the deck.
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+* `list cards` + 
+`delete card 2` n/2030 + 
+Deletes the 2nd flash card in the `cs2030` deck.
+* `search card java` + 
+`delete card 1` +
+Deletes the 1st card in the results of the search card command.
+
+=== Replacing image 
+
+==== Replacing a deck image: `replace deck image`
+
+Replaces the photo of an existing deck in the library. By default, all decks will have a default logo as shown in our wireframe.
+Format: `replace deck photo INDEX n/PHOTO_PATH`
+
+* Replaces the photo of the deck at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …​
+* The application will display a text label that reads ‘You can enter the path of your image into the command field or drag and drop your image into the command field.’
+
+Examples:
+* `replace deck image 1 n/src/resources/images/img.PNG.` +
+Replaces the photo of the 1st deck to the photo that the file path directs to.
+
+==== Replacing a card image: `replace card image`
+
+Replaces the photo of an existing card in a specified deck. By default, all cards will have a default image as shown in our wireframe.
+Format: `replace card image n/DECK_TITLE INDEX n/PHOTO_PATH`
+
+* Replaces the photo of the card belonging to the deck with that DECK_TITLE, whereby the card is at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …​
+* The application will display a text label that reads ‘You can enter the path of your image into the command field or drag and drop your image into the command field.’
+
+Examples:
+* `replace card image n/cs3230 1 n/src/resources/images/img.PNG.` +
+Replaces the photo of the 1st card of the `cs3230` deck with the photo that the file path directs to.
+
+=== Filtering 
+
+==== Filtering by tag 
+
+=== Filtering by keyword
+
+---
+
+
 
 ==== Filtering by tag: `filter tag`
 
@@ -136,6 +329,7 @@ Format: `undo`
 Redoes latest command.
 Format: `redo`
 
+=== Deck Features 
 
 
 ---
