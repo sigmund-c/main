@@ -310,7 +310,7 @@ Format: `filter tag t/TAG_TITLE`
  
 Examples:
 
-* `filter tag t/Computing`
+* `filter tag t/Computing` +
 Returns `cs2040`, `cs3223` and `cs1101s`. 
 
 
