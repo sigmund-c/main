@@ -22,7 +22,7 @@ Responsibilities: Prioritising + Testing Self
 '''
 
 === Phaedra Tan
-image::placeholder.png[width="150", align="left"]
+image::phaebaez.png[width="150", align="left"]
 {empty}[http://github.com/phaebaez[Github]] [<<phaedra#, portfolio>>]
 
 Role: Developer +
