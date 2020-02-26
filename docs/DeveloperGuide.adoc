@@ -381,6 +381,7 @@ Use case ends when there are no more flashcards in the test queue.
 
 
 
+[discrete]
 === Use case: Add a new deck
 
 *MSS*
@@ -399,6 +400,11 @@ Use case ends when there are no more flashcards in the test queue.
 +
 ** i. At step 2, CardiBuddy creates a deck with the specified name and tags.
 +
+** ii. Use case ends.
+* 1c. The user tries to create tags with more than one word
++
+** i. CardiBuddy shows the user an error message, as tags cannot have more than one word.
+
 ** ii. Use case ends.
 
 _{More to be added}_
