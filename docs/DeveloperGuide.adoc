@@ -464,17 +464,29 @@ Author: ...
 
 Pros:
 
-* Ability to create user accounts
-* Clean and minimalistic user interface
+* User can create an account
+* Clean user interface
 * Ability to search for decks created by other users
-* Ability to type in answers
+* Ability to turn flashcard questions into 3 different kinds of questions: True and False, MCQ and short answer
+* 3 different ways to test self: Test, Write and Swipe/Flip
+* Ability to play a timed matching game to match questions to their answers
+* "Don't know" option if the user does not know the answer to the question.
 
 Cons:
 
-* Answers need to be written word for word to be marked as correct
-* Unable to view a full list of cards the user got wrong, and cards the user got right
-* More steps needed to create a flash card
-** eg. 
+* Confusing options for tests: "write", "test" and "swipe/flip"
+** Both "write" and "test" tests the user on flashcard content.
+** However, "write" allows the user to force correct on the flashcard while "test" only allows the user to skip the question.
+** Hence answers need to be written word for word to be marked as correct when using "test"
+** The "swipe/flip" test option is not displayed together with the write and test options, and user has to navigate around before stumbling onto it.
+*** These similar options may overwhelm the user with too much choice.
+*** Naming of the options are also not clear (eg. "write")
+
+* Scrolling view of flashcards at the end of test sessions, instead of a list view of the cards and their outcomes.
+* Difficult to add a new flashcard to an existing deck
+** Had to explore many options before finding a "..." button at the top right hand corner, which displayed a dropdown list of options for the set. User has to select edit set, before being able to
+* More confusing naming
+** Statistics (not seen, familiar, mastered for flashcards are nested under the option "Learn"
 
 [appendix]
 == Instructions for Manual Testing
