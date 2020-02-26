@@ -460,7 +460,7 @@ A temporary queue created when a Test Session is started. It stores the flashcar
 
 *Quizlet*
 
-Author: ...
+Author: Andrew Sutherland
 
 Pros:
 
