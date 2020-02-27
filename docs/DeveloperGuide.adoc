@@ -276,16 +276,38 @@ Refer to the guide <<DevOps#, here>>.
 
 [appendix]
 == Product Scope
+*Target users*: NUS School of Computing students
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+
+* enrolled in content-heavy modules in university
+* has a need for an effective way to revise and memorise content
+* values efficiency
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*:
+
+1. Time efficient
+* It is easier for fast typers to add and delete flashcards
+* Unlike regular GUI apps in the market, minimal navigation and clicking is required
+* Faster loading time for CLI applications
+
+2. No steep learning curve
+* Command words are intuitive and uncomplicated
+* Easy for computing students to learn and remember
+
+3. Prioritises cards
+* More tests for flashcards that the student got wrong
+
+4. Flexible answering
+* Students can paraphrase their answers, and manually evaluate if their answers are correct
+* No need for word-for-word answers
+* Accommodates different module types and scenarios eg. having to describe a situation, or a diagram
+* Paraphrasing is also a much more effective way to learn, compared to rote memorisation
 
 [appendix]
 == User Stories
@@ -313,33 +335,77 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `CardiBuddy` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case: Start a test session
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to start a test session with a chosen deck.
+2.  CardiBuddy shows the user the questions in the flashcards, one by one
+3.  User inputs the correct answer
+4.  CardiBuddy compares the user's input with the flashcard's stored answer, and shows the user the outcome (CORRECT) as well as the flashcard's stored answer.
+5. The user chooses to go to the next flashcard
+6. CardiBuddy removes the flashcard from the <<test-queue,test queue>>.
+7. CardiBuddy shows user the question on the next flashcard in the queue.
+
 +
-Use case ends.
+Use case ends when there are no more flashcards in the test queue.
 
 *Extensions*
 
 [none]
-* 2a. The list is empty.
+* 1a. The given index is invalid.
 +
-Use case ends.
+** i. CardiBuddy shows an error message
++
+** ii. Use case resumes at step 1.
++
 
-* 3a. The given index is invalid.
-+
 [none]
-** 3a1. AddressBook shows an error message.
+* 2a. The deck is empty
 +
-Use case resumes at step 2.
+** i. Use case ends.
+
+[none]
+* 3a. The user inputs the wrong answer
++
+** i. When the user chooses to show the next flash card, CardiBuddy adds the flashcard that was wrongly answered to the back of the test queue, to test again later.
+** ii. Use case resumes at 4.
+
+[none]
+* 5a. The user forces CardiBuddy to mark the flashcard as correct, despite the user's answer and flashcard's answers not matching up. _(for non-MCQ and non-True-False questions)_
++
+** i. Use case resumes at 6.
+
+
+
+[discrete]
+=== Use case: Add a new deck
+
+*MSS*
+
+1. User requests to add a new deck
+2. CardiBuddy creates a new deck with the specified name
+
+*Extensions*
+
+[none]
+* 1a. A deck with the same name already exists
++
+** i. CardiBuddy shows an error message, tells the user that there already exists a deck with the same name.
+** ii. Use case ends.
+* 1b. While creating the deck, user also specifies a few tags to attach to the deck.
++
+** i. At step 2, CardiBuddy creates a deck with the specified name and tags.
++
+** ii. Use case ends.
+* 1c. The user tries to create tags with more than one word
++
+** i. CardiBuddy shows the user an error message, as tags cannot have more than one word.
+
+** ii. Use case ends.
 
 _{More to be added}_
 
@@ -347,7 +413,8 @@ _{More to be added}_
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+. Should be able to hold up to 100 decks without a noticeable sluggishness in performance for typical usage.
+. Each deck should be able to hold up to 100 flashcards without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 _{More to be added}_
@@ -358,25 +425,68 @@ _{More to be added}_
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
+
+[[flashcard]] Flashcard::
+A card created by the user to test themselves. Contains a question and an answer.
+
+Example
+
+ Question: `Give the code to create a new ArrayList containing Integers`
+ Answer: `ArrayList<Integer> lst = new ArrayList<>();`
+
+[[deck]] Deck::
+A group containing flashcards belonging to the same category, both of which are created and defined by the user.
+
+Example
+
+ A deck named "CS2103T" contains the flashcards testing CS2103T content.
+
+[[tag]] Tag::
+A single word that can be attached to a deck. Typically describes the category the deck belongs to, and is used to filter and organise the user's flashcards.
+
+Example
+
+ A tag called "computing" can be assigned to decks named "CS2103T", "CS2101" and "CS3223". When the user filters their deck by the tag "computing", these 3 decks will be shown. (These 3 modules are read in the School of Computing)
+
+[[test-session]] Test Session::
+A session started by the user when the user wishes to test themselves on the contents of a deck. Each flashcard in the deck specified by the user is shown sequentially, and can only proceed when the user enters the answer to the question.
+
+
+[[test-queue]] Test Queue::
+A temporary queue created when a Test Session is started. It stores the flashcards that either have not been tested yet, or have been tested but the user got wrong.
 
 [appendix]
 == Product Survey
 
-*Product Name*
+*Quizlet*
 
-Author: ...
+Author: Andrew Sutherland
 
 Pros:
 
-* ...
-* ...
+* User can create an account
+* Clean user interface
+* Ability to search for decks created by other users
+* Ability to turn flashcard questions into 3 different kinds of questions: True and False, MCQ and short answer
+* 3 different ways to test self: Test, Write and Swipe/Flip
+* Ability to play a timed matching game to match questions to their answers
+* "Don't know" option if the user does not know the answer to the question.
 
 Cons:
 
-* ...
-* ...
+* Confusing options for tests: "write", "test" and "swipe/flip"
+** Both "write" and "test" tests the user on flashcard content.
+** However, "write" allows the user to force correct on the flashcard while "test" only allows the user to skip the question.
+** Hence answers need to be written word for word to be marked as correct when using "test"
+** The "swipe/flip" test option is not displayed together with the write and test options, and user has to navigate around before stumbling onto it.
+*** These similar options may overwhelm the user with too much choice.
+*** Naming of the options are also not clear (eg. "write")
+
+* Scrolling view of flashcards at the end of test sessions, instead of a list view of the cards and their outcomes.
+* Difficult to add a new flashcard to an existing deck
+** Had to explore many options before finding a "..." button at the top right hand corner, which displayed a dropdown list of options for the set. User has to select edit set, before being able to
+* More confusing naming
+** Statistics (not seen, familiar, mastered for flashcards are nested under the option "Learn"
 
 [appendix]
 == Instructions for Manual Testing
