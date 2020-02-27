@@ -623,12 +623,21 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <h2 id="product-scope"><a class="link" href="#product-scope">Appendix A: Product Scope</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
+<p><strong>Target users</strong>: NUS School of Computing students</p>
+</div>
+<div class="paragraph">
 <p><strong>Target user profile</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>has a need to manage a significant number of contacts</p>
+<p>enrolled in content-heavy modules in university</p>
+</li>
+<li>
+<p>has a need for an effective way to revise and memorise content</p>
+</li>
+<li>
+<p>values efficiency</p>
 </li>
 <li>
 <p>prefer desktop apps over other types</p>
@@ -645,7 +654,69 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Value proposition</strong>: manage contacts faster than a typical mouse/GUI driven app</p>
+<p><strong>Value proposition</strong>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Time efficient</p>
+<div class="ulist">
+<ul>
+<li>
+<p>It is easier for fast typers to add and delete flashcards</p>
+</li>
+<li>
+<p>Unlike regular GUI apps in the market, minimal navigation and clicking is required</p>
+</li>
+<li>
+<p>Faster loading time for CLI applications</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>No steep learning curve</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Command words are intuitive and uncomplicated</p>
+</li>
+<li>
+<p>Easy for computing students to learn and remember</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Prioritises cards</p>
+<div class="ulist">
+<ul>
+<li>
+<p>More tests for flashcards that the student got wrong</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Flexible answering</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Students can paraphrase their answers, and manually evaluate if their answers are correct</p>
+</li>
+<li>
+<p>No need for word-for-word answers</p>
+</li>
+<li>
+<p>Accommodates different module types and scenarios eg. having to describe a situation, or a diagram</p>
+</li>
+<li>
+<p>Paraphrasing is also a much more effective way to learn, compared to rote memorisation</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -718,27 +789,36 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <h2 id="use-cases"><a class="link" href="#use-cases">Appendix C: Use Cases</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
+<p>(For all use cases below, the <strong>System</strong> is the <code>CardiBuddy</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
-<h3 id="use-case-delete-person" class="discrete">Use case: Delete person</h3>
+<h3 id="use-case-start-a-test-session" class="discrete">Use case: Start a test session</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to list persons</p>
+<p>User requests to start a test session with a chosen deck.</p>
 </li>
 <li>
-<p>AddressBook shows a list of persons</p>
+<p>CardiBuddy shows the user the questions in the flashcards, one by one</p>
 </li>
 <li>
-<p>User requests to delete a specific person in the list</p>
+<p>User inputs the correct answer</p>
 </li>
 <li>
-<p>AddressBook deletes the person</p>
+<p>CardiBuddy compares the user&#8217;s input with the flashcard&#8217;s stored answer, and shows the user the outcome (CORRECT) as well as the flashcard&#8217;s stored answer.</p>
+</li>
+<li>
+<p>The user chooses to go to the next flashcard</p>
+</li>
+<li>
+<p>CardiBuddy removes the flashcard from the <a href="#test-queue">test queue</a>.</p>
+</li>
+<li>
+<p>CardiBuddy shows user the question on the next flashcard in the queue.</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case ends when there are no more flashcards in the test queue.</p>
 </div>
 </li>
 </ol>
@@ -749,20 +829,115 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>2a. The list is empty.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
+<p>1a. The given index is invalid.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>i. CardiBuddy shows an error message</p>
+</li>
+<li>
+<p>ii. Use case resumes at step 1.</p>
+</li>
+</ul>
 </div>
 </li>
 <li>
-<p>3a. The given index is invalid.</p>
+<p>2a. The deck is empty</p>
+<div class="ulist">
+<ul>
+<li>
+<p>i. Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. AddressBook shows an error message.</p>
-<div class="paragraph">
-<p>Use case resumes at step 2.</p>
+<p>3a. The user inputs the wrong answer</p>
+<div class="ulist">
+<ul>
+<li>
+<p>i. When the user chooses to show the next flash card, CardiBuddy adds the flashcard that was wrongly answered to the back of the test queue, to test again later.</p>
+</li>
+<li>
+<p>ii. Use case resumes at 4.</p>
+</li>
+</ul>
 </div>
+</li>
+</ul>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>5a. The user forces CardiBuddy to mark the flashcard as correct, despite the user&#8217;s answer and flashcard&#8217;s answers not matching up. <em>(for non-MCQ and non-True-False questions)</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>i. Use case resumes at 6.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="use-case-add-a-new-deck" class="discrete">Use case: Add a new deck</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to add a new deck</p>
+</li>
+<li>
+<p>CardiBuddy creates a new deck with the specified name</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>1a. A deck with the same name already exists</p>
+<div class="ulist">
+<ul>
+<li>
+<p>i. CardiBuddy shows an error message, tells the user that there already exists a deck with the same name.</p>
+</li>
+<li>
+<p>ii. Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. While creating the deck, user also specifies a few tags to attach to the deck.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>i. At step 2, CardiBuddy creates a deck with the specified name and tags.</p>
+</li>
+<li>
+<p>ii. Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1c. The user tries to create tags with more than one word</p>
+<div class="ulist">
+<ul>
+<li>
+<p>i. CardiBuddy shows the user an error message, as tags cannot have more than one word.</p>
+</li>
+<li>
+<p>ii. Use case ends.</p>
 </li>
 </ul>
 </div>
@@ -783,7 +958,10 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>11</code> or above installed.</p>
 </li>
 <li>
-<p>Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.</p>
+<p>Should be able to hold up to 100 decks without a noticeable sluggishness in performance for typical usage.</p>
+</li>
+<li>
+<p>Each deck should be able to hold up to 100 flashcards without a noticeable sluggishness in performance for typical usage.</p>
 </li>
 <li>
 <p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
@@ -804,9 +982,62 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <dd>
 <p>Windows, Linux, Unix, OS-X</p>
 </dd>
-<dt class="hdlist1"><a id="private-contact-detail"></a> Private contact detail</dt>
+<dt class="hdlist1"><a id="flashcard"></a> Flashcard</dt>
 <dd>
-<p>A contact detail that is not meant to be shared with others</p>
+<p>A card created by the user to test themselves. Contains a question and an answer.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Example</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Question: `Give the code to create a new ArrayList containing Integers`
+Answer: `ArrayList&lt;Integer&gt; lst = new ArrayList&lt;&gt;();`</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="deck"></a> Deck</dt>
+<dd>
+<p>A group containing flashcards belonging to the same category, both of which are created and defined by the user.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Example</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>A deck named "CS2103T" contains the flashcards testing CS2103T content.</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="tag"></a> Tag</dt>
+<dd>
+<p>A single word that can be attached to a deck. Typically describes the category the deck belongs to, and is used to filter and organise the user&#8217;s flashcards.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Example</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>A tag called "computing" can be assigned to decks named "CS2103T", "CS2101" and "CS3223". When the user filters their deck by the tag "computing", these 3 decks will be shown. (These 3 modules are read in the School of Computing)</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="test-session"></a> Test Session</dt>
+<dd>
+<p>A session started by the user when the user wishes to test themselves on the contents of a deck. Each flashcard in the deck specified by the user is shown sequentially, and can only proceed when the user enters the answer to the question.</p>
+</dd>
+<dt class="hdlist1"><a id="test-queue"></a> Test Queue</dt>
+<dd>
+<p>A temporary queue created when a Test Session is started. It stores the flashcards that either have not been tested yet, or have been tested but the user got wrong.</p>
 </dd>
 </dl>
 </div>
@@ -816,10 +1047,10 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <h2 id="product-survey"><a class="link" href="#product-survey">Appendix F: Product Survey</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Product Name</strong></p>
+<p><strong>Quizlet</strong></p>
 </div>
 <div class="paragraph">
-<p>Author: &#8230;&#8203;</p>
+<p>Author: Andrew Sutherland</p>
 </div>
 <div class="paragraph">
 <p>Pros:</p>
@@ -827,10 +1058,25 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p>&#8230;&#8203;</p>
+<p>User can create an account</p>
 </li>
 <li>
-<p>&#8230;&#8203;</p>
+<p>Clean user interface</p>
+</li>
+<li>
+<p>Ability to search for decks created by other users</p>
+</li>
+<li>
+<p>Ability to turn flashcard questions into 3 different kinds of questions: True and False, MCQ and short answer</p>
+</li>
+<li>
+<p>3 different ways to test self: Test, Write and Swipe/Flip</p>
+</li>
+<li>
+<p>Ability to play a timed matching game to match questions to their answers</p>
+</li>
+<li>
+<p>"Don&#8217;t know" option if the user does not know the answer to the question.</p>
 </li>
 </ul>
 </div>
@@ -840,10 +1086,56 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p>&#8230;&#8203;</p>
+<p>Confusing options for tests: "write", "test" and "swipe/flip"</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Both "write" and "test" tests the user on flashcard content.</p>
 </li>
 <li>
-<p>&#8230;&#8203;</p>
+<p>However, "write" allows the user to force correct on the flashcard while "test" only allows the user to skip the question.</p>
+</li>
+<li>
+<p>Hence answers need to be written word for word to be marked as correct when using "test"</p>
+</li>
+<li>
+<p>The "swipe/flip" test option is not displayed together with the write and test options, and user has to navigate around before stumbling onto it.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>These similar options may overwhelm the user with too much choice.</p>
+</li>
+<li>
+<p>Naming of the options are also not clear (eg. "write")</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Scrolling view of flashcards at the end of test sessions, instead of a list view of the cards and their outcomes.</p>
+</li>
+<li>
+<p>Difficult to add a new flashcard to an existing deck</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Had to explore many options before finding a "&#8230;&#8203;" button at the top right hand corner, which displayed a dropdown list of options for the set. User has to select edit set, before being able to</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>More confusing naming</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Statistics (not seen, familiar, mastered for flashcards are nested under the option "Learn"</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -958,4 +1250,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-02-25 15:48:05 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2020-02-27 12:29:58 UTC</div></div></div></body></html>
