@@ -16,7 +16,7 @@ endif::[]
 == What is Cardi Buddy?
 Flash Cards allow you to learn _twice as fast_, and remember longer as proven by decades of cognitive science – they promote studying through active recall, which is one of the practices through which our brains learn most effectively.
 
-*Cardi Buddy (CardiB)* is a flash cards application that allows students to generate their own flash cards and test themselves through a simple Command Line Interface. Through making your own flash cards, you are _processing, summarising and internalizing_ the content that you have learnt and creating _stronger neural pathways_ as opposed to using pre-made decks. 
+*Cardi Buddy (CardiB)* is a flash cards application that allows students to generate their own flash cards and test themselves through a simple Command Line Interface. Through making your own flash cards, you are _processing, summarising and internalizing_ the content that you have learnt and creating _stronger neural pathways_ as opposed to using pre-made decks.
 
 If you can type fast, CardiB can also help you to store revision materials in a blink of an eye. Instead of revising by re-reading lecture notes, CardiB allows you _break down complex concepts into simpler questions_ in multiple flash cards and create test sessions to run through unfamiliar concepts.
 
