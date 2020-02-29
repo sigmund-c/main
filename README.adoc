@@ -1,10 +1,8 @@
 = Cardi Buddy (CardiB)
 
-image:https://api.codacy.com/project/badge/Grade/f8b5ed4e9c134355b556b8fc55befef4[link="https://app.codacy.com/gh/AY1920S2-CS2103T-T10-2/main?utm_source=github.com&utm_medium=referral&utm_content=AY1920S2-CS2103T-T10-2/main&utm_campaign=Badge_Grade_Settings"]
-ifdef::env-github,env-browser[:relfileprefix: docs/]
-
 https://travis-ci.com/AY1920S2-CS2103T-T10-2/main[image:https://travis-ci.com/AY1920S2-CS2103T-T10-2/main.svg?branch=master[Build Status]]
 https://coveralls.io/github/AY1920S2-CS2103T-G09-2/main?branch=master[image:https://coveralls.io/repos/github/AY1920S2-CS2103T-G09-2/main/badge.svg?branch=master[Coverage Status]]
+image:https://api.codacy.com/project/badge/Grade/f8b5ed4e9c134355b556b8fc55befef4[link="https://app.codacy.com/gh/AY1920S2-CS2103T-T10-2/main?utm_source=github.com&utm_medium=referral&utm_content=AY1920S2-CS2103T-T10-2/main&utm_campaign=Badge_Grade_Settings"]
 image:https://img.shields.io/badge/license-MIT-blue.svg[MIT License, link=LICENSE]
 
 ifdef::env-github[]
