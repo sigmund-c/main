@@ -6,7 +6,7 @@ image:https://api.codacy.com/project/badge/Grade/f8b5ed4e9c134355b556b8fc55befef
 image:https://img.shields.io/badge/license-MIT-blue.svg[MIT License, link=LICENSE]
 
 ifdef::env-github[]
-image::docs/images/Ui.png[width="600"]
+image::docs/images/Ui.png[width="900"]
 endif::[]
 
 ifndef::env-github[]
@@ -14,13 +14,26 @@ image::images/Ui.png[width="600"]
 endif::[]
 
 == What is Cardi Buddy?
-*Cardi Buddy* (CardiB) is for students who prefer to use a desktop app to store their revision materials as flashcards. If you can type fast, CardiB can help you to store revision materials quickly. The self-testing features will definitely help you to ace your examinations as opposed to traditional ways of revision by re-reading lecture notes.
+Flash Cards allow you to learn twice as fast, and remember longer as proven by decades of cognitive science – they promote studying through active recall, which is one of the practices through which our brains learn most effectively.
 
-== Site Map
+*Cardi Buddy* (CardiB) is a Flash Cards application that allows students to generate their own flash cards and test themselves using these flashcards through a simple Command Line Interface. Through making your own Flash Cards, you are processing, summarising and internalizing the content that you have learnt and creating stronger neural pathways as opposed to using pre-made decks. 
+
+If you can type fast, CardiB can also help you to store revision materials in a blink of an eye. Instead of revising by re-reading lecture notes, CardiB allows you break down complex concepts into questions into multiple Flash Cards and create test sessions to run through unfamiliar concepts.
+
+In addition, CardiB comes with a multitude of features specially designed for NUS SoC students taking content-heavy modules:
+
+* *Drag and drop images* into Flash Cards to cater to visual learners
+* *Detect duplicates* of Flash Cards to prevent repetition
+* *Tag Flash Cards* for better organization
+* *Search for Flash Cards according to Tags* to access relevant topics more efficiently
+* *Prioritise Flash Cards* that have a higher frequency of incorrect answers in quizzes for more effective testing
+
+
+
+== Table of Contents
 
 * <<UserGuide#, User Guide>>
 * <<DeveloperGuide#, Developer Guide>>
-* <<LearningOutcomes#, Learning Outcomes>>
 * <<AboutUs#, About Us>>
 * <<ContactUs#, Contact Us>>
 
