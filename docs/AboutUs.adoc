@@ -10,10 +10,11 @@ Cardi Buddy (CardiB) is for students who *prefer to use a desktop app to store t
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
+
 == Project Team
 
 === Ashleigh Aathar
-image::ashleigh.png[width="150", align="left"]
+image::airshhlay.png[width="150", align="left"]
 {empty}[https://github.com/airshhlay[Github]] [<<ashleigh#, Portfolio>>]
 
 Role: Developer +
@@ -26,24 +27,39 @@ image::phaebaez.png[width="150", align="left"]
 {empty}[http://github.com/phaebaez[Github]] [<<phaedra#, Portfolio>>]
 
 Role: Developer +
-Responsibilities: Undo + Redo and Detect Duplicates
+Responsibilities: Undo + Redo + Detect Duplicates
 
 '''
 
 === Qiu Jing Ying
-image::jingying.png[width="150", align="left"]
+image::haveaqiupill.png[width="150", align="left"]
 {empty}[http://github.com/haveaqiupill[Github]] [<<jingying#, Portfolio>>]
 
 Role: Developer +
-Responsibilities: Finding/Filtering of Sub-topics/Main topics and UI
+Responsibilities: Finding/Filtering of Sub-topics/Main topics + UI
 
 '''
 
 === Sigmund Chianasta
-image::placeholder.png[width="150", align="left"]
+image::sigmund-c.png[width="150", align="left"]
 {empty}[http://github.com/sigmund-c[Github]] [<<sigmund#, Portfolio>>]
 
 Role: Developer +
 Responsibilities: Inheritance of Cards from Deck + Statistics
 
 '''
+
+== Tutor and Lecturer
+This would not have been possible without the help of our lecturer and tutor.
+
+=== Professor Akshay Narayan
+image::placeholder.png[width="150", align="left"]
+{empty}[http://github.com/akshayknarayan[Github]]
+
+Role: Lecturer
+
+=== Jolyn Tan
+image::jolynnn8d.png[width="150", align="left"]
+{empty}[http://github.com/jolynnn8D[Github]]
+
+Role: Tutor
