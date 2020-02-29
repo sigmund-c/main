@@ -50,11 +50,12 @@ Responsibilities: Inheritance of Cards from Deck + Statistics
 '''
 
 == Tutor and Lecturer
-This would not have been possible without the help of our lecturers and tutor.
+This would not have been possible without the help of our lecturer and tutor.
 
 === Professor Akshay Narayan
 image::placeholder.png[width="150", align="left"]
 {empty}[http://github.com/akshayknarayan[Github]]
+
 Role: Lecturer
 
 === Jolyn Tan
