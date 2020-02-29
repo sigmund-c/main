@@ -58,7 +58,7 @@ image::placeholder.png[width="150", align="left"]
 Role: Lecturer
 
 === Jolyn Tan
-image::jolynnn8D.png[width="150", align="left"]
+image::jolynnn8d.png[width="150", align="left"]
 {empty}[http://github.com/jolynnn8D[Github]]
 
 Role: Tutor
