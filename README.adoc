@@ -32,10 +32,10 @@ What are you waiting for? Give CardiB a go and you will be sure to see improveme
 
 == Table of Contents
 
-* <<UserGuide#, User Guide>>
-* <<DeveloperGuide#, Developer Guide>>
-* <<AboutUs#, About Us>>
-* <<ContactUs#, Contact Us>>
+* <<docs/UserGuide#, User Guide>>
+* <<docs/DeveloperGuide#, Developer Guide>>
+* <<docs/AboutUs#, About Us>>
+* <<docs/ContactUs#, Contact Us>>
 
 == Acknowledgements
 
