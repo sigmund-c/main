@@ -33,21 +33,21 @@ public class TestUtil {
     }
 
     /**
-     * Returns the middle index of the person in the {@code model}'s person list.
+     * Returns the middle index of the deck in the {@code model}'s deck list.
      */
     public static Index getMidIndex(Model model) {
         return Index.fromOneBased(model.getFilteredPersonList().size() / 2);
     }
 
     /**
-     * Returns the last index of the person in the {@code model}'s person list.
+     * Returns the last index of the deck in the {@code model}'s deck list.
      */
     public static Index getLastIndex(Model model) {
         return Index.fromOneBased(model.getFilteredPersonList().size());
     }
 
     /**
-     * Returns the person in the {@code model}'s person list at {@code index}.
+     * Returns the deck in the {@code model}'s deck list at {@code index}.
      */
     public static Person getPerson(Model model, Index index) {
         return model.getFilteredPersonList().get(index.getZeroBased());

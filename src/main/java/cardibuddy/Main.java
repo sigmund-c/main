@@ -1,6 +1,7 @@
-package seedu.address;
+package cardibuddy;
 
 import javafx.application.Application;
+import seedu.address.MainApp;
 
 /**
  * The main entry point to the application.

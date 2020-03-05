@@ -1,4 +1,4 @@
-package seedu.address.commons.core;
+package cardibuddy.commons.core;
 
 /**
  * Container for user visible messages.
