@@ -319,19 +319,19 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use CardiBuddy
 
-|`* * *` |student |delete decks of the modules that I am no longer taking|be more organised
-
-|`* * *` |student |edit my flashcards |change or add extra information whenever I want to
-
-|`* * *`|student|immediately see the questions/flashcards that I get right|know what content I am more familiar with
+|`* * *` |student currently taking cs2105|edit my flashcards |change or add extra information whenever I learn something new
 
 |`* * *` |student practicing for my finals|create test sessions|repeatedly test myself on the same content
+
+|`* * *`|student studying for finals|immediately see the questions/flashcards that I get right|know what content I am more familiar with
 
 |`* * *`|student studying for finals|test flashcards that I got wrong more often|better remember the content
 
 |`* * *` |student taking many modules|create new decks to contain my flashcards|organise my notes and modules
 
 |`* * *`|student taking many modules|easily search for a deck that I want to access|more efficient with my time
+
+|`* * *` |student who likes to keep things organised|delete decks of the modules that I am no longer taking|be more organised
 
 |`* * *` |student with many content-heavy modules|easily search for any flashcards that are relevant to my modules|more efficient with my time
 
