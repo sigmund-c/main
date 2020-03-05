@@ -319,55 +319,56 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use CardiBuddy
 
-|`* * *` |student |create new decks to contain my flashcards|organise my notes and modules
-
-|`* * *` |student |create test sessions|repeatedly test myself on the same content
-
-|`* * *`|student|test flashcards that I got wrong more often|better remember the content
-
-|`* * *`|student|immediately see the questions/flashcards that I get right|know what content I am more familiar with
-
-|`* * *` |student with many content-heavy modules|easily search for any flashcards that are relevant to my modules|more efficient with my time
-
-|`* * *`|student taking many modules|easily search for a deck that I want to access|more efficient with my time
-
 |`* * *` |student |delete decks of the modules that I am no longer taking|be more organised
 
 |`* * *` |student |edit my flashcards |change or add extra information whenever I want to
 
-|`* *`|student who receives flashcard images from her friends|drag and drop the images into the application|conveniently create new flashcards
+|`* * *`|student|immediately see the questions/flashcards that I get right|know what content I am more familiar with
 
-|`* *`|student who owns multiple mobile/computer devices|access flashcards on all my devices|revise them on the go
+|`* * *` |student practicing for my finals|create test sessions|repeatedly test myself on the same content
 
-|`* *`|student with short attention span|play memory games in the application|remember my key concepts better
+|`* * *`|student studying for finals|test flashcards that I got wrong more often|better remember the content
 
-|`* *`|student who likes designing and aesthetics|customise the colours and fonts of the flashcards|
+|`* * *` |student taking many modules|create new decks to contain my flashcards|organise my notes and modules
 
-|`* *` |student |set priority levels for the flashcards I am less familiar with|it will appear more often during future test sessions
+|`* * *`|student taking many modules|easily search for a deck that I want to access|more efficient with my time
 
-|`* *`|student taking timed examinations|time myself during a test session|better prepared to think under timed conditions
+|`* * *` |student with many content-heavy modules|easily search for any flashcards that are relevant to my modules|more efficient with my time
 
 |`* *`|student|revisit previous test sessions|continue my revision
 
+|`* *` |student |set priority levels for the flashcards I am less familiar with|it will appear more often during future test sessions
+
 |`* *`|student|tag flashcards with different topics|filter and revise the topics that I am less familiar with
 
-|`*`|student who constantly travels|view my created cards online|revise them on my mobile devices
+|`* *`|student taking timed examinations|time myself during a test session|better prepared to think under timed conditions
 
-|`*`|student with a short attention span|add animations to my flashcards|remain entertained
+|`* *`|student who likes designing and aesthetics|customise the colours and fonts of the flashcards|
 
-|`*`|student taking modules with other friends|collaborate on decks with other users|help each other revise the content
+|`* *`|student who owns multiple mobile/computer devices|access flashcards on all my devices|revise them on the go
 
-|`*`|student|edit other people's decks|fill in any gaps in my knowledge
+|`* *`|student who receives flashcard images from her friends|drag and drop the images into the application|conveniently create new flashcards
 
-|`*`|student who likes to store content to study on her phone|convert the flashcards to images|so that I can refer to them easily
-
-|`*`|student who needs incentive|earn rewards|will be motivated to use the flashcards more
+|`* *`|student with short attention span|play memory games in the application|remember my key concepts better
 
 |`*`|competitive student|graded on a bell-curve with other Computer Science students who are using the same application|see how well I have revised compared to the rest
 
+|`*`|student|edit other people's decks|fill in any gaps in my knowledge
+
+|`*`|student taking modules with other friends|collaborate on decks with other users|help each other revise the content
+
+|`*`|student who constantly travels|view my created cards online|revise them on my mobile devices
+
+|`*`|student who likes to store content to study on her phone|convert the flashcards to images|so that I can refer to them easily
+
 |`*`|student who likes to study with her friends|send my friends flashcards that I created|share my flashcards with them
 
+|`*`|student who needs incentive|earn rewards|will be motivated to use the flashcards more
+
 |`*`|student who is lazy to type out long questions|read out the questions and answers to the flashcards to automatically add them via voice recognition|
+
+|`*`|student with a short attention span|add animations to my flashcards|remain entertained
+
 |=======================================================================
 
 _{More to be added}_
