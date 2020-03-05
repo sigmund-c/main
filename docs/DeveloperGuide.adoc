@@ -319,7 +319,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use CardiBuddy
 
-|`* * *` |student |create new decks to contain my flashcards|so that I can organise my notes and modules
+|`* * *` |student |create new decks to contain my flashcards|organise my notes and modules
 
 |`* * *` |student |create test sessions|repeatedly test myself on the same content
 
