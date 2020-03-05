@@ -66,10 +66,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String cardibuddy} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code cardibuddy} is invalid.
      */
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);

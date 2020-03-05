@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate deck(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
@@ -41,7 +41,7 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this cardibuddy book into the model's {@code AddressBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
