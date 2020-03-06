@@ -2,7 +2,7 @@ package cardibuddy.model.flashcard;
 
 public class Answer {
 
-    public String answerString;
+    private String answerString;
 
     public Answer(String question) {
         answerString = question;
@@ -15,9 +15,9 @@ public class Answer {
 
     @Override
     public boolean equals(Object other) {
-        return other == this
-                || (other instanceof Question
-                && answerString.equals(((Question) other).questionString));
+        if (other == this) {
+            return true;
+        } else return (other instanceof Answer) && answerString.equals(other.toString());
     }
 
     @Override
