@@ -8,6 +8,7 @@ import cardibuddy.commons.core.index.Index;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
@@ -35,7 +36,7 @@ public class DeleteDeckCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Deck> lastShownList = model.getFilteredDeckList();
+        List<Deck> lastShownList = new ArrayList<>(); // temp
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);

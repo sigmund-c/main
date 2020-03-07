@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fea1b876-4987-4067-bc28-6b2ab36c3ccd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/seedu/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cardibuddy/logic/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/cardibuddy/logic/commands/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardibuddy/.idea/cardibuddy.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardibuddy/.idea/checkstyle-idea.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardibuddy/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardibuddy/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardibuddy/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardibuddy/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardibuddy/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/seedu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/seedu/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +42,7 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="520" />
-    <option name="y" value="486" />
+    <option name="y" value="485" />
     <option name="width" value="1065" />
     <option name="height" value="1040" />
   </component>
@@ -47,6 +52,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -89,12 +96,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/cardibuddy" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../.." />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.75373995" />
@@ -128,7 +133,7 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25302014" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25637585" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
