@@ -5,7 +5,7 @@ import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.model.Model;
 
 import static java.util.Objects.requireNonNull;
-import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_CARDS;
+//import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_CARDS;
 
 /**
  * Lists all cards in the deck to the user.
