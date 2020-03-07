@@ -1,4 +1,4 @@
 package cardibuddy.model.tag;
 
-public class Empty {
+public class Tag {
 }

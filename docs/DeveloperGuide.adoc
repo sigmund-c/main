@@ -316,36 +316,36 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
-|Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use CardiBuddy
+|Priority|As a ... |I want to ... |So that I can...
+|`* * *`|new user |see usage instructions |refer to instructions when I forget how to use CardiBuddy
 
-|`* * *` |student |delete decks of the modules that I am no longer taking|be more organised
+|`* * *`|student currently taking cs2105|edit my flashcards |change or add extra information whenever I learn something new
 
-|`* * *` |student |edit my flashcards |change or add extra information whenever I want to
+|`* * *`|student practicing for my finals|create test sessions|repeatedly test myself on the same content
 
-|`* * *`|student|immediately see the questions/flashcards that I get right|know what content I am more familiar with
+|`* * *`|student studying for finals|see the flashcards that I got correct during test sessions|know what content I am more familiar with
 
-|`* * *` |student practicing for my finals|create test sessions|repeatedly test myself on the same content
+|`* * *`|student studying for finals|test flashcards that I got wrong more often during test sessions|better remember unfamiliar content
 
-|`* * *`|student studying for finals|test flashcards that I got wrong more often|better remember the content
+|`* * *`|student taking many modules|create new decks to contain my flashcards|organise my notes and modules
 
-|`* * *` |student taking many modules|create new decks to contain my flashcards|organise my notes and modules
+|`* * *`|student who is very busy|easily search for a deck that I want to access|more efficient with my time
 
-|`* * *`|student taking many modules|easily search for a deck that I want to access|more efficient with my time
+|`* * *`|student who likes to keep things organised|delete decks of the modules that I am no longer taking|be more organised
 
-|`* * *` |student with many content-heavy modules|easily search for any flashcards that are relevant to my modules|more efficient with my time
+|`* * *`|student with many content-heavy modules|easily search for any flashcards that are relevant to my modules|more efficient with my time
 
 |`* *`|student|revisit previous test sessions|continue my revision
 
-|`* *` |student |set priority levels for the flashcards I am less familiar with|it will appear more often during future test sessions
+|`* *` |student|set priority levels for the flashcards I am less familiar with|it will appear more often during future test sessions
 
 |`* *`|student|tag flashcards with different topics|filter and revise the topics that I am less familiar with
 
 |`* *`|student taking timed examinations|time myself during a test session|better prepared to think under timed conditions
 
-|`* *`|student who likes designing and aesthetics|customise the colours and fonts of the flashcards|
+|`* *`|student who likes designing and aesthetics|customise the colours and fonts of the flashcards|tweak the theme to my preferences
 
-|`* *`|student who owns multiple mobile/computer devices|access flashcards on all my devices|revise them on the go
+|`* *`|student who owns multiple devices|access flashcards on all my devices|revise them while travelling
 
 |`* *`|student who receives flashcard images from her friends|drag and drop the images into the application|conveniently create new flashcards
 
@@ -357,15 +357,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*`|student taking modules with other friends|collaborate on decks with other users|help each other revise the content
 
-|`*`|student who constantly travels|view my created cards online|revise them on my mobile devices
-
 |`*`|student who likes to store content to study on her phone|convert the flashcards to images|so that I can refer to them easily
 
 |`*`|student who likes to study with her friends|send my friends flashcards that I created|share my flashcards with them
 
 |`*`|student who needs incentive|earn rewards|will be motivated to use the flashcards more
-
-|`*`|student who is lazy to type out long questions|read out the questions and answers to the flashcards to automatically add them via voice recognition|
 
 |`*`|student with a short attention span|add animations to my flashcards|remain entertained
 
@@ -409,6 +405,7 @@ Use case ends when there are no more flashcards in the test queue.
 +
 ** i. Use case ends.
 
+*Inclusions*
 [none]
 * 3a. The user inputs the wrong answer
 +
