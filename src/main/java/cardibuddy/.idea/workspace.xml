@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="713ef36c-51a5-4b10-8d33-d91a4863dd1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/logic/parser/CliSyntax.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/commands/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/commands/ExitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/commands/ExitCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/commands/HelpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/commands/deck/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/commands/deck/AddDeckCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/commands/deck/DeleteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/commands/deck/DeleteDeckCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/commands/deck/ListCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/commands/deck/ListDeckCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/commands/flashcard/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/commands/flashcard/AddCardCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/commands/flashcard/DeleteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/commands/flashcard/DeleteCardCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/commands/flashcard/ListCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/commands/flashcard/ListCardCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logic/parser/exceptions/Empty.java" beforeDir="false" afterPath="$PROJECT_DIR$/logic/parser/exceptions/Empty.java" afterDir="false" />
-    </list>
+    <list default="true" id="713ef36c-51a5-4b10-8d33-d91a4863dd1c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +30,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/logic/commands/ExitCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+            <state relative-caret-position="459">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -72,10 +60,10 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="width" value="1064" />
-    <option name="height" value="1038" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="-9" />
+    <option name="width" value="1065" />
+    <option name="height" value="1039" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -146,7 +134,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1583587724676" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1583589616733" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../seedu" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -180,7 +168,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="0" width="851" height="830" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19974716" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -333,8 +320,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/logic/commands/ExitCommand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="18" column="5" lean-forward="true" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+        <state relative-caret-position="459">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
