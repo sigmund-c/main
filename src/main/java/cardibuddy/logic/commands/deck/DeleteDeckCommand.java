@@ -28,7 +28,7 @@ public class DeleteDeckCommand extends Command {
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public DeleteDeckCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
