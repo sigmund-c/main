@@ -405,6 +405,7 @@ Use case ends when there are no more flashcards in the test queue.
 +
 ** i. Use case ends.
 
+*Inclusions*
 [none]
 * 3a. The user inputs the wrong answer
 +
