@@ -32,6 +32,10 @@ public class Flashcard {
         return this.answer;
     }
 
+    public boolean checkAnswer(String toCheck) {
+        return answer.checkAnswer(toCheck);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
