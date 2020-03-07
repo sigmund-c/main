@@ -1,6 +1,7 @@
 package cardibuddy.logic.commands;
 
 import cardibuddy.logic.commands.exceptions.CommandException;
+import cardibuddy.model.Model;
 
 /**
  * Represents a command with hidden internal cardibuddy.logic and the ability to be executed.
