@@ -2,9 +2,14 @@ package cardibuddy.model.flashcard;
 
 public class TfAnswer implements Answer {
 
+    public static final String MESSAGE_CONSTRAINTS = "True / False answers should either be \"T\" or \"F\"";
+
     private String correctAnswer; // should be "T" or "F"
 
     public TfAnswer(String correctAnswer) {
+        if (!isValid(correctAnswer)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
         this.correctAnswer = correctAnswer;
     }
 
@@ -13,6 +18,9 @@ public class TfAnswer implements Answer {
     }
 
     public boolean checkAnswer(String toCheck) {
+        if (!isValid(toCheck)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
         return toCheck.equals(correctAnswer);
     }
 

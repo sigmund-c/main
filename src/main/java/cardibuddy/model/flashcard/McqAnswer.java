@@ -3,13 +3,17 @@ package cardibuddy.model.flashcard;
 import java.util.List;
 
 public class McqAnswer implements Answer{
+    public static final String MESSAGE_CONSTRAINTS = "MCQ answers should be a single letter corresponding to answer.";
 
     private String correctAnswer; // should be "a" or "b" or "c" or ....
     private List<String> answers;
 
     public McqAnswer(int correctIndex, List<String> answers) {
-        this.correctAnswer = correctAnswer;
         this.answers = answers;
+        if (!isValid(correctAnswer)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
+        this.correctAnswer = correctAnswer;
     }
 
     public boolean isValid(String test) {
@@ -20,6 +24,9 @@ public class McqAnswer implements Answer{
     }
 
     public boolean checkAnswer(String toCheck) {
+        if (!isValid(toCheck)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
         return toCheck.equals(correctAnswer);
     }
 

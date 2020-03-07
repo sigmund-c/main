@@ -2,9 +2,14 @@ package cardibuddy.model.flashcard;
 
 public class ShortAnswer implements Answer {
 
+    public static final String MESSAGE_CONSTRAINTS = "Short answers should be strings.";
+
     private String correctAnswer;
 
     public ShortAnswer(String correctAnswer) {
+        if (!isValid(correctAnswer)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
         this.correctAnswer = correctAnswer;
     }
 
@@ -13,6 +18,9 @@ public class ShortAnswer implements Answer {
     }
 
     public boolean checkAnswer(String toCheck) {
+        if (!isValid(toCheck)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
         return toCheck.equals(correctAnswer);
     }
 
