@@ -1,4 +1,4 @@
-package cardibuddy.logic.parser.exceptions;
+package cardibuddy.logic.parser;
 
 public class Empty {
 }
