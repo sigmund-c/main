@@ -1,4 +1,4 @@
-package cardibuddy.model.testing;
+package cardibuddy.model.testsession;
 
 public enum TestSetting {
     SHUFFLE,
