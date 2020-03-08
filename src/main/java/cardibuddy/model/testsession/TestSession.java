@@ -17,18 +17,11 @@ public class TestSession {
     // space to set deck settings
 
 
-    // space to set test statistics
-    public int numberRight;
-
-    // store the user's answer history
+    // hashmap to store the user's answer history
     public HashMap<Flashcard, TestResult> testResults;
 
     // test queue
     public LinkedList<Flashcard> testQueue;
-    // test response strings
-    public String CORRECT_STRING = "Correct! The answer is %s.\nType /n to go to the next question.";
-    public String WRONG_STRING = "Wrong! The answer is %s.\nType /n to go to the next question.";
-    public String END_STRING = "Test complete!";
 
     /**
      * Constructor for test session. Initiates the test session.
@@ -39,51 +32,40 @@ public class TestSession {
         this.deck = deck;
         testQueue = new LinkedList<>(deck.getFlashcards());
         testResults = new HashMap<>();
-        next(); // show the first flashcard in the deck
+        this.nextFlashcard(); // show the first flashcard in the deck
     }
 
-
-
     /**
-     * Moves on to the next flashcard in the queue. Sets the current variable to this next flashcard.
+     * Moves on to the next flashcard in the queue, called when the user inputs the command for 'next'.
+     * Sets the @var current variable to this next flashcard.
      * @return the next flashcard
      */
-    public Flashcard next() {
-        current = testQueue.removeFirst();
-        return current;
-    }
-
-    public TestResult test(Answer userAnswer, TestSetting... forceCorrect) {
-        if (forceCorrect[0] == TestSetting.FORCE_CORRECT) {
-            return new TestResult(userAnswer, Result.CORRECT);
-        }
-        else if (isCorrect(userAnswer)) {
-            return new TestResult(userAnswer, Result.CORRECT);
+    public Flashcard nextFlashcard() {
+        if (testQueue.size() > 0) {
+            current = testQueue.removeFirst();
+            return current;
         }
         else {
-            return new TestResult(userAnswer, Result.WRONG;)
+            return null; // TODO: change the way to terminate test session
         }
     }
 
     /**
-     * Checks the current flashcard's stored answer against
-     * @param userAnswer
-     * @return
+     * Takes the user's answer for the current flashcard, and tests it against the current flashcard.
+     * @param userAnswer Answer object provided by the user.
+     * @return the TestResult of the test
      */
-    public boolean isCorrect(Answer userAnswer) {
-        Answer answer = current.getAnswer();
-        if (answer.equals(userAnswer)) {
-            return true;
-        }
-        else {
-            return false;
-        }
+    public TestResult test(Answer userAnswer) {
+        TestResult result = new TestResult(current.getAnswer(), userAnswer); // get the result of the test
+        testResults.put(current, result); // store the current flashcard and the result in the testResults hashmap
+        return result;
     }
 
     @Override
     public boolean equals(Object other) {
         return this == other
                 || (other instanceof TestSession)
-                && this.deck.equals(((TestSession) other).deck);
+                && this.deck.equals(((TestSession) other).deck)
+                && this.testResults.equals(((TestSession) other).testResults);
     }
 }
