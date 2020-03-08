@@ -147,31 +147,31 @@ Edits the answer of the 2nd card to be `cs2040` and clears all existing tags.
 
 === Listing
 
-==== Listing all decks: `list all`
+==== Listing all decks: `list decks`
 
 Shows a list of all the decks in the library. +
-Format: `list all`
+Format: `list decks`
 
-==== Listing all cards in a deck: `list deck`
+==== Listing all cards in a deck: `list cards`
 
 Shows a list of all the cards in a particular deck. This command is only valid after you enter a deck.
-Format: `list deck`
+Format: `list cards`
 
 === Clearing
 
-==== Clearing all decks: `clear all`
+==== Clearing all decks: `clear decks`
 
 Clears all entries (both decks and cards)  from the library. +
-Format: `clear all`
+Format: `clear decks`
 
-==== Clearing all cards in a deck: `clear deck`
+==== Clearing all cards in a deck: `clear cards`
 
 Clears all the cards from the specified deck.
-Format: `clear deck n/DECK_TITLE`
+Format: `clear cards n/DECK_TITLE`
 
 Examples:
 
-* `clear deck n/cs2105` +
+* `clear cards n/cs2105` +
 Clears all the cards in the deck `cs2105`
 
 === Deleting
@@ -195,24 +195,26 @@ Deletes the 2nd deck in the library.
 `delete deck 1` +
 Deletes the 1st deck in the results of the search command.
 
-=== Searching
+==== Deleting a card: `delete card`
 
-==== Searching all decks: `search all`
+Deletes the specified card from a specific deck.
+Format: `delete INDEX n/DECK_TITLE`
 
-Searches across all decks and returns all decks and flashcards that contain any of the given keywords. +
-Format: `search all KEYWORD` [MORE_KEYWORDS]
-
-* The search is case insensitive. e.g cs2040 will match CS2040
-* The order of the keywords does not matter. e.g. Science Module will match Module Science
-* For decks, only the deck title is searched. For flashcards, both the question and answer are searched.
-* The keyword does not need to match a word within the deck’s title exactly . e.g. cs will match with cs2030.
-* Decks with titles or flashcards with questions or answers that match at least one of the keywords will be returned. +
-e.g. Java notes will return Java notes, Javascript notes, C++ notes.
+* Deletes the card at the specified INDEX of the deck.
+* The index refers to the index number shown in the complete list of flashcards in the deck.
+* The index must be a positive integer 1, 2, 3, …
 
 Examples:
 
-* `search all cs2106` +
-Returns `cs2106 (deck)` and `is cs2106 a core mod in the school of computing? (flashcard)`
+* `list cards` +
+`delete card 2` n/2030 +
+Deletes the 2nd flash card in the `cs2030` deck.
+
+* `search card java` +
+`delete card 1` +
+Deletes the 1st card in the results of the search card command.
+
+=== Searching
 
 ==== Searching for a deck: `search deck`
 
@@ -251,25 +253,6 @@ Returns `cs2106`
 
 * `search deck cs2040 cs2030` +
 Returns `cs2040` and `cs2030`
-
-==== Deleting a card: `delete card`
-
-Deletes the specified card from a specific deck.
-Format: `delete INDEX n/DECK_TITLE`
-
-* Deletes the card at the specified INDEX of the deck.
-* The index refers to the index number shown in the complete list of flashcards in the deck.
-* The index must be a positive integer 1, 2, 3, …
-
-Examples:
-
-* `list cards` +
-`delete card 2` n/2030 +
-Deletes the 2nd flash card in the `cs2030` deck.
-
-* `search card java` +
-`delete card 1` +
-Deletes the 1st card in the results of the search card command.
 
 === Replacing image
 
