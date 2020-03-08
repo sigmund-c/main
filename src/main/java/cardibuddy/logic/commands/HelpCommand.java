@@ -1,6 +1,6 @@
 package cardibuddy.logic.commands;
 
-import seedu.address.model.Model;
+import cardibuddy.model.Model;
 
 /**
  * Format full help instructions for every command for display.
