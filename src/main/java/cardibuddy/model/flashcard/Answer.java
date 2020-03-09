@@ -1,27 +1,10 @@
 package cardibuddy.model.flashcard;
 
-public class Answer {
+public interface Answer {
 
-    private String answerString;
+    boolean isValid(String test);
 
-    public Answer(String question) {
-        answerString = question;
-    }
+    boolean checkAnswer(String toCheck);
 
-    @Override
-    public String toString() {
-        return answerString;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        } else return (other instanceof Answer) && answerString.equals(other.toString());
-    }
-
-    @Override
-    public int hashCode() {
-        return answerString.hashCode();
-    }
+    String getCorrectAnswer();
 }
