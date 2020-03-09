@@ -36,6 +36,15 @@ public class Flashcard {
         return answer.checkAnswer(toCheck);
     }
 
+    public boolean isSameFlashcard(Flashcard otherCard) {
+        if (otherCard == this) {
+            return true;
+        }
+
+        return otherCard != null
+                && otherCard.getAnswer().equals(getAnswer());
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

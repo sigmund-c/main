@@ -1,35 +1,34 @@
 package cardibuddy;
 
+import cardibuddy.model.CardiBuddy;
+import cardibuddy.storage.CardiBuddyStorage;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import seedu.address.AppParameters;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.Version;
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.ConfigUtil;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
-import seedu.address.storage.UserPrefsStorage;
-import seedu.address.ui.Ui;
-import seedu.address.ui.UiManager;
+import cardibuddy.commons.core.Config;
+import cardibuddy.commons.core.LogsCenter;
+import cardibuddy.commons.core.Version;
+import cardibuddy.commons.exceptions.DataConversionException;
+import cardibuddy.commons.util.ConfigUtil;
+import cardibuddy.commons.util.StringUtil;
+import cardibuddy.logic.Logic;
+import cardibuddy.logic.LogicManager;
+import cardibuddy.model.Model;
+import cardibuddy.model.ModelManager;
+import cardibuddy.model.ReadOnlyCardiBuddy;
+import cardibuddy.model.ReadOnlyUserPrefs;
+import cardibuddy.model.UserPrefs;
+import cardibuddy.model.util.SampleDataUtil;
+import cardibuddy.storage.JsonCardiBuddyStorage;
+import cardibuddy.storage.JsonUserPrefsStorage;
+import cardibuddy.storage.Storage;
+import cardibuddy.storage.StorageManager;
+import cardibuddy.storage.UserPrefsStorage;
+import cardibuddy.ui.Ui;
+import cardibuddy.ui.UiManager;
 
 /**
  * Runs the application.
@@ -48,7 +47,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing CardiBuddy ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -56,7 +55,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        CardiBuddyStorage addressBookStorage = new JsonCardiBuddyStorage(userPrefs.getCardiBuddyFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         initLogging(config);
@@ -74,20 +73,20 @@ public class MainApp extends Application {
      * or an empty cardibuddy book will be used instead if errors occur when reading {@code storage}'s cardibuddy book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyCardiBuddy> addressBookOptional;
+        ReadOnlyCardiBuddy initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readCardiBuddy();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                logger.info("Data file not found. Will be starting with a sample CardiBuddy");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleCardiBuddy);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty CardiBuddy");
+            initialData = new CardiBuddy();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty CardiBuddy");
+            initialData = new CardiBuddy();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -151,7 +150,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty CardiBuddy");
             initializedPrefs = new UserPrefs();
         }
 
@@ -167,7 +166,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting CardiBuddy " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
