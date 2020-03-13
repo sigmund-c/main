@@ -35,6 +35,10 @@ public class TestSession {
         this.nextFlashcard(); // show the first flashcard in the deck
     }
 
+    public boolean isEmpty() {
+        return testQueue.isEmpty();
+    }
+
     /**
      * Moves on to the next flashcard in the queue, called when the user inputs the command for 'next'.
      * Sets the @var current variable to this next flashcard.
