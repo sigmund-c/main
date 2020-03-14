@@ -4,7 +4,13 @@ import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
 
+<<<<<<< HEAD
 import static cardibuddy.logic.parser.CliSyntax.*;
+=======
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_Object;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_TITLE;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
+>>>>>>> AddCommand
 import static java.util.Objects.requireNonNull;
 
 public class AddCommand extends Command {
@@ -13,7 +19,11 @@ public class AddCommand extends Command {
 
     private final Deck toAdd;
 
+<<<<<<< HEAD
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deck to the cardibuddy book. "
+=======
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deck/flashcard to the cardibuddy book. "
+>>>>>>> AddCommand
             + "Parameters: "
             + PREFIX_Object + "Object Type "
             + PREFIX_TITLE + "Title \n"
