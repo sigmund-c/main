@@ -15,7 +15,7 @@ public class AddCommand extends Command {
 
     private final Deck toAdd;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deck to the cardibuddy book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deck/flashcard to the cardibuddy book. "
             + "Parameters: "
             + PREFIX_Object + "Object Type "
             + PREFIX_TITLE + "Title \n"
