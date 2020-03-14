@@ -4,7 +4,9 @@ import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
 
-import static cardibuddy.logic.parser.CliSyntax.*;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_Object;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_TITLE;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
 public class AddCommand extends Command {
