@@ -15,11 +15,11 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deck to the cardibuddy book. "
             + "Parameters: "
-            + "[" + PREFIX_Deck + "] \n"
-            + "[" + PREFIX_Flashcard + "] \n" //Has default values for cardType, question and answer
-            + PREFIX_TITLE + "Title "
+            + PREFIX_Object + "Object Type "
+            + PREFIX_TITLE + "Title \n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_Object + "deck "
             + PREFIX_TITLE + "cs2103t "
             + PREFIX_TAG + "Hard "
             + PREFIX_TAG + "Software Engineering";
