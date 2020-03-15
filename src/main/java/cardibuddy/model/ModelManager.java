@@ -3,6 +3,7 @@ package cardibuddy.model;
 import static java.util.Objects.requireNonNull;
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
 
+import cardibuddy.model.deck.Deck;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -23,22 +24,22 @@ import cardibuddy.model.flashcard.Flashcard;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(cardibuddy.model.ModelManager.class);
 
-    private final CardiBuddy addressBook;
+    private final CardiBuddy cardiBuddy;
     private final UserPrefs userPrefs;
     private final FilteredList<Flashcard> filteredFlashcards;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given cardiBuddy and userPrefs.
      */
-    public ModelManager(ReadOnlyCardiBuddy addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyCardiBuddy cardiBuddy, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(cardiBuddy, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + cardiBuddy + " and user prefs " + userPrefs);
 
-        this.addressBook = new CardiBuddy(addressBook);
+        this.cardiBuddy = new CardiBuddy(cardiBuddy);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredFlashcards = new FilteredList<>(this.addressBook.getFlashcardList());
+        filteredFlashcards = new FilteredList<>(this.cardiBuddy.getFlashcardList());
     }
 
     public ModelManager() {
@@ -75,45 +76,62 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setCardiBuddyFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setCardiBuddyFilePath(addressBookFilePath);
+    public void setCardiBuddyFilePath(Path cardiBuddyFilePath) {
+        requireNonNull(cardiBuddyFilePath);
+        userPrefs.setCardiBuddyFilePath(cardiBuddyFilePath);
     }
 
     //=========== CardiBuddy ================================================================================
 
     @Override
-    public void setCardiBuddy(ReadOnlyCardiBuddy addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setCardiBuddy(ReadOnlyCardiBuddy cardiBuddy) {
+        this.cardiBuddy.resetData(cardiBuddy);
     }
 
     @Override
     public ReadOnlyCardiBuddy getCardiBuddy() {
-        return addressBook;
+        return cardiBuddy;
     }
 
     @Override
-    public boolean hasFlashcard(Flashcard person) {
-        requireNonNull(person);
-        return addressBook.hasFlashcard(person);
+    public boolean hasDeck(Deck deck) {
+        requireNonNull(deck);
+        return cardiBuddy.hasDeck(deck);
     }
 
     @Override
-    public void deleteFlashcard(Flashcard target) {
-        addressBook.removeFlashcard(target);
+    public void deleteDeck(Deck target) {
+
     }
 
     @Override
-    public void addFlashcard(Flashcard person) {
-        addressBook.addFlashcard(person);
+    public void addDeck(Deck deck) {
+        cardiBuddy.addDeck(deck);
         updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
     }
 
     @Override
-    public void setFlashcard(Flashcard target, Flashcard editedFlashcard) {
+    public void setDeck(Deck target, Deck editedDeck) {
+
+    }
+
+    public boolean hasCard(Flashcard person) {
+        return true;
+    }
+
+    public void deleteCard(Flashcard target) {
+        cardiBuddy.removeFlashcard(target);
+    }
+
+    public void addCard(Flashcard person) {
+        cardiBuddy.addFlashcard(person);
+        updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+    }
+
+    public void setCard(Flashcard target, Flashcard editedFlashcard) {
         requireAllNonNull(target, editedFlashcard);
 
-        addressBook.setFlashcard(target, editedFlashcard);
+        cardiBuddy.setFlashcard(target, editedFlashcard);
     }
 
     //=========== Filtered Flashcard List Accessors =============================================================
@@ -147,7 +165,7 @@ public class ModelManager implements Model {
 
         // state check
         cardibuddy.model.ModelManager other = (cardibuddy.model.ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return cardiBuddy.equals(other.cardiBuddy)
                 && userPrefs.equals(other.userPrefs)
                 && filteredFlashcards.equals(other.filteredFlashcards);
     }

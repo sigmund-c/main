@@ -78,7 +78,31 @@ public interface Model {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedFlashcard} must not be the same as another existing person in the address book.
      */
-    void setDeck(Flashcard target, Flashcard editedFlashcard);
+    void setDeck(Deck target, Deck editedDeck);
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    boolean hasCard(Flashcard card);
+
+    /**
+     * Deletes the given person.
+     * The person must exist in the address book.
+     */
+    void deleteCard(Flashcard target);
+
+    /**
+     * Adds the given person.
+     * {@code person} must not already exist in the address book.
+     */
+    void addCard(Flashcard person);
+
+    /**
+     * Replaces the given person {@code target} with {@code editedFlashcard}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedFlashcard} must not be the same as another existing person in the address book.
+     */
+    void setCard(Flashcard target, Flashcard editedFlashcard);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Flashcard> getFilteredFlashcardList();

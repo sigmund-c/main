@@ -2,6 +2,8 @@ package cardibuddy.model;
 
 import static java.util.Objects.requireNonNull;
 
+import cardibuddy.model.deck.Deck;
+import cardibuddy.model.deck.UniqueDeckList;
 import cardibuddy.model.flashcard.UniqueFlashcardList;
 import java.util.List;
 import javafx.collections.ObservableList;
@@ -13,8 +15,9 @@ import cardibuddy.model.flashcard.Flashcard;
  */
 public class CardiBuddy implements ReadOnlyCardiBuddy {
 
+    private final UniqueDeckList decks;
     private final UniqueFlashcardList flashcards;
-
+    
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -23,13 +26,14 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
      *   among constructors.
      */
     {
+        decks = new UniqueDeckList();
         flashcards = new UniqueFlashcardList();
     }
 
     public CardiBuddy() {}
 
     /**
-     * Creates an CardiBuddy using the Flashcards in the {@code toBeCopied}
+     * Creates a CardiBuddy using the Flashcards in the {@code toBeCopied}
      */
     public CardiBuddy(ReadOnlyCardiBuddy toBeCopied) {
         this();
@@ -39,7 +43,15 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code flashcards}.
+     * Replaces the contents of the flashcard list with {@code flashcards}.
+     * {@code flashcards} must not contain duplicate flashcards.
+     */
+    public void setDecks(List<Deck> decks) {
+        this.decks.setDecks(decks);
+    }
+
+    /**
+     * Replaces the contents of the flashcard list with {@code flashcards}.
      * {@code flashcards} must not contain duplicate flashcards.
      */
     public void setFlashcards(List<Flashcard> flashcards) {
@@ -52,31 +64,68 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
     public void resetData(ReadOnlyCardiBuddy newData) {
         requireNonNull(newData);
 
+        setDecks(newData.getDeckList());
         setFlashcards(newData.getFlashcardList());
     }
 
-    //// person-level operations
-
+    //// deck-level operations
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a deck with the same identity as {@code deck} exists in cardibuddy.
      */
-    public boolean hasFlashcard(Flashcard person) {
-        requireNonNull(person);
-        return flashcards.contains(person);
+    public boolean hasDeck(Deck deck) {
+        requireNonNull(deck);
+        return decks.contains(deck);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a deck to the cardi buddy.
+     * The deck must not already exist in the cardi buddy.
+     */
+    public void addDeck(Deck d) {
+        decks.add(d);
+    }
+
+    /**
+     * Replaces the given deck {@code target} in the list with {@code editedDeck}.
+     * {@code target} must exist in the cardi buddy.
+     * The deck identity of {@code editedFlashcard} must not be the same as another existing deck in the cardi buddy.
+     */
+    public void setDeck(Deck target, Deck editedDeck) {
+        requireNonNull(editedDeck);
+
+        decks.setDeck(target, editedDeck);
+    }
+
+    /**
+     * Removes {@code key} from this {@code CardiBuddy}.
+     * {@code key} must exist in the cardi buddy.
+     */
+    public void removeDeck(Deck key) {
+        decks.remove(key);
+    }
+
+
+    //// flashcard-level operations
+    /**
+     * Returns true if a deck with the same identity as {@code card} exists in cardibuddy.
+     */
+    public boolean hasFlashcard(Flashcard card) {
+        requireNonNull(card);
+        return flashcards.contains(card);
+    }
+
+    /**
+     * Adds a flashcard to the cardi buddy.
+     * The flashcard must not already exist in the cardi buddy.
      */
     public void addFlashcard(Flashcard p) {
         flashcards.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedFlashcard}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedFlashcard} must not be the same as another existing person in the address book.
+     * Replaces the given flashcard {@code target} in the list with {@code editedFlashcard}.
+     * {@code target} must exist in the cardi buddy.
+     * The flashcard identity of {@code editedFlashcard} must not be the same as another existing flashcard in the cardi buddy.
      */
     public void setFlashcard(Flashcard target, Flashcard editedFlashcard) {
         requireNonNull(editedFlashcard);
@@ -86,7 +135,7 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
 
     /**
      * Removes {@code key} from this {@code CardiBuddy}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the cardi buddy.
      */
     public void removeFlashcard(Flashcard key) {
         flashcards.remove(key);
@@ -98,6 +147,11 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
     public String toString() {
         return flashcards.asUnmodifiableObservableList().size() + " flashcards";
         // TODO: refine later
+    }
+
+    @Override
+    public ObservableList<Deck> getDeckList() {
+        return decks.asUnmodifiableObservableList();
     }
 
     @Override
