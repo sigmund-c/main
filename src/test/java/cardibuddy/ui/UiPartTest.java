@@ -1,15 +1,18 @@
 package cardibuddy.ui;
 
+import static cardibuddy.testutil.Assert.assertThrows;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static cardibuddy.testutil.Assert.assertThrows;
 
 import java.net.URL;
 import java.nio.file.Path;
-import javafx.fxml.FXML;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+
 import cardibuddy.MainApp;
+import javafx.fxml.FXML;
 
 public class UiPartTest {
 
@@ -82,7 +85,7 @@ public class UiPartTest {
 
     /**
      * UiPart used for testing.
-     * It should only be used with invalid FXML files or the valid file located at {@link}.
+     * It should only be used with invalid FXML files or the valid file located at link.
      */
     private static class TestUiPart<T> extends UiPart<T> {
 
