@@ -216,10 +216,10 @@ Deletes the 1st card in the results of the search card command.
 
 === Searching
 
-==== Searching for a deck: `search deck`
+==== Searching for a deck: `search`
 
 Searches for the decks with titles that contain any of the given keywords.
-Format: `search deck KEYWORD [MORE_KEYWORDS]`
+Format: `search d/KEYWORD [MORE_KEYWORDS]`
 
 * The search is case insensitive. e.g cs2040 will match CS2040
 * The order of the keywords does not matter. e.g. Science Module will match Module Science
@@ -229,16 +229,16 @@ Format: `search deck KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `search deck cs2106` +
+* `search d/cs2106` +
 Returns `cs2106`
 
-* `search deck cs2040 cs2030` +
+* `search d/cs2040 d/cs2030` +
 Returns `cs2040` and `cs2030`
 
-==== Searching for a card: `search card`
+==== Searching for a card: `search`
 
 Finds the cards with a question that contain any of the given keywords.
-Format: `search card KEYWORD [MORE_KEYWORDS]`
+Format: `search c/KEYWORD [MORE_KEYWORDS]`
 
 * The search is case insensitive. e.g programming will match Programming.
 * The order of the keywords does not matter. e.g. Javascript programming language will match with programming language Javascript.
@@ -248,10 +248,10 @@ Format: `search card KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `search card cs2106` +
+* `search c/cs2106` +
 Returns `cs2106`
 
-* `search deck cs2040 cs2030` +
+* `search c/cs2040 c/cs2030` +
 Returns `cs2040` and `cs2030`
 
 === Replacing image
