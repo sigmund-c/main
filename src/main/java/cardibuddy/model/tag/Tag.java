@@ -1,7 +1,7 @@
 package cardibuddy.model.tag;
 
-import static java.util.Objects.requireNonNull;
 import static cardibuddy.commons.util.AppUtil.checkArgument;
+import static java.util.Objects.requireNonNull;
 
 public class Tag {
 
