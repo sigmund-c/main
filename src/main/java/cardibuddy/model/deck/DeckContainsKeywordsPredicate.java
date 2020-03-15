@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Deck}'s {@code Keyword} matches any of the keywords given.
  */
 public class DeckContainsKeywordsPredicate implements Predicate<Deck> {
     private final List<String> keywords;

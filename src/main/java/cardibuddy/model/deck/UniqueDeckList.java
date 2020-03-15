@@ -28,7 +28,7 @@ public class UniqueDeckList implements Iterable<Deck> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent deck as the given argument.
      */
     public boolean contains(Deck toCheck) {
         requireNonNull(toCheck);
@@ -36,8 +36,8 @@ public class UniqueDeckList implements Iterable<Deck> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a deck to the list.
+     * The deck must not already exist in the list.
      */
     public void add(Deck toAdd) {
         requireNonNull(toAdd);
@@ -48,9 +48,9 @@ public class UniqueDeckList implements Iterable<Deck> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedDeck}.
+     * Replaces the deck {@code target} in the list with {@code editedDeck}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedDeck} must not be the same as another existing person in the list.
+     * The deck identity of {@code editedDeck} must not be the same as another existing deck in the list.
      */
     public void setDeck(Deck target, Deck editedDeck) {
         requireAllNonNull(target, editedDeck);
@@ -68,8 +68,8 @@ public class UniqueDeckList implements Iterable<Deck> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent deck from the list.
+     * The deck must exist in the list.
      */
     public void remove(Deck toRemove) {
         requireNonNull(toRemove);

@@ -33,7 +33,7 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
     public CardiBuddy() {}
 
     /**
-     * Creates a CardiBuddy using the Flashcards in the {@code toBeCopied}
+     * Creates a CardiBuddy using the Decks in the {@code toBeCopied}
      */
     public CardiBuddy(ReadOnlyCardiBuddy toBeCopied) {
         this();
@@ -43,8 +43,8 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the flashcard list with {@code flashcards}.
-     * {@code flashcards} must not contain duplicate flashcards.
+     * Replaces the contents of the decks list with {@code decks}.
+     * {@code decks} must not contain duplicate decks.
      */
     public void setDecks(List<Deck> decks) {
         this.decks.setDecks(decks);
@@ -78,8 +78,8 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
     }
 
     /**
-     * Adds a deck to the cardi buddy.
-     * The deck must not already exist in the cardi buddy.
+     * Adds a deck to the cardibuddy.
+     * The deck must not already exist in the cardibuddy.
      */
     public void addDeck(Deck d) {
         decks.add(d);

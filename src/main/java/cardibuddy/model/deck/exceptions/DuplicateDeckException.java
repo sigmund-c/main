@@ -6,6 +6,6 @@ package cardibuddy.model.deck.exceptions;
  */
 public class DuplicateDeckException extends RuntimeException {
     public DuplicateDeckException() {
-        super("Operation would result in duplicate flashcards");
+        super("Operation would result in duplicate decks");
     }
 }
