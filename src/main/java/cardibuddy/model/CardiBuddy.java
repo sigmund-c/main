@@ -2,12 +2,13 @@ package cardibuddy.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.UniqueDeckList;
-import cardibuddy.model.flashcard.UniqueFlashcardList;
-import java.util.List;
-import javafx.collections.ObservableList;
 import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.UniqueFlashcardList;
+import javafx.collections.ObservableList;
 
 /**
  * Wraps all data at the address-book level
@@ -125,7 +126,8 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
     /**
      * Replaces the given flashcard {@code target} in the list with {@code editedFlashcard}.
      * {@code target} must exist in the cardi buddy.
-     * The flashcard identity of {@code editedFlashcard} must not be the same as another existing flashcard in the cardi buddy.
+     * The flashcard identity of {@code editedFlashcard} must not be the
+     * same as another existing flashcard in the cardi buddy.
      */
     public void setFlashcard(Flashcard target, Flashcard editedFlashcard) {
         requireNonNull(editedFlashcard);

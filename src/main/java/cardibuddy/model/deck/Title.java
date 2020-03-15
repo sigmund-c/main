@@ -1,5 +1,8 @@
 package cardibuddy.model.deck;
 
+/**
+ * Deck Title class.
+ */
 public class Title {
 
     private String titleString;
@@ -17,6 +20,8 @@ public class Title {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
-        } else return (other instanceof Title) && titleString.equals(other.toString());
+        } else {
+            return (other instanceof Title) && titleString.equals(other.toString());
+        }
     }
 }

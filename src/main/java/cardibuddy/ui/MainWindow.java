@@ -1,6 +1,13 @@
 package cardibuddy.ui;
 
 import java.util.logging.Logger;
+
+import cardibuddy.commons.core.GuiSettings;
+import cardibuddy.commons.core.LogsCenter;
+import cardibuddy.logic.Logic;
+import cardibuddy.logic.commands.CommandResult;
+import cardibuddy.logic.commands.exceptions.CommandException;
+import cardibuddy.logic.parser.exceptions.ParseException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -9,12 +16,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import cardibuddy.commons.core.GuiSettings;
-import cardibuddy.commons.core.LogsCenter;
-import cardibuddy.logic.Logic;
-import cardibuddy.logic.commands.CommandResult;
-import cardibuddy.logic.commands.exceptions.CommandException;
-import cardibuddy.logic.parser.exceptions.ParseException;
+
 
 /**
  * The Main Window. Provides the basic application layout containing

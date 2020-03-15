@@ -1,13 +1,15 @@
 package cardibuddy.logic;
 
 import java.nio.file.Path;
-import javafx.collections.ObservableList;
+
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.ReadOnlyCardiBuddy;
 import cardibuddy.model.flashcard.Flashcard;
+import javafx.collections.ObservableList;
+
 
 /**
  * API of the Logic component

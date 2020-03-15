@@ -3,8 +3,9 @@ package cardibuddy.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import cardibuddy.commons.core.Messages;
-import cardibuddy.model.deck.DeckContainsKeywordsPredicate;
 import cardibuddy.model.Model;
+import cardibuddy.model.deck.DeckContainsKeywordsPredicate;
+
 
 /**
  * Finds and lists all decks in cardi buddy whose title contains any of the argument keywords.
@@ -14,8 +15,8 @@ public class SearchCommand extends Command {
 
     public static final String COMMAND_WORD = "search";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD +
-            ": Finds all decks whose titles contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds all decks whose titles contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " java";

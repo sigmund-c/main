@@ -1,13 +1,15 @@
 package cardibuddy.ui;
 
 import java.util.logging.Logger;
+
+import cardibuddy.commons.core.LogsCenter;
+import cardibuddy.model.flashcard.Flashcard;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import cardibuddy.commons.core.LogsCenter;
-import cardibuddy.model.flashcard.Flashcard;
+
 
 /**
  * Panel containing the list of persons.

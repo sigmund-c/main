@@ -1,12 +1,13 @@
 package cardibuddy.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 import cardibuddy.commons.exceptions.IllegalValueException;
 import cardibuddy.model.CardiBuddy;
 import cardibuddy.model.ReadOnlyCardiBuddy;
@@ -36,7 +37,8 @@ class JsonSerializableCardiBuddy {
      * @param source future changes to this will not affect the created {@code JsonSerializableCardiBuddy}.
      */
     public JsonSerializableCardiBuddy(ReadOnlyCardiBuddy source) {
-        flashcards.addAll(source.getFlashcardList().stream().map(JsonAdaptedFlashcard::new).collect(Collectors.toList()));
+        flashcards.addAll(source.getFlashcardList().stream()
+                .map(JsonAdaptedFlashcard::new).collect(Collectors.toList()));
     }
 
     /**

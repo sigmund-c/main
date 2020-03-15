@@ -1,12 +1,13 @@
 package cardibuddy.ui;
 
 import java.util.Comparator;
+
+import cardibuddy.model.flashcard.Flashcard;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import cardibuddy.model.flashcard.Flashcard;
 
 /**
  * An UI component that displays information of a {@code Flashcard}.

@@ -2,8 +2,9 @@ package cardibuddy.commons.util;
 
 import static java.util.Objects.requireNonNull;
 
-import javafx.scene.image.Image;
 import cardibuddy.MainApp;
+import javafx.scene.image.Image;
+
 
 /**
  * A container for App specific utility functions

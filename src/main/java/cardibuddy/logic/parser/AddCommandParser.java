@@ -1,17 +1,9 @@
 package cardibuddy.logic.parser;
 
-import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_TITLE;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.Set;
 import java.util.stream.Stream;
+
 import cardibuddy.logic.commands.AddCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
-import cardibuddy.model.flashcard.Question;
-import cardibuddy.model.flashcard.Answer;
-import cardibuddy.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object

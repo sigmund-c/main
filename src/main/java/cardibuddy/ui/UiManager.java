@@ -1,15 +1,17 @@
 package cardibuddy.ui;
 
 import java.util.logging.Logger;
+
+import cardibuddy.MainApp;
+import cardibuddy.commons.core.LogsCenter;
+import cardibuddy.commons.util.StringUtil;
+import cardibuddy.logic.Logic;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import cardibuddy.MainApp;
-import cardibuddy.commons.core.LogsCenter;
-import cardibuddy.commons.util.StringUtil;
-import cardibuddy.logic.Logic;
+
 
 /**
  * The manager of the UI component.

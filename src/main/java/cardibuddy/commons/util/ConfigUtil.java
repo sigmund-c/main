@@ -1,10 +1,12 @@
 package cardibuddy.commons.util;
 
-import cardibuddy.commons.core.Config;
-import cardibuddy.commons.exceptions.DataConversionException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+
+import cardibuddy.commons.core.Config;
+import cardibuddy.commons.exceptions.DataConversionException;
+
 
 /**
  * A class for accessing the Config File.

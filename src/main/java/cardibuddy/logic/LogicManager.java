@@ -3,7 +3,7 @@ package cardibuddy.logic;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
-import javafx.collections.ObservableList;
+
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.logic.commands.Command;
@@ -15,6 +15,8 @@ import cardibuddy.model.Model;
 import cardibuddy.model.ReadOnlyCardiBuddy;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.storage.Storage;
+import javafx.collections.ObservableList;
+
 
 /**
  * The main LogicManager of the app.

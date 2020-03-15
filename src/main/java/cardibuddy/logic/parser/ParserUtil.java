@@ -5,10 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
 import cardibuddy.commons.core.index.Index;
 import cardibuddy.commons.util.StringUtil;
 import cardibuddy.logic.parser.exceptions.ParseException;
-import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.tag.Tag;
 
 /**

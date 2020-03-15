@@ -1,14 +1,12 @@
 package cardibuddy.model;
 
-import cardibuddy.model.deck.Deck;
-import cardibuddy.model.flashcard.Flashcard;
-
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
-import javafx.collections.ObservableList;
 import cardibuddy.commons.core.GuiSettings;
+import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
+import javafx.collections.ObservableList;
 
 
 /**
@@ -39,85 +37,86 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' cardibuddy file path.
      */
     Path getCardiBuddyFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' cardibuddy file path.
      */
-    void setCardiBuddyFilePath(Path addressBookFilePath);
+    void setCardiBuddyFilePath(Path cardiBuddyFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces cardibuddy data with the data in {@code cardiBuddy}.
      */
-    void setCardiBuddy(ReadOnlyCardiBuddy addressBook);
+    void setCardiBuddy(ReadOnlyCardiBuddy cardiBuddy);
 
     /** Returns the CardiBuddy */
     ReadOnlyCardiBuddy getCardiBuddy();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a deck with the same identity as {@code deck} exists in the cardibuddy.
      */
     boolean hasDeck(Deck deck);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given deck.
+     * The deck must exist in the cardibuddy.
      */
     void deleteDeck(Deck target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given deck.
+     * {@code deck} must not already exist in the cardibuddy.
      */
-    void addDeck(Deck person);
+    void addDeck(Deck deck);
 
     /**
-     * Replaces the given person {@code target} with {@code editedFlashcard}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedFlashcard} must not be the same as another existing person in the address book.
+     * Replaces the given deck {@code target} with {@code editedDeck}.
+     * {@code target} must exist in the cardibuddy.
+     * The deck identity of {@code editedDeck} must not be the same as another existing deck in the cardibuddy.
      */
     void setDeck(Deck target, Deck editedDeck);
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a flashcard with the same identity as {@code flashcard} exists in the cardibuddy.
      */
     boolean hasCard(Flashcard card);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given flashcard.
+     * The flashcard must exist in the cardibuddy.
      */
     void deleteCard(Flashcard target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given flashcard.
+     * {@code flashcard} must not already exist in the cardibuddy.
      */
-    void addCard(Flashcard person);
+    void addCard(Flashcard flashcard);
 
     /**
-     * Replaces the given person {@code target} with {@code editedFlashcard}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedFlashcard} must not be the same as another existing person in the address book.
+     * Replaces the given flashcard {@code target} with {@code editedFlashcard}.
+     * {@code target} must exist in the cardibuddy.
+     * The flashcard identity of {@code editedFlashcard} must not
+     * be the same as another existing flashcard in the cardibuddy.
      */
     void setCard(Flashcard target, Flashcard editedFlashcard);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /** Returns an unmodifiable view of the filtered deck list */
     ObservableList<Deck> getFilteredDeckList();
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /** Returns an unmodifiable view of the filtered flashcard list */
     ObservableList<Flashcard> getFilteredFlashcardList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered deck list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredDeckList(Predicate<Deck> predicate);
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered flashcard list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredFlashcardList(Predicate<Flashcard> predicate);

@@ -1,14 +1,15 @@
 package cardibuddy.model.deck;
 
-import static java.util.Objects.requireNonNull;
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+
+import cardibuddy.model.deck.exceptions.DeckNotFoundException;
+import cardibuddy.model.deck.exceptions.DuplicateDeckException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import cardibuddy.model.deck.exceptions.DuplicateDeckException;
-import cardibuddy.model.deck.exceptions.DeckNotFoundException;
 
 /**
  * A list of decks that enforces uniqueness between its elements and does not allow nulls.

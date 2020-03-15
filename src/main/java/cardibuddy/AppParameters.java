@@ -5,9 +5,11 @@ import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
-import javafx.application.Application;
+
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.commons.util.FileUtil;
+import javafx.application.Application;
+
 
 /**
  * Represents the parsed command-line parameters given to the application.

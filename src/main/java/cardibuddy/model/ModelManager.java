@@ -1,25 +1,22 @@
 package cardibuddy.model;
 
-import static java.util.Objects.requireNonNull;
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
-import cardibuddy.model.deck.Deck;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
+
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.commons.core.LogsCenter;
-import cardibuddy.model.CardiBuddy;
-import cardibuddy.model.Model;
-import cardibuddy.model.ReadOnlyCardiBuddy;
-import cardibuddy.model.ReadOnlyUserPrefs;
-import cardibuddy.model.UserPrefs;
+import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the cardibuddy data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(cardibuddy.model.ModelManager.class);
@@ -27,6 +24,7 @@ public class ModelManager implements Model {
     private final CardiBuddy cardiBuddy;
     private final UserPrefs userPrefs;
     private final FilteredList<Flashcard> filteredFlashcards;
+    private final FilteredList<Deck> filteredDecks;
 
     /**
      * Initializes a ModelManager with the given cardiBuddy and userPrefs.
@@ -35,11 +33,12 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(cardiBuddy, userPrefs);
 
-        logger.fine("Initializing with address book: " + cardiBuddy + " and user prefs " + userPrefs);
+        logger.fine("Initializing with CardiBuddy: " + cardiBuddy + " and user prefs " + userPrefs);
 
         this.cardiBuddy = new CardiBuddy(cardiBuddy);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredFlashcards = new FilteredList<>(this.cardiBuddy.getFlashcardList());
+        filteredDecks = new FilteredList<>(this.cardiBuddy.getDeckList());
     }
 
     public ModelManager() {
@@ -115,7 +114,7 @@ public class ModelManager implements Model {
 
     }
 
-    public boolean hasCard(Flashcard person) {
+    public boolean hasCard(Flashcard flashcard) {
         return true;
     }
 
@@ -123,8 +122,12 @@ public class ModelManager implements Model {
         cardiBuddy.removeFlashcard(target);
     }
 
-    public void addCard(Flashcard person) {
-        cardiBuddy.addFlashcard(person);
+    /**
+     * Adds Flashcard to a Deck.
+     * @param flashcard
+     */
+    public void addCard(Flashcard flashcard) {
+        cardiBuddy.addFlashcard(flashcard);
         updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
     }
 
@@ -137,12 +140,27 @@ public class ModelManager implements Model {
     //=========== Filtered Flashcard List Accessors =============================================================
 
     /**
+     * Returns an unmodifiable view of the list of {@code Deck} backed by the internal list of
+     * {@code versionedCardiBuddy}
+     */
+    @Override
+    public ObservableList<Deck> getFilteredDeckList() {
+        return filteredDecks;
+    }
+
+    /**
      * Returns an unmodifiable view of the list of {@code Flashcard} backed by the internal list of
      * {@code versionedCardiBuddy}
      */
     @Override
     public ObservableList<Flashcard> getFilteredFlashcardList() {
         return filteredFlashcards;
+    }
+
+    @Override
+    public void updateFilteredDeckList(Predicate<Deck> predicate) {
+        requireNonNull(predicate);
+        filteredDecks.setPredicate(predicate);
     }
 
     @Override
@@ -167,6 +185,7 @@ public class ModelManager implements Model {
         cardibuddy.model.ModelManager other = (cardibuddy.model.ModelManager) obj;
         return cardiBuddy.equals(other.cardiBuddy)
                 && userPrefs.equals(other.userPrefs)
+                && filteredDecks.equals(other.filteredDecks)
                 && filteredFlashcards.equals(other.filteredFlashcards);
     }
 
