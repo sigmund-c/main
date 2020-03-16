@@ -6,7 +6,6 @@ import static java.util.Objects.requireNonNull;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 
-
 /**
  * Lists all decks/flashcards in the directory to the user.
  */
