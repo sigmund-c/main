@@ -6,14 +6,13 @@ import cardibuddy.model.flashcard.CardContainsKeywordsPredicate;
 
 public class TestCommand extends Command{
 
-    public static final String COMMAND_WORD = "help";
+    public static final String COMMAND_WORD = "test";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Started a test session with the given deck index."
 
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(, false, true);
+        return new CommandResult(MESSAGE_USAGE, false, true);
     }
 }

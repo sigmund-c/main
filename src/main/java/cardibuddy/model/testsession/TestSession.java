@@ -50,16 +50,10 @@ public class TestSession {
         assert !testQueue.isEmpty();
             current = testQueue.removeFirst();
             return current;
-<<<<<<< HEAD
     }
 
     public LinkedList<Flashcard> getTestQueue() {
         return testQueue;
-=======
-        } else {
-            return null; // TODO: change the way to terminate test session
-        }
->>>>>>> 4b20dda5d6cb17c02af6a1cc02147ee523672a2a
     }
 
     /**
