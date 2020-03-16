@@ -1,6 +1,7 @@
 package cardibuddy.logic.commands;
-import java.util.List;
 import static java.util.Objects.requireNonNull;
+
+import java.util.List;
 
 import cardibuddy.commons.core.Messages;
 import cardibuddy.commons.core.index.Index;
