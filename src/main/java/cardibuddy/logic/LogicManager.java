@@ -3,7 +3,7 @@ package cardibuddy.logic;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
-import javafx.collections.ObservableList;
+
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.logic.commands.Command;
@@ -13,8 +13,10 @@ import cardibuddy.logic.parser.CardiBuddyParser;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.Model;
 import cardibuddy.model.ReadOnlyCardiBuddy;
-import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.deck.Deck;
 import cardibuddy.storage.Storage;
+import javafx.collections.ObservableList;
+
 
 /**
  * The main LogicManager of the app.
@@ -56,8 +58,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Flashcard> getFilteredFlashcardList() {
-        return model.getFilteredFlashcardList();
+    public ObservableList<Deck> getFilteredDeckList() {
+        return model.getFilteredDeckList();
     }
 
     @Override

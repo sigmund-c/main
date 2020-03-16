@@ -1,7 +1,9 @@
 package cardibuddy.model.flashcard;
 
-import cardibuddy.model.deck.Deck;
 import java.util.Objects;
+
+import cardibuddy.model.deck.Deck;
+
 
 /**
  * Represents a Flashcard in CardiBuddy.
@@ -36,6 +38,11 @@ public class Flashcard {
         return answer.checkAnswer(toCheck);
     }
 
+    /**
+     * Checks if the flashcards are of the same identity.
+     * @param otherCard
+     * @return true if they are the same and false otherwise.
+     */
     public boolean isSameFlashcard(Flashcard otherCard) {
         if (otherCard == this) {
             return true;

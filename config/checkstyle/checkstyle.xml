@@ -21,8 +21,8 @@
 
   <module name="RegexpSingleline">
     <!-- Checks that FIXME is not used in comments.  TODO is preferred. -->
-    <property name="format" value="((//.*)|(\*.*))FIXME" />
-    <property name="message" value='TODO is preferred to FIXME."' />
+    <property name="format" value="((//.*)|(\*.*))FIXME." />
+    <property name="message" value="TODO is preferred to FIXME." />
   </module>
 
   <module name="SuppressionFilter">

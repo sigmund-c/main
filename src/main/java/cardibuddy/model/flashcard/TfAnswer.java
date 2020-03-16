@@ -1,5 +1,8 @@
 package cardibuddy.model.flashcard;
 
+/**
+ * True False answer class.
+ */
 public class TfAnswer implements Answer {
 
     public static final String MESSAGE_CONSTRAINTS = "True / False answers should either be \"T\" or \"F\"";
@@ -17,6 +20,11 @@ public class TfAnswer implements Answer {
         return test.equals("T") || test.equals("F");
     }
 
+    /**
+     * Checks if answer is equals to stored answer.
+     * @param toCheck
+     * @return true if answer is equals.
+     */
     public boolean checkAnswer(String toCheck) {
         if (!isValid(toCheck)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
@@ -37,7 +45,9 @@ public class TfAnswer implements Answer {
     public boolean equals(Object other) {
         if (other == this) {
             return true;
-        } else return (other instanceof Answer) && correctAnswer.equals(other.toString());
+        } else {
+            return (other instanceof Answer) && correctAnswer.equals(other.toString());
+        }
     }
 
 }

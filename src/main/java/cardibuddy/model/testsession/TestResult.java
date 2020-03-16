@@ -1,18 +1,22 @@
 package cardibuddy.model.testsession;
 
 import cardibuddy.model.flashcard.Answer;
-import cardibuddy.model.flashcard.Flashcard;
 
+/**
+ * Test Result class.
+ */
 public class TestResult {
 
     // test response strings
-    public String CORRECT_STRING = "Correct! The answer is %s.\nType /n to go to the next question.";
-    public String WRONG_STRING = "Wrong! The answer is %s.\nType /n to go to the next question.";
-    public String END_STRING = "Test complete!";
+    public static final String CORRECT_STRING = "Correct! The answer is %s.\nType /n to go to the next question.";
+    public static final String WRONG_STRING = "Wrong! The answer is %s.\nType /n to go to the next question.";
+    public static final String END_STRING = "Test complete!";
 
-    Answer flashcardAnswer; // TODO: may remove this as the flashcard is already stored as the key in the hashmap, so there is no need to store it again
-    Answer userAnswer;
-    Result result;
+    private Answer flashcardAnswer;
+    //TODO: may remove this as the flashcard is already stored as
+    //the key in the hashmap, so there is no need to store it again
+    private Answer userAnswer;
+    private Result result;
 
     /**
      * Constructor for TestResult.
@@ -26,11 +30,14 @@ public class TestResult {
         result = this.computeResult();
     }
 
+    /**
+     * Result of test session.
+     * @return Result object (idk what to write here :( ).
+     */
     public Result computeResult() {
         if (flashcardAnswer.equals(userAnswer)) {
             return Result.CORRECT;
-        }
-        else {
+        } else {
             return Result.WRONG;
         }
     }

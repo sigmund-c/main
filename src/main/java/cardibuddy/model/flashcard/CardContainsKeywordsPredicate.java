@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import cardibuddy.commons.util.StringUtil;
-import cardibuddy.model.flashcard.CardContainsKeywordsPredicate;
-import cardibuddy.model.flashcard.Flashcard;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.

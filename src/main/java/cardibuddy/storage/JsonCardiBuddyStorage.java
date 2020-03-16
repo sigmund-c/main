@@ -6,13 +6,13 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
+
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.commons.exceptions.DataConversionException;
 import cardibuddy.commons.exceptions.IllegalValueException;
 import cardibuddy.commons.util.FileUtil;
 import cardibuddy.commons.util.JsonUtil;
 import cardibuddy.model.ReadOnlyCardiBuddy;
-import cardibuddy.storage.CardiBuddyStorage;
 
 /**
  * A class to access CardiBuddy data stored as a json file on the hard disk.

@@ -1,6 +1,7 @@
 package cardibuddy.model;
 
 import java.nio.file.Path;
+
 import cardibuddy.commons.core.GuiSettings;
 
 /**
