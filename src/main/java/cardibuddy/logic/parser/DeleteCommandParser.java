@@ -1,8 +1,5 @@
 package cardibuddy.logic.parser;
 
-import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.commands.DeleteCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 

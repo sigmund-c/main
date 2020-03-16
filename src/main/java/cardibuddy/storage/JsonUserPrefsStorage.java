@@ -3,11 +3,11 @@ package cardibuddy.storage;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+
 import cardibuddy.commons.exceptions.DataConversionException;
 import cardibuddy.commons.util.JsonUtil;
 import cardibuddy.model.ReadOnlyUserPrefs;
 import cardibuddy.model.UserPrefs;
-import cardibuddy.storage.UserPrefsStorage;
 
 /**
  * A class to access UserPrefs stored in the hard disk as a json file

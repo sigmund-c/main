@@ -1,7 +1,5 @@
 package cardibuddy.logic.commands;
 
-import cardibuddy.logic.commands.Command;
-import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.model.Model;
 
 /**

@@ -1,8 +1,11 @@
 package cardibuddy.model.tag;
 
-import static java.util.Objects.requireNonNull;
 import static cardibuddy.commons.util.AppUtil.checkArgument;
+import static java.util.Objects.requireNonNull;
 
+/**
+ * Tags for Decks and Cards.
+ */
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";

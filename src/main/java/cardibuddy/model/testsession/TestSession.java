@@ -1,27 +1,29 @@
 package cardibuddy.model.testsession;
-import cardibuddy.model.deck.Deck;
-import cardibuddy.model.flashcard.Answer;
-import cardibuddy.model.flashcard.Flashcard;
-import cardibuddy.model.flashcard.Question;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import cardibuddy.model.deck.Deck;
+import cardibuddy.model.flashcard.Answer;
+import cardibuddy.model.flashcard.Flashcard;
+
+/**
+ * Test Session class.
+ */
 public class TestSession {
 
-    public Deck deck;
-    public Flashcard current;
+    private Deck deck;
+    private Flashcard current;
     // public Statistic statistics; // for recording statistics
 
     // space to set deck settings
 
 
     // hashmap to store the user's answer history
-    public HashMap<Flashcard, TestResult> testResults;
+    private HashMap<Flashcard, TestResult> testResults;
 
     // test queue
-    public LinkedList<Flashcard> testQueue;
+    private LinkedList<Flashcard> testQueue;
 
     /**
      * Constructor for test session. Initiates the test session.
@@ -35,19 +37,23 @@ public class TestSession {
         this.nextFlashcard(); // show the first flashcard in the deck
     }
 
+    public boolean isEmpty() {
+        return testQueue.isEmpty();
+    }
+
     /**
      * Moves on to the next flashcard in the queue, called when the user inputs the command for 'next'.
      * Sets the @var current variable to this next flashcard.
      * @return the next flashcard
      */
     public Flashcard nextFlashcard() {
-        if (testQueue.size() > 0) {
+        assert !testQueue.isEmpty();
             current = testQueue.removeFirst();
             return current;
-        }
-        else {
-            return null; // TODO: change the way to terminate test session
-        }
+    }
+
+    public LinkedList<Flashcard> getTestQueue() {
+        return testQueue;
     }
 
     /**

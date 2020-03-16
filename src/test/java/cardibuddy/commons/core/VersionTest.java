@@ -1,8 +1,9 @@
 package cardibuddy.commons.core;
 
+import static cardibuddy.testutil.Assert.assertThrows;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static cardibuddy.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 

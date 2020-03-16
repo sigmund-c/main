@@ -2,7 +2,10 @@ package cardibuddy.model.flashcard;
 
 import java.util.List;
 
-public class McqAnswer implements Answer{
+/**
+ * McqAnswer class.
+ */
+public class McqAnswer implements Answer {
     public static final String MESSAGE_CONSTRAINTS = "MCQ answers should be a single letter corresponding to answer.";
 
     private String correctAnswer; // should be "a" or "b" or "c" or ....
@@ -16,6 +19,11 @@ public class McqAnswer implements Answer{
         this.correctAnswer = correctAnswer;
     }
 
+    /**
+     * Checks if test length is valid.
+     * @param test
+     * @return true if ...
+     */
     public boolean isValid(String test) {
         if (test.length() != 1) {
             return false;
@@ -23,6 +31,11 @@ public class McqAnswer implements Answer{
         return getNumberForChar(test.charAt(0)) <= answers.size(); // makes sure test is within number of given answers
     }
 
+    /**
+     * Javadocs to pass checkstyle.
+     * @param toCheck
+     * @return true if answer is valid.
+     */
     public boolean checkAnswer(String toCheck) {
         if (!isValid(toCheck)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
@@ -52,7 +65,7 @@ public class McqAnswer implements Answer{
     }
 
     private char getCharForNumber(int i) { // 1 -> a; 2 -> b; 3 -> c, ...
-        return i > 0 && i < 27 ? (char)(i + 64) : null;
+        return i > 0 && i < 27 ? (char) (i + 64) : null;
     }
 
     @Override
