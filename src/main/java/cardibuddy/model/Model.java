@@ -112,8 +112,6 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered flashcard list */
     ObservableList<Flashcard> getFilteredFlashcardList();
 
-    ObservableList<Deck> getFilteredDeckList();
-
     /**
      * Updates the filter of the filtered deck list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
