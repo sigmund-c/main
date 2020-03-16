@@ -45,13 +45,13 @@ public class TestSession {
      * @return the next flashcard
      */
     public Flashcard nextFlashcard() {
-        if (testQueue.size() > 0) {
+        assert !testQueue.isEmpty();
             current = testQueue.removeFirst();
             return current;
-        }
-        else {
-            return null; // TODO: change the way to terminate test session
-        }
+    }
+
+    public LinkedList<Flashcard> getTestQueue() {
+        return testQueue;
     }
 
     /**
