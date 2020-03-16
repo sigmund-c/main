@@ -100,7 +100,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteDeck(Deck target) {
-
+        cardiBuddy.removeDeck(target);
     }
 
     @Override
@@ -111,7 +111,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setDeck(Deck target, Deck editedDeck) {
-
+        cardiBuddy.setDeck(target, editedDeck);
     }
 
     public boolean hasCard(Flashcard flashcard) {
@@ -124,7 +124,7 @@ public class ModelManager implements Model {
 
     /**
      * Adds Flashcard to a Deck.
-     * @param flashcard
+     * @param flashcard new card.
      */
     public void addCard(Flashcard flashcard) {
         cardiBuddy.addFlashcard(flashcard);
