@@ -1,14 +1,6 @@
 package cardibuddy.logic.commands;
 
-<<<<<<< HEAD
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
-=======
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_CARD;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
->>>>>>> upstream/master
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
-
+import static cardibuddy.logic.parser.CliSyntax.*;
 import static java.util.Objects.requireNonNull;
 
 import cardibuddy.logic.commands.exceptions.CommandException;
@@ -24,20 +16,12 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deck/flashcard to the cardibuddy book. "
             + "Parameters: "
-<<<<<<< HEAD
-            + "[" + PREFIX_DECK + "Deck \n"
-            + "[" + PREFIX_FLASHCARD + "Flashcard \n"
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_DECK + "cs2105 "
-=======
             + PREFIX_DECK + "[Deck Name] "
-            + PREFIX_CARD + "[Card Name]"
+            + PREFIX_FLASHCARD + "[Card Name]"
             + PREFIX_TITLE + "Title \n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DECK + "cs2103t "
->>>>>>> upstream/master
             + PREFIX_TAG + "Hard "
             + PREFIX_TAG + "Software Engineering";
 
