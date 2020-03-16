@@ -3,9 +3,11 @@ package cardibuddy.logic.parser;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
+
 import cardibuddy.logic.commands.SearchCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
-import cardibuddy.model.flashcard.CardContainsKeywordsPredicate;
+import cardibuddy.model.deck.DeckContainsKeywordsPredicate;
+
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -26,7 +28,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new SearchCommand(new CardContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new SearchCommand(new DeckContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 
 }

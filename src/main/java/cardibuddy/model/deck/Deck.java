@@ -2,12 +2,15 @@ package cardibuddy.model.deck;
 
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
 
-import cardibuddy.model.flashcard.Flashcard;
-import cardibuddy.model.tag.Tag;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.tag.Tag;
+
+
 
 /**
  * Represents a Deck in the cardibuddy application.
@@ -31,7 +34,9 @@ public class Deck {
         this.tags.addAll(tags);
     }
 
-    public Title getTitle() { return this.title; }
+    public Title getTitle() {
+        return this.title;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -45,29 +50,28 @@ public class Deck {
         return this.flashcards;
     }
 
+    /**
+     * Adds a Flashcard to a Deck.
+     * @param card
+     * @return the set of Flashcards from the Deck.
+     */
     public Set<Flashcard> addFlashcard(Flashcard card) {
         flashcards.add(card);
         return Collections.unmodifiableSet(flashcards);
     }
 
     /**
-     * Returns true if both decks have the same identity and data fields.
-     * This defines a stronger notion of equality between two decks.
+     * Checks if the Title of the Deck exists.
+     * @param otherDeck the deck being compared to.
+     * @return true if the Deck already exists and false otherwise.
      */
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
+    public boolean isSameDeck(Deck otherDeck) {
+        if (otherDeck == this) {
             return true;
         }
 
-        if (!(other instanceof Deck)) {
-            return false;
-        }
-
-        Deck otherDeck = (Deck) other;
-        return otherDeck.getTitle().equals(getTitle())
-                && otherDeck.getTags().equals(getTags())
-                && otherDeck.getFlashcards().equals(getFlashcards());
+        return otherDeck != null
+                && otherDeck.getTitle().equals(getTitle());
     }
 
     @Override

@@ -1,16 +1,18 @@
 package cardibuddy.commons.util;
 
+import static cardibuddy.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static cardibuddy.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Level;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+
 import cardibuddy.commons.core.Config;
 import cardibuddy.commons.exceptions.DataConversionException;
 

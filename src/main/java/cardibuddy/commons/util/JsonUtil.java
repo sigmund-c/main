@@ -2,8 +2,6 @@ package cardibuddy.commons.util;
 
 import static java.util.Objects.requireNonNull;
 
-import cardibuddy.commons.core.LogsCenter;
-import cardibuddy.commons.exceptions.DataConversionException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,6 +19,9 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
+import cardibuddy.commons.core.LogsCenter;
+import cardibuddy.commons.exceptions.DataConversionException;
 
 /**
  * Converts a Java object instance to JSON and vice versa

@@ -1,14 +1,14 @@
 package cardibuddy.logic.commands.flashcard;
 
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_TITLE;
+import static java.util.Objects.requireNonNull;
+
 import cardibuddy.logic.commands.Command;
 import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.flashcard.Flashcard;
-
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_TITLE;
-import static java.util.Objects.requireNonNull;
 
 /**
  * Adds a deck to the cardibuddy book.

@@ -1,7 +1,7 @@
 package cardibuddy.commons.util;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static cardibuddy.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +9,7 @@ public class AppUtilTest {
 
     @Test
     public void getImage_exitingImage() {
-        assertNotNull(AppUtil.getImage("/images/address_book_32.png"));
+        assertNotNull(AppUtil.getImage("/images/cb_logo_32.png"));
     }
 
     @Test
