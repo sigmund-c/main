@@ -1,6 +1,13 @@
 package cardibuddy.ui;
 
 import java.util.logging.Logger;
+
+import cardibuddy.commons.core.GuiSettings;
+import cardibuddy.commons.core.LogsCenter;
+import cardibuddy.logic.Logic;
+import cardibuddy.logic.commands.CommandResult;
+import cardibuddy.logic.commands.exceptions.CommandException;
+import cardibuddy.logic.parser.exceptions.ParseException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -9,12 +16,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import cardibuddy.commons.core.GuiSettings;
-import cardibuddy.commons.core.LogsCenter;
-import cardibuddy.logic.Logic;
-import cardibuddy.logic.commands.CommandResult;
-import cardibuddy.logic.commands.exceptions.CommandException;
-import cardibuddy.logic.parser.exceptions.ParseException;
+
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -30,7 +32,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private DeckListPanel deckListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -41,7 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane deckListPanelPlaceholder = new StackPane();
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -106,13 +108,13 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        deckListPanel = new DeckListPanel(logic.getFilteredDeckList());
+        deckListPanelPlaceholder.getChildren().add(deckListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getCardiBuddyFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -143,6 +145,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the test window.
+     */
+    @FXML
+    public void handleTest() {
+        if (!helpWindow.isShowing()) {
+            helpWindow.show();
+        } else {
+            helpWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -159,8 +173,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public DeckListPanel getdeckListPanel() {
+        return deckListPanel;
     }
 
     /**

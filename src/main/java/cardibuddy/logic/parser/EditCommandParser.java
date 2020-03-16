@@ -1,15 +1,10 @@
 package cardibuddy.logic.parser;
 
-import static java.util.Objects.requireNonNull;
-import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_TITLE;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
-import cardibuddy.commons.core.index.Index;
+
 import cardibuddy.logic.commands.EditCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.tag.Tag;

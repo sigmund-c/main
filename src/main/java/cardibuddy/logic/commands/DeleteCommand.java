@@ -11,6 +11,9 @@ import java.util.List;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_Object;
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Deletes the Deck that corresponds with the index and the subsequent Flashcards.
+ */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
