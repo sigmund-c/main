@@ -3,13 +3,11 @@ package cardibuddy.logic.commands;
 import cardibuddy.commons.core.Messages;
 import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.commands.exceptions.CommandException;
-import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.Model;
 
 import java.util.List;
 
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_Object;
 import static java.util.Objects.requireNonNull;
 
 /**
