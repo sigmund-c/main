@@ -61,28 +61,8 @@ public class Deck {
     }
 
     /**
-     * Returns true if both decks have the same identity and data fields.
-     * This defines a stronger notion of equality between two decks.
-     */
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof Deck)) {
-            return false;
-        }
-
-        Deck otherDeck = (Deck) other;
-        return otherDeck.getTitle().equals(getTitle())
-                && otherDeck.getTags().equals(getTags())
-                && otherDeck.getFlashcards().equals(getFlashcards());
-    }
-
-    /**
      * Checks if the Title of the Deck exists.
-     * @param otherDeck
+     * @param otherDeck the deck being compared to.
      * @return true if the Deck already exists and false otherwise.
      */
     public boolean isSameDeck(Deck otherDeck) {

@@ -145,6 +145,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the test window.
+     */
+    @FXML
+    public void handleTest() {
+        if (!helpWindow.isShowing()) {
+            helpWindow.show();
+        } else {
+            helpWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }

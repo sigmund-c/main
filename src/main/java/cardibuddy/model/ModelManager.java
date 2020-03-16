@@ -106,7 +106,7 @@ public class ModelManager implements Model {
     @Override
     public void addDeck(Deck deck) {
         cardiBuddy.addDeck(deck);
-        updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+        updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
     }
 
     @Override

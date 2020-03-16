@@ -14,6 +14,9 @@ import javafx.collections.ObservableList;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
+    Predicate<Deck> PREDICATE_SHOW_ALL_DECKS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
     Predicate<Flashcard> PREDICATE_SHOW_ALL_FLASHCARDS = unused -> true;
 
     /**

@@ -18,7 +18,7 @@ public interface CardiBuddyStorage {
     Path getCardiBuddyFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyCardiBuddy}.
+     * Returns CardiBuddy data as a {@link ReadOnlyCardiBuddy}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
@@ -32,14 +32,14 @@ public interface CardiBuddyStorage {
 
     /**
      * Saves the given {@link ReadOnlyCardiBuddy} to the storage.
-     * @param addressBook cannot be null.
+     * @param cardiBuddy cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveCardiBuddy(ReadOnlyCardiBuddy addressBook) throws IOException;
+    void saveCardiBuddy(ReadOnlyCardiBuddy cardiBuddy) throws IOException;
 
     /**
      * @see #saveCardiBuddy(ReadOnlyCardiBuddy)
      */
-    void saveCardiBuddy(ReadOnlyCardiBuddy addressBook, Path filePath) throws IOException;
+    void saveCardiBuddy(ReadOnlyCardiBuddy cardiBuddy, Path filePath) throws IOException;
 
 }
