@@ -6,7 +6,8 @@ package cardibuddy.logic.parser;
 public class CliSyntax {
 
     /* Prefix definitions */
-    public static final Prefix PREFIX_TITLE = new Prefix("n/");
+//    public static final Prefix PREFIX_TITLE = new Prefix("n/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
-    public static final Prefix PREFIX_OBJECT = new Prefix("o/");
+    public static final Prefix PREFIX_DECK = new Prefix("d/");
+    public static final Prefix PREFIX_FLASHCARD = new Prefix("c/");
 }

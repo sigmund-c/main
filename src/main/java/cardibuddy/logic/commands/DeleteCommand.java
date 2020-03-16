@@ -8,6 +8,7 @@ import cardibuddy.model.deck.Deck;
 
 import java.util.List;
 
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_Object;
 import static java.util.Objects.requireNonNull;
 
@@ -20,9 +21,8 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a deck/flashcard identified by the index number used in the displayed cardibuddy book.\n"
             + "Parameters: "
-            + PREFIX_Object + "Object Type INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_Object + "deck 1";
+            + "Object Type INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + "1";
 
     public static final String MESSAGE_DELETE_DECK_SUCCESS = "Deleted Deck: %1$s";
 

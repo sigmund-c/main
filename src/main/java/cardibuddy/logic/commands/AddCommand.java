@@ -1,8 +1,9 @@
 package cardibuddy.logic.commands;
 
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_OBJECT;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_TITLE;
+
 import static java.util.Objects.requireNonNull;
 
 import cardibuddy.logic.commands.exceptions.CommandException;
@@ -18,12 +19,11 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deck/flashcard to the cardibuddy book. "
             + "Parameters: "
-            + PREFIX_OBJECT + "Object Type "
-            + PREFIX_TITLE + "Title \n"
+            + "[" + PREFIX_DECK + "Deck \n"
+            + "[" + PREFIX_FLASHCARD + "Flashcard \n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_OBJECT + "deck "
-            + PREFIX_TITLE + "cs2103t "
+            + PREFIX_DECK + "cs2105 "
             + PREFIX_TAG + "Hard "
             + PREFIX_TAG + "Software Engineering";
 
