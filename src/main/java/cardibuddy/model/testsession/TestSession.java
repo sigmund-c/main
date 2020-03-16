@@ -48,8 +48,8 @@ public class TestSession {
      */
     public Flashcard nextFlashcard() {
         assert !testQueue.isEmpty();
-            current = testQueue.removeFirst();
-            return current;
+        current = testQueue.removeFirst();
+        return current;
     }
 
     public LinkedList<Flashcard> getTestQueue() {

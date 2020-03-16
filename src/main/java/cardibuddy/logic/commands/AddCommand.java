@@ -20,7 +20,7 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_DECK + "[Deck Name] "
             + PREFIX_FLASHCARD + "[Card Name]"
-//            + PREFIX_TITLE + "Title \n"
+            // + PREFIX_TITLE + "Title \n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DECK + "cs2103t "
