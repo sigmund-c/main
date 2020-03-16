@@ -1,21 +1,24 @@
 package cardibuddy.model.flashcard;
 
-import static java.util.Objects.requireNonNull;
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
 import java.util.List;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import cardibuddy.model.flashcard.exceptions.DuplicateFlashcardException;
 import cardibuddy.model.flashcard.exceptions.FlashcardNotFoundException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 
 /**
  * A list of flashcards that enforces uniqueness between its elements and does not allow nulls.
- * A flashcard is considered unique by comparing using {@code Flashcard#isSameFlashcard(Flashcard)}. As such, adding and updating of
- * flashcards uses Flashcard#isSameFlashcard(Flashcard) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniqueFlashcardList. However, the removal of a person uses Flashcard#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A flashcard is considered unique by comparing using {@code Flashcard#isSameFlashcard(Flashcard)}.
+ * As such, adding and updating of flashcards uses Flashcard#isSameFlashcard(Flashcard)
+ * for equality so as to ensure that the flashcard being added or updated is unique in terms of
+ * identity in the UniqueFlashcardList. However, the removal of a flashcard uses Flashcard#equals(Object) so
+ * as to ensure that the flashcard with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *

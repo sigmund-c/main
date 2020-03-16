@@ -1,10 +1,11 @@
 package cardibuddy.logic.commands.flashcard;
 
+import static java.util.Objects.requireNonNull;
+
 import cardibuddy.logic.commands.Command;
 import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.model.Model;
 
-import static java.util.Objects.requireNonNull;
 //import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_CARDS;
 
 /**
@@ -20,7 +21,7 @@ public class ListCardCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-//        model.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
+        //model.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

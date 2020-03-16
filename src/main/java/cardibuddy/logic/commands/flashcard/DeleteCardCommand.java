@@ -1,17 +1,17 @@
 package cardibuddy.logic.commands.flashcard;
 
-import cardibuddy.logic.commands.Command;
-import cardibuddy.logic.commands.CommandResult;
-import cardibuddy.logic.commands.exceptions.CommandException;
-import cardibuddy.commons.core.Messages;
-import cardibuddy.commons.core.index.Index;
-import cardibuddy.model.Model;
-import cardibuddy.model.flashcard.Flashcard;
+import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import cardibuddy.commons.core.Messages;
+import cardibuddy.commons.core.index.Index;
+import cardibuddy.logic.commands.Command;
+import cardibuddy.logic.commands.CommandResult;
+import cardibuddy.logic.commands.exceptions.CommandException;
+import cardibuddy.model.Model;
+import cardibuddy.model.flashcard.Flashcard;
 
 /**
  * Deletes a deck identified using it's displayed index from the cardibuddy book.

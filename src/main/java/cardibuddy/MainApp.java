@@ -1,13 +1,10 @@
 package cardibuddy;
 
-import cardibuddy.model.CardiBuddy;
-import cardibuddy.storage.CardiBuddyStorage;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
-import javafx.application.Application;
-import javafx.stage.Stage;
+
 import cardibuddy.commons.core.Config;
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.commons.core.Version;
@@ -16,12 +13,14 @@ import cardibuddy.commons.util.ConfigUtil;
 import cardibuddy.commons.util.StringUtil;
 import cardibuddy.logic.Logic;
 import cardibuddy.logic.LogicManager;
+import cardibuddy.model.CardiBuddy;
 import cardibuddy.model.Model;
 import cardibuddy.model.ModelManager;
 import cardibuddy.model.ReadOnlyCardiBuddy;
 import cardibuddy.model.ReadOnlyUserPrefs;
 import cardibuddy.model.UserPrefs;
 import cardibuddy.model.util.SampleDataUtil;
+import cardibuddy.storage.CardiBuddyStorage;
 import cardibuddy.storage.JsonCardiBuddyStorage;
 import cardibuddy.storage.JsonUserPrefsStorage;
 import cardibuddy.storage.Storage;
@@ -29,6 +28,8 @@ import cardibuddy.storage.StorageManager;
 import cardibuddy.storage.UserPrefsStorage;
 import cardibuddy.ui.Ui;
 import cardibuddy.ui.UiManager;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  * Runs the application.
@@ -55,8 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        CardiBuddyStorage addressBookStorage = new JsonCardiBuddyStorage(userPrefs.getCardiBuddyFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        CardiBuddyStorage cardiBuddyStorage = new JsonCardiBuddyStorage(userPrefs.getCardiBuddyFilePath());
+        storage = new StorageManager(cardiBuddyStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -73,14 +74,14 @@ public class MainApp extends Application {
      * or an empty cardibuddy book will be used instead if errors occur when reading {@code storage}'s cardibuddy book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyCardiBuddy> addressBookOptional;
+        Optional<ReadOnlyCardiBuddy> cardiBuddyOptional;
         ReadOnlyCardiBuddy initialData;
         try {
-            addressBookOptional = storage.readCardiBuddy();
-            if (!addressBookOptional.isPresent()) {
+            cardiBuddyOptional = storage.readCardiBuddy();
+            if (!cardiBuddyOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample CardiBuddy");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleCardiBuddy);
+            initialData = cardiBuddyOptional.orElseGet(SampleDataUtil::getSampleCardiBuddy);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty CardiBuddy");
             initialData = new CardiBuddy();
@@ -172,7 +173,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Cardi Buddy ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
