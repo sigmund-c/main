@@ -1,14 +1,14 @@
 package cardibuddy.logic.commands;
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
 
 import cardibuddy.commons.core.Messages;
 import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.commands.exceptions.CommandException;
-import cardibuddy.model.deck.Deck;
 import cardibuddy.model.Model;
+import cardibuddy.model.deck.Deck;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Deletes the Deck that corresponds with the index and the subsequent Flashcards.
@@ -17,7 +17,8 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a deck/flashcard identified by the index number used in the displayed cardibuddy book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD +
+            ": Deletes a deck/flashcard identified by the index number used in the displayed cardibuddy book.\n"
             + "Parameters: "
             + "Object Type INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + "1";
