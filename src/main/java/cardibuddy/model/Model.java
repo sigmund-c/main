@@ -8,7 +8,6 @@ import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
 import javafx.collections.ObservableList;
 
-
 /**
  * The API of the Model component.
  */
