@@ -1,6 +1,7 @@
 package cardibuddy.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -8,28 +9,25 @@ import cardibuddy.model.CardiBuddy;
 import cardibuddy.model.ReadOnlyCardiBuddy;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Title;
-import cardibuddy.model.flashcard.Flashcard;
-import cardibuddy.model.flashcard.Question;
-import cardibuddy.model.flashcard.ShortAnswer;
 import cardibuddy.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    private static Set<Tag> tags = null;
-    private static Deck sampleDeck = new Deck(new Title("Sample"), tags);
+    private static Set<Tag> tags = new HashSet<>();
 
-    public static Flashcard[] getSampleFlashcards() {
-        return new Flashcard[] {
-            new Flashcard(sampleDeck, new Question("Alex Yeoh"), new ShortAnswer("87438807"))
+    public static Deck[] getSampleDecks() {
+        tags.add(new Tag("Y2S1"));
+        return new Deck[] {
+            new Deck(new Title("CS2105"), tags)
         };
     }
 
     public static ReadOnlyCardiBuddy getSampleCardiBuddy() {
         CardiBuddy sampleCb = new CardiBuddy();
-        for (Flashcard sampleFlashcard : getSampleFlashcards()) {
-            sampleCb.addFlashcard(sampleFlashcard);
+        for (Deck sampleDeck : getSampleDecks()) {
+            sampleCb.addDeck(sampleDeck);
         }
         return sampleCb;
     }

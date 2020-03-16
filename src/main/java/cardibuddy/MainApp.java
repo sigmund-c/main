@@ -56,8 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        CardiBuddyStorage addressBookStorage = new JsonCardiBuddyStorage(userPrefs.getCardiBuddyFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        CardiBuddyStorage cardiBuddyStorage = new JsonCardiBuddyStorage(userPrefs.getCardiBuddyFilePath());
+        storage = new StorageManager(cardiBuddyStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -74,14 +74,14 @@ public class MainApp extends Application {
      * or an empty cardibuddy book will be used instead if errors occur when reading {@code storage}'s cardibuddy book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyCardiBuddy> addressBookOptional;
+        Optional<ReadOnlyCardiBuddy> cardiBuddyOptional;
         ReadOnlyCardiBuddy initialData;
         try {
-            addressBookOptional = storage.readCardiBuddy();
-            if (!addressBookOptional.isPresent()) {
+            cardiBuddyOptional = storage.readCardiBuddy();
+            if (!cardiBuddyOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample CardiBuddy");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleCardiBuddy);
+            initialData = cardiBuddyOptional.orElseGet(SampleDataUtil::getSampleCardiBuddy);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty CardiBuddy");
             initialData = new CardiBuddy();

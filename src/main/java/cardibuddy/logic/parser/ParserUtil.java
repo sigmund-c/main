@@ -9,6 +9,7 @@ import java.util.Set;
 import cardibuddy.commons.core.index.Index;
 import cardibuddy.commons.util.StringUtil;
 import cardibuddy.logic.parser.exceptions.ParseException;
+import cardibuddy.model.deck.Title;
 import cardibuddy.model.tag.Tag;
 
 /**
@@ -29,6 +30,21 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a {@code String title} into a {@code Title}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Title parseTitle(String title) throws ParseException {
+        requireNonNull(title);
+        String trimmedName = title.trim();
+        if (!Title.isValidTitle(trimmedName)) {
+            throw new ParseException(Title.MESSAGE_CONSTRAINTS);
+        }
+        return new Title(trimmedName);
     }
 
     /**

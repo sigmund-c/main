@@ -13,7 +13,7 @@ import cardibuddy.logic.parser.CardiBuddyParser;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.Model;
 import cardibuddy.model.ReadOnlyCardiBuddy;
-import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.deck.Deck;
 import cardibuddy.storage.Storage;
 import javafx.collections.ObservableList;
 
@@ -58,8 +58,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Flashcard> getFilteredFlashcardList() {
-        return model.getFilteredFlashcardList();
+    public ObservableList<Deck> getFilteredDeckList() {
+        return model.getFilteredDeckList();
     }
 
     @Override

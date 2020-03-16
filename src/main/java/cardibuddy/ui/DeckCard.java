@@ -2,7 +2,7 @@ package cardibuddy.ui;
 
 import java.util.Comparator;
 
-import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.deck.Deck;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -10,11 +10,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 /**
- * An UI component that displays information of a {@code Flashcard}.
+ * An UI component that displays information of a {@code deck}.
  */
-public class FlashcardCard extends UiPart<Region> {
+public class DeckCard extends UiPart<Region> {
 
-    private static final String FXML = "FlashcardListCard.fxml";
+    private static final String FXML = "deckListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -24,26 +24,23 @@ public class FlashcardCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Flashcard flashcard;
+    public final Deck deck;
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label question;
+    private Label title;
     @FXML
     private Label id;
     @FXML
-    private Label answer;
-    @FXML
     private FlowPane tags;
 
-    public FlashcardCard(Flashcard flashcard, int displayedIndex) {
+    public DeckCard(Deck deck, int displayedIndex) {
         super(FXML);
-        this.flashcard = flashcard;
+        this.deck = deck;
         id.setText(displayedIndex + ". ");
-        question.setText(flashcard.getQuestion().toString());
-        answer.setText(flashcard.getAnswer().toString());
-        flashcard.getDeck().getTags().stream()
+        title.setText(deck.getTitle().toString());
+        deck.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
@@ -56,13 +53,13 @@ public class FlashcardCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FlashcardCard)) {
+        if (!(other instanceof DeckCard)) {
             return false;
         }
 
         // state check
-        FlashcardCard card = (FlashcardCard) other;
+        DeckCard card = (DeckCard) other;
         return id.getText().equals(card.id.getText())
-                && flashcard.equals(card.flashcard);
+                && deck.equals(card.deck);
     }
 }
