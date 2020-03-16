@@ -1,6 +1,5 @@
 package cardibuddy.logic.commands;
 import java.util.List;
-
 import static java.util.Objects.requireNonNull;
 
 import cardibuddy.commons.core.Messages;
@@ -17,8 +16,8 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD +
-            ": Deletes a deck/flashcard identified by the index number used in the displayed cardibuddy book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes a deck/flashcard identified by the index number used in the displayed cardibuddy book.\n"
             + "Parameters: "
             + "Object Type INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + "1";
