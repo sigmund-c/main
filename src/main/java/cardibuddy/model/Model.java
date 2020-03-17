@@ -8,7 +8,6 @@ import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
 import javafx.collections.ObservableList;
 
-
 /**
  * The API of the Model component.
  */
@@ -56,6 +55,8 @@ public interface Model {
 
     /** Returns the CardiBuddy */
     ReadOnlyCardiBuddy getCardiBuddy();
+
+
 
     /**
      * Returns true if a deck with the same identity as {@code deck} exists in the cardibuddy.
