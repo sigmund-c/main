@@ -65,7 +65,9 @@ public class TestSession {
      */
     public Flashcard nextFlashcard() {
         assert !testQueue.isEmpty();
-        if (testResults.get(current).getResult() == Result.WRONG) { /* check if the user got the current flashcard wrong, and add it to the back of the testQueue again */
+        /* check if the user got the current flashcard wrong,
+        and add it to the back of the testQueue again */
+        if (testResults.get(current).getResult() == Result.WRONG) {
             testQueue.addLast(current);
         }
         current = testQueue.removeFirst();
@@ -84,6 +86,11 @@ public class TestSession {
      */
     public TestResult test(Answer userAnswer) {
         TestResult result = new TestResult(current.getAnswer(), userAnswer); // get the result of the test
+        if (testResults.containsKey(current)) { // if already tested before, update numTries
+            TestResult prevResult = testResults.get(current);
+            int numTries = prevResult.getNumTries();
+            result.setNumTries(numTries + 1); // increase numTries by 1
+        }
         testResults.put(current, result); // store the current flashcard and the result in the testResults hashmap
         return result;
     }
