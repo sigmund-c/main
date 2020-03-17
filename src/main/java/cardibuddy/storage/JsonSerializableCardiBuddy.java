@@ -29,10 +29,10 @@ class JsonSerializableCardiBuddy {
     /**
      * Constructs a {@code JsonSerializableCardiBuddy} with the given flashcards.
      */
-//    @JsonCreator
-//    public JsonSerializableCardiBuddy(@JsonProperty("decks") List<JsonAdaptedDeck> decks) {
-//        this.decks.addAll(decks);
-//    }
+    // @JsonCreator
+    // public JsonSerializableCardiBuddy(@JsonProperty("decks") List<JsonAdaptedDeck> decks) {
+        //this.decks.addAll(decks);
+    //}
     @JsonCreator
     public JsonSerializableCardiBuddy(@JsonProperty("flashcards") List<JsonAdaptedFlashcard> flashcards) {
         this.flashcards.addAll(flashcards);
@@ -43,32 +43,31 @@ class JsonSerializableCardiBuddy {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableCardiBuddy}.
      */
-//    public JsonSerializableCardiBuddy(ReadOnlyCardiBuddy source) {
-//        decks.addAll(source.getDeckList().stream()
-//                .map(JsonAdaptedDeck::new).collect(Collectors.toList()));
-//    }
+
+    // public JsonSerializableCardiBuddy(ReadOnlyCardiBuddy source) {
+        //decks.addAll(source.getDeckList().stream().map(JsonAdaptedDeck::new).collect(Collectors.toList()));
+    // }
     public JsonSerializableCardiBuddy(ReadOnlyCardiBuddy source) {
         flashcards.addAll(source.getFlashcardList().stream()
                 .map(JsonAdaptedFlashcard::new).collect(Collectors.toList()));
     }
-
 
     /**
      * Converts this address book into the model's {@code CardiBuddy} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-//    public CardiBuddy toModelType() throws IllegalValueException {
-//        CardiBuddy cardibuddy = new CardiBuddy();
-//        for (JsonAdaptedDeck jsonAdaptedDeck : decks) {
-//            Deck deck = jsonAdaptedDeck.toModelType();
-//            if (cardibuddy.hasDeck(deck)) {
-//                throw new IllegalValueException(MESSAGE_DUPLICATE_DECK);
-//            }
-//            cardibuddy.addDeck(deck);
-//        }
-//        return cardibuddy;
-//    }
+    // public CardiBuddy toModelType() throws IllegalValueException {
+        // CardiBuddy cardibuddy = new CardiBuddy();
+        // for (JsonAdaptedDeck jsonAdaptedDeck : decks) {
+            // Deck deck = jsonAdaptedDeck.toModelType();
+            // if (cardibuddy.hasDeck(deck)) {
+                // throw new IllegalValueException(MESSAGE_DUPLICATE_DECK);
+            // }
+            // cardibuddy.addDeck(deck);
+        // }
+        // return cardibuddy;
+    // }
 
     public CardiBuddy toModelType() throws IllegalValueException {
         CardiBuddy cardibuddy = new CardiBuddy();
