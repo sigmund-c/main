@@ -85,19 +85,19 @@ public interface Model {
     /**
      * Returns true if a flashcard with the same identity as {@code flashcard} exists in the cardibuddy.
      */
-    boolean hasCard(Flashcard card);
+    boolean hasFlashcard(Flashcard flashcard);
 
     /**
      * Deletes the given flashcard.
      * The flashcard must exist in the cardibuddy.
      */
-    void deleteCard(Flashcard target);
+    void deleteFlashcard(Flashcard target);
 
     /**
      * Adds the given flashcard.
      * {@code flashcard} must not already exist in the cardibuddy.
      */
-    void addCard(Flashcard flashcard);
+    void addFlashcard(Flashcard flashcard);
 
     /**
      * Replaces the given flashcard {@code target} with {@code editedFlashcard}.
@@ -105,7 +105,7 @@ public interface Model {
      * The flashcard identity of {@code editedFlashcard} must not
      * be the same as another existing flashcard in the cardibuddy.
      */
-    void setCard(Flashcard target, Flashcard editedFlashcard);
+    void setFlashcard(Flashcard target, Flashcard editedFlashcard);
 
     /** Returns an unmodifiable view of the filtered deck list */
     ObservableList<Deck> getFilteredDeckList();

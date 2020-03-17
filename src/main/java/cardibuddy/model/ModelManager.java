@@ -114,11 +114,13 @@ public class ModelManager implements Model {
         cardiBuddy.setDeck(target, editedDeck);
     }
 
-    public boolean hasCard(Flashcard flashcard) {
-        return true;
+    public boolean hasFlashcard(Flashcard flashcard) {
+        requireNonNull(flashcard);
+        return cardiBuddy.hasFlashcard(flashcard);
     }
 
-    public void deleteCard(Flashcard target) {
+    @Override
+    public void deleteFlashcard(Flashcard target) {
         cardiBuddy.removeFlashcard(target);
     }
 
@@ -126,12 +128,14 @@ public class ModelManager implements Model {
      * Adds Flashcard to a Deck.
      * @param flashcard new card.
      */
-    public void addCard(Flashcard flashcard) {
+    @Override
+    public void addFlashcard(Flashcard flashcard) {
         cardiBuddy.addFlashcard(flashcard);
         updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
     }
 
-    public void setCard(Flashcard target, Flashcard editedFlashcard) {
+    @Override
+    public void setFlashcard(Flashcard target, Flashcard editedFlashcard) {
         requireAllNonNull(target, editedFlashcard);
 
         cardiBuddy.setFlashcard(target, editedFlashcard);

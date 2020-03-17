@@ -10,6 +10,9 @@ import cardibuddy.commons.core.index.Index;
 import cardibuddy.commons.util.StringUtil;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.deck.Title;
+import cardibuddy.model.flashcard.Answer;
+import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.flashcard.ShortAnswer;
 import cardibuddy.model.tag.Tag;
 
 /**
@@ -72,5 +75,23 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static Question parseQuestion(String question) throws ParseException {
+        requireNonNull(question);
+        String trimmedQuestion = question.trim();
+        if (!Question.isValidQuestion(trimmedQuestion)) {
+            throw new ParseException(Question.MESSAGE_CONSTRAINTS);
+        }
+        return new Question(trimmedQuestion);
+    }
+
+    public static Answer parseAnswer(String answer) throws ParseException {
+        requireNonNull(answer);
+        String trimmedAnswer = answer.trim();
+        if (!Answer.isValidAnswer(trimmedAnswer)) {
+            throw new ParseException(Answer.MESSAGE_CONSTRAINTS);
+        }
+        return new ShortAnswer(trimmedAnswer);
     }
 }
