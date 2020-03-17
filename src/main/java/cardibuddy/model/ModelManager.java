@@ -114,6 +114,7 @@ public class ModelManager implements Model {
         cardiBuddy.setDeck(target, editedDeck);
     }
 
+    @Override
     public boolean hasFlashcard(Flashcard flashcard) {
         requireNonNull(flashcard);
         return cardiBuddy.hasFlashcard(flashcard);

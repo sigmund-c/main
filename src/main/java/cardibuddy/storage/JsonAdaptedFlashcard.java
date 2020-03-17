@@ -4,18 +4,15 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import cardibuddy.model.deck.Deck;
-import cardibuddy.model.deck.Title;
-import cardibuddy.model.flashcard.Answer;
-import cardibuddy.model.flashcard.Question;
-import cardibuddy.model.flashcard.ShortAnswer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import cardibuddy.commons.exceptions.IllegalValueException;
+import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.flashcard.ShortAnswer;
 import cardibuddy.model.tag.Tag;
 
 /**
@@ -59,7 +56,6 @@ class JsonAdaptedFlashcard {
 
     /**
      * Converts this Jackson-friendly adapted flashcard object into the model's {@code Flashcard} object.
-     *
      * @throws IllegalValueException if there were any data constraints violated in the adapted flashcard.
      */
     public Flashcard toModelType() throws IllegalValueException {
@@ -69,7 +65,7 @@ class JsonAdaptedFlashcard {
         }
 
         final Set<Tag> modelTags = new HashSet<>(flashcardTags);
-      Deck testDeck = new Deck();
+        Deck testDeck = new Deck();
         Question testQuestion = new Question(question);
         ShortAnswer testAnswer = new ShortAnswer(answer);
         return new Flashcard(testDeck, testQuestion, testAnswer);

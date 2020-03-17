@@ -1,15 +1,19 @@
 package cardibuddy.logic.commands;
 
-import static cardibuddy.logic.parser.CliSyntax.*;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static java.util.Objects.requireNonNull;
+
+import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
-
-import java.util.logging.Logger;
 
 /**
  * Adds a deck to the cardibuddy.

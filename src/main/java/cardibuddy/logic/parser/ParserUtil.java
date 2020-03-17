@@ -39,7 +39,7 @@ public class ParserUtil {
      * Parses a {@code String title} into a {@code Title}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code title} is invalid.
      */
     public static Title parseTitle(String title) throws ParseException {
         requireNonNull(title);
@@ -77,6 +77,12 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses a {@code String question} into a {@code Question}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code question} is invalid.
+     */
     public static Question parseQuestion(String question) throws ParseException {
         requireNonNull(question);
         String trimmedQuestion = question.trim();
@@ -86,6 +92,12 @@ public class ParserUtil {
         return new Question(trimmedQuestion);
     }
 
+    /**
+     * Parses a {@code String answer} into a {@code Answer}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code answer} is invalid.
+     */
     public static Answer parseAnswer(String answer) throws ParseException {
         requireNonNull(answer);
         String trimmedAnswer = answer.trim();

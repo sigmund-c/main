@@ -2,7 +2,11 @@ package cardibuddy.logic.parser;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_DECK_CANNOT_BE_CARD;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static cardibuddy.logic.parser.CliSyntax.*;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collections;
@@ -17,7 +21,6 @@ import cardibuddy.model.deck.exceptions.DeckCannotBeCardException;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
-import cardibuddy.model.flashcard.ShortAnswer;
 import cardibuddy.model.tag.Tag;
 
 /**
@@ -36,7 +39,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DECK, PREFIX_FLASHCARD, PREFIX_TAG, PREFIX_QUESTION, PREFIX_ANSWER);
+                ArgumentTokenizer.tokenize(args, PREFIX_DECK, PREFIX_FLASHCARD, PREFIX_TAG,
+                        + PREFIX_QUESTION, PREFIX_ANSWER);
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

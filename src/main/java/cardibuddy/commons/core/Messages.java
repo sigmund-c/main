@@ -11,5 +11,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_CARD_DISPLAYED_INDEX = "The card index provided is invalid";
     public static final String MESSAGE_DECKS_LISTED_OVERVIEW = "%1$d decks listed!";
     public static final String MESSAGE_CARDS_LISTED_OVERVIEW = "%1$d cards listed!";
-    public static final String MESSAGE_DECK_CANNOT_BE_CARD = "Operation would result in the object created being both a deck and a card!";
+    public static final String MESSAGE_DECK_CANNOT_BE_CARD = "Operation would result in the object created "
+            + "being both a deck and a card!";
 }
