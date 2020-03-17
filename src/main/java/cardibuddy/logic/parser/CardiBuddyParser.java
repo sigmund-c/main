@@ -15,6 +15,7 @@ import cardibuddy.logic.commands.ExitCommand;
 import cardibuddy.logic.commands.HelpCommand;
 import cardibuddy.logic.commands.ListCommand;
 import cardibuddy.logic.commands.SearchCommand;
+import cardibuddy.logic.commands.TestCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 
 /**
@@ -52,6 +53,9 @@ public class CardiBuddyParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case TestCommand.COMMAND_WORD:
+            return new TestCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
