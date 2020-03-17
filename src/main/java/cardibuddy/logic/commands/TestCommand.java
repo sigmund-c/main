@@ -1,5 +1,6 @@
 package cardibuddy.logic.commands;
 
+
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
@@ -16,7 +17,6 @@ import cardibuddy.model.deck.Deck;
 public class TestCommand extends Command {
 
     public static final String COMMAND_WORD = "test";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Starts a test session with the deck indicated by the index\n"
             + "Parameters: INDEX (must be a positive integer)\n"
@@ -44,7 +44,7 @@ public class TestCommand extends Command {
         model.testDeck(deckToTest);
         return new CommandResult(MESSAGE_TEST_SESSION_SUCCESS, false, false);
     }
-
+  
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
