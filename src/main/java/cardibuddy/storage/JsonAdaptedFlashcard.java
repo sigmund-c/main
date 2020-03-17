@@ -49,9 +49,7 @@ class JsonAdaptedFlashcard {
         question = source.getQuestion().toString();
         answer = source.getAnswer().toString();
         deck = source.getDeck().toString();
-        // tagged.addAll(source.getDeck().getTags().stream()
-                // .map(JsonAdaptedTag::new)
-                // .collect(Collectors.toList()));
+        // tagged.addAll(source.getDeck().getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
     /**
