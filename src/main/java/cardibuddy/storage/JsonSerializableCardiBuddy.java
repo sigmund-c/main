@@ -11,24 +11,24 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import cardibuddy.commons.exceptions.IllegalValueException;
 import cardibuddy.model.CardiBuddy;
 import cardibuddy.model.ReadOnlyCardiBuddy;
-import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.deck.Deck;
 
 /**
  * An Immutable CardiBuddy that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "cardibuddy")
 class JsonSerializableCardiBuddy {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Flashcards list contains duplicate flashcard(s).";
+    public static final String MESSAGE_DUPLICATE_DECK = "Decks list contains duplicate deck(s).";
 
-    private final List<JsonAdaptedFlashcard> flashcards = new ArrayList<>();
+    private final List<JsonAdaptedDeck> decks = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableCardiBuddy} with the given flashcards.
      */
     @JsonCreator
-    public JsonSerializableCardiBuddy(@JsonProperty("flashcards") List<JsonAdaptedFlashcard> flashcards) {
-        this.flashcards.addAll(flashcards);
+    public JsonSerializableCardiBuddy(@JsonProperty("decks") List<JsonAdaptedDeck> decks) {
+        this.decks.addAll(decks);
     }
 
     /**
@@ -37,8 +37,8 @@ class JsonSerializableCardiBuddy {
      * @param source future changes to this will not affect the created {@code JsonSerializableCardiBuddy}.
      */
     public JsonSerializableCardiBuddy(ReadOnlyCardiBuddy source) {
-        flashcards.addAll(source.getFlashcardList().stream()
-                .map(JsonAdaptedFlashcard::new).collect(Collectors.toList()));
+        decks.addAll(source.getDeckList().stream()
+                .map(JsonAdaptedDeck::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,15 +47,15 @@ class JsonSerializableCardiBuddy {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public CardiBuddy toModelType() throws IllegalValueException {
-        CardiBuddy addressBook = new CardiBuddy();
-        for (JsonAdaptedFlashcard jsonAdaptedFlashcard : flashcards) {
-            Flashcard flashcard = jsonAdaptedFlashcard.toModelType();
-            if (addressBook.hasFlashcard(flashcard)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        CardiBuddy cardibuddy = new CardiBuddy();
+        for (JsonAdaptedDeck jsonAdaptedDeck : decks) {
+            Deck deck = jsonAdaptedDeck.toModelType();
+            if (cardibuddy.hasDeck(deck)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_DECK);
             }
-            addressBook.addFlashcard(flashcard);
+            cardibuddy.addDeck(deck);
         }
-        return addressBook;
+        return cardibuddy;
     }
 
 }
