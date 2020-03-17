@@ -2,11 +2,11 @@ package cardibuddy.logic.parser;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_DECK_CANNOT_BE_CARD;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collections;
@@ -56,7 +56,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
             toAdd = new Deck(title, tagList);
             return new AddCommand((Deck) toAdd);
-        } else if (argMultimap.containsKey(PREFIX_FLASHCARD))  {
+        } else if (argMultimap.containsKey(PREFIX_FLASHCARD)) {
             Title title = new Title("");
             Set<Tag> tagList = Collections.<Tag>emptySet();
             Deck deck = new Deck(title, tagList);

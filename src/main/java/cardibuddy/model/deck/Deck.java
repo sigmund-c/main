@@ -2,16 +2,15 @@ package cardibuddy.model.deck;
 
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
 
-
-import cardibuddy.model.flashcard.Flashcard;
-import cardibuddy.model.tag.Tag;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+
+import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.tag.Tag;
 
 /**
  * Represents a Deck in the cardibuddy application.

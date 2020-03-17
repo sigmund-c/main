@@ -1,10 +1,10 @@
 package cardibuddy.logic.commands;
 
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
 import java.util.logging.Logger;
@@ -28,7 +28,7 @@ public class AddCommand extends Command {
             + "[ " + PREFIX_FLASHCARD + "CARD_TITLE] "
             // + PREFIX_TITLE + "Title \n"
             + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_QUESTION+ "QUESTION] "
+            + "[" + PREFIX_QUESTION + "QUESTION] "
             + "[" + PREFIX_ANSWER + "ANSWER]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DECK + "cs2103t "
