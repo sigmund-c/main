@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import cardibuddy.model.flashcard.Flashcard;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -12,7 +11,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import cardibuddy.commons.exceptions.IllegalValueException;
 import cardibuddy.model.CardiBuddy;
 import cardibuddy.model.ReadOnlyCardiBuddy;
-import cardibuddy.model.deck.Deck;
+// import cardibuddy.model.deck.Deck;
+import cardibuddy.model.flashcard.Flashcard;
 
 /**
  * An Immutable CardiBuddy that is serializable to JSON format.
