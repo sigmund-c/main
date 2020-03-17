@@ -107,6 +107,11 @@ public interface Model {
      */
     void setFlashcard(Flashcard target, Flashcard editedFlashcard);
 
+    /**
+     * Starts the test session with {@code deck}
+     * @param deck the deck to be tested
+     */
+    void testDeck(Deck deck);
     /** Returns an unmodifiable view of the filtered deck list */
     ObservableList<Deck> getFilteredDeckList();
 

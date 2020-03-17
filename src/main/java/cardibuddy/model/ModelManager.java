@@ -142,6 +142,14 @@ public class ModelManager implements Model {
         cardiBuddy.setFlashcard(target, editedFlashcard);
     }
 
+    /**
+     * Starts a test session // TODO see how to update the list
+     * @param deck the deck to be tested
+     */
+    @Override
+    public void testDeck(Deck deck) {
+    }
+
     //=========== Filtered Flashcard List Accessors =============================================================
 
     /**

@@ -18,25 +18,25 @@ import cardibuddy.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Flashcard}.
  */
-class JsonAdaptedFlashcard {
+class JsonAdaptedFlashcard extends JsonAdaptedView {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Flashcard's %s field is missing!";
 
+    private final String deck;
     private final String question;
     private final String answer;
-    private final String deck;
     private final List<cardibuddy.storage.JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedFlashcard} with the given flashcard details.
      */
     @JsonCreator
-    public JsonAdaptedFlashcard(@JsonProperty("question") String question, @JsonProperty("answer") String answer,
-                                @JsonProperty("deck") String deck,
+    public JsonAdaptedFlashcard(@JsonProperty("deck") String deck, @JsonProperty("question") String question,
+                                @JsonProperty("answer") String answer,
                                 @JsonProperty("tagged") List<cardibuddy.storage.JsonAdaptedTag> tagged) {
+        this.deck = deck;
         this.question = question;
         this.answer = answer;
-        this.deck = deck;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -46,11 +46,14 @@ class JsonAdaptedFlashcard {
      * Converts a given {@code Flashcard} into this class for Jackson use.
      */
     public JsonAdaptedFlashcard(Flashcard source) {
+        deck = source.getDeck().toString();
         question = source.getQuestion().toString();
         answer = source.getAnswer().toString();
-        deck = source.getDeck().toString();
-        // tagged.addAll(source.getDeck().getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
+        //tagged.addAll(source.getDeck().getTags().stream()
+        //        .map(cardibuddy.storage.JsonAdaptedTag::new)
+        //        .collect(Collectors.toList()));
     }
+    // TODO: add tags for individual flashcards. Right now, flashcards use deck's tags.
 
     /**
      * Converts this Jackson-friendly adapted flashcard object into the model's {@code Flashcard} object.
