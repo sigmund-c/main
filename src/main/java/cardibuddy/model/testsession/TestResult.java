@@ -21,6 +21,7 @@ public class TestResult {
     /**
      * Constructor for TestResult.
      * Automatically computes the result based on the given flashcardAnswer and the given userAnswer.
+     *
      * @param flashcardAnswer
      * @param userAnswer
      */
@@ -32,6 +33,7 @@ public class TestResult {
 
     /**
      * Result of test session.
+     *
      * @return Result object (idk what to write here :( ).
      */
     public Result computeResult() {
