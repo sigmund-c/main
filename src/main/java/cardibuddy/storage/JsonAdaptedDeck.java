@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import cardibuddy.model.deck.Title;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -72,9 +73,9 @@ public class JsonAdaptedDeck extends JsonAdaptedView {
         }
 
         // TODO: add if conditions here to check formatting
-
+        Title modelTitle = new Title(title);
         final Set<Tag> modelTags = new HashSet<>(deckTags);
-        return new Deck(null, null); // TODO: to replace params with actual values
+        return new Deck(modelTitle, modelTags); // TODO: to replace params with actual values
     }
 
 }

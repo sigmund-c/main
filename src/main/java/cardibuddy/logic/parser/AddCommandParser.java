@@ -2,6 +2,7 @@ package cardibuddy.logic.parser;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_DECK_CANNOT_BE_CARD;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
@@ -18,6 +19,7 @@ import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Title;
 import cardibuddy.model.deck.exceptions.DeckCannotBeCardException;
+import cardibuddy.model.deck.exceptions.InvalidDeckException;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
@@ -49,6 +51,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_FLASHCARD)) {
             // both PREFIX_DECK and PREFIX_FLASHCARD are present
             throw new DeckCannotBeCardException(String.format(MESSAGE_DECK_CANNOT_BE_CARD, AddCommand.MESSAGE_USAGE));
+        } else if (arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_QUESTION, PREFIX_ANSWER)) {
+            //trying to add a deck with a question and/or an answer
+            throw new InvalidDeckException(String.format(MESSAGE_INVALID_DECK, AddCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.containsKey(PREFIX_DECK)) {

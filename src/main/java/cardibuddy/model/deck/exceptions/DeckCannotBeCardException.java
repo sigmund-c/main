@@ -8,8 +8,4 @@ public class DeckCannotBeCardException extends RuntimeException {
     public DeckCannotBeCardException(String message) {
         super(message);
     }
-
-    public DeckCannotBeCardException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }
