@@ -7,6 +7,8 @@ import cardibuddy.logic.parser.exceptions.ParseException;
 
 import java.util.logging.Logger;
 
+import static cardibuddy.logic.commands.OpenCommand.MESSAGE_OPEN_DECK_SUCCESS;
+
 /**
  * Parses input arguments and creates a new OpenCommand object
  */
@@ -20,11 +22,11 @@ public class OpenCommandParser implements Parser<OpenCommand> {
      */
     public OpenCommand parse(String args) throws ParseException {
         try {
-            logger.info("Open command executing.");
             Index index = ParserUtil.parseIndex(args);
             return new OpenCommand(index);
-        } catch (ParseException e) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, OpenCommand.MESSAGE_USAGE), e);
+        } catch (ParseException pe) {
+            throw new ParseException(
+                    String.format(MESSAGE_OPEN_DECK_SUCCESS, OpenCommand.MESSAGE_USAGE), pe);
         }
     }
 }

@@ -59,9 +59,9 @@ public class JsonAdaptedDeck extends JsonAdaptedView {
     }
 
     /**
-     * Converts this Jackson-friendly adapted flashcard object into the model's {@code Flashcard} object.
+     * Converts this Jackson-friendly adapted flashcard object into the model's {@code Deck} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted flashcard.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted deck.
      */
     public Deck toModelType() throws IllegalValueException {
         final List<Tag> deckTags = new ArrayList<>();

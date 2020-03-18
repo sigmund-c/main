@@ -6,16 +6,7 @@ import static cardibuddy.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import cardibuddy.logic.commands.AddCommand;
-import cardibuddy.logic.commands.ClearCommand;
-import cardibuddy.logic.commands.Command;
-import cardibuddy.logic.commands.DeleteCommand;
-import cardibuddy.logic.commands.EditCommand;
-import cardibuddy.logic.commands.ExitCommand;
-import cardibuddy.logic.commands.HelpCommand;
-import cardibuddy.logic.commands.ListCommand;
-import cardibuddy.logic.commands.SearchCommand;
-import cardibuddy.logic.commands.TestCommand;
+import cardibuddy.logic.commands.*;
 import cardibuddy.logic.parser.exceptions.ParseException;
 
 /**
@@ -43,7 +34,10 @@ public class CardiBuddyParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         switch (commandWord) {
+        case OpenCommand.COMMAND_WORD:
+            return new OpenCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);

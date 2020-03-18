@@ -76,6 +76,11 @@ public interface Model {
     void addDeck(Deck deck);
 
     /**
+     * Adds the given deck.
+     * {@code deck} must not already exist in the cardibuddy.
+     */
+
+    /**
      * Replaces the given deck {@code target} with {@code editedDeck}.
      * {@code target} must exist in the cardibuddy.
      * The deck identity of {@code editedDeck} must not be the same as another existing deck in the cardibuddy.
