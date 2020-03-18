@@ -12,9 +12,6 @@ import cardibuddy.commons.exceptions.IllegalValueException;
 import cardibuddy.model.CardiBuddy;
 import cardibuddy.model.ReadOnlyCardiBuddy;
 import cardibuddy.model.deck.Deck;
-
-import static cardibuddy.logic.commands.AddCommand.MESSAGE_DUPLICATE_DECK;
-
 /**
  * An Immutable CardiBuddy that is serializable to JSON format.
  */
