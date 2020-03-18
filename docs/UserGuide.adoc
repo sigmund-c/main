@@ -75,7 +75,7 @@ Format: `exit`
 ==== Adding a deck: `add deck`
 
 Creates a new deck to be added to the library.
-Format: `add deck d/TITLE [t/TAG]…`
+Format: `add d/TITLE [t/TAG]…`
 
 [Tip]
 A deck can have any number of tags (including 0)
@@ -91,7 +91,7 @@ Returns a new deck titled `cs1101s` with the tags `Hard` and `CS`
 ==== Adding a card: `add card`
 
 Creates a new card to be added to the deck.
-Format: `add card c/DECK_TITLE n/CARD_TYPE`
+Format: `add c/DECK_TITLE n/CARD_TYPE`
 
 * The variable CARD_TYPE can only take the values of ‘MCQ’, ‘True/False’ or ‘Short Answer’ or ‘Matching’. Any other values will cause the application to display an error message.
 * When a card is created, the question field of the card will be set to the default value of ‘Please type your question here’.
@@ -102,7 +102,7 @@ Format: `add card c/DECK_TITLE n/CARD_TYPE`
 
 Examples:
 
-* `add card c/cs1101s n/MCQ` +
+* `add c/cs1101s n/MCQ` +
 Returns a new card belonging to the deck `cs1101s` and of the type `MCQ`
 
 === Editing
