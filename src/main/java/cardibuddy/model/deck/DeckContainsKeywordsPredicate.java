@@ -80,6 +80,11 @@ public class DeckContainsKeywordsPredicate implements Predicate<Deck> {
         return anyMatch;
     }
 
+    /**
+     * Filters keywords to remove & symbol and to group keywords together as List objects.
+     * @param keywords list of keywords from SearchCommand.
+     * @return a List of Lists of keywords that are grouped accordingly.
+     */
     private List<List<String>> filterKeywords(List<String> keywords) {
         List<List<String>> newList = new ArrayList<>();
         for (int i = 0; i < keywords.size(); i++) {
