@@ -36,7 +36,7 @@ image::haveaqiupill.png[width="150", align="left"]
 {empty}[http://github.com/haveaqiupill[Github]] [<<jingying#, Portfolio>>]
 
 Role: Developer +
-Responsibilities: Finding/Filtering of Sub-topics/Main topics + UI
+Responsibilities: Advanced Search + UI
 
 '''
 

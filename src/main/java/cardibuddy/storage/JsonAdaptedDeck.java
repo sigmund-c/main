@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import cardibuddy.commons.exceptions.IllegalValueException;
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.deck.Title;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.tag.Tag;
 /**
