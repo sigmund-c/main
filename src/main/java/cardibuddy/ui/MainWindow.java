@@ -44,7 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane deckListPanelPlaceholder = new StackPane();
+    private StackPane deckListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
