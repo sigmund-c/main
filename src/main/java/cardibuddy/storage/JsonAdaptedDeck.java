@@ -73,9 +73,9 @@ public class JsonAdaptedDeck extends JsonAdaptedView {
         }
 
         // TODO: add if conditions here to check formatting
-
+        Title modelTitle = new Title(title);
         final Set<Tag> modelTags = new HashSet<>(deckTags);
-        return new Deck(new Title("CS2103"), modelTags); // TODO: to replace params with actual values
+        return new Deck(modelTitle, modelTags); // TODO: to replace params with actual values
     }
 
 }

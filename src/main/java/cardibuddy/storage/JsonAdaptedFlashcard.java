@@ -66,9 +66,9 @@ class JsonAdaptedFlashcard extends JsonAdaptedView {
         }
 
         final Set<Tag> modelTags = new HashSet<>(flashcardTags);
-        Deck testDeck = new Deck();
-        Question testQuestion = new Question(question);
-        ShortAnswer testAnswer = new ShortAnswer(answer);
-        return new Flashcard(testDeck, testQuestion, testAnswer);
+        Deck modelDeck = new Deck();
+        Question modelQuestion = new Question(question);
+        ShortAnswer modelAnswer = new ShortAnswer(answer);
+        return new Flashcard(modelDeck, modelQuestion, modelAnswer);
     }
 }

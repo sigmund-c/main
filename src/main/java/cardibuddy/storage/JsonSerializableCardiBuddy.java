@@ -19,7 +19,6 @@ import cardibuddy.model.deck.Deck;
 @JsonRootName(value = "cardibuddy")
 class JsonSerializableCardiBuddy {
 
-
     public static final String MESSAGE_DUPLICATE_DECK = "Decks list contains duplicate deck(s).";
     public static final String MESSAGE_DUPLICATE_FLASHCARDS = "Flashcards list contains duplicate flashcard(s).";
 
@@ -28,7 +27,7 @@ class JsonSerializableCardiBuddy {
 
     /**
      * Constructs a {@code JsonSerializableCardiBuddy} with the given flashcards.
-     * */
+     */
     @JsonCreator
     public JsonSerializableCardiBuddy(@JsonProperty("decks") List<JsonAdaptedDeck> decks) {
         this.decks.addAll(decks);
@@ -36,10 +35,8 @@ class JsonSerializableCardiBuddy {
 
     /**
      * Converts a given {@code ReadOnlyCardiBuddy} into this class for Jackson use.
-     *
      * @param source future changes to this will not affect the created {@code JsonSerializableCardiBuddy}.
      */
-
     public JsonSerializableCardiBuddy(ReadOnlyCardiBuddy source) {
         decks.addAll(source.getDeckList().stream()
             .map(JsonAdaptedDeck::new).collect(Collectors.toList()));
