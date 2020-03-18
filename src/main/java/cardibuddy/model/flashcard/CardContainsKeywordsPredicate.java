@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import cardibuddy.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Flashcards}'s {@code Name} matches any of the keywords given.
  */
 public class CardContainsKeywordsPredicate implements Predicate<Flashcard> {
     private final List<String> keywords;

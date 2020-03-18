@@ -15,7 +15,7 @@ import cardibuddy.model.deck.DeckContainsKeywordsPredicate;
 public class SearchCommandParser implements Parser<SearchCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
+     * Parses the given {@code String} of arguments in the context of the SearchCommand
      * and returns a FindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */

@@ -8,6 +8,7 @@ import cardibuddy.logic.Logic;
 import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.logic.parser.exceptions.ParseException;
+import cardibuddy.model.deck.exceptions.DeckCannotBeCardException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -43,7 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane deckListPanelPlaceholder = new StackPane();
+    private StackPane deckListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -197,7 +198,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | DeckCannotBeCardException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
