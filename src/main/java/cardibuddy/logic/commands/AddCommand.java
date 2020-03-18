@@ -26,7 +26,6 @@ public class AddCommand extends Command {
             + "Parameters: "
             + "[ " + PREFIX_DECK + "DECK_TITLE] "
             + "[ " + PREFIX_FLASHCARD + "CARD_TITLE] "
-            // + PREFIX_TITLE + "Title \n"
             + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_QUESTION + "QUESTION] "
             + "[" + PREFIX_ANSWER + "ANSWER]\n"
