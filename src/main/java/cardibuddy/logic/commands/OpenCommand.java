@@ -41,7 +41,7 @@ public class OpenCommand extends Command {
         }
 
         Deck deckToOpen = lastShownList.get(targetIndex.getZeroBased());
-        return new CommandResult(String.format(MESSAGE_OPEN_DECK_SUCCESS + deckToOpen.getTitle(), Optional.of(deckToOpen)));
+        return new CommandResult(String.format(MESSAGE_OPEN_DECK_SUCCESS, Optional.of(deckToOpen)));
     }
 
     @Override
