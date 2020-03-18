@@ -2,15 +2,15 @@ package cardibuddy.model.deck;
 
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.tag.Tag;
-
-
 
 /**
  * Represents a Deck in the cardibuddy application.
@@ -23,7 +23,7 @@ public class Deck {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private Set<Flashcard> flashcards = new HashSet<>();
+    private List<Flashcard> flashcards = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -32,6 +32,10 @@ public class Deck {
         requireAllNonNull(title, tags);
         this.title = title;
         this.tags.addAll(tags);
+    }
+
+    public Deck() {
+        title = new Title("");
     }
 
     public Title getTitle() {
@@ -46,7 +50,7 @@ public class Deck {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Set<Flashcard> getFlashcards() {
+    public List<Flashcard> getFlashcards() {
         return this.flashcards;
     }
 
@@ -55,9 +59,9 @@ public class Deck {
      * @param card
      * @return the set of Flashcards from the Deck.
      */
-    public Set<Flashcard> addFlashcard(Flashcard card) {
+    public List<Flashcard> addFlashcard(Flashcard card) {
         flashcards.add(card);
-        return Collections.unmodifiableSet(flashcards);
+        return Collections.unmodifiableList(flashcards);
     }
 
     /**

@@ -1,6 +1,5 @@
 package cardibuddy.logic.commands;
 
-
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
@@ -44,7 +43,7 @@ public class TestCommand extends Command {
         model.testDeck(deckToTest);
         return new CommandResult(MESSAGE_TEST_SESSION_SUCCESS, false, false);
     }
-  
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

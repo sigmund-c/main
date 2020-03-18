@@ -43,7 +43,7 @@ public class ShortAnswer implements Answer {
 
     @Override
     public String toString() {
-        return "Answer a short string of any combination of letters, numbers and spaces";
+        return correctAnswer;
     }
 
     @Override
