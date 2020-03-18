@@ -49,15 +49,18 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         if (arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_FLASHCARD)) {
             // both PREFIX_DECK and PREFIX_FLASHCARD are present
-            throw new DeckCannotBeCardException(String.format(MESSAGE_DECK_CANNOT_BE_FLASHCARD, AddCommand.MESSAGE_USAGE));
+            throw new DeckCannotBeCardException(String.format(MESSAGE_DECK_CANNOT_BE_FLASHCARD
+                    + "\n" +  AddCommand.MESSAGE_USAGE));
         } else if (arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_QUESTION, PREFIX_ANSWER) |
                 arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_QUESTION) |
                 arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_ANSWER)) {
             //trying to add a deck with a question and/or an answer
-            throw new InvalidDeckException(String.format(MESSAGE_INVALID_DECK, AddCommand.MESSAGE_USAGE));
+            throw new InvalidDeckException(String.format(MESSAGE_INVALID_DECK + "\n"
+                    +  AddCommand.MESSAGE_ADD_DECK));
         } else if (arePrefixesPresent(argMultimap, PREFIX_FLASHCARD)) {
             if (!arePrefixesPresent(argMultimap, PREFIX_FLASHCARD, PREFIX_QUESTION, PREFIX_ANSWER)) {
-                throw new InvalidFlashcardException(String.format(MESSAGE_INVALID_FLASHCARD, AddCommand.MESSAGE_USAGE));
+                throw new InvalidFlashcardException(String.format(MESSAGE_INVALID_FLASHCARD + "\n"
+                        + AddCommand.MESSAGE_ADD_FLASHCARD));
             }
         }
         if (argMultimap.containsKey(PREFIX_DECK)) {

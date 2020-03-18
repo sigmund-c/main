@@ -22,18 +22,47 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deck/flashcard to the cardibuddy book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deck/flashcard to the cardibuddy book. \n"
             + "Parameters: "
-            + "[ " + PREFIX_DECK + "DECK_TITLE] "
-            + "[ " + PREFIX_FLASHCARD + "CARD_TITLE] "
+            + PREFIX_DECK + "DECK_TITLE "
             // + PREFIX_TITLE + "Title \n"
             + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_QUESTION + "QUESTION] "
-            + "[" + PREFIX_ANSWER + "ANSWER]\n"
+            + "|| "
+            + PREFIX_FLASHCARD + " "
+            + PREFIX_QUESTION + "QUESTION "
+            + PREFIX_ANSWER + "ANSWER "
+            + "[" + PREFIX_TAG + "TAG]... \n"
+            + "Example (adding a deck): " + COMMAND_WORD + " "
+            + PREFIX_DECK + "cs2103t "
+            + PREFIX_TAG + "Hard "
+            + PREFIX_TAG + "Software Engineering \n"
+            + "Example (adding a flashcard): " + COMMAND_WORD + " "
+            + PREFIX_FLASHCARD + " "
+            + PREFIX_QUESTION + "A queue cannot be implemented using an array "
+            + PREFIX_ANSWER + "False "
+            + PREFIX_TAG + "Programming";
+
+    public static final String MESSAGE_ADD_DECK = "To add a deck to the cardibuddy book. \n"
+            + "Parameters: "
+            + PREFIX_DECK + "DECK_TITLE "
+            // + PREFIX_TITLE + "Title \n"
+            + "[" + PREFIX_TAG + "TAG]... \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DECK + "cs2103t "
             + PREFIX_TAG + "Hard "
             + PREFIX_TAG + "Software Engineering";
+
+    public static final String MESSAGE_ADD_FLASHCARD = "To add a flashcard to the cardibuddy book. \n"
+            + "Parameters: "
+            + PREFIX_FLASHCARD + "CARD_TITLE "
+            + PREFIX_QUESTION + "QUESTION "
+            + PREFIX_ANSWER + "ANSWER"
+            + "[" + PREFIX_TAG + "TAG]... \n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_FLASHCARD + " "
+            + PREFIX_QUESTION + "A queue cannot be implemented using an array "
+            + PREFIX_ANSWER + "False "
+            + PREFIX_TAG + "Programming";
 
     public static final String MESSAGE_SUCCESS = "New object added: %1$s";
     public static final String MESSAGE_DUPLICATE_DECK = "This deck already exists in the cardibuddy library";
