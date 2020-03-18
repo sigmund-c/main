@@ -21,6 +21,7 @@ import cardibuddy.model.flashcard.Flashcard;
 @JsonRootName(value = "cardibuddy")
 class JsonSerializableCardiBuddy {
 
+
     public static final String MESSAGE_DUPLICATE_DECK = "Decks list contains duplicate deck(s).";
     public static final String MESSAGE_DUPLICATE_FLASHCARDS = "Flashcards list contains duplicate flashcard(s).";
 
@@ -42,7 +43,7 @@ class JsonSerializableCardiBuddy {
      */
 
      public JsonSerializableCardiBuddy(ReadOnlyCardiBuddy source) {
-    decks.addAll(source.getDeckList().stream()
+     decks.addAll(source.getDeckList().stream()
             .map(JsonAdaptedDeck::new).collect(Collectors.toList()));
      }
 
@@ -52,6 +53,7 @@ class JsonSerializableCardiBuddy {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
+
      public CardiBuddy toModelType() throws IllegalValueException {
          CardiBuddy cardibuddy = new CardiBuddy();
          for (JsonAdaptedDeck jsonAdaptedDeck : decks) {
