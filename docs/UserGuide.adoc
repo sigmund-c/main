@@ -75,23 +75,23 @@ Format: `exit`
 ==== Adding a deck: `add deck`
 
 Creates a new deck to be added to the library.
-Format: `add deck n/TITLE [t/TAG]…`
+Format: `add deck d/TITLE [t/TAG]…`
 
 [Tip]
 A deck can have any number of tags (including 0)
 
 Examples:
 
-* `add n/cs2103T` +
+* `add d/cs2103T` +
 Returns a new deck titled `cs2103T`
 
-* `add n/cs1101s t/Hard t/CS` +
+* `add d/cs1101s t/Hard t/CS` +
 Returns a new deck titled `cs1101s` with the tags `Hard` and `CS`
 
 ==== Adding a card: `add card`
 
 Creates a new card to be added to the deck.
-Format: `add card n/DECK_TITLE n/CARD_TYPE`
+Format: `add card c/DECK_TITLE n/CARD_TYPE`
 
 * The variable CARD_TYPE can only take the values of ‘MCQ’, ‘True/False’ or ‘Short Answer’ or ‘Matching’. Any other values will cause the application to display an error message.
 * When a card is created, the question field of the card will be set to the default value of ‘Please type your question here’.
@@ -102,7 +102,7 @@ Format: `add card n/DECK_TITLE n/CARD_TYPE`
 
 Examples:
 
-* `add card n/cs1101s n/MCQ` +
+* `add card c/cs1101s n/MCQ` +
 Returns a new card belonging to the deck `cs1101s` and of the type `MCQ`
 
 === Editing
@@ -110,7 +110,7 @@ Returns a new card belonging to the deck `cs1101s` and of the type `MCQ`
 ==== Editing a deck: `edit deck`
 
 Edits an existing deck in the library.
-Format: `edit deck INDEX [ n/TITLE] [t/TAG]…`
+Format: `edit deck INDEX [d/TITLE] [t/TAG]…`
 
 * Edits the decks at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
@@ -120,10 +120,10 @@ Format: `edit deck INDEX [ n/TITLE] [t/TAG]…`
 
 Examples:
 
-* `edit 1 n/cs2103T` +
+* `edit 1 d/cs2103T` +
 Edits the title of the 1st deck to be `cs2103T`.
 
-* `edit 2 n/cs2040 t/` +
+* `edit 2 d/cs2040 t/` +
 Edits the title of the 2nd deck to be `cs2040` and clears all existing tags.
 
 ==== Editing a card: `edit card`
@@ -167,11 +167,11 @@ Format: `clear decks`
 ==== Clearing all cards in a deck: `clear cards`
 
 Clears all the cards from the specified deck.
-Format: `clear cards n/DECK_TITLE`
+Format: `clear cards d/DECK_TITLE`
 
 Examples:
 
-* `clear cards n/cs2105` +
+* `clear cards d/cs2105` +
 Clears all the cards in the deck `cs2105`
 
 === Deleting
@@ -198,7 +198,7 @@ Deletes the 1st deck in the results of the search command.
 ==== Deleting a card: `delete card`
 
 Deletes the specified card from a specific deck.
-Format: `delete INDEX n/DECK_TITLE`
+Format: `delete INDEX d/DECK_TITLE`
 
 * Deletes the card at the specified INDEX of the deck.
 * The index refers to the index number shown in the complete list of flashcards in the deck.
@@ -207,7 +207,7 @@ Format: `delete INDEX n/DECK_TITLE`
 Examples:
 
 * `list cards` +
-`delete card 2` n/2030 +
+`delete card 2` d/2030 +
 Deletes the 2nd flash card in the `cs2030` deck.
 
 * `search card java` +
@@ -218,22 +218,24 @@ Deletes the 1st card in the results of the search card command.
 
 ==== Searching for a deck: `search`
 
-Searches for the decks with titles that contain any of the given keywords.
-Format: `search d/KEYWORD [MORE_KEYWORDS]`
+Searches for the decks with titles that contain any of the given keywords or all of the keywords
+concatenated with the `&` symbol.
+Format: `search d/KEYWORD [&] [MORE_KEYWORDS]`
 
+* If the search has a `&` symbol, only decks with the words concatenated before and after
+the symbol will be returned.
 * The search is case insensitive. e.g cs2040 will match CS2040
 * The order of the keywords does not matter. e.g. Science Module will match Module Science
-* Only the title is searched.
-* The keyword does not need to match a word within the deck’s title exactly . e.g. cs will match with cs2030
-* Decks with titles that match at least one of the keywords will be returned. e.g. Java notes will return Java notes, Javascript notes, C++ notes.
+* Both title and tags are searched.
+* The keyword needs to match a word within the deck’s title exactly . e.g. cs will not match with cs2030
 
 Examples:
 
-* `search d/cs2106` +
-Returns `cs2106`
+* `search d/cs2106 d/easy` +
+Returns the deck titled or tagged with `cs2106` or `easy`
 
-* `search d/cs2040 d/cs2030` +
-Returns `cs2040` and `cs2030`
+* `search d/cs2040 & hard` +
+Returns decks titled or tagged with both `cs2040` and `cs2106`
 
 ==== Searching for a card: `search`
 
