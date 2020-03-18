@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import cardibuddy.commons.exceptions.IllegalValueException;
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.deck.Title;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.tag.Tag;
 /**
@@ -74,7 +75,7 @@ public class JsonAdaptedDeck extends JsonAdaptedView {
         // TODO: add if conditions here to check formatting
 
         final Set<Tag> modelTags = new HashSet<>(deckTags);
-        return new Deck(null, null); // TODO: to replace params with actual values
+        return new Deck(new Title("CS2103"), modelTags); // TODO: to replace params with actual values
     }
 
 }
