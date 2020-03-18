@@ -25,7 +25,6 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a deck/flashcard to the cardibuddy book. \n"
             + "Parameters: "
             + PREFIX_DECK + "DECK_TITLE "
-            // + PREFIX_TITLE + "Title \n"
             + "[" + PREFIX_TAG + "TAG]... "
             + "|| "
             + PREFIX_FLASHCARD + " "
