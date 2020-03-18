@@ -1,6 +1,9 @@
 package cardibuddy.logic.parser;
 
-import static cardibuddy.commons.core.Messages.*;
+import static cardibuddy.commons.core.Messages.MESSAGE_DECK_CANNOT_BE_FLASHCARD;
+import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_DECK;
+import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_FLASHCARD;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
@@ -51,9 +54,9 @@ public class AddCommandParser implements Parser<AddCommand> {
             // both PREFIX_DECK and PREFIX_FLASHCARD are present
             throw new DeckCannotBeCardException(String.format(MESSAGE_DECK_CANNOT_BE_FLASHCARD
                     + "\n" +  AddCommand.MESSAGE_USAGE));
-        } else if (arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_QUESTION, PREFIX_ANSWER) |
-                arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_QUESTION) |
-                arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_ANSWER)) {
+        } else if (arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_QUESTION, PREFIX_ANSWER)
+                | arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_QUESTION)
+                | arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_ANSWER)) {
             //trying to add a deck with a question and/or an answer
             throw new InvalidDeckException(String.format(MESSAGE_INVALID_DECK + "\n"
                     +  AddCommand.MESSAGE_ADD_DECK));
