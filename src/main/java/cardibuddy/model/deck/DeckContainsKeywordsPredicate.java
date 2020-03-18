@@ -1,9 +1,11 @@
 package cardibuddy.model.deck;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
 import cardibuddy.commons.util.StringUtil;
+import cardibuddy.model.tag.Tag;
 
 
 /**
@@ -18,8 +20,23 @@ public class DeckContainsKeywordsPredicate implements Predicate<Deck> {
 
     @Override
     public boolean test(Deck deck) {
-        return keywords.stream()
+        boolean anyMatch = false;
+        anyMatch = new ArrayList<>(keywords).stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(deck.getTitle().toString(), keyword));
+        if (anyMatch) {
+            return anyMatch;
+        } else {
+            for (Tag t:deck.getTags()) {
+                System.out.println(t.toString());
+                if (!anyMatch) {
+                    anyMatch = new ArrayList<>(keywords).stream()
+                            .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(t.toString(), "[" + keyword + "]"));
+                } else {
+                    break;
+                }
+            }
+            return anyMatch;
+        }
     }
 
     @Override
