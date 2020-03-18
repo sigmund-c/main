@@ -37,7 +37,9 @@ public class JsonAdaptedDeck extends JsonAdaptedView {
                            @JsonProperty("flashcards") List<JsonAdaptedFlashcard> flashcards,
                            @JsonProperty("tagged") List<cardibuddy.storage.JsonAdaptedTag> tagged) {
         this.title = title;
-        this.flashcards.addAll(flashcards);
+        if (flashcards != null) {
+            this.flashcards.addAll(flashcards);
+        }
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -67,15 +69,15 @@ public class JsonAdaptedDeck extends JsonAdaptedView {
             deckTags.add(tag.toModelType());
         }
 
-        final List<Flashcard> deckFlashcards = new ArrayList<>();
+        final List<Flashcard> modelFlashcards = new ArrayList<>();
         for (JsonAdaptedFlashcard flashcard : flashcards) {
-            deckFlashcards.add(flashcard.toModelType());
+            modelFlashcards.add(flashcard.toModelType());
         }
 
         // TODO: add if conditions here to check formatting
         Title modelTitle = new Title(title);
         final Set<Tag> modelTags = new HashSet<>(deckTags);
-        return new Deck(modelTitle, modelTags); // TODO: to replace params with actual values
+        return new Deck(modelTitle, modelTags, modelFlashcards); // TODO: to replace params with actual values
     }
 
 }

@@ -49,18 +49,6 @@ public class UniqueDeckList implements Iterable<Deck> {
     }
 
     /**
-     * Opens a deck in the list.
-     * The deck must already exist in the list.
-     */
-    public void open(Deck toOpen) {
-        requireNonNull(toOpen);
-        if (!internalList.get(toOpen)) {
-            throw new DeckNotFoundException();
-        }
-    }
-
-
-    /**
      * Replaces the deck {@code target} in the list with {@code editedDeck}.
      * {@code target} must exist in the list.
      * The deck identity of {@code editedDeck} must not be the same as another existing deck in the list.

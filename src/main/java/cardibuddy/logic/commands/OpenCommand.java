@@ -3,6 +3,7 @@ package cardibuddy.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import cardibuddy.commons.core.Messages;
 import cardibuddy.commons.core.index.Index;
@@ -40,8 +41,7 @@ public class OpenCommand extends Command {
         }
 
         Deck deckToOpen = lastShownList.get(targetIndex.getZeroBased());
-        model.openDeck(deckToOpen);
-        return new CommandResult(String.format(MESSAGE_OPEN_DECK_SUCCESS, deckToOpen));
+        return new CommandResult(String.format(MESSAGE_OPEN_DECK_SUCCESS + deckToOpen.getTitle(), Optional.of(deckToOpen)));
     }
 
     @Override

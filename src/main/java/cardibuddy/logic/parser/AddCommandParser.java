@@ -12,6 +12,7 @@ import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -69,15 +70,18 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (argMultimap.containsKey(PREFIX_DECK)) {
             Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_DECK).get());
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-            toAdd = new Deck(title, tagList);
+            List<Flashcard> flashcardList = Collections.<Flashcard>emptyList();
+            toAdd = new Deck(title, tagList, flashcardList);
             return new AddCommand((Deck) toAdd);
         } else if (argMultimap.containsKey(PREFIX_FLASHCARD)) {
+            // Title modelTitle = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_DECK).get());
+            // Set<Tag> modelTags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
             Title title = new Title("");
             Set<Tag> tagList = Collections.<Tag>emptySet();
-            Deck deck = new Deck(title, tagList);
-            Question question = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
-            Answer answer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
-            toAdd = new Flashcard(deck, question, answer);
+            Deck modelDeck = new Deck(title, tagList);
+            Question modelQuestion = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
+            Answer modelAnswer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
+            toAdd = new Flashcard(modelDeck, modelQuestion, modelAnswer);
             return new AddCommand((Flashcard) toAdd);
         }
         return null;

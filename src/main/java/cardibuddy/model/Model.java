@@ -76,12 +76,6 @@ public interface Model {
     void addDeck(Deck deck);
 
     /**
-     * Opens the given deck.
-     * {@code deck} must exist in the cardibuddy.
-     */
-    void openDeck(Deck deck);
-
-    /**
      * Replaces the given deck {@code target} with {@code editedDeck}.
      * {@code target} must exist in the cardibuddy.
      * The deck identity of {@code editedDeck} must not be the same as another existing deck in the cardibuddy.
