@@ -9,6 +9,8 @@ import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.deck.exceptions.DeckCannotBeCardException;
+import cardibuddy.model.deck.exceptions.InvalidDeckException;
+import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -198,7 +200,8 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (CommandException | ParseException | DeckCannotBeCardException e) {
+        } catch (CommandException | ParseException | DeckCannotBeCardException | InvalidDeckException
+                | InvalidFlashcardException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
