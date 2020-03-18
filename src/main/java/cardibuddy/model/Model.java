@@ -65,7 +65,7 @@ public interface Model {
 
     /**
      * Deletes the given deck.
-     * The deck must exist in the cardibuddy.
+     * {@code deck} must exist in the cardibuddy.
      */
     void deleteDeck(Deck target);
 
@@ -74,6 +74,12 @@ public interface Model {
      * {@code deck} must not already exist in the cardibuddy.
      */
     void addDeck(Deck deck);
+
+    /**
+     * Opens the given deck.
+     * {@code deck} must exist in the cardibuddy.
+     */
+    void openDeck(Deck deck);
 
     /**
      * Replaces the given deck {@code target} with {@code editedDeck}.

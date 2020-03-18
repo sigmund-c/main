@@ -105,6 +105,14 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
         decks.remove(key);
     }
 
+    /**
+     * Opens {@code key} from this {@code CardiBuddy}.
+     * {@code key} must exist in the cardi buddy.
+     */
+    public void openDeck(Deck key) {
+        decks.open(key);
+    }
+
 
     //// flashcard-level operations
     /**

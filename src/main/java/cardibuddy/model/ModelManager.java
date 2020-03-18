@@ -110,6 +110,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void openDeck(Deck deck) {
+        cardiBuddy.openDeck(deck);
+    }
+
+    @Override
     public void setDeck(Deck target, Deck editedDeck) {
         cardiBuddy.setDeck(target, editedDeck);
     }
