@@ -27,7 +27,7 @@ public class AddCommand extends Command {
             + PREFIX_DECK + "DECK_TITLE "
             + "[" + PREFIX_TAG + "TAG]... "
             + "|| "
-            + PREFIX_FLASHCARD + " "
+            + PREFIX_FLASHCARD + "DECK_TITLE "
             + PREFIX_QUESTION + "QUESTION "
             + PREFIX_ANSWER + "ANSWER "
             + "[" + PREFIX_TAG + "TAG]... \n"
@@ -36,7 +36,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "Hard "
             + PREFIX_TAG + "Software Engineering \n"
             + "Example (adding a flashcard): " + COMMAND_WORD + " "
-            + PREFIX_FLASHCARD + " "
+            + PREFIX_FLASHCARD + "Java "
             + PREFIX_QUESTION + "A queue cannot be implemented using an array "
             + PREFIX_ANSWER + "False "
             + PREFIX_TAG + "Programming";
@@ -53,12 +53,12 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_ADD_FLASHCARD = "To add a flashcard to the cardibuddy book. \n"
             + "Parameters: "
-            + PREFIX_FLASHCARD + "CARD_TITLE "
+            + PREFIX_FLASHCARD + "DECK_TITLE "
             + PREFIX_QUESTION + "QUESTION "
             + PREFIX_ANSWER + "ANSWER"
             + "[" + PREFIX_TAG + "TAG]... \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_FLASHCARD + " "
+            + PREFIX_FLASHCARD + "Java "
             + PREFIX_QUESTION + "A queue cannot be implemented using an array "
             + PREFIX_ANSWER + "False "
             + PREFIX_TAG + "Programming";
