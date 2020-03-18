@@ -11,21 +11,28 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import cardibuddy.commons.exceptions.IllegalValueException;
 import cardibuddy.model.CardiBuddy;
 import cardibuddy.model.ReadOnlyCardiBuddy;
+// import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
 
 /**
  * An Immutable CardiBuddy that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "cardibuddy")
 class JsonSerializableCardiBuddy {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Flashcards list contains duplicate flashcard(s).";
+    //public static final String MESSAGE_DUPLICATE_DECK = "Decks list contains duplicate deck(s).";
+    public static final String MESSAGE_DUPLICATE_FLASHCARDS = "Flashcards list contains duplicate flashcard(s).";
 
+    //private final List<JsonAdaptedDeck> decks = new ArrayList<>();
     private final List<JsonAdaptedFlashcard> flashcards = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableCardiBuddy} with the given flashcards.
      */
+    // @JsonCreator
+    // public JsonSerializableCardiBuddy(@JsonProperty("decks") List<JsonAdaptedDeck> decks) {
+    // this.decks.addAll(decks);
+    //}
     @JsonCreator
     public JsonSerializableCardiBuddy(@JsonProperty("flashcards") List<JsonAdaptedFlashcard> flashcards) {
         this.flashcards.addAll(flashcards);
@@ -36,6 +43,10 @@ class JsonSerializableCardiBuddy {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableCardiBuddy}.
      */
+
+    // public JsonSerializableCardiBuddy(ReadOnlyCardiBuddy source) {
+    //decks.addAll(source.getDeckList().stream().map(JsonAdaptedDeck::new).collect(Collectors.toList()));
+    // }
     public JsonSerializableCardiBuddy(ReadOnlyCardiBuddy source) {
         flashcards.addAll(source.getFlashcardList().stream()
                 .map(JsonAdaptedFlashcard::new).collect(Collectors.toList()));
@@ -46,16 +57,28 @@ class JsonSerializableCardiBuddy {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
+    // public CardiBuddy toModelType() throws IllegalValueException {
+    // CardiBuddy cardibuddy = new CardiBuddy();
+    // for (JsonAdaptedDeck jsonAdaptedDeck : decks) {
+    // Deck deck = jsonAdaptedDeck.toModelType();
+    // if (cardibuddy.hasDeck(deck)) {
+    // throw new IllegalValueException(MESSAGE_DUPLICATE_DECK);
+    // }
+    // cardibuddy.addDeck(deck);
+    // }
+    // return cardibuddy;
+    // }
+
     public CardiBuddy toModelType() throws IllegalValueException {
-        CardiBuddy addressBook = new CardiBuddy();
+        CardiBuddy cardibuddy = new CardiBuddy();
         for (JsonAdaptedFlashcard jsonAdaptedFlashcard : flashcards) {
             Flashcard flashcard = jsonAdaptedFlashcard.toModelType();
-            if (addressBook.hasFlashcard(flashcard)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            if (cardibuddy.hasFlashcard(flashcard)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_FLASHCARDS);
             }
-            addressBook.addFlashcard(flashcard);
+            cardibuddy.addFlashcard(flashcard);
         }
-        return addressBook;
+        return cardibuddy;
     }
 
 }
