@@ -11,8 +11,9 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import cardibuddy.commons.exceptions.IllegalValueException;
 import cardibuddy.model.CardiBuddy;
 import cardibuddy.model.ReadOnlyCardiBuddy;
-// import cardibuddy.model.deck.Deck;
-import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.deck.Deck;
+
+import static cardibuddy.logic.commands.AddCommand.MESSAGE_DUPLICATE_DECK;
 
 /**
  * An Immutable CardiBuddy that is serializable to JSON format.
@@ -20,22 +21,17 @@ import cardibuddy.model.flashcard.Flashcard;
 @JsonRootName(value = "cardibuddy")
 class JsonSerializableCardiBuddy {
 
-    //public static final String MESSAGE_DUPLICATE_DECK = "Decks list contains duplicate deck(s).";
-    public static final String MESSAGE_DUPLICATE_FLASHCARDS = "Flashcards list contains duplicate flashcard(s).";
+    public static final String MESSAGE_DUPLICATE_DECK = "Decks list contains duplicate deck(s).";
 
-    //private final List<JsonAdaptedDeck> decks = new ArrayList<>();
+    private final List<JsonAdaptedDeck> decks = new ArrayList<>();
     private final List<JsonAdaptedFlashcard> flashcards = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableCardiBuddy} with the given flashcards.
      */
-    // @JsonCreator
-    // public JsonSerializableCardiBuddy(@JsonProperty("decks") List<JsonAdaptedDeck> decks) {
-    // this.decks.addAll(decks);
-    //}
     @JsonCreator
-    public JsonSerializableCardiBuddy(@JsonProperty("flashcards") List<JsonAdaptedFlashcard> flashcards) {
-        this.flashcards.addAll(flashcards);
+    public JsonSerializableCardiBuddy(@JsonProperty("decks") List<JsonAdaptedDeck> decks) {
+        this.decks.addAll(decks);
     }
 
     /**
@@ -44,12 +40,8 @@ class JsonSerializableCardiBuddy {
      * @param source future changes to this will not affect the created {@code JsonSerializableCardiBuddy}.
      */
 
-    // public JsonSerializableCardiBuddy(ReadOnlyCardiBuddy source) {
-    //decks.addAll(source.getDeckList().stream().map(JsonAdaptedDeck::new).collect(Collectors.toList()));
-    // }
     public JsonSerializableCardiBuddy(ReadOnlyCardiBuddy source) {
-        flashcards.addAll(source.getFlashcardList().stream()
-                .map(JsonAdaptedFlashcard::new).collect(Collectors.toList()));
+        decks.addAll(source.getDeckList().stream().map(JsonAdaptedDeck::new).collect(Collectors.toList()));
     }
 
     /**
@@ -57,28 +49,17 @@ class JsonSerializableCardiBuddy {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    // public CardiBuddy toModelType() throws IllegalValueException {
-    // CardiBuddy cardibuddy = new CardiBuddy();
-    // for (JsonAdaptedDeck jsonAdaptedDeck : decks) {
-    // Deck deck = jsonAdaptedDeck.toModelType();
-    // if (cardibuddy.hasDeck(deck)) {
-    // throw new IllegalValueException(MESSAGE_DUPLICATE_DECK);
-    // }
-    // cardibuddy.addDeck(deck);
-    // }
-    // return cardibuddy;
-    // }
-
     public CardiBuddy toModelType() throws IllegalValueException {
         CardiBuddy cardibuddy = new CardiBuddy();
-        for (JsonAdaptedFlashcard jsonAdaptedFlashcard : flashcards) {
-            Flashcard flashcard = jsonAdaptedFlashcard.toModelType();
-            if (cardibuddy.hasFlashcard(flashcard)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_FLASHCARDS);
+        for (JsonAdaptedDeck jsonAdaptedDeck : decks) {
+            Deck deck = jsonAdaptedDeck.toModelType();
+
+            if (cardibuddy.hasDeck(deck)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_DECK);
             }
-            cardibuddy.addFlashcard(flashcard);
+
+            cardibuddy.addDeck(deck);
         }
         return cardibuddy;
     }
-
 }
