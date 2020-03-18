@@ -19,6 +19,7 @@ import cardibuddy.model.deck.Deck;
 @JsonRootName(value = "cardibuddy")
 class JsonSerializableCardiBuddy {
 
+
     public static final String MESSAGE_DUPLICATE_DECK = "Decks list contains duplicate deck(s).";
     public static final String MESSAGE_DUPLICATE_FLASHCARDS = "Flashcards list contains duplicate flashcard(s).";
 
@@ -61,5 +62,4 @@ class JsonSerializableCardiBuddy {
         }
         return cardibuddy;
     }
-
 }
