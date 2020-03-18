@@ -57,4 +57,11 @@ public class ArgumentMultimap {
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
     }
+
+    /**
+     * Checks for the presence of {@code key}.
+     */
+    public Boolean containsKey(Prefix key) {
+        return argMultimap.containsKey(key);
+    }
 }

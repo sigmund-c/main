@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import cardibuddy.commons.exceptions.IllegalValueException;
+import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.flashcard.ShortAnswer;
 import cardibuddy.model.tag.Tag;
 
 /**
@@ -47,15 +49,14 @@ class JsonAdaptedFlashcard extends JsonAdaptedView {
         deck = source.getDeck().toString();
         question = source.getQuestion().toString();
         answer = source.getAnswer().toString();
-        tagged.addAll(source.getDeck().getTags().stream()
-                .map(cardibuddy.storage.JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        //tagged.addAll(source.getDeck().getTags().stream()
+        //        .map(cardibuddy.storage.JsonAdaptedTag::new)
+        //        .collect(Collectors.toList()));
     }
     // TODO: add tags for individual flashcards. Right now, flashcards use deck's tags.
 
     /**
      * Converts this Jackson-friendly adapted flashcard object into the model's {@code Flashcard} object.
-     *
      * @throws IllegalValueException if there were any data constraints violated in the adapted flashcard.
      */
     public Flashcard toModelType() throws IllegalValueException {
@@ -65,7 +66,9 @@ class JsonAdaptedFlashcard extends JsonAdaptedView {
         }
 
         final Set<Tag> modelTags = new HashSet<>(flashcardTags);
-        return new Flashcard(null, null, null);
+        Deck testDeck = new Deck();
+        Question testQuestion = new Question(question);
+        ShortAnswer testAnswer = new ShortAnswer(answer);
+        return new Flashcard(testDeck, testQuestion, testAnswer);
     }
-
 }
