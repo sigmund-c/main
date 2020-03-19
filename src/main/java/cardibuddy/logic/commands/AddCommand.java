@@ -1,12 +1,14 @@
 package cardibuddy.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
-import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
@@ -71,6 +73,7 @@ public class AddCommand extends Command {
 
     private final Object toAdd;
     private final Boolean isDeck;
+    private static List<Flashcard> flashcards = new ArrayList<>();
     /**
      * Creates an AddCommand to add the specified {@code Deck}
      */
@@ -78,6 +81,7 @@ public class AddCommand extends Command {
         requireNonNull(deck);
         toAdd = deck;
         isDeck = true;
+        flashcards = deck.getFlashcards();
     }
 
     public AddCommand(Flashcard flashcard) {
@@ -98,10 +102,11 @@ public class AddCommand extends Command {
 
             logger.info("Deck has been added");
         } else {
-            if (model.hasFlashcard((Flashcard) toAdd)) {
+            if (flashcards.contains(toAdd)) {
                 throw new CommandException(MESSAGE_DUPLICATE_FLASHCARD);
             }
             model.addFlashcard((Flashcard) toAdd);
+            flashcards.add((Flashcard) toAdd);
             logger.info("Flashcard has been added");
         }
 

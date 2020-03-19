@@ -4,6 +4,9 @@ import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Constructs a {@code CommandResult} with the specified fields.
+ */
 public class DeckCommandResult extends CommandResult {
     private final boolean isDeck;
 
