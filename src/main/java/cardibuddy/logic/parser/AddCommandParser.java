@@ -72,9 +72,9 @@ public class AddCommandParser implements Parser<AddCommand> {
                 + " You need to open a deck first. \n" + OpenCommand.MESSAGE_USAGE));
             }
             Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
-//            if (!deckTitle.equals(title)) {
-//                throw new WrongDeckException(String.format(MESSAGE_WRONG_DECK));
-//            }
+            // if (!deckTitle.equals(title)) {
+            //    throw new WrongDeckException(String.format(MESSAGE_WRONG_DECK));
+            // }
             if (!arePrefixesPresent(argMultimap, PREFIX_FLASHCARD, PREFIX_QUESTION, PREFIX_ANSWER)) {
                 throw new InvalidFlashcardException(String.format(MESSAGE_INVALID_FLASHCARD + "\n"
                         + AddCommand.MESSAGE_ADD_FLASHCARD));
@@ -87,8 +87,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             toAdd = new Deck(title, tagList, flashcardList);
             return new AddCommand((Deck) toAdd);
         } else if (argMultimap.containsKey(PREFIX_FLASHCARD)) {
-             Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
-             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+            Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
+            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
             Deck modelDeck = new Deck(title, tagList);
             Question modelQuestion = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
             Answer modelAnswer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());

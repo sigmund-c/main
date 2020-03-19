@@ -1,8 +1,8 @@
 package cardibuddy.logic.parser;
 
-import java.util.logging.Logger;
-
 import static cardibuddy.logic.commands.OpenCommand.MESSAGE_OPEN_DECK_SUCCESS;
+
+import java.util.logging.Logger;
 
 import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.commands.OpenCommand;

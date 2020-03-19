@@ -1,8 +1,8 @@
 package cardibuddy.logic.commands;
 
-import java.util.Objects;
-
 import static java.util.Objects.requireNonNull;
+
+import java.util.Objects;
 
 /**
  * Constructs a {@code CommandResult} with the specified fields.
