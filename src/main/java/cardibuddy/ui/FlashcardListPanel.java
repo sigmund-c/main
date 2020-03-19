@@ -27,7 +27,7 @@ public class FlashcardListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code deck} using a {@code flashcardCard}
+     * Custom {@code ListCell} that displays the graphics of a {@code Flashcard} using a {@code FlashcardCard}
      */
     class FlashcardListViewCell extends ListCell<Flashcard> {
         @Override
