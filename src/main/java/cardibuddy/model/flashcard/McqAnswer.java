@@ -2,6 +2,9 @@ package cardibuddy.model.flashcard;
 
 import java.util.List;
 
+import static cardibuddy.commons.util.AppUtil.checkArgument;
+import static java.util.Objects.requireNonNull;
+
 /**
  * McqAnswer class.
  */
@@ -9,13 +12,10 @@ public class McqAnswer implements Answer {
     public static final String MESSAGE_CONSTRAINTS = "MCQ answers should be a single letter corresponding to answer.";
 
     private String correctAnswer; // should be "a" or "b" or "c" or ....
-    private List<String> answers;
 
-    public McqAnswer(int correctIndex, List<String> answers) {
-        this.answers = answers;
-        if (!isValid(correctAnswer)) {
-            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
-        }
+    public McqAnswer(String correctAnswer) {
+        requireNonNull(correctAnswer);
+        checkArgument(isValid(correctAnswer), MESSAGE_CONSTRAINTS);
         this.correctAnswer = correctAnswer;
     }
 
@@ -28,7 +28,11 @@ public class McqAnswer implements Answer {
         if (test.length() != 1) {
             return false;
         }
-        return getNumberForChar(test.charAt(0)) <= answers.size(); // makes sure test is within number of given answers
+        if (getNumberForChar(test.charAt(0)) == -1) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -37,14 +41,11 @@ public class McqAnswer implements Answer {
      * @return true if answer is valid.
      */
     public boolean checkAnswer(String toCheck) {
+        requireNonNull(toCheck);
         if (!isValid(toCheck)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
         return toCheck.equals(correctAnswer);
-    }
-
-    public String getCorrectAnswer() {
-        return correctAnswer;
     }
 
     /**
@@ -53,17 +54,16 @@ public class McqAnswer implements Answer {
      */
     @Override
     public String toString() {
-        StringBuilder ans = new StringBuilder("Answer one of the following:\n");
-        for (int i = 0; i < answers.size(); i++) {
-            ans.append(getCharForNumber(i) + ". " + answers.get(i) + "\n");
-        }
-        return ans.toString();
+        return correctAnswer;
     }
 
-    private int getNumberForChar(char c) { // a -> 1; b -> 2; c -> 3; ...
-        return ((int) c) - 64;
+    // returns the corresponding number for alphabetical letters, eg. a -> 1; b -> 2; c -> 3; ...
+    private int getNumberForChar(char c) {
+        int num = ((int) c) - 64;
+        return num > 0 && num < 27 ? num : -1;
     }
 
+    // returns the corresponding alphabetical letter for numbers
     private char getCharForNumber(int i) { // 1 -> a; 2 -> b; 3 -> c, ...
         return i > 0 && i < 27 ? (char) (i + 64) : null;
     }
@@ -78,7 +78,7 @@ public class McqAnswer implements Answer {
         }
         McqAnswer o = (McqAnswer) other;
 
-        return answers.equals(o.answers) && correctAnswer.equals(o.correctAnswer);
+        return correctAnswer.equals(o.correctAnswer);
     }
 }
 
