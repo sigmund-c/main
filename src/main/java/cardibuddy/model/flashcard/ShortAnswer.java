@@ -1,28 +1,31 @@
 package cardibuddy.model.flashcard;
 
+import static cardibuddy.commons.util.AppUtil.checkArgument;
+import static java.util.Objects.requireNonNull;
+
 /**
  * Short Answer class for Flashcard.
  */
 public class ShortAnswer implements Answer {
 
-    public static final String MESSAGE_CONSTRAINTS = "Short answers should be strings.";
+    public static final String MESSAGE_CONSTRAINTS = "Short Answer should not be left blank";
+    public static final String VALIDATION_REGEX = "[^\\s].*";
 
     private String correctAnswer;
 
     public ShortAnswer(String correctAnswer) {
-        if (!isValid(correctAnswer)) {
-            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
-        }
+        requireNonNull(correctAnswer);
+        checkArgument(isValid(correctAnswer), MESSAGE_CONSTRAINTS);
         this.correctAnswer = correctAnswer;
     }
 
     /**
      * Checks if given answer is a string and is valid.
      * @param test
-     * @return true if it is a string.
+     * @return true if it is not blank
      */
     public boolean isValid(String test) {
-        return true; // as long as its a string its true
+        return test.matches(VALIDATION_REGEX); // as long as its a string its true
     }
 
     /**
@@ -31,14 +34,11 @@ public class ShortAnswer implements Answer {
      * @return true if the string is equal.
      */
     public boolean checkAnswer(String toCheck) {
+        requireNonNull(toCheck);
         if (!isValid(toCheck)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
         return toCheck.equals(correctAnswer);
-    }
-
-    public String getCorrectAnswer() {
-        return correctAnswer;
     }
 
     @Override
