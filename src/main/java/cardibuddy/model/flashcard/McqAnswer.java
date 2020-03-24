@@ -1,7 +1,5 @@
 package cardibuddy.model.flashcard;
 
-import java.util.List;
-
 import static cardibuddy.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
