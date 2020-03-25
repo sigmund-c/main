@@ -31,7 +31,7 @@
 !define STORAGE_COLOR_T3 #806600
 !define STORAGE_COLOR_T2 #544400
 
-!define USER_COLOR #000000
+!define USER_COLOR #FFFFFF
 
 skinparam BackgroundColor #FFFFFFF
 
