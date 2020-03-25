@@ -13,13 +13,13 @@ activate ui UI_COLOR
 ui -[UI_COLOR]> cardibuddy.logic : execute("delete 1")
 activate cardibuddy.logic LOGIC_COLOR
 
-cardibuddy.logic -[LOGIC_COLOR]> model : deletePerson(p)
+cardibuddy.logic -[LOGIC_COLOR]> model : deleteDeck(d)
 activate model MODEL_COLOR
 
 model -[MODEL_COLOR]-> cardibuddy.logic
 deactivate model
 
-cardibuddy.logic -[LOGIC_COLOR]> storage : saveAddressBook(addressBook)
+cardibuddy.logic -[LOGIC_COLOR]> storage : saveCardiBuddy(cardiBuddy)
 activate storage STORAGE_COLOR
 
 storage -[STORAGE_COLOR]> storage : Save to file
