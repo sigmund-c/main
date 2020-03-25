@@ -13,6 +13,8 @@ Class HelpWindow
 Class ResultDisplay
 Class DeckListPanel
 Class DeckCard
+Class FlashcardListPanel
+Class FlashcardCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -37,6 +39,8 @@ MainWindow *-down-> DeckListPanel
 MainWindow *-down-> StatusBarFooter
 
 DeckListPanel -down-> DeckCard
+DeckCard -down-> FlashcardListPanel
+FlashcardListPanel -down-> FlashcardCard
 
 MainWindow -left-|> UiPart
 
@@ -44,10 +48,13 @@ ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 DeckListPanel --|> UiPart
 DeckCard --|> UiPart
+FlashcardListPanel --|> UiPart
+FlashcardCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow -down-|> UiPart
 
 DeckCard ..> Model
+FlashcardCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
