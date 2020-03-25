@@ -103,7 +103,7 @@ public class AddCommand extends Command {
 
             logger.info("Deck has been added");
         } else {
-            if (flashcards.contains(toAdd)) {
+            if (model.hasFlashcard((Flashcard) toAdd)) {
                 throw new CommandException(MESSAGE_DUPLICATE_FLASHCARD);
             }
             model.addFlashcard((Flashcard) toAdd);
