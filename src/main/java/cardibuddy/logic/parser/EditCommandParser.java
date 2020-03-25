@@ -3,7 +3,6 @@ import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;

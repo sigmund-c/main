@@ -65,9 +65,9 @@ public class AddCommandParser implements Parser<AddCommand> {
                     + AddCommand.MESSAGE_ADD_DECK));
         } else if (arePrefixesPresent(argMultimap, PREFIX_FLASHCARD)) {
             Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
-             // if (!deckTitle.equals(title)) {
-             //   throw new WrongDeckException(String.format(MESSAGE_WRONG_DECK));
-             // }
+            // if (!deckTitle.equals(title)) {
+            //   throw new WrongDeckException(String.format(MESSAGE_WRONG_DECK));
+            // }
             if (!arePrefixesPresent(argMultimap, PREFIX_FLASHCARD, PREFIX_QUESTION, PREFIX_ANSWER)) {
                 throw new InvalidFlashcardException(String.format(MESSAGE_INVALID_FLASHCARD + "\n"
                         + AddCommand.MESSAGE_ADD_FLASHCARD));

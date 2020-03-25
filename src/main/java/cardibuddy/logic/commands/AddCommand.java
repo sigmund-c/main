@@ -1,11 +1,11 @@
 package cardibuddy.logic.commands;
-import static java.util.Objects.requireNonNull;
 
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
+import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
