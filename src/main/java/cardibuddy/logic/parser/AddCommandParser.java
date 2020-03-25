@@ -18,7 +18,6 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import cardibuddy.logic.commands.AddCommand;
-import cardibuddy.logic.commands.OpenCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Title;
@@ -67,10 +66,6 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new InvalidDeckException(String.format(MESSAGE_INVALID_DECK + "\n"
                     + AddCommand.MESSAGE_ADD_DECK));
         } else if (arePrefixesPresent(argMultimap, PREFIX_FLASHCARD)) {
-            if (!inDeck) {
-                throw new NotInDeckException(String.format(MESSAGE_NOT_IN_DECK
-                + " You need to open a deck first. \n" + OpenCommand.MESSAGE_USAGE));
-            }
             Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
 //             if (!deckTitle.equals(title)) {
 //                throw new WrongDeckException(String.format(MESSAGE_WRONG_DECK));

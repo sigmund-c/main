@@ -14,7 +14,6 @@ import cardibuddy.logic.commands.EditCommand;
 import cardibuddy.logic.commands.ExitCommand;
 import cardibuddy.logic.commands.HelpCommand;
 import cardibuddy.logic.commands.ListCommand;
-import cardibuddy.logic.commands.OpenCommand;
 import cardibuddy.logic.commands.SearchCommand;
 import cardibuddy.logic.commands.TestCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
@@ -46,8 +45,6 @@ public class CardiBuddyParser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
-        case OpenCommand.COMMAND_WORD:
-            return new OpenCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
