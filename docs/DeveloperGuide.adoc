@@ -79,7 +79,7 @@ image::UiClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `DeckListPanel`, `FlashcardListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -235,12 +235,21 @@ image::CommitActivityDiagram.png[]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
+=== Search and Filter feature
+Users can choose to find a `Deck` or a `Flashcard` through:
 
-_{Explain here how the data encryption feature will be implemented}_
+* searching by keywords from the title of a `Deck` or from the `Question` or `Answer` from a `Flashcard`.
+* filtering by tags from the `Tag(s)` associated with a `Deck` or a `Flashcard`
 
-// end::dataencryption[]
+Both `search` and `filter` have the and-or functionality where adding `&` between keywords returns decks and flashcards
+with both terms before and after the `&` symbol.
+For example, `filter Y1 & hard` will return decks and flashcards that are tagged with both `Y1` and `hard`.
+
+The following sequence diagram shows how the `Search` command works:
+
+image::SearchFilterDiagram.png[]
+
+Figure X. Component interactions for a Search command
 
 === Logging
 

@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":SearchCommandParser" as SearchCommandParser LOGIC_COLOR
+participant "sc:SearchCommand" as SearchCommand LOGIC_COLOR
+participant "sdkp:SearchDeckKeywordsPredicate" as SearchDeckKeywordsPredicate LOGIC_COLOR
+participant "cr:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+
+end box
+
+[-> SearchCommandParser: parseCommand(search ...)
+activate SearchCommandParser
+
+SearchCommandParser -> SearchCommandParser: parse(arguments)
+activate SearchCommandParser
+
+create SearchCommand
+SearchCommandParser -> SearchCommand
+activate SearchCommand
+
+create SearchDeckKeywordsPredicate
+SearchCommandParser -> SearchDeckKeywordsPredicate
+activate SearchDeckKeywordsPredicate
+
+SearchDeckKeywordsPredicate --> SearchCommand: sdkp
+deactivate SearchDeckKeywordsPredicate
+SearchCommand --> SearchCommandParser: sc
+deactivate SearchCommand
+deactivate SearchCommandParser
+
+[-> SearchCommand: execute()
+activate SearchCommand
+
+SearchCommand -> Model: updateFilteredDeckList(predicate)
+activate Model
+
+create CommandResult
+SearchCommand -> CommandResult
+
+activate CommandResult
+CommandResult --> SearchCommand: cr
+deactivate CommandResult
+
+deactivate SearchCommandParser
+
+@enduml

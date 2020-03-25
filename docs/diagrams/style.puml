@@ -13,14 +13,14 @@
 !define UI_COLOR_T3 #166800
 !define UI_COLOR_T4 #0E4100
 
-!define LOGIC_COLOR #3333C4
-!define LOGIC_COLOR_T1 #C8C8FA
+!define LOGIC_COLOR #424874
+!define LOGIC_COLOR_T1 #f4eeff
 !define LOGIC_COLOR_T2 #6A6ADC
 !define LOGIC_COLOR_T3 #1616B0
 !define LOGIC_COLOR_T4 #101086
 
-!define MODEL_COLOR #9D0012
-!define MODEL_COLOR_T1 #F97181
+!define MODEL_COLOR #f19292
+!define MODEL_COLOR_T1 #ffd3b6
 !define MODEL_COLOR_T2 #E41F36
 !define MODEL_COLOR_T3 #7B000E
 !define MODEL_COLOR_T4 #51000A
@@ -55,7 +55,7 @@ skinparam Sequence {
     MessageAlign center
     BoxFontSize 15
     BoxPadding 0
-    BoxFontColor #FFFFFF
+    BoxFontColor #000000
     FontName Arial
 }
 
