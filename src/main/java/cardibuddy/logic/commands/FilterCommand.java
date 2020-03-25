@@ -4,16 +4,16 @@ import static java.util.Objects.requireNonNull;
 
 import cardibuddy.commons.core.Messages;
 import cardibuddy.model.Model;
-import cardibuddy.model.deck.SearchDeckKeywordsPredicate;
+import cardibuddy.model.deck.FilterDeckKeywordsPredicate;
 
 
 /**
- * Finds and lists all decks and cards in cardi buddy whose title contains any of the argument keywords.
+ * Finds and lists all decks and cards in cardi buddy whose tags contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class SearchCommand extends Command {
+public class FilterCommand extends Command {
 
-    public static final String COMMAND_WORD = "search";
+    public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all decks whose titles contain any of "
@@ -21,10 +21,14 @@ public class SearchCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " java";
 
-    private final SearchDeckKeywordsPredicate predicate;
+    private final FilterDeckKeywordsPredicate predicate;
 
-    public SearchCommand(SearchDeckKeywordsPredicate predicate) {
+    public FilterCommand(FilterDeckKeywordsPredicate predicate) {
         this.predicate = predicate;
+    }
+
+    public FilterDeckKeywordsPredicate getPredicate() {
+        return predicate;
     }
 
     @Override
@@ -38,8 +42,8 @@ public class SearchCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SearchCommand // instanceof handles nulls
-                && predicate.equals(((SearchCommand) other).predicate)); // state check
+                || (other instanceof FilterCommand // instanceof handles nulls
+                && predicate.equals(((FilterCommand) other).predicate)); // state check
     }
 
 
