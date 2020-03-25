@@ -1,5 +1,7 @@
 package cardibuddy.model.flashcard;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * True False answer class.
  */
@@ -10,6 +12,7 @@ public class TfAnswer implements Answer {
     private String correctAnswer; // should be "T" or "F"
 
     public TfAnswer(String correctAnswer) {
+        requireNonNull(correctAnswer);
         if (!isValid(correctAnswer)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
@@ -26,19 +29,16 @@ public class TfAnswer implements Answer {
      * @return true if answer is equals.
      */
     public boolean checkAnswer(String toCheck) {
+        requireNonNull(toCheck);
         if (!isValid(toCheck)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
         return toCheck.equals(correctAnswer);
     }
 
-    public String getCorrectAnswer() {
-        return correctAnswer;
-    }
-
     @Override
     public String toString() {
-        return "Answer \"T\" for True or \"F\" for False.";
+        return correctAnswer;
     }
 
     @Override
