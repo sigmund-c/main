@@ -31,7 +31,7 @@
 !define STORAGE_COLOR_T3 #806600
 !define STORAGE_COLOR_T2 #544400
 
-!define USER_COLOR #00000
+!define USER_COLOR #000000
 
 skinparam BackgroundColor #FFFFFFF
 
@@ -55,7 +55,7 @@ skinparam Sequence {
     MessageAlign center
     BoxFontSize 15
     BoxPadding 0
-    BoxFontColor #FFFFFF
+    BoxFontColor #000000
     FontName Arial
 }
 
