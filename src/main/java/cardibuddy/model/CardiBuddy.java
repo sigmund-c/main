@@ -105,7 +105,6 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
         decks.remove(key);
     }
 
-
     //// flashcard-level operations
     /**
      * Returns true if a deck with the same identity as {@code card} exists in cardibuddy.

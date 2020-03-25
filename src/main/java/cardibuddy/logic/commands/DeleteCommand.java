@@ -19,8 +19,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes a deck/flashcard identified by the index number used in the displayed cardibuddy book.\n"
-            + "Parameters: "
-            + "Object Type INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + "1";
 
     public static final String MESSAGE_DELETE_DECK_SUCCESS = "Deleted Deck: %1$s";
