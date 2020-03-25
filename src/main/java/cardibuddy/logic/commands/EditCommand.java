@@ -1,7 +1,8 @@
 package cardibuddy.logic.commands;
-import static java.util.Objects.requireNonNull;
+
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_DECKS;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
