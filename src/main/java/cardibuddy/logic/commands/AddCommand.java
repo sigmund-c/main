@@ -70,10 +70,10 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the deck";
 
     private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
+    private static List<Flashcard> flashcards = new ArrayList<>();
 
     private final Object toAdd;
     private final Boolean isDeck;
-    private static List<Flashcard> flashcards = new ArrayList<>();
     /**
      * Creates an AddCommand to add the specified {@code Deck}
      */
