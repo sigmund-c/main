@@ -251,6 +251,16 @@ image::SearchFilterDiagram.png[]
 
 Figure X. Component interactions for a Search command
 
+=== Test feature
+Users can start a <<test-session>> with a chosen `Deck` by:
+
+* The `index` of the deck will be provided byt he user and parsed by Cardi Buddy. A `TestSession` object containing the indicated `Deck` is created.
+* The `TestSession` object updates Cardibuddy's `UniqueFlashcardList` to display the first flashcard in the queue, along with the other flashcards to be tested.
+
+The following is a proposed diagram of how the `test` feature should work:
+
+image::TestSequenceDiagram.png[]
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
