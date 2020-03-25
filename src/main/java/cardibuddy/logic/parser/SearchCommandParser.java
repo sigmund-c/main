@@ -6,11 +6,11 @@ import java.util.Arrays;
 
 import cardibuddy.logic.commands.SearchCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
-import cardibuddy.model.deck.DeckContainsKeywordsPredicate;
+import cardibuddy.model.deck.SearchDeckKeywordsPredicate;
 
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new SearchCommand object
  */
 public class SearchCommandParser implements Parser<SearchCommand> {
 
@@ -28,7 +28,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new SearchCommand(new DeckContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new SearchCommand(new SearchDeckKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 
 }

@@ -9,56 +9,57 @@ import cardibuddy.model.tag.Tag;
 
 
 /**
- * Tests that a {@code Deck}'s {@code Keyword} matches any of the keywords given.
+ * Tests that a {@code Deck or Card}'s {@code Tags} matches any of the keywords given.
  */
-public class DeckContainsKeywordsPredicate implements Predicate<Deck> {
+public class FilterDeckKeywordsPredicate implements Predicate<Deck> {
     private final List<String> keywords;
 
-    public DeckContainsKeywordsPredicate(List<String> keywords) {
+    public FilterDeckKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
+    /**
+     * Evaluates this predicate on the given argument.
+     *
+     * @param deck the input argument
+     * @return {@code true} if the input argument matches the predicate,
+     * otherwise {@code false}
+     */
     @Override
     public boolean test(Deck deck) {
         boolean anyMatch = false;
         if (checkAnd(keywords)) {
-            anyMatch = testAnd(deck, keywords);
+            anyMatch = searchAnd(deck, keywords);
         } else {
-            anyMatch = testOr(deck, keywords);
+            anyMatch = searchOr(deck, keywords);
         }
         return anyMatch;
     }
 
     /**
      * Checks if deck contains either of the keywords.
-     * @param keywords list of keywords from SearchCommand.
+     * @param keywords list of keywords from FilterCommand.
      * @return true if deck's title or tag contains any of the keywords.
      */
-    private boolean testOr(Deck deck, List<String> keywords) {
+    private boolean searchOr(Deck deck, List<String> keywords) {
         boolean anyMatch = false;
-        anyMatch = new ArrayList<>(keywords).stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(deck.getTitle().toString(), keyword));
-        if (anyMatch) {
-            return anyMatch;
-        } else {
-            for (Tag t : deck.getTags()) {
-                if (!anyMatch) {
-                    anyMatch = new ArrayList<>(keywords).stream()
-                            .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(t.toString(), "[" + keyword + "]"));
-                } else {
-                    break;
-                }
+        for (Tag t : deck.getTags()) {
+            if (!anyMatch) {
+                anyMatch = new ArrayList<>(keywords).stream()
+                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(t.toString(), "[" + keyword + "]"));
+            } else {
+                break;
             }
-            return anyMatch;
         }
+        return anyMatch;
     }
 
     /**
      * Checks if deck contains all of the keywords with &.
-     * @param keywords list of keywords from SearchCommand.
+     * @param keywords list of keywords from FilterCommand.
      * @return true if deck's title or tag contains all of the keywords with &.
      */
-    private boolean testAnd(Deck deck, List<String> keywords) {
+    private boolean searchAnd(Deck deck, List<String> keywords) {
         boolean anyMatch = false;
         List<List<String>> filteredKeywords = filterKeywords(keywords);
 
@@ -82,14 +83,14 @@ public class DeckContainsKeywordsPredicate implements Predicate<Deck> {
 
     /**
      * Filters keywords to remove & symbol and to group keywords together as List objects.
-     * @param keywords list of keywords from SearchCommand.
+     * @param keywords list of keywords from FilterCommand.
      * @return a List of Lists of keywords that are grouped accordingly.
      */
     private List<List<String>> filterKeywords(List<String> keywords) {
         List<List<String>> newList = new ArrayList<>();
         for (int i = 0; i < keywords.size(); i++) {
             if (keywords.get(i).equals("&")) {
-                List<String> prev = newList.get(i - 1);
+                List<String> prev = newList.get(newList.size() - 1);
                 prev.add(keywords.get(i + 1));
                 i++;
             } else {
@@ -102,7 +103,7 @@ public class DeckContainsKeywordsPredicate implements Predicate<Deck> {
     }
 
     /**
-     * Checks if the symbol & is present in the SearchCommand keywords.
+     * Checks if the symbol & is present in the FilterCommand keywords.
      * @param keywords list of keywords to be searched
      * @return true if & is present
      */
@@ -118,8 +119,8 @@ public class DeckContainsKeywordsPredicate implements Predicate<Deck> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeckContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((DeckContainsKeywordsPredicate) other).keywords)); // state check
+                || (other instanceof FilterDeckKeywordsPredicate // instanceof handles nulls
+                && keywords.equals(((FilterDeckKeywordsPredicate) other).keywords)); // state check
     }
 
 }

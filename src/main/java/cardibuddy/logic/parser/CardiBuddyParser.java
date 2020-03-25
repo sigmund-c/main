@@ -12,6 +12,7 @@ import cardibuddy.logic.commands.Command;
 import cardibuddy.logic.commands.DeleteCommand;
 import cardibuddy.logic.commands.EditCommand;
 import cardibuddy.logic.commands.ExitCommand;
+import cardibuddy.logic.commands.FilterCommand;
 import cardibuddy.logic.commands.HelpCommand;
 import cardibuddy.logic.commands.ListCommand;
 import cardibuddy.logic.commands.SearchCommand;
@@ -60,6 +61,9 @@ public class CardiBuddyParser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
+
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
 
         case SearchCommand.COMMAND_WORD:
             return new SearchCommandParser().parse(arguments);
