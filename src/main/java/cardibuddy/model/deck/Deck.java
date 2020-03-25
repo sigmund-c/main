@@ -8,7 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.tag.Tag;
 
@@ -24,6 +26,18 @@ public class Deck {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
     private List<Flashcard> flashcards = new ArrayList<>();
+    private final Logger logger = LogsCenter.getLogger(Deck.class.getName());
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Deck(Title title, Set<Tag> tags, List<Flashcard> flashcards) {
+        requireAllNonNull(title, tags);
+        this.title = title;
+        this.tags.addAll(tags);
+        this.flashcards.addAll(flashcards);
+        logger.info("Created Deck");
+    }
 
     /**
      * Every field must be present and not null.
@@ -32,10 +46,12 @@ public class Deck {
         requireAllNonNull(title, tags);
         this.title = title;
         this.tags.addAll(tags);
+        logger.info("Created Deck");
     }
 
     public Deck() {
         title = new Title("");
+        flashcards = new ArrayList<>();
     }
 
     public Title getTitle() {
@@ -51,7 +67,7 @@ public class Deck {
     }
 
     public List<Flashcard> getFlashcards() {
-        return this.flashcards;
+        return Collections.unmodifiableList(flashcards);
     }
 
     /**

@@ -4,6 +4,7 @@ import static cardibuddy.commons.core.Messages.MESSAGE_DECK_CANNOT_BE_FLASHCARD;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_DECK;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_FLASHCARD;
+import static cardibuddy.commons.core.Messages.MESSAGE_NOT_IN_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
@@ -12,15 +13,18 @@ import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import cardibuddy.logic.commands.AddCommand;
+import cardibuddy.logic.commands.OpenCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Title;
 import cardibuddy.model.deck.exceptions.DeckCannotBeCardException;
 import cardibuddy.model.deck.exceptions.InvalidDeckException;
+import cardibuddy.model.deck.exceptions.NotInDeckException;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
@@ -32,6 +36,8 @@ import cardibuddy.model.tag.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
     private static Object toAdd;
+    private boolean inDeck = true;
+    private Title deckTitle = null;
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -61,6 +67,14 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new InvalidDeckException(String.format(MESSAGE_INVALID_DECK + "\n"
                     + AddCommand.MESSAGE_ADD_DECK));
         } else if (arePrefixesPresent(argMultimap, PREFIX_FLASHCARD)) {
+            if (!inDeck) {
+                throw new NotInDeckException(String.format(MESSAGE_NOT_IN_DECK
+                + " You need to open a deck first. \n" + OpenCommand.MESSAGE_USAGE));
+            }
+            Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
+             if (!deckTitle.equals(title)) {
+                throw new WrongDeckException(String.format(MESSAGE_WRONG_DECK));
+             }
             if (!arePrefixesPresent(argMultimap, PREFIX_FLASHCARD, PREFIX_QUESTION, PREFIX_ANSWER)) {
                 throw new InvalidFlashcardException(String.format(MESSAGE_INVALID_FLASHCARD + "\n"
                         + AddCommand.MESSAGE_ADD_FLASHCARD));
@@ -69,15 +83,16 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (argMultimap.containsKey(PREFIX_DECK)) {
             Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_DECK).get());
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-            toAdd = new Deck(title, tagList);
+            List<Flashcard> flashcardList = Collections.<Flashcard>emptyList();
+            toAdd = new Deck(title, tagList, flashcardList);
             return new AddCommand((Deck) toAdd);
         } else if (argMultimap.containsKey(PREFIX_FLASHCARD)) {
-            Title title = new Title("");
-            Set<Tag> tagList = Collections.<Tag>emptySet();
-            Deck deck = new Deck(title, tagList);
-            Question question = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
-            Answer answer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
-            toAdd = new Flashcard(deck, question, answer);
+            Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
+            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+            Deck modelDeck = new Deck(title, tagList);
+            Question modelQuestion = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
+            Answer modelAnswer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
+            toAdd = new Flashcard(modelDeck, modelQuestion, modelAnswer);
             return new AddCommand((Flashcard) toAdd);
         }
         return null;
