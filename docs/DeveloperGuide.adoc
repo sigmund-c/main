@@ -251,6 +251,11 @@ image::SearchFilterDiagram.png[]
 
 Figure X. Component interactions for a Search command
 
+Calling the `search` command creates a predicate based on the given keywords and passed as an argument to a `SearchCommand` object.
+The `execute()` method is then called to filter the decks accordingly to the predicate and it returns a `CommandResult` object.
+
+Future implementations would return flashcards and decks that are filtered accordingly to the predicate. (by v1.3)
+
 === Test feature
 Users can start a <<test-session>> with a chosen `Deck` by:
 

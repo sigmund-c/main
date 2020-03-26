@@ -17,7 +17,7 @@ end box
 activate SearchCommandParser
 
 create SearchDeckKeywordsPredicate
-SearchCommandParser -> SearchDeckKeywordsPredicate
+SearchCommandParser -> SearchDeckKeywordsPredicate: Arrays.asList(nameKeywords)
 activate SearchDeckKeywordsPredicate
 SearchDeckKeywordsPredicate --> SearchCommandParser: sdkp
 deactivate SearchDeckKeywordsPredicate
