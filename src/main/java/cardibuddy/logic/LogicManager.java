@@ -14,6 +14,7 @@ import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.Model;
 import cardibuddy.model.ReadOnlyCardiBuddy;
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.storage.Storage;
 import javafx.collections.ObservableList;
 
@@ -27,12 +28,12 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final CardiBuddyParser addressBookParser;
+    private final CardiBuddyParser cardiBuddyParser;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new CardiBuddyParser();
+        cardiBuddyParser = new CardiBuddyParser();
     }
 
     @Override
@@ -40,7 +41,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = cardiBuddyParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
@@ -60,6 +61,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Deck> getFilteredDeckList() {
         return model.getFilteredDeckList();
+    }
+
+    @Override
+    public ObservableList<Flashcard> getFilteredFlashcardList() {
+        return model.getFilteredFlashcardList();
     }
 
     @Override
