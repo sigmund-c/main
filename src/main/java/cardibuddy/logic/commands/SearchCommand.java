@@ -8,7 +8,7 @@ import cardibuddy.model.deck.SearchDeckKeywordsPredicate;
 
 
 /**
- * Finds and lists all decks and cards in cardi buddy whose title contains any of the argument keywords.
+ * Finds and lists all decks and cards in cardibuddy whose title contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class SearchCommand extends Command {
