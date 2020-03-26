@@ -16,21 +16,22 @@ end box
 [-> SearchCommandParser: parseCommand(search ...)
 activate SearchCommandParser
 
-SearchCommandParser -> SearchCommandParser: parse(arguments)
-activate SearchCommandParser
+create SearchDeckKeywordsPredicate
+SearchCommandParser -> SearchDeckKeywordsPredicate: Arrays.asList(nameKeywords)
+activate SearchDeckKeywordsPredicate
+SearchDeckKeywordsPredicate --> SearchCommandParser: sdkp
+deactivate SearchDeckKeywordsPredicate
 
 create SearchCommand
-SearchCommandParser -> SearchCommand
+SearchCommandParser -> SearchCommand: SearchCommand(sdkp)
+SearchCommandParser -> SearchCommand: parse(arguments)
+
 activate SearchCommand
 
-create SearchDeckKeywordsPredicate
-SearchCommandParser -> SearchDeckKeywordsPredicate
-activate SearchDeckKeywordsPredicate
-
-SearchDeckKeywordsPredicate --> SearchCommand: sdkp
-deactivate SearchDeckKeywordsPredicate
 SearchCommand --> SearchCommandParser: sc
 deactivate SearchCommand
+
+[<-- SearchCommandParser: sc
 deactivate SearchCommandParser
 
 [-> SearchCommand: execute()
@@ -39,13 +40,22 @@ activate SearchCommand
 SearchCommand -> Model: updateFilteredDeckList(predicate)
 activate Model
 
+Model --> SearchCommand: filteredList: ObservableList<Deck>
+deactivate Model
+
+SearchCommand -> Model: getFilteredDeckList().size()
+activate Model
+Model --> SearchCommand: size
+deactivate Model
+
 create CommandResult
-SearchCommand -> CommandResult
+SearchCommand -> CommandResult: CommandResult(String.format(Messages.MESSAGE_DECKS_LISTED_OVERVIEW, size))
 
 activate CommandResult
 CommandResult --> SearchCommand: cr
 deactivate CommandResult
 
-deactivate SearchCommandParser
+[<-- SearchCommand: cr
+deactivate SearchCommand
 
 @enduml
