@@ -1,10 +1,6 @@
 package cardibuddy.logic.parser;
 
-import static cardibuddy.commons.core.Messages.MESSAGE_DECK_CANNOT_BE_FLASHCARD;
-import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_DECK;
-import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_FLASHCARD;
-import static cardibuddy.commons.core.Messages.MESSAGE_NOT_IN_DECK;
+import static cardibuddy.commons.core.Messages.*;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
@@ -25,6 +21,7 @@ import cardibuddy.model.deck.Title;
 import cardibuddy.model.deck.exceptions.DeckCannotBeCardException;
 import cardibuddy.model.deck.exceptions.InvalidDeckException;
 import cardibuddy.model.deck.exceptions.NotInDeckException;
+import cardibuddy.model.deck.exceptions.WrongDeckException;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
@@ -69,12 +66,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         } else if (arePrefixesPresent(argMultimap, PREFIX_FLASHCARD)) {
             if (!inDeck) {
                 throw new NotInDeckException(String.format(MESSAGE_NOT_IN_DECK
-                + " You need to open a deck first. \n" + OpenCommand.MESSAGE_USAGE));
+                        + " You need to open a deck first. \n" + OpenCommand.MESSAGE_USAGE));
             }
             Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
-//             if (!deckTitle.equals(title)) {
-//                throw new WrongDeckException(String.format(MESSAGE_WRONG_DECK));
-//             }
+             if (!deckTitle.equals(title)) {
+               throw new WrongDeckException(String.format(MESSAGE_WRONG_DECK));
+             }
             if (!arePrefixesPresent(argMultimap, PREFIX_FLASHCARD, PREFIX_QUESTION, PREFIX_ANSWER)) {
                 throw new InvalidFlashcardException(String.format(MESSAGE_INVALID_FLASHCARD + "\n"
                         + AddCommand.MESSAGE_ADD_FLASHCARD));

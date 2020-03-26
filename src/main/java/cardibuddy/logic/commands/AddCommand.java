@@ -5,7 +5,6 @@ import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
-
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
@@ -39,7 +38,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "Hard "
             + PREFIX_TAG + "Software Engineering \n"
             + "Example (adding a flashcard): " + COMMAND_WORD + " "
-            + PREFIX_FLASHCARD + "Java"
+            + PREFIX_FLASHCARD + "Java "
             + PREFIX_QUESTION + "A queue cannot be implemented using an array "
             + PREFIX_ANSWER + "False "
             + PREFIX_TAG + "Programming";
@@ -71,10 +70,10 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the deck";
 
     private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
+    private static List<Flashcard> flashcards = new ArrayList<>();
 
     private final Object toAdd;
     private final Boolean isDeck;
-    private static List<Flashcard> flashcards = new ArrayList<>();
     /**
      * Creates an AddCommand to add the specified {@code Deck}
      */

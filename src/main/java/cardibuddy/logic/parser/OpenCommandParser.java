@@ -8,7 +8,6 @@ import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.commands.OpenCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 
-
 /**
  * Parses input arguments and creates a new OpenCommand object
  */
