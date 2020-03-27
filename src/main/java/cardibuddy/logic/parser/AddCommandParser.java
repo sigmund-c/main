@@ -1,7 +1,7 @@
 package cardibuddy.logic.parser;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_DECK_CANNOT_BE_FLASHCARD;
-import cardibuddy.logic.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_DECK;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_FLASHCARD;
 import static cardibuddy.commons.core.Messages.MESSAGE_NOT_IN_DECK;
@@ -76,7 +76,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             }
             Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
             for (Deck d: cardibuddy.getDeckList()) {
-                if (d.getTitle = title) {
+                if (d.getTitle() = title) {
                     throw new WrongDeckException(String.format(MESSAGE_WRONG_DECK));
                 }
             }
