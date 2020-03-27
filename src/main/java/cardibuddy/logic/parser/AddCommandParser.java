@@ -13,7 +13,6 @@ import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -21,6 +20,7 @@ import java.util.stream.Stream;
 import cardibuddy.logic.commands.AddCommand;
 import cardibuddy.logic.commands.OpenCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
+import cardibuddy.model.CardiBuddy;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Title;
 import cardibuddy.model.deck.exceptions.DeckCannotBeCardException;
@@ -32,7 +32,6 @@ import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
 import cardibuddy.model.tag.Tag;
-import cardibuddy.model.CardiBuddy;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -40,7 +39,7 @@ import cardibuddy.model.CardiBuddy;
 public class AddCommandParser implements Parser<AddCommand> {
     private static Object toAdd;
     private boolean inDeck = true;
-    public CardiBuddy cardibuddy = new CardiBuddy();
+    private CardiBuddy cardibuddy = new CardiBuddy();
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
