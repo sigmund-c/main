@@ -8,6 +8,7 @@ import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.ReadOnlyCardiBuddy;
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.flashcard.Flashcard;
 import javafx.collections.ObservableList;
 
 
@@ -33,6 +34,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of decks */
     ObservableList<Deck> getFilteredDeckList();
+
+    /** Returns an unmodifiable view of the filtered list of flashcards */
+    ObservableList<Flashcard> getFilteredFlashcardList();
 
     /**
      * Returns the user prefs' address book file path.
