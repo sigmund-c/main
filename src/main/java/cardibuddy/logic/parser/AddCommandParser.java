@@ -1,6 +1,10 @@
 package cardibuddy.logic.parser;
 
-import static cardibuddy.commons.core.Messages.*;
+import static cardibuddy.commons.core.Messages.MESSAGE_DECK_CANNOT_BE_FLASHCARD;
+import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_DECK;
+import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_FLASHCARD;
+import static cardibuddy.commons.core.Messages.MESSAGE_NOT_IN_DECK;
+import static cardibuddy.commons.core.Messages.MESSAGE_WRONG_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
@@ -27,6 +31,7 @@ import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
 import cardibuddy.model.tag.Tag;
+import cardibuddy.model.CardiBuddy; 
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -34,7 +39,7 @@ import cardibuddy.model.tag.Tag;
 public class AddCommandParser implements Parser<AddCommand> {
     private static Object toAdd;
     private boolean inDeck = true;
-    private Title deckTitle = null;
+    public CardiBuddy cardibuddy = new CardiBuddy();
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -69,9 +74,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                         + " You need to open a deck first. \n" + OpenCommand.MESSAGE_USAGE));
             }
             Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
-             if (!deckTitle.equals(title)) {
-               throw new WrongDeckException(String.format(MESSAGE_WRONG_DECK));
-             }
+            for (Decks d: cardibuddy.getDeckList() {
+                if (d.getTitle = title) {
+                    throw new WrongDeckException(String.format(MESSAGE_WRONG_DECK));
+                }
+            }
             if (!arePrefixesPresent(argMultimap, PREFIX_FLASHCARD, PREFIX_QUESTION, PREFIX_ANSWER)) {
                 throw new InvalidFlashcardException(String.format(MESSAGE_INVALID_FLASHCARD + "\n"
                         + AddCommand.MESSAGE_ADD_FLASHCARD));
@@ -80,7 +87,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (argMultimap.containsKey(PREFIX_DECK)) {
             Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_DECK).get());
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-            List<Flashcard> flashcardList = Collections.<Flashcard>emptyList();
+            List<Flashcard> flashcardList = cardibuddy.getFlashcardList();
             toAdd = new Deck(title, tagList, flashcardList);
             return new AddCommand((Deck) toAdd);
         } else if (argMultimap.containsKey(PREFIX_FLASHCARD)) {
