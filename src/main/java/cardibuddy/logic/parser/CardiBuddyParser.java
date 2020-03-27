@@ -49,7 +49,7 @@ public class CardiBuddyParser {
         switch (commandWord) {
 
         case OpenCommand.COMMAND_WORD:
-        return new OpenCommandParser().parse(arguments);
+            return new OpenCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
