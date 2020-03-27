@@ -74,7 +74,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         + " You need to open a deck first. \n" + OpenCommand.MESSAGE_USAGE));
             }
             Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
-            for (Decks d: cardibuddy.getDeckList() {
+            for (Decks d: cardibuddy.getDeckList()) {
                 if (d.getTitle = title) {
                     throw new WrongDeckException(String.format(MESSAGE_WRONG_DECK));
                 }
