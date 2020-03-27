@@ -32,7 +32,7 @@ import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
 import cardibuddy.model.tag.Tag;
-import cardibuddy.model.CardiBuddy; 
+import cardibuddy.model.CardiBuddy;
 
 /**
  * Parses input arguments and creates a new AddCommand object
