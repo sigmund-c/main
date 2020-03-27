@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import cardibuddy.logic.commands.AddCommand;
 import cardibuddy.logic.commands.ClearCommand;
+import cardibuddy.logic.commands.Command;
 import cardibuddy.logic.commands.DeleteCommand;
 import cardibuddy.logic.commands.EditCommand;
 import cardibuddy.logic.commands.ExitCommand;
@@ -16,7 +17,6 @@ import cardibuddy.logic.commands.ListCommand;
 import cardibuddy.logic.commands.OpenCommand;
 import cardibuddy.logic.commands.SearchCommand;
 import cardibuddy.logic.commands.TestCommand;
-import cardibuddy.logic.commands.Command;
 
 import cardibuddy.logic.parser.exceptions.ParseException;
 
