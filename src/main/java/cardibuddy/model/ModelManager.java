@@ -3,6 +3,7 @@ package cardibuddy.model;
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
 
+import cardibuddy.ui.MainWindow;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;

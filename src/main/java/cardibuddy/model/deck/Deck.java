@@ -2,6 +2,7 @@ package cardibuddy.model.deck;
 
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
 
+import cardibuddy.model.flashcard.UniqueFlashcardList;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import java.util.logging.Logger;
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.tag.Tag;
+import javafx.collections.ObservableList;
 
 /**
  * Represents a Deck in the cardibuddy application.
@@ -92,6 +94,12 @@ public class Deck {
 
         return otherDeck != null
                 && otherDeck.getTitle().equals(getTitle());
+    }
+
+    public ObservableList<Flashcard> getFlashcardList() {
+        UniqueFlashcardList flashcardList = new UniqueFlashcardList();
+        flashcardList.setFlashcards(flashcards);
+        return flashcardList.asUnmodifiableObservableList();
     }
 
     @Override

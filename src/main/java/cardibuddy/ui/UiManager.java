@@ -31,6 +31,10 @@ public class UiManager implements Ui {
         this.logic = logic;
     }
 
+    public MainWindow getMainWindow() {
+        return mainWindow;
+    }
+
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
@@ -41,7 +45,7 @@ public class UiManager implements Ui {
         try {
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
-            mainWindow.fillInnerParts();
+            mainWindow.fillInnerPartsWithDecks();
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));

@@ -2,6 +2,7 @@ package cardibuddy.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import cardibuddy.logic.LogicToUiManager;
 import java.util.List;
 
 import cardibuddy.commons.core.Messages;
@@ -24,10 +25,13 @@ public class OpenCommand extends Command {
 
     public static final String MESSAGE_OPEN_DECK_SUCCESS = "Opened Deck: %1$s";
 
+    public LogicToUiManager logicToUiManager;
+
     private final Index targetIndex;
 
-    public OpenCommand(Index targetIndex) {
+    public OpenCommand(Index targetIndex, LogicToUiManager logicToUiManager) {
         this.targetIndex = targetIndex;
+        this.logicToUiManager = logicToUiManager;
     }
 
     @Override
@@ -40,6 +44,9 @@ public class OpenCommand extends Command {
         }
 
         Deck deckToOpen = lastShownList.get(targetIndex.getZeroBased());
+
+        logicToUiManager.openFlashcardPanel(targetIndex.getZeroBased());
+
         return new CommandResult(String.format(MESSAGE_OPEN_DECK_SUCCESS + deckToOpen.getFlashcards(), deckToOpen));
     }
 

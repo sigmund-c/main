@@ -1,5 +1,6 @@
 package cardibuddy;
 
+import cardibuddy.logic.LogicToUiManager;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -42,6 +43,7 @@ public class MainApp extends Application {
 
     protected Ui ui;
     protected Logic logic;
+    protected LogicToUiManager logicToUiManager;
     protected Storage storage;
     protected Model model;
     protected Config config;
@@ -66,6 +68,10 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+
+        logicToUiManager = new LogicToUiManager((UiManager) ui);
+
+        logic.setLogicToUiManager(logicToUiManager);
     }
 
     /**
@@ -86,7 +92,7 @@ public class MainApp extends Application {
             logger.warning("Data file not in the correct format. Will be starting with an empty CardiBuddy");
             initialData = new CardiBuddy();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty CardiBuddy");
+            logger.warning( "Problem while reading from the file. Will be starting with an empty CardiBuddy");
             initialData = new CardiBuddy();
         }
 
