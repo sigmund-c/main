@@ -1,6 +1,5 @@
 package cardibuddy;
 
-import cardibuddy.logic.LogicToUiManager;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -14,6 +13,7 @@ import cardibuddy.commons.util.ConfigUtil;
 import cardibuddy.commons.util.StringUtil;
 import cardibuddy.logic.Logic;
 import cardibuddy.logic.LogicManager;
+import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.model.CardiBuddy;
 import cardibuddy.model.Model;
 import cardibuddy.model.ModelManager;
@@ -92,7 +92,7 @@ public class MainApp extends Application {
             logger.warning("Data file not in the correct format. Will be starting with an empty CardiBuddy");
             initialData = new CardiBuddy();
         } catch (IOException e) {
-            logger.warning( "Problem while reading from the file. Will be starting with an empty CardiBuddy");
+            logger.warning("Problem while reading from the file. Will be starting with an empty CardiBuddy");
             initialData = new CardiBuddy();
         }
 

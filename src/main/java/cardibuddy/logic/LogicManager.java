@@ -1,6 +1,5 @@
 package cardibuddy.logic;
 
-import cardibuddy.model.CardiBuddy;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;

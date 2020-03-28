@@ -2,10 +2,10 @@ package cardibuddy.logic.parser;
 
 import static cardibuddy.logic.commands.OpenCommand.MESSAGE_OPEN_DECK_SUCCESS;
 
-import cardibuddy.logic.LogicToUiManager;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.index.Index;
+import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.OpenCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 

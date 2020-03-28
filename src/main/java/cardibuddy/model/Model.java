@@ -1,6 +1,5 @@
 package cardibuddy.model;
 
-import cardibuddy.ui.MainWindow;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 

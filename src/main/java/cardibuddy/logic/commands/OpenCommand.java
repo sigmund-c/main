@@ -2,11 +2,11 @@ package cardibuddy.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import cardibuddy.logic.LogicToUiManager;
 import java.util.List;
 
 import cardibuddy.commons.core.Messages;
 import cardibuddy.commons.core.index.Index;
+import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
@@ -25,7 +25,7 @@ public class OpenCommand extends Command {
 
     public static final String MESSAGE_OPEN_DECK_SUCCESS = "Opened Deck: %1$s";
 
-    public LogicToUiManager logicToUiManager;
+    private LogicToUiManager logicToUiManager;
 
     private final Index targetIndex;
 

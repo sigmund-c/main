@@ -7,13 +7,12 @@ import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
-import cardibuddy.logic.Logic;
-import cardibuddy.logic.LogicToUiManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
+import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
@@ -23,8 +22,6 @@ import cardibuddy.model.flashcard.Flashcard;
  * Adds a deck to the cardibuddy.
  */
 public class AddCommand extends Command {
-
-    private LogicToUiManager logicToUiManager;
 
     public static final String COMMAND_WORD = "add";
 
@@ -78,6 +75,9 @@ public class AddCommand extends Command {
 
     private final Object toAdd;
     private final Boolean isDeck;
+
+    private LogicToUiManager logicToUiManager;
+
     /**
      * Creates an AddCommand to add the specified {@code Deck}
      */

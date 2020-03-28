@@ -3,12 +3,12 @@ package cardibuddy.logic.parser;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static cardibuddy.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import cardibuddy.logic.LogicToUiManager;
-import cardibuddy.model.CardiBuddy;
-import cardibuddy.model.ReadOnlyCardiBuddy;
+//import cardibuddy.model.CardiBuddy;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.AddCommand;
 import cardibuddy.logic.commands.ClearCommand;
 import cardibuddy.logic.commands.Command;
@@ -21,8 +21,8 @@ import cardibuddy.logic.commands.ListCommand;
 import cardibuddy.logic.commands.OpenCommand;
 import cardibuddy.logic.commands.SearchCommand;
 import cardibuddy.logic.commands.TestCommand;
-
 import cardibuddy.logic.parser.exceptions.ParseException;
+import cardibuddy.model.ReadOnlyCardiBuddy;
 
 /**
  * Parses user input.
