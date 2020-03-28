@@ -13,6 +13,7 @@ import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
+import cardibuddy.logic.LogicToUiManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -33,6 +34,8 @@ import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
 import cardibuddy.model.tag.Tag;
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -41,9 +44,11 @@ public class AddCommandParser implements Parser<AddCommand> {
     private static Object toAdd;
     private boolean inDeck = true;
     private ReadOnlyCardiBuddy cardiBuddy;
+    private LogicToUiManager logicToUiManager;
 
-    public AddCommandParser(ReadOnlyCardiBuddy cardiBuddy) {
+    public AddCommandParser(ReadOnlyCardiBuddy cardiBuddy, LogicToUiManager logicToUiManager) {
         this.cardiBuddy = cardiBuddy;
+        this.logicToUiManager = logicToUiManager;
     }
 
     /**
@@ -102,9 +107,14 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             // Search for the deck with matching title
             Deck deck = new Deck();
-            for (Deck d : cardiBuddy.getDeckList()) {
+            int deckIndex = 0;
+            ObservableList<Deck> deckObservableList = cardiBuddy.getDeckList();
+
+            for (int i = 0; i < cardiBuddy.getDeckList().size(); i++) {
+                Deck d = deckObservableList.get(i);
                 if (d.getTitle().equals(title)) {
                     deck = d;
+                    deckIndex = i;
                     break;
                 }
             }
@@ -114,7 +124,9 @@ public class AddCommandParser implements Parser<AddCommand> {
             toAdd = new Flashcard(deck, modelQuestion, modelAnswer);
             deck.addFlashcard((Flashcard)toAdd);
 
-            return new AddCommand((Flashcard) toAdd);
+            logicToUiManager.openFlashcardPanel(deckIndex);
+
+            return new AddCommand((Flashcard) toAdd, logicToUiManager);
         }
         return null;
     }

@@ -7,6 +7,8 @@ import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
+import cardibuddy.logic.Logic;
+import cardibuddy.logic.LogicToUiManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -21,6 +23,8 @@ import cardibuddy.model.flashcard.Flashcard;
  * Adds a deck to the cardibuddy.
  */
 public class AddCommand extends Command {
+
+    private LogicToUiManager logicToUiManager;
 
     public static final String COMMAND_WORD = "add";
 
@@ -84,7 +88,8 @@ public class AddCommand extends Command {
         flashcards = deck.getFlashcards();
     }
 
-    public AddCommand(Flashcard flashcard) {
+    public AddCommand(Flashcard flashcard, LogicToUiManager logicToUiManager) {
+        this.logicToUiManager = logicToUiManager;
         requireNonNull(flashcard);
         toAdd = flashcard;
         isDeck = false;
@@ -109,7 +114,6 @@ public class AddCommand extends Command {
             flashcards.add((Flashcard) toAdd);
             logger.info("Flashcard has been added");
         }
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

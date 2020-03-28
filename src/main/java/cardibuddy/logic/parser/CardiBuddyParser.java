@@ -66,7 +66,7 @@ public class CardiBuddyParser {
             return new OpenCommandParser(logicToUiManager).parse(arguments);
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser(cardiBuddy).parse(arguments);
+            return new AddCommandParser(cardiBuddy, logicToUiManager).parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
