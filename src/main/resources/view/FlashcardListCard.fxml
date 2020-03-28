@@ -26,6 +26,7 @@
                     </minWidth>
                 </Label>
                 <Label fx:id="question" text="\$first" styleClass="cell_big_label"/>
+
                 <Label fx:id="answer" text="\$first" styleClass="cell_small_label"/>
             </HBox>
            <!-- <FlowPane fx:id="tags" /> -->

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
+import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
@@ -74,6 +75,9 @@ public class AddCommand extends Command {
 
     private final Object toAdd;
     private final Boolean isDeck;
+
+    private LogicToUiManager logicToUiManager;
+
     /**
      * Creates an AddCommand to add the specified {@code Deck}
      */
@@ -84,7 +88,8 @@ public class AddCommand extends Command {
         flashcards = deck.getFlashcards();
     }
 
-    public AddCommand(Flashcard flashcard) {
+    public AddCommand(Flashcard flashcard, LogicToUiManager logicToUiManager) {
+        this.logicToUiManager = logicToUiManager;
         requireNonNull(flashcard);
         toAdd = flashcard;
         isDeck = false;
@@ -109,7 +114,6 @@ public class AddCommand extends Command {
             flashcards.add((Flashcard) toAdd);
             logger.info("Flashcard has been added");
         }
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

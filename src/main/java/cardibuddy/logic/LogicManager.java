@@ -33,7 +33,11 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        cardiBuddyParser = new CardiBuddyParser();
+        cardiBuddyParser = new CardiBuddyParser(model.getCardiBuddy());
+    }
+
+    public void setLogicToUiManager(LogicToUiManager logicToUiManager) {
+        cardiBuddyParser.setLogicToUiManager(logicToUiManager);
     }
 
     @Override
