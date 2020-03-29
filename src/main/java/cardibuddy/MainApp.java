@@ -13,6 +13,7 @@ import cardibuddy.commons.util.ConfigUtil;
 import cardibuddy.commons.util.StringUtil;
 import cardibuddy.logic.Logic;
 import cardibuddy.logic.LogicManager;
+import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.model.CardiBuddy;
 import cardibuddy.model.Model;
 import cardibuddy.model.ModelManager;
@@ -42,6 +43,7 @@ public class MainApp extends Application {
 
     protected Ui ui;
     protected Logic logic;
+    protected LogicToUiManager logicToUiManager;
     protected Storage storage;
     protected Model model;
     protected Config config;
@@ -66,6 +68,10 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+
+        logicToUiManager = new LogicToUiManager((UiManager) ui);
+
+        logic.setLogicToUiManager(logicToUiManager);
     }
 
     /**

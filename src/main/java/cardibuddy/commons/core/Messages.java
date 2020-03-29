@@ -12,7 +12,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_FLASHCARD = "A flashcard should have a question and an answer.";
     public static final String MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX = "The card index provided is invalid";
     public static final String MESSAGE_NOT_IN_DECK = "This operation can only be done in a deck.";
-    public static final String MESSAGE_WRONG_DECK = "This operation is being executed in a deckk that differs from the"
+    public static final String MESSAGE_WRONG_DECK = "This operation is being executed in a deck that differs from the"
             + " deck that the user has inputted.";
     public static final String MESSAGE_DECKS_LISTED_OVERVIEW = "%1$d decks listed!";
     public static final String MESSAGE_FLASHCARDS_LISTED_OVERVIEW = "%1$d cards listed!";

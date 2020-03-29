@@ -3,9 +3,12 @@ package cardibuddy.logic.parser;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static cardibuddy.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+//import cardibuddy.model.CardiBuddy;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.AddCommand;
 import cardibuddy.logic.commands.ClearCommand;
 import cardibuddy.logic.commands.Command;
@@ -18,8 +21,8 @@ import cardibuddy.logic.commands.ListCommand;
 import cardibuddy.logic.commands.OpenCommand;
 import cardibuddy.logic.commands.SearchCommand;
 import cardibuddy.logic.commands.TestCommand;
-
 import cardibuddy.logic.parser.exceptions.ParseException;
+import cardibuddy.model.ReadOnlyCardiBuddy;
 
 /**
  * Parses user input.
@@ -30,6 +33,16 @@ public class CardiBuddyParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private ReadOnlyCardiBuddy cardiBuddy;
+    private LogicToUiManager logicToUiManager;
+
+    public CardiBuddyParser(ReadOnlyCardiBuddy cardiBuddy) {
+        this.cardiBuddy = cardiBuddy;
+    }
+
+    public void setLogicToUiManager(LogicToUiManager logicToUiManager) {
+        this.logicToUiManager = logicToUiManager;
+    }
 
     /**
      * Parses user input into command for execution.
@@ -50,10 +63,10 @@ public class CardiBuddyParser {
         switch (commandWord) {
 
         case OpenCommand.COMMAND_WORD:
-            return new OpenCommandParser().parse(arguments);
+            return new OpenCommandParser(logicToUiManager).parse(arguments);
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            return new AddCommandParser(cardiBuddy, logicToUiManager).parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);

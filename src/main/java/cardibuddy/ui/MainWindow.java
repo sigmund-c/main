@@ -38,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private DeckListPanel deckListPanel;
+    private FlashcardListPanel flashcardListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -49,6 +50,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane deckListPanelPlaceholder;
+
+    @FXML
+    private StackPane flashcardListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,11 +114,30 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Fills up all the placeholders of this window.
+     * Fills up all the placeholders of this window with Decks.
      */
-    void fillInnerParts() {
+    void fillInnerPartsWithDecks() {
         deckListPanel = new DeckListPanel(logic.getFilteredDeckList());
         deckListPanelPlaceholder.getChildren().add(deckListPanel.getRoot());
+
+        resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getCardiBuddyFilePath());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
+        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Fills up all the placeholders of this window with Flashcards.
+     */
+    public void fillInnerPartsWithCards(int deckIndex) {
+        flashcardListPanel = new FlashcardListPanel(logic.getFilteredDeckList()
+                                    .get(deckIndex)
+                                    .getFlashcardList());
+        flashcardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
