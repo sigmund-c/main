@@ -8,6 +8,9 @@ import cardibuddy.ui.UiManager;
 public class LogicToUiManager {
 
     protected UiManager ui;
+    private String openedDeck;
+    private boolean inDeck = false;
+
 
     public LogicToUiManager(UiManager ui) {
         this.ui = ui;
@@ -15,6 +18,27 @@ public class LogicToUiManager {
 
     public void openFlashcardPanel(int index) {
         ui.getMainWindow().fillInnerPartsWithCards(index);
+    }
+
+    public void openDeckPanel() {
+        ui.getMainWindow().fillInnerPartsWithDecks();
+    }
+
+    public void setOpenedDeck(String openedDeck) {
+        if (openedDeck.equals("")) {
+            inDeck = false;
+        } else {
+            inDeck = true;
+        }
+        this.openedDeck = openedDeck;
+    }
+
+    public String getOpenedDeck() {
+        return openedDeck;
+    }
+
+    public boolean isInDeck() {
+        return this.inDeck;
     }
 
 }

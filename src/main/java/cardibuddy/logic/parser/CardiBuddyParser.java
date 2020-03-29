@@ -72,7 +72,7 @@ public class CardiBuddyParser {
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new DeleteCommandParser(logicToUiManager).parse(arguments);
 
         case TestCommand.COMMAND_WORD:
             return new TestCommandParser().parse(arguments);

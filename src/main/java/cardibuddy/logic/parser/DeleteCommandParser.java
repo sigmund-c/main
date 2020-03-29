@@ -3,6 +3,7 @@ package cardibuddy.logic.parser;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import cardibuddy.commons.core.index.Index;
+import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.DeleteCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 
@@ -10,6 +11,12 @@ import cardibuddy.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new DeleteCommand object
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
+
+    private LogicToUiManager logicToUiManager;
+
+    public DeleteCommandParser(LogicToUiManager logicToUiManager) {
+        this.logicToUiManager = logicToUiManager;
+    }
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
@@ -19,6 +26,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
+            logicToUiManager.setOpenedDeck("");
+            logicToUiManager.openDeckPanel();
             return new DeleteCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(

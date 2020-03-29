@@ -5,7 +5,7 @@ import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_DECK;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_FLASHCARD;
 import static cardibuddy.commons.core.Messages.MESSAGE_NOT_IN_DECK;
-//import static cardibuddy.commons.core.Messages.MESSAGE_WRONG_DECK;
+import static cardibuddy.commons.core.Messages.MESSAGE_WRONG_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
@@ -28,7 +28,7 @@ import cardibuddy.model.deck.Title;
 import cardibuddy.model.deck.exceptions.DeckCannotBeCardException;
 import cardibuddy.model.deck.exceptions.InvalidDeckException;
 import cardibuddy.model.deck.exceptions.NotInDeckException;
-//import cardibuddy.model.deck.exceptions.WrongDeckException;
+import cardibuddy.model.deck.exceptions.WrongDeckException;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
@@ -42,7 +42,6 @@ import javafx.collections.ObservableList;
  */
 public class AddCommandParser implements Parser<AddCommand> {
     private static Object toAdd;
-    private boolean inDeck = true;
     private ReadOnlyCardiBuddy cardiBuddy;
     private LogicToUiManager logicToUiManager;
 
@@ -79,16 +78,15 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new InvalidDeckException(String.format(MESSAGE_INVALID_DECK + "\n"
                     + AddCommand.MESSAGE_ADD_DECK));
         } else if (arePrefixesPresent(argMultimap, PREFIX_FLASHCARD)) {
-            if (!inDeck) {
+            if (!logicToUiManager.isInDeck()) {
                 throw new NotInDeckException(String.format(MESSAGE_NOT_IN_DECK
                         + " You need to open a deck first. \n" + OpenCommand.MESSAGE_USAGE));
             }
             Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
-            //for (Deck d: cardiBuddy.getDeckList()) {
-            //if (d.getTitle().equals(title)) {
-            //throw new WrongDeckException(String.format(MESSAGE_WRONG_DECK));
-            //}
-            //}
+            if (!title.toString().toLowerCase().equals(logicToUiManager.getOpenedDeck())) {
+                throw new WrongDeckException(String.format(MESSAGE_WRONG_DECK));
+            }
+
             if (!arePrefixesPresent(argMultimap, PREFIX_FLASHCARD, PREFIX_QUESTION, PREFIX_ANSWER)) {
                 throw new InvalidFlashcardException(String.format(MESSAGE_INVALID_FLASHCARD + "\n"
                         + AddCommand.MESSAGE_ADD_FLASHCARD));

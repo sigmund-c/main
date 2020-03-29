@@ -116,7 +116,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up all the placeholders of this window with Decks.
      */
-    void fillInnerPartsWithDecks() {
+    public void fillInnerPartsWithDecks() {
         deckListPanel = new DeckListPanel(logic.getFilteredDeckList());
         deckListPanelPlaceholder.getChildren().add(deckListPanel.getRoot());
 
