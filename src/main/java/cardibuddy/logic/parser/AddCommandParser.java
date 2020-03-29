@@ -156,7 +156,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Question modelQuestion = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
         Answer modelAnswer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
-        Flashcard flashcard = new Flashcard(deck, modelQuestion, modelAnswer);
+        Flashcard flashcard = new Flashcard(deck, modelQuestion, modelAnswer, tagList);
         deck.addFlashcard(flashcard);
 
         logicToUiManager.openFlashcardPanel(deckIndex);
