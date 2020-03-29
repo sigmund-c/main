@@ -81,6 +81,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         return null;
     }
 
+    /**
+     * Handles wrong input commands by user by throwing respective exceptions.
+     * @param argMultimap Multimap of arguments.
+     * @throws ParseException Respective exceptions.
+     */
     private void handleInputErrors(ArgumentMultimap argMultimap) throws ParseException {
         if (arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_FLASHCARD)) {
             // both PREFIX_DECK and PREFIX_FLASHCARD are present
@@ -112,6 +117,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
     }
 
+    /**
+     * Adds a deck to CardiBuddy.
+     * @param argMultimap Multimap of arguments.
+     * @return New deck created.
+     * @throws ParseException if there is an error parsing the arguments.
+     */
     private Deck addDeck(ArgumentMultimap argMultimap) throws ParseException {
         Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_DECK).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
@@ -119,6 +130,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         return new Deck(title, tagList, flashcards);
     }
 
+    /**
+     * Adds a flashcard to a deck in CardiBuddy.
+     * @param argMultimap Multimap of arguments.
+     * @return New flashcard created.
+     * @throws ParseException if there is an error parsing the arguments.
+     */
     private Flashcard addCard(ArgumentMultimap argMultimap) throws ParseException {
         Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
