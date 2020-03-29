@@ -7,6 +7,8 @@ import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.commons.util.StringUtil;
 import cardibuddy.logic.Logic;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
@@ -52,6 +54,10 @@ public class UiManager implements Ui {
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
     }
+
+//    public void switchScene(String fxmlName) {
+//        Parent pane = FXMLLoader.load(getClass())
+//    }
 
     private Image getImage(String imagePath) {
         return new Image(MainApp.class.getResourceAsStream(imagePath));

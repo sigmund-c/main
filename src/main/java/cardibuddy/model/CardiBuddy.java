@@ -8,6 +8,7 @@ import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.UniqueDeckList;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.UniqueFlashcardList;
+import cardibuddy.model.testsession.TestSession;
 import javafx.collections.ObservableList;
 
 /**
@@ -18,6 +19,7 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
 
     private final UniqueDeckList decks;
     private final UniqueFlashcardList flashcards;
+    private TestSession testSession;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -87,6 +89,13 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
     }
 
     /**
+     * Starts a test for the given deck
+     */
+    public void startTest(TestSession ts) {
+
+    }
+
+    /**
      * Replaces the given deck {@code target} in the list with {@code editedDeck}.
      * {@code target} must exist in the cardi buddy.
      * The deck identity of {@code editedFlashcard} must not be the same as another existing deck in the cardi buddy.
@@ -140,6 +149,15 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
      */
     public void removeFlashcard(Flashcard key) {
         flashcards.remove(key);
+    }
+
+    /**
+     * Opens the flashcard list associated with the {@code deck} at the given index.
+     * {@code deck} must exist before it can be opened.
+     * @return
+     */
+    public void openDeck(int index) {
+
     }
 
     //// util methods

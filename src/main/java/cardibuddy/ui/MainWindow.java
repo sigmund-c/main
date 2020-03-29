@@ -12,6 +12,7 @@ import cardibuddy.model.deck.exceptions.DeckCannotBeCardException;
 import cardibuddy.model.deck.exceptions.InvalidDeckException;
 import cardibuddy.model.deck.exceptions.NotInDeckException;
 import cardibuddy.model.deck.exceptions.WrongDeckException;
+import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,6 +54,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane flashcardListPanelPlaceholder;
+
+    @FXML
+    private StackPane testCardPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -148,6 +152,10 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
+
+//    public void fillInnerPartsWithUnflippedCard(Flashcard card) {
+//         deckListPanelPlaceholder.getChildren().add() // TODO: make FXML file for test card
+//    }
 
     /**
      * Sets the default size based on {@code guiSettings}.

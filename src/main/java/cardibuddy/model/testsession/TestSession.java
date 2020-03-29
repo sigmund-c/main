@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Question;
 
 /**
  * Test Session class.
@@ -67,16 +68,24 @@ public class TestSession {
         assert !testQueue.isEmpty();
         /* check if the user got the current flashcard wrong,
         and add it to the back of the testQueue again */
-        if (testResults.get(current).getResult() == Result.WRONG) {
-            testQueue.addLast(current);
+        if (testResults.containsKey(current)) {
+            if (testResults.get(current).getResult() == Result.WRONG) {
+                testQueue.addLast(current);
+            }
         }
         current = testQueue.removeFirst();
+        return current;
+    }
+
+    public Flashcard getCurrentFlashcard() {
         return current;
     }
 
     public LinkedList<Flashcard> getTestQueue() {
         return testQueue;
     }
+
+
 
     /**
      * Takes the user's answer for the current flashcard, and tests it against the current flashcard.

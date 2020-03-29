@@ -1,5 +1,6 @@
 package cardibuddy.logic;
 
+import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.ui.UiManager;
 
 /**
@@ -15,6 +16,10 @@ public class LogicToUiManager {
 
     public void openFlashcardPanel(int index) {
         ui.getMainWindow().fillInnerPartsWithCards(index);
+    }
+
+    public void openTestingFlashcard(Flashcard flashcard) {
+        ui.getMainWindow().fillInnerPartWithUnflippedCard(flashcard);
     }
 
 }

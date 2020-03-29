@@ -113,6 +113,10 @@ public interface Model {
     void setFlashcard(Flashcard target, Flashcard editedFlashcard);
 
     /**
+     * Opens the flashcards associated with the deck at the given index.
+     */
+    void openDeck(int index);
+    /**
      * Starts the test session with {@code deck}
      * @param deck the deck to be tested
      */

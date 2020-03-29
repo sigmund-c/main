@@ -6,9 +6,11 @@ import java.util.List;
 
 import cardibuddy.commons.core.Messages;
 import cardibuddy.commons.core.index.Index;
+import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.testsession.TestSession;
 
 /**
  * A class for the test command, used to initiate a test session.
@@ -23,10 +25,12 @@ public class TestCommand extends Command {
 
     public static final String MESSAGE_TEST_SESSION_SUCCESS = "";
 
+    private LogicToUiManager logicToUiManager;
     private final Index targetIndex;
 
-    public TestCommand(Index targetIndex) {
+    public TestCommand(Index targetIndex, LogicToUiManager logicToUiManager) {
         this.targetIndex = targetIndex;
+        this.logicToUiManager = logicToUiManager;
     }
 
     @Override
@@ -40,6 +44,7 @@ public class TestCommand extends Command {
 
         Deck deckToTest =
                 lastShownList.get(targetIndex.getZeroBased());
+
         model.testDeck(deckToTest);
         return new CommandResult(MESSAGE_TEST_SESSION_SUCCESS, false, false);
     }

@@ -75,7 +75,7 @@ public class CardiBuddyParser {
             return new DeleteCommandParser().parse(arguments);
 
         case TestCommand.COMMAND_WORD:
-            return new TestCommandParser().parse(arguments);
+            return new TestCommandParser(logicToUiManager).parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
