@@ -67,46 +67,21 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        handleExceptions(argMultimap);
+        handleInputErrors(argMultimap);
 
         if (argMultimap.containsKey(PREFIX_DECK)) {
-            Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_DECK).get());
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-            List<Flashcard> flashcards = new ArrayList<>();
-            toAdd = new Deck(title, tagList, flashcards);
-
+            toAdd = addDeck(argMultimap);
             return new AddCommand((Deck) toAdd);
         } else if (argMultimap.containsKey(PREFIX_FLASHCARD)) {
-            Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            // Search for the deck with matching title
-            Deck deck = new Deck();
-            int deckIndex = 0;
-            ObservableList<Deck> deckObservableList = cardiBuddy.getDeckList();
-
-            for (int i = 0; i < cardiBuddy.getDeckList().size(); i++) {
-                Deck d = deckObservableList.get(i);
-                if (d.getTitle().equals(title)) {
-                    deck = d;
-                    deckIndex = i;
-                    break;
-                }
-            }
-
-            Question modelQuestion = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
-            Answer modelAnswer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
-            toAdd = new Flashcard(deck, modelQuestion, modelAnswer);
-            deck.addFlashcard((Flashcard) toAdd);
-
-            logicToUiManager.openFlashcardPanel(deckIndex);
+            toAdd = addCard(argMultimap);
 
             return new AddCommand((Flashcard) toAdd, logicToUiManager);
         }
         return null;
     }
 
-    private void handleExceptions(ArgumentMultimap argMultimap) throws ParseException {
+    private void handleInputErrors(ArgumentMultimap argMultimap) throws ParseException {
         if (arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_FLASHCARD)) {
             // both PREFIX_DECK and PREFIX_FLASHCARD are present
             throw new DeckCannotBeCardException(String.format(MESSAGE_DECK_CANNOT_BE_FLASHCARD
@@ -135,6 +110,41 @@ public class AddCommandParser implements Parser<AddCommand> {
                         + AddCommand.MESSAGE_ADD_FLASHCARD));
             }
         }
+    }
+
+    private Deck addDeck(ArgumentMultimap argMultimap) throws ParseException {
+        Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_DECK).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        List<Flashcard> flashcards = new ArrayList<>();
+        return new Deck(title, tagList, flashcards);
+    }
+
+    private Flashcard addCard(ArgumentMultimap argMultimap) throws ParseException {
+        Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+
+        // Search for the deck with matching title
+        Deck deck = new Deck();
+        int deckIndex = 0;
+        ObservableList<Deck> deckObservableList = cardiBuddy.getDeckList();
+
+        for (int i = 0; i < cardiBuddy.getDeckList().size(); i++) {
+            Deck d = deckObservableList.get(i);
+            if (d.getTitle().equals(title)) {
+                deck = d;
+                deckIndex = i;
+                break;
+            }
+        }
+
+        Question modelQuestion = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
+        Answer modelAnswer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
+        Flashcard flashcard = new Flashcard(deck, modelQuestion, modelAnswer);
+        deck.addFlashcard(flashcard);
+
+        logicToUiManager.openFlashcardPanel(deckIndex);
+
+        return flashcard;
     }
 
     /**
