@@ -1,4 +1,9 @@
 package cardibuddy.logic.commands;
+
+import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
+import static cardibuddy.commons.core.Messages.MESSAGE_UNANSWERED_QUESTION;
+import static java.util.Objects.requireNonNull;
+
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
@@ -8,10 +13,6 @@ import cardibuddy.model.Model;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.exceptions.NoOngoingTestException;
 import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
-
-import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
-import static cardibuddy.commons.core.Messages.MESSAGE_UNANSWERED_QUESTION;
-import static java.util.Objects.requireNonNull;
 
 /**
  * A class for the test command, used to initiate a test session.
@@ -38,6 +39,7 @@ public class NextCommand extends Command {
 
     /**
      * Gets the next question in the test queue, if any.
+     *
      * @param model {@code Model} which the command should operate on.
      * @return
      * @throws CommandException

@@ -1,8 +1,8 @@
 package cardibuddy.model.testsession.exceptions;
 
-import cardibuddy.commons.core.Messages;
-
 import java.util.NoSuchElementException;
+
+import cardibuddy.commons.core.Messages;
 
 /**
  * Test Exception (add more details).

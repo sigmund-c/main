@@ -1,13 +1,12 @@
 package cardibuddy.logic.commands;
 
+import static cardibuddy.commons.core.Messages.MESSAGE_UNANSWERED_QUESTION;
+import static java.util.Objects.requireNonNull;
+
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
 import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
-
-import static cardibuddy.commons.core.Messages.MESSAGE_UNANSWERED_QUESTION;
-import static java.util.Objects.requireNonNull;
-
 /**
  * A command class called in a test session, when the user forces their answer to be marked correct.
  */

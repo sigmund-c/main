@@ -2,7 +2,6 @@ package cardibuddy.model.testsession;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.NoSuchElementException;
 
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Answer;
@@ -64,6 +63,7 @@ public class TestSession {
 
     /**
      * Called when the test session is first started.
+     *
      * @return the first question in the {@code testQueue}
      */
     public Question getFirstQuestion() {
@@ -76,9 +76,10 @@ public class TestSession {
      * Moves on to the next flashcard in the queue, called when the user inputs the command for 'next'.<br>
      * Sets the {@code current} flashcard to this next flashcard.<br>
      * Checks to see if the card should be added to the back of the queue again. (Prioritising)
+     *
      * @return the {@code Question} for the next flashcard.
      */
-    public Question getNextQuestion() throws UnansweredQuestionException{
+    public Question getNextQuestion() throws UnansweredQuestionException {
         if (!hasAnswered) { // cannot go to the next question without answering the question
             throw new UnansweredQuestionException();
         }
@@ -97,7 +98,6 @@ public class TestSession {
     }
 
 
-
     /**
      * A method that returns a boolean indicating if the TestSession is complete.
      * A TestSession is complete when there are no more flashcards left in the {@code testQueue}
@@ -107,7 +107,8 @@ public class TestSession {
     }
 
     /**
-     * Performs the force correct option. Allows the user to manually mark their answer as correct, if it was initially marked wrong by {@code TestResult}.
+     * Performs the force correct option.
+     * Allows the user to manually mark their answer as correct, if it was initially marked wrong by {@code TestResult}.
      * Force correct should be performed before the user gets the next question.
      */
     public void forceCorrect() throws UnansweredQuestionException, AlreadyCorrectException {
@@ -121,6 +122,7 @@ public class TestSession {
     /**
      * Takes the user's answer for the current flashcard, and tests it against the current flashcard.
      * If the user got the answer wrong, the current flashcard is automatically added to the back of the test queue.
+     *
      * @param userAnswer the String representation of the user's answer
      * @return the TestResult of the test
      */
@@ -128,7 +130,8 @@ public class TestSession {
         // compare the userAnswer, and get the result of the test
         TestResult testResult = new TestResult(current.getAnswer(), userAnswer);
         // if flashcard was already tested before, update the number of tries.
-        // There no need to update the number of tries if this is the first time testing the flashcard as by default, numTries is set to 1.
+        // There no need to update the number of tries if this is the first time testing the flashcard.
+        // By default, numTries is set to 1.
         if (testResults.containsKey(current)) {
             TestResult prevResult = testResults.get(current);
             int numTries = prevResult.getNumTries();

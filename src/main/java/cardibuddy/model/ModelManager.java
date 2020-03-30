@@ -10,10 +10,8 @@ import java.util.logging.Logger;
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.deck.Deck;
-import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
-import cardibuddy.model.testsession.Result;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.TestSession;
 import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
@@ -35,6 +33,7 @@ public class ModelManager implements Model {
     private final FilteredList<Flashcard> filteredFlashcards;
     private final FilteredList<Deck> filteredDecks;
     private TestSession testSession;
+
     /**
      * Initializes a ModelManager with the given cardiBuddy and userPrefs.
      */
@@ -136,6 +135,7 @@ public class ModelManager implements Model {
 
     /**
      * Adds Flashcard to a Deck.
+     *
      * @param flashcard new card.
      */
     @Override
@@ -161,6 +161,7 @@ public class ModelManager implements Model {
 
     /**
      * Starts a test session // TODO see how to update the list
+     *
      * @param deck the deck to be tested
      */
     @Override
@@ -176,6 +177,7 @@ public class ModelManager implements Model {
     public Question getFirstQuestion() {
         return testSession.getFirstQuestion();
     }
+
     /**
      * Gets the next question in the {@code TestSession}
      */
@@ -190,6 +192,7 @@ public class ModelManager implements Model {
 
     /**
      * Checks the given answer in the test session
+     *
      * @param userAnswer a string representation of the user's answer
      * @returns A Result enums that represents the result of the user's answer.
      */

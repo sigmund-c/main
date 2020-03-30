@@ -1,14 +1,12 @@
 package cardibuddy.logic.commands;
-import java.util.logging.Logger;
 
-import cardibuddy.commons.core.LogsCenter;
+import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
+import static java.util.Objects.requireNonNull;
+
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.testsession.TestResult;
-
-import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
-import static java.util.Objects.requireNonNull;
 
 /**
  * A class for the test command, used to initiate a test session.
@@ -21,7 +19,6 @@ public class AnswerCommand extends Command {
             + "Example: " + COMMAND_WORD + " Waterfall is not an agile approach.";
 
     public static final String MESSAGE_ANS_SUCCESS = "Submitted the answer";
-    private static final Logger logger = LogsCenter.getLogger(cardibuddy.logic.commands.AnswerCommand.class);
 
     private LogicToUiManager logicToUiManager;
     private String userAnswer;
@@ -34,9 +31,10 @@ public class AnswerCommand extends Command {
     /**
      * Submits the user's answer to the {@code TestSession} stored in the model.
      * A {@code Result} is obtained which is passed to the Ui to display the outcome to the user.
+     *
      * @param model {@code Model} which the command should operate on.
      * @return CommandResult object
-     * @throws CommandException
+     * @throws CommandException when there is no ongoing test session
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {

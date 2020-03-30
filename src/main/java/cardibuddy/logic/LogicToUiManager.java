@@ -1,9 +1,7 @@
 package cardibuddy.logic;
 
 import cardibuddy.model.flashcard.Answer;
-import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
-import cardibuddy.model.testsession.Result;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.ui.UiManager;
 
@@ -27,7 +25,7 @@ public class LogicToUiManager {
     }
 
     public void showTestAnswer(Answer answer) {
-        ui.getMainWindow().fillInnerPartsWithAnswer(answer); // TODO: add this method
+        ui.getMainWindow().fillInnerPartsWithAnswer(answer);
     }
 
     public void showTestResult(TestResult testResult) {
@@ -35,7 +33,7 @@ public class LogicToUiManager {
     }
 
     public void showTestEnd() {
-        ui.getMainWindow().fillInnerPartsWithDecks(); // TODO: add this method and create an FXML file for test end
+        ui.getMainWindow().fillInnerPartsWithDecks();
     }
 
 }

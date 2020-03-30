@@ -1,16 +1,20 @@
 package cardibuddy.logic.commands;
 
+import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
+import static java.util.Objects.requireNonNull;
+
+import java.util.logging.Logger;
+
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.testsession.exceptions.NoOngoingTestException;
 
-import java.util.logging.Logger;
-
-import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
-import static java.util.Objects.requireNonNull;
-
+/**
+ * A command to quit the current test session prematurely,
+ * if there are still flashcards remaining in the test queue.
+ */
 public class QuitCommand extends Command {
     public static final String COMMAND_WORD = "quit";
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -48,7 +52,7 @@ public class QuitCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this ||
-                other instanceof QuitCommand; // short circuit if same object
+        return other == this
+                || other instanceof QuitCommand; // short circuit if same object
     }
 }

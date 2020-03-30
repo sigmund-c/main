@@ -1,6 +1,5 @@
 package cardibuddy.ui;
 
-
 import cardibuddy.model.flashcard.Question;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -25,7 +24,7 @@ public class QuestionTestCard extends UiPart<Region> {
     private HBox cardPane;
     @FXML
     private Label content;
-    
+
     public QuestionTestCard(Question question) {
         super(FXML);
         this.question = question;

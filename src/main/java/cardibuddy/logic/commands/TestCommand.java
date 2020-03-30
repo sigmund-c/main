@@ -13,9 +13,7 @@ import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
-import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
-import cardibuddy.model.testsession.TestSession;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
 
 /**

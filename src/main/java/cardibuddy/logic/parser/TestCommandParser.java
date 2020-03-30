@@ -2,13 +2,12 @@ package cardibuddy.logic.parser;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.logging.Logger;
+
 import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.LogicToUiManager;
-import cardibuddy.logic.commands.OpenCommand;
 import cardibuddy.logic.commands.TestCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
-
-import java.util.logging.Logger;
 
 
 /**
@@ -32,6 +31,7 @@ public class TestCommandParser implements Parser<TestCommand> {
     /**
      * Parses the given {@code String} of arguments for initiating a TestSession,
      * and returns a AnswerCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform to the expected format (eg. nonexistent index)
      */
     public TestCommand parse(String args) throws ParseException {

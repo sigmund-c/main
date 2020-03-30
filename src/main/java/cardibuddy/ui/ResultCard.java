@@ -1,6 +1,8 @@
 package cardibuddy.ui;
 
-import cardibuddy.model.testsession.Result;
+import static cardibuddy.commons.core.Messages.MESSAGE_FLASHCARD_ANSWER;
+import static cardibuddy.commons.core.Messages.MESSAGE_USER_ANSWER;
+
 import cardibuddy.model.testsession.TestResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,17 +13,15 @@ import javafx.scene.layout.Region;
  * A class for the Test Session's results view.
  * Shows the user the results of their answer, when tested against the flashcard's provided answer.
  * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
- *  * As a consequence, UI elements' variable names cannot be set to such keywords
- *  * or an exception will be thrown by JavaFX during runtime.
+ * * As a consequence, UI elements' variable names cannot be set to such keywords
+ * * or an exception will be thrown by JavaFX during runtime.
  */
-public class ResultCard extends UiPart<Region>{
+public class ResultCard extends UiPart<Region> {
 
     private static final String FXML = "ResultCard.fxml";
 
     public final TestResult testResult;
 
-    private final String MESSAGE_USER_ANSWER = "Your input: %s";
-    private final String MESSAGE_FLASHCARD_ANSWER = "Correct answer: %s";
 
     @FXML
     private HBox cardPane;
