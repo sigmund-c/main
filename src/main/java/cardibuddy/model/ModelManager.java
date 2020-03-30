@@ -17,6 +17,7 @@ import cardibuddy.model.testsession.Result;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.TestSession;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
+import cardibuddy.model.testsession.exceptions.NoOngoingTestException;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
@@ -184,6 +185,19 @@ public class ModelManager implements Model {
     public TestResult submitAnswer(String userAnswer) {
         TestResult testResult = testSession.submitAnswer(userAnswer);
         return testResult;
+    }
+
+    /**
+     * Clears the current {@code TestSession}.
+     * Called when the test session has ended, either when there are no more flashcards
+     * to test or when the user calls quit.
+     */
+    @Override
+    public void clearTestSession() {
+        if (testSession == null) { // if there is no test session to clear
+            throw new NoOngoingTestException();
+        }
+        testSession = null;
     }
 
     //=========== Filtered Flashcard List Accessors =============================================================

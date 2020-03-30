@@ -6,7 +6,9 @@ import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.testsession.exceptions.NoOngoingTestException;
 
+import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -43,18 +45,25 @@ public class NextCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!model.isTestComplete()) {
-            Question question = model.getNextQuestion();
-            logicToUiManager.showTestQuestion(question);
-            return new CommandResult(MESSAGE_NEXT_SUCCESS, false, false);
-        } else {
-            logicToUiManager.showTestEnd();
-            return new CommandResult(MESSAGE_TEST_COMPLETE, false, false);
+        try {
+            if (!model.isTestComplete()) {
+                Question question = model.getNextQuestion();
+                logicToUiManager.showTestQuestion(question);
+                return new CommandResult(MESSAGE_NEXT_SUCCESS, false, false);
+            } else {
+                model.clearTestSession();
+                logicToUiManager.showTestEnd();
+                return new CommandResult(MESSAGE_TEST_COMPLETE, false, false);
+            }
+        }
+        catch (NullPointerException e) {
+            throw new CommandException(MESSAGE_NO_TESTSESSION);
         }
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this; // short circuit if same object
+        return other == this ||
+                other instanceof NextCommand; // short circuit if same object
     }
 }

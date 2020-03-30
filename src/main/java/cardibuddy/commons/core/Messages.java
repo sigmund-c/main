@@ -19,4 +19,5 @@ public class Messages {
     public static final String MESSAGE_DECK_CANNOT_BE_FLASHCARD = "Operation would result in the object created "
             + "being both a deck and a card!";
     public static final String MESSAGE_EMPTY_DECK = "The deck contains no flashcards to test!";
+    public static final String MESSAGE_NO_TESTSESSION = "There is no test session ongoing!";
 }

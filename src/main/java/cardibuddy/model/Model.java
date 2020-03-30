@@ -138,6 +138,13 @@ public interface Model {
      */
     Question getNextQuestion();
 
+    /**
+     * Clears the current {@code TestSession}.
+     * Called when the test session has ended, either when there are no more flashcards
+     * to test or when the user calls quit.
+     */
+    public void clearTestSession();
+
     /** Returns an unmodifiable view of the filtered deck list */
     ObservableList<Deck> getFilteredDeckList();
 

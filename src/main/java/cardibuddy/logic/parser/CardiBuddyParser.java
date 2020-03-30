@@ -72,6 +72,9 @@ public class CardiBuddyParser {
         case NextCommand.COMMAND_WORD:
             return new NextCommandParser(logicToUiManager).parse(arguments);
 
+        case QuitCommand.COMMAND_WORD:
+            return new QuitCommand(logicToUiManager);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 

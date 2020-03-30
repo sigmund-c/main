@@ -7,6 +7,7 @@ import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.testsession.TestResult;
 
+import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -40,9 +41,13 @@ public class AnswerCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        TestResult testResult = model.submitAnswer(userAnswer);
-        logicToUiManager.showTestResult(testResult);
-        return new CommandResult(MESSAGE_ANS_SUCCESS, false, false);
+        try {
+            TestResult testResult = model.submitAnswer(userAnswer);
+            logicToUiManager.showTestResult(testResult);
+            return new CommandResult(MESSAGE_ANS_SUCCESS, false, false);
+        } catch (NullPointerException e) {
+            throw new CommandException(MESSAGE_NO_TESTSESSION);
+        }
     }
 
     @Override
