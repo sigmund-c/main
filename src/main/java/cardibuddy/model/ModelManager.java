@@ -16,8 +16,10 @@ import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.Result;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.TestSession;
+import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
 import cardibuddy.model.testsession.exceptions.NoOngoingTestException;
+import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
@@ -165,15 +167,25 @@ public class ModelManager implements Model {
     public Question testDeck(Deck deck) throws EmptyDeckException {
         requireNonNull(deck);
         testSession = new TestSession(deck);
-        return testSession.getNextQuestion();
+        return testSession.getFirstQuestion();
     }
 
+    /**
+     * Gets the first question from the newly created {@code TestSession}.
+     */
+    public Question getFirstQuestion() {
+        return testSession.getFirstQuestion();
+    }
     /**
      * Gets the next question in the {@code TestSession}
      */
     @Override
-    public Question getNextQuestion() {
-        return testSession.getNextQuestion();
+    public Question getNextQuestion() throws UnansweredQuestionException, NoOngoingTestException {
+        try {
+            return testSession.getNextQuestion();
+        } catch (NullPointerException e) {
+            throw new NoOngoingTestException();
+        }
     }
 
     /**
@@ -183,8 +195,16 @@ public class ModelManager implements Model {
      */
     @Override
     public TestResult submitAnswer(String userAnswer) {
-        TestResult testResult = testSession.submitAnswer(userAnswer);
-        return testResult;
+        return testSession.submitAnswer(userAnswer);
+    }
+
+    /**
+     * Marks the user's answer as correct when it was marked wrong by the {@code TestSession}.
+     * Allows for flexibility in the user's answers.
+     */
+    @Override
+    public void forceCorrect() throws UnansweredQuestionException, AlreadyCorrectException {
+        testSession.forceCorrect();
     }
 
     /**

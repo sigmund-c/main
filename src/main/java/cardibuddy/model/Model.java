@@ -134,6 +134,17 @@ public interface Model {
     TestResult submitAnswer(String userAnswer);
 
     /**
+     * Marks the user's answer as correct when it was marked wrong by the {@code TestSession}
+     * Allows for flexibility in the user's answers.
+     */
+    void forceCorrect();
+
+    /**
+     * Gets the first question from the newly created {@code TestSession}.
+     */
+    Question getFirstQuestion();
+
+    /**
      * Gets the next question in the {@code TestSession}
      */
     Question getNextQuestion();

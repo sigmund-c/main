@@ -63,17 +63,20 @@ public class CardiBuddyParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case TestCommand.COMMAND_WORD:
+        case TestCommand.COMMAND_WORD: // test session command
             return new TestCommandParser(logicToUiManager).parse(arguments);
 
-        case AnswerCommand.COMMAND_WORD:
+        case AnswerCommand.COMMAND_WORD: // test session command
             return new AnswerCommand(logicToUiManager, arguments.trim());
 
-        case NextCommand.COMMAND_WORD:
-            return new NextCommandParser(logicToUiManager).parse(arguments);
+        case NextCommand.COMMAND_WORD: // test session command
+            return new NextCommand(logicToUiManager);
 
-        case QuitCommand.COMMAND_WORD:
+        case QuitCommand.COMMAND_WORD: // test session command
             return new QuitCommand(logicToUiManager);
+
+        case ForceCommand.COMMAND_WORD: // test session command
+            return new ForceCommand();
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

@@ -7,8 +7,10 @@ import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.exceptions.NoOngoingTestException;
+import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
+import static cardibuddy.commons.core.Messages.MESSAGE_UNANSWERED_QUESTION;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -28,11 +30,9 @@ public class NextCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(NextCommand.class);
 
     private LogicToUiManager logicToUiManager;
-    private String settings; // TODO: implement force correct
 
-    public NextCommand(LogicToUiManager logicToUiManager, String settings) {
+    public NextCommand(LogicToUiManager logicToUiManager) {
         this.logicToUiManager = logicToUiManager;
-        this.settings = settings; // TODO: implement force correct
     }
 
 
@@ -50,20 +50,24 @@ public class NextCommand extends Command {
                 Question question = model.getNextQuestion();
                 logicToUiManager.showTestQuestion(question);
                 return new CommandResult(MESSAGE_NEXT_SUCCESS, false, false);
-            } else {
+            } else { // if no more flashcards in the test queue
                 model.clearTestSession();
                 logicToUiManager.showTestEnd();
                 return new CommandResult(MESSAGE_TEST_COMPLETE, false, false);
             }
-        }
-        catch (NullPointerException e) {
+        } catch (NoOngoingTestException e) {
             throw new CommandException(MESSAGE_NO_TESTSESSION);
+        } catch (UnansweredQuestionException e) {
+            throw new CommandException(String.format
+                    (MESSAGE_UNANSWERED_QUESTION,
+                            "Cannot go to the next question",
+                            "\nType 'skip' if you want to skip this question."));
         }
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this ||
-                other instanceof NextCommand; // short circuit if same object
+        return other == this
+                || other instanceof NextCommand; // short circuit if same object
     }
 }

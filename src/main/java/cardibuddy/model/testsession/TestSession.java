@@ -8,7 +8,9 @@ import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
+import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
 
 /**
  * Test Session class.
@@ -33,6 +35,7 @@ public class TestSession {
     private Deck deck;
     private Flashcard current;
     private boolean isOngoing;
+    private boolean hasAnswered;
     // public Statistic statistics; // for recording statistics
 
     // space to set deck settings
@@ -60,18 +63,28 @@ public class TestSession {
     }
 
     /**
+     * Called when the test session is first started.
+     * @return the first question in the {@code testQueue}
+     */
+    public Question getFirstQuestion() {
+        current = testQueue.removeFirst();
+        hasAnswered = false;
+        return current.getQuestion();
+    }
+
+    /**
      * Moves on to the next flashcard in the queue, called when the user inputs the command for 'next'.<br>
      * Sets the {@code current} flashcard to this next flashcard.<br>
      * Checks to see if the card should be added to the back of the queue again. (Prioritising)
      * @return the {@code Question} for the next flashcard.
      */
-    public Question getNextQuestion() {
-        if (testResults.containsKey(current)) { // if already tested before
-            if (testResults.get(current).getResult() == Result.WRONG) { // if user got this flashcard wrong
-                testQueue.addLast(current);
-            }
+    public Question getNextQuestion() throws UnansweredQuestionException{
+        if (!hasAnswered) { // cannot go to the next question without answering the question
+            throw new UnansweredQuestionException();
         }
         current = testQueue.removeFirst();
+        hasAnswered = false; // reset the boolean as the user has not answered this new question
+
         return current.getQuestion();
     }
 
@@ -93,23 +106,43 @@ public class TestSession {
         return testQueue.isEmpty();
     }
 
-
+    /**
+     * Performs the force correct option. Allows the user to manually mark their answer as correct, if it was initially marked wrong by {@code TestResult}.
+     * Force correct should be performed before the user gets the next question.
+     */
+    public void forceCorrect() throws UnansweredQuestionException, AlreadyCorrectException {
+        if (!hasAnswered) { // cannot force correct a question you have not even answered
+            throw new UnansweredQuestionException();
+        }
+        testQueue.removeLast(); // reverse the prioritisation
+        testResults.get(current).forceCorrect();
+    }
 
     /**
      * Takes the user's answer for the current flashcard, and tests it against the current flashcard.
-     *
+     * If the user got the answer wrong, the current flashcard is automatically added to the back of the test queue.
      * @param userAnswer the String representation of the user's answer
      * @return the TestResult of the test
      */
     public TestResult submitAnswer(String userAnswer) {
-        TestResult result = new TestResult(current.getAnswer(), userAnswer); // get the result of the test
-        if (testResults.containsKey(current)) { // if already tested before, update numTries
+        // compare the userAnswer, and get the result of the test
+        TestResult testResult = new TestResult(current.getAnswer(), userAnswer);
+        // if flashcard was already tested before, update the number of tries.
+        // There no need to update the number of tries if this is the first time testing the flashcard as by default, numTries is set to 1.
+        if (testResults.containsKey(current)) {
             TestResult prevResult = testResults.get(current);
             int numTries = prevResult.getNumTries();
-            result.setNumTries(numTries + 1); // increase numTries by 1
+            testResult.setNumTries(numTries + 1); // increase numTries by 1
         }
-        testResults.put(current, result); // store the current flashcard and the result in the testResults hashmap
-        return result;
+        testResults.put(current, testResult); // store the result
+
+        // add the current flashcard back into the test queue
+        if (testResult.getResult() == Result.WRONG) {
+            testQueue.addLast(current);
+        }
+
+        hasAnswered = true; // note down that the user has answered the question
+        return testResult;
     }
 
     @Override

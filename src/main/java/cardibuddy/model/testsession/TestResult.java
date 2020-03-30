@@ -1,6 +1,7 @@
 package cardibuddy.model.testsession;
 
 import cardibuddy.model.flashcard.Answer;
+import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
 
 /**
  * Test Result class. Stores the user's answer,
@@ -46,6 +47,16 @@ public class TestResult {
         } else {
             return Result.WRONG;
         }
+    }
+
+    /**
+     * Changes the {@code result} to correct.
+     */
+    public void forceCorrect() throws AlreadyCorrectException {
+        if (result == Result.CORRECT) {
+            throw new AlreadyCorrectException();
+        }
+        result = Result.CORRECT;
     }
 
     /**

@@ -20,4 +20,5 @@ public class Messages {
             + "being both a deck and a card!";
     public static final String MESSAGE_EMPTY_DECK = "The deck contains no flashcards to test!";
     public static final String MESSAGE_NO_TESTSESSION = "There is no test session ongoing!";
+    public static final String MESSAGE_UNANSWERED_QUESTION = "%s: Have you answered this question yet?%s";
 }
