@@ -11,6 +11,7 @@ import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.TestSession;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -26,7 +27,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Flashcard> filteredFlashcards;
     private final FilteredList<Deck> filteredDecks;
-//    private final Flashcard current; // the flashcard being tested right now
+    private TestSession testSession;
     /**
      * Initializes a ModelManager with the given cardiBuddy and userPrefs.
      */
@@ -143,20 +144,16 @@ public class ModelManager implements Model {
         cardiBuddy.setFlashcard(target, editedFlashcard);
     }
 
-    @Override
-    public void openDeck(int index) {
-
-    }
-
     /**
      * Starts a test session // TODO see how to update the list
      * @param deck the deck to be tested
      */
     @Override
-    public void testDeck(Deck deck) {
+    public Question testDeck(Deck deck) {
         requireNonNull(deck);
-        TestSession ts = new TestSession(deck);
-        cardiBuddy.startTest(ts);
+        testSession = new TestSession(deck);
+        return testSession.getNextQuestion();
+        //cardiBuddy.startTest(ts);
         //logicToUiManager.openFlash
     }
 

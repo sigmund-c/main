@@ -1,6 +1,8 @@
 package cardibuddy.logic;
 
+import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Question;
 import cardibuddy.ui.UiManager;
 
 /**
@@ -18,8 +20,12 @@ public class LogicToUiManager {
         ui.getMainWindow().fillInnerPartsWithCards(index);
     }
 
-    public void openTestingFlashcard(Flashcard flashcard) {
-        ui.getMainWindow().fillInnerPartWithUnflippedCard(flashcard);
+    public void showTestQuestion(Question question) {
+        ui.getMainWindow().fillInnerPartsWithQuestion(question);
+    }
+
+    public void showTestAnswer(Answer answer) {
+        ui.getMainWindow().fillInnerPartsWithAnswer(answer);
     }
 
 }

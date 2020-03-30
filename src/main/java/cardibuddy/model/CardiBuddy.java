@@ -19,8 +19,7 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
 
     private final UniqueDeckList decks;
     private final UniqueFlashcardList flashcards;
-    private TestSession testSession;
-
+    //private TestSession testSession;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -149,15 +148,6 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
      */
     public void removeFlashcard(Flashcard key) {
         flashcards.remove(key);
-    }
-
-    /**
-     * Opens the flashcard list associated with the {@code deck} at the given index.
-     * {@code deck} must exist before it can be opened.
-     * @return
-     */
-    public void openDeck(int index) {
-
     }
 
     //// util methods

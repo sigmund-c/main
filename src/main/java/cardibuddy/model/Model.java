@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Question;
 import javafx.collections.ObservableList;
 
 /**
@@ -113,14 +114,14 @@ public interface Model {
     void setFlashcard(Flashcard target, Flashcard editedFlashcard);
 
     /**
-     * Opens the flashcards associated with the deck at the given index.
-     */
-    void openDeck(int index);
-    /**
      * Starts the test session with {@code deck}
      * @param deck the deck to be tested
      */
-    void testDeck(Deck deck);
+    Question testDeck(Deck deck);
+
+    /**
+     * Gets the next question in the TestSession
+     */
     /** Returns an unmodifiable view of the filtered deck list */
     ObservableList<Deck> getFilteredDeckList();
 

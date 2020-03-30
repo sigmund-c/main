@@ -30,6 +30,7 @@ public class TestSession {
 
     private Deck deck;
     private Flashcard current;
+    private boolean isOngoing;
     // public Statistic statistics; // for recording statistics
 
     // space to set deck settings
@@ -51,7 +52,6 @@ public class TestSession {
         this.deck = deck;
         testQueue = new LinkedList<>(deck.getFlashcards());
         testResults = new HashMap<>();
-        this.nextFlashcard(); // show the first flashcard in the deck
     }
 
     public boolean isEmpty() {
@@ -60,21 +60,27 @@ public class TestSession {
 
     /**
      * Moves on to the next flashcard in the queue, called when the user inputs the command for 'next'.<br>
-     * Sets the @var current variable to this next flashcard.<br>
+     * Sets the {@code current} flashcard to this next flashcard.<br>
      * Checks to see if the card should be added to the back of the queue again. (Prioritising)
-     * @return the next flashcard
+     * @return the {@code Question} for the next flashcard.
      */
-    public Flashcard nextFlashcard() {
+    public Question getNextQuestion() {
         assert !testQueue.isEmpty();
-        /* check if the user got the current flashcard wrong,
-        and add it to the back of the testQueue again */
-        if (testResults.containsKey(current)) {
-            if (testResults.get(current).getResult() == Result.WRONG) {
+        if (testResults.containsKey(current)) { // if already tested before
+            if (testResults.get(current).getResult() == Result.WRONG) { // if user got this flashcard wrong
                 testQueue.addLast(current);
             }
         }
         current = testQueue.removeFirst();
-        return current;
+        return current.getQuestion();
+    }
+
+    /**
+     * Shows the answer for the {@code current} flashcard.
+     */
+    public Answer getAnswer() {
+        assert !testQueue.isEmpty() && current != null;
+        return current.getAnswer();
     }
 
     public Flashcard getCurrentFlashcard() {
@@ -83,6 +89,14 @@ public class TestSession {
 
     public LinkedList<Flashcard> getTestQueue() {
         return testQueue;
+    }
+
+    /**
+     * A method that returns a boolean indicating if the TestSession is complete.
+     * A TestSession is complete when there are no more flashcards left in the {@code testQueue}
+     */
+    public boolean isComplete() {
+        return testQueue.isEmpty();
     }
 
 

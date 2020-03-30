@@ -1,11 +1,8 @@
 package cardibuddy.ui;
 
 import cardibuddy.model.flashcard.Answer;
-import cardibuddy.model.flashcard.Flashcard;
-import cardibuddy.model.flashcard.Question;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
@@ -18,29 +15,23 @@ import javafx.scene.layout.Region;
  *
  * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
  */
-public class TestCard extends UiPart<Region> {
+public class AnswerTestCard extends UiPart<Region> {
 
-    private static final String FXML = "TestCard.fxml";
-    
-    public final Question question;
+    private static final String FXML = "AnswerTestCard.fxml";
+
     public final Answer answer;
-    
+
     @FXML
     private HBox cardPane;
     @FXML
     private Label content;
-    
-    public TestCard(Question question) {
+
+    public AnswerTestCard(Answer answer) {
         super(FXML);
-        this.question = question;
-        content.setText(question.toString());
+        this.answer = answer;
+        content.setText(answer.toString());
     }
 
-    public TestCard(Answer answer) {
-        super(FXML);
-        this.question
-    }
-    
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
@@ -49,13 +40,13 @@ public class TestCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TestCard)) {
+        if (!(other instanceof AnswerTestCard)) {
             return false;
         }
 
         // state check
-        TestCard card = (TestCard) other;
-        return question.equals(card.question)
+        AnswerTestCard card = (AnswerTestCard) other;
+        return answer.equals(card.answer)
                 && content.getText().equals(card.content.getText());
     }
 

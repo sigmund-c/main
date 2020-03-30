@@ -12,7 +12,9 @@ import cardibuddy.model.deck.exceptions.DeckCannotBeCardException;
 import cardibuddy.model.deck.exceptions.InvalidDeckException;
 import cardibuddy.model.deck.exceptions.NotInDeckException;
 import cardibuddy.model.deck.exceptions.WrongDeckException;
+import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -153,9 +155,23 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
-//    public void fillInnerPartsWithUnflippedCard(Flashcard card) {
-//         deckListPanelPlaceholder.getChildren().add() // TODO: make FXML file for test card
-//    }
+    /**
+     * Fills the placeholder of this window with the Question of the current flashcard being tested.
+     * @param question
+     */
+    public void fillInnerPartsWithQuestion(Question question) {
+         QuestionTestCard questionCard = new QuestionTestCard(question);
+         deckListPanelPlaceholder.getChildren().add(questionCard.getRoot()); // TODO: make FXML file for test card
+    }
+
+    /**
+     * Fills the placeholder of this window with the Answer of the current flashcard being tested.
+     * @param answer
+     */
+    public void fillInnerPartsWithAnswer(Answer answer) {
+        AnswerTestCard answerCard = new AnswerTestCard(answer);
+        deckListPanelPlaceholder.getChildren().add(answerCard.getRoot());
+    }
 
     /**
      * Sets the default size based on {@code guiSettings}.
