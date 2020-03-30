@@ -5,8 +5,13 @@ import java.util.function.Predicate;
 
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.testsession.Result;
+import cardibuddy.model.testsession.TestResult;
+import cardibuddy.model.testsession.TestSession;
+import cardibuddy.model.testsession.exceptions.EmptyDeckException;
 import javafx.collections.ObservableList;
 
 /**
@@ -114,14 +119,25 @@ public interface Model {
     void setFlashcard(Flashcard target, Flashcard editedFlashcard);
 
     /**
+     * Checks if the current {@code TestSession} is complete
+     */
+    boolean isTestComplete();
+    /**
      * Starts the test session with {@code deck}
      * @param deck the deck to be tested
      */
-    Question testDeck(Deck deck);
+    Question testDeck(Deck deck) throws EmptyDeckException;
 
     /**
-     * Gets the next question in the TestSession
+     * Checks the given {@code Answer} with the current flashcard's answer in the TestSession.
      */
+    TestResult submitAnswer(String userAnswer);
+
+    /**
+     * Gets the next question in the {@code TestSession}
+     */
+    Question getNextQuestion();
+
     /** Returns an unmodifiable view of the filtered deck list */
     ObservableList<Deck> getFilteredDeckList();
 

@@ -10,9 +10,13 @@ import java.util.logging.Logger;
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.testsession.Result;
+import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.TestSession;
+import cardibuddy.model.testsession.exceptions.EmptyDeckException;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
@@ -145,16 +149,41 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Checks if the current {@code TestSession} is complete
+     */
+    @Override
+    public boolean isTestComplete() {
+        return testSession.isComplete();
+    }
+
+    /**
      * Starts a test session // TODO see how to update the list
      * @param deck the deck to be tested
      */
     @Override
-    public Question testDeck(Deck deck) {
+    public Question testDeck(Deck deck) throws EmptyDeckException {
         requireNonNull(deck);
         testSession = new TestSession(deck);
         return testSession.getNextQuestion();
-        //cardiBuddy.startTest(ts);
-        //logicToUiManager.openFlash
+    }
+
+    /**
+     * Gets the next question in the {@code TestSession}
+     */
+    @Override
+    public Question getNextQuestion() {
+        return testSession.getNextQuestion();
+    }
+
+    /**
+     * Checks the given answer in the test session
+     * @param userAnswer a string representation of the user's answer
+     * @returns A Result enums that represents the result of the user's answer.
+     */
+    @Override
+    public TestResult submitAnswer(String userAnswer) {
+        TestResult testResult = testSession.submitAnswer(userAnswer);
+        return testResult;
     }
 
     //=========== Filtered Flashcard List Accessors =============================================================

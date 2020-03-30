@@ -9,18 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cardibuddy.logic.LogicToUiManager;
-import cardibuddy.logic.commands.AddCommand;
-import cardibuddy.logic.commands.ClearCommand;
-import cardibuddy.logic.commands.Command;
-import cardibuddy.logic.commands.DeleteCommand;
-import cardibuddy.logic.commands.EditCommand;
-import cardibuddy.logic.commands.ExitCommand;
-import cardibuddy.logic.commands.FilterCommand;
-import cardibuddy.logic.commands.HelpCommand;
-import cardibuddy.logic.commands.ListCommand;
-import cardibuddy.logic.commands.OpenCommand;
-import cardibuddy.logic.commands.SearchCommand;
-import cardibuddy.logic.commands.TestCommand;
+import cardibuddy.logic.commands.*;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.ReadOnlyCardiBuddy;
 
@@ -77,6 +66,12 @@ public class CardiBuddyParser {
         case TestCommand.COMMAND_WORD:
             return new TestCommandParser(logicToUiManager).parse(arguments);
 
+        case AnswerCommand.COMMAND_WORD:
+            return new AnswerCommand(logicToUiManager, arguments.trim());
+
+        case NextCommand.COMMAND_WORD:
+            return new NextCommandParser(logicToUiManager).parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -99,5 +94,4 @@ public class CardiBuddyParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

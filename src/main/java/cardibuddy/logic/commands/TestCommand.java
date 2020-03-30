@@ -1,9 +1,12 @@
 package cardibuddy.logic.commands;
 
+import static cardibuddy.commons.core.Messages.MESSAGE_EMPTY_DECK;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.commons.core.Messages;
 import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.LogicToUiManager;
@@ -13,6 +16,7 @@ import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.TestSession;
+import cardibuddy.model.testsession.exceptions.EmptyDeckException;
 
 /**
  * A class for the test command, used to initiate a test session.
@@ -25,7 +29,8 @@ public class TestCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_TEST_SESSION_SUCCESS = "";
+    public static final String MESSAGE_TEST_SESSION_SUCCESS = "Started a test session.";
+    private static final Logger logger = LogsCenter.getLogger(TestCommand.class);
 
     private LogicToUiManager logicToUiManager;
     private final Index targetIndex;
@@ -47,11 +52,14 @@ public class TestCommand extends Command {
         Deck deckToTest =
                 lastShownList.get(targetIndex.getZeroBased());
 
-        Question firstQuestion = model.testDeck(deckToTest);
+        try {
+            Question firstQuestion = model.testDeck(deckToTest);
+            logicToUiManager.showTestQuestion(firstQuestion);
+            return new CommandResult(MESSAGE_TEST_SESSION_SUCCESS, false, false);
+        } catch (EmptyDeckException e) {
+            throw new CommandException(MESSAGE_EMPTY_DECK);
+        }
 
-        logicToUiManager.showTestQuestion(firstQuestion);
-
-        return new CommandResult(MESSAGE_TEST_SESSION_SUCCESS, false, false);
     }
 
     @Override

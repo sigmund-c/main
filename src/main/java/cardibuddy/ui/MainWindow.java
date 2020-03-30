@@ -13,9 +13,10 @@ import cardibuddy.model.deck.exceptions.InvalidDeckException;
 import cardibuddy.model.deck.exceptions.NotInDeckException;
 import cardibuddy.model.deck.exceptions.WrongDeckException;
 import cardibuddy.model.flashcard.Answer;
-import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
+import cardibuddy.model.testsession.TestResult;
+import cardibuddy.model.testsession.exceptions.EmptyDeckException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -122,7 +123,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up all the placeholders of this window with Decks.
      */
-    void fillInnerPartsWithDecks() {
+    public void fillInnerPartsWithDecks() {
         deckListPanel = new DeckListPanel(logic.getFilteredDeckList());
         deckListPanelPlaceholder.getChildren().add(deckListPanel.getRoot());
 
@@ -160,18 +161,35 @@ public class MainWindow extends UiPart<Stage> {
      * @param question
      */
     public void fillInnerPartsWithQuestion(Question question) {
-         QuestionTestCard questionCard = new QuestionTestCard(question);
+        deckListPanelPlaceholder.getChildren().clear();
+        flashcardListPanelPlaceholder.getChildren().clear();
+        QuestionTestCard questionCard = new QuestionTestCard(question);
          deckListPanelPlaceholder.getChildren().add(questionCard.getRoot()); // TODO: make FXML file for test card
     }
 
     /**
      * Fills the placeholder of this window with the Answer of the current flashcard being tested.
-     * @param answer
+     * @param question to display to the user
      */
     public void fillInnerPartsWithAnswer(Answer answer) {
-        AnswerTestCard answerCard = new AnswerTestCard(answer);
-        deckListPanelPlaceholder.getChildren().add(answerCard.getRoot());
+        deckListPanelPlaceholder.getChildren().clear();
+        AnswerTestCard answerTestCard = new AnswerTestCard(answer);
+        deckListPanelPlaceholder.getChildren().add(answerTestCard.getRoot());
     }
+
+    /**
+     * Fills the placeholder of this window with the Result
+     * of the user's answer input against the current flashcard being tested.
+     */
+    public void fillInnerPartsWithResult(TestResult testResult) {
+        deckListPanelPlaceholder.getChildren().clear();
+        ResultCard resultCard = new ResultCard(testResult); // TODO: Create result card + FXML file
+        deckListPanelPlaceholder.getChildren().add(resultCard.getRoot());
+    }
+
+//    public void fillInnerPartsWithTestEnd() {
+//
+//    }
 
     /**
      * Sets the default size based on {@code guiSettings}.
@@ -197,9 +215,6 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    /**
-     * Opens the test window.
-     */
     @FXML
     public void handleTest() {
         if (!helpWindow.isShowing()) {

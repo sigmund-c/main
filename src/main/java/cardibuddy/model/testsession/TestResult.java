@@ -16,7 +16,7 @@ public class TestResult {
     private Answer flashcardAnswer;
     //TODO: may remove this as the flashcard is already stored as
     //the key in the hashmap, so there is no need to store it again
-    private Answer userAnswer;
+    private String userAnswer;
     private Result result;
 
     private int numTries;
@@ -28,7 +28,7 @@ public class TestResult {
      * @param flashcardAnswer
      * @param userAnswer
      */
-    public TestResult(Answer flashcardAnswer, Answer userAnswer) {
+    public TestResult(Answer flashcardAnswer, String userAnswer) {
         this.flashcardAnswer = flashcardAnswer;
         this.userAnswer = userAnswer;
         this.numTries = 1; // when first created, numTries = 1 by default
@@ -41,7 +41,7 @@ public class TestResult {
      * @return Result object (idk what to write here :( ).
      */
     public Result computeResult() {
-        if (flashcardAnswer.equals(userAnswer)) {
+        if (flashcardAnswer.toString().equals(userAnswer)) {
             return Result.CORRECT;
         } else {
             return Result.WRONG;
@@ -65,11 +65,15 @@ public class TestResult {
         return result;
     }
 
-    public Answer getUserAnswer() {
+    public String getUserAnswer() {
         return userAnswer;
     }
 
-    public void setUserAnswer(Answer userAnswer) {
+    public Answer getFlashcardAnswer() {
+        return flashcardAnswer;
+    }
+
+    public void setUserAnswer(String userAnswer) {
         this.userAnswer = userAnswer;
     }
 }

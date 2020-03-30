@@ -4,6 +4,17 @@ package cardibuddy.model.testsession;
  * Enumeration for Results for testing feature.
  */
 public enum Result {
-    CORRECT,
-    WRONG;
+    CORRECT("Correct!"),
+    WRONG("You got it wrong!");
+
+    private String resultString;
+
+    private Result(String resultString) {
+        this.resultString = resultString;
+    }
+
+    @Override
+    public String toString() {
+        return resultString;
+    }
 }

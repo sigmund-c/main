@@ -1,10 +1,9 @@
 package cardibuddy.ui;
 
-import cardibuddy.model.flashcard.Flashcard;
+
 import cardibuddy.model.flashcard.Question;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
@@ -20,9 +19,8 @@ import javafx.scene.layout.Region;
 public class QuestionTestCard extends UiPart<Region> {
 
     private static final String FXML = "QuestionTestCard.fxml";
-    
-    public final Question question;
-    
+    private Question question;
+
     @FXML
     private HBox cardPane;
     @FXML
@@ -33,7 +31,7 @@ public class QuestionTestCard extends UiPart<Region> {
         this.question = question;
         content.setText(question.toString());
     }
-    
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
@@ -48,8 +46,8 @@ public class QuestionTestCard extends UiPart<Region> {
 
         // state check
         QuestionTestCard card = (QuestionTestCard) other;
-        return question.equals(card.question)
-                && content.getText().equals(card.content.getText());
+        return content.getText().equals(card.content.getText())
+                && card.question.equals(this.question);
     }
 
 }

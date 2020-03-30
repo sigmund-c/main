@@ -2,11 +2,13 @@ package cardibuddy.model.testsession;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.testsession.exceptions.EmptyDeckException;
 
 /**
  * Test Session class.
@@ -47,15 +49,14 @@ public class TestSession {
      *
      * @param deck the deck that is being tested
      */
-    public TestSession(Deck deck) {
+    public TestSession(Deck deck) throws EmptyDeckException {
         // initialise variables
         this.deck = deck;
-        testQueue = new LinkedList<>(deck.getFlashcards());
+        testQueue = new LinkedList<>(deck.getFlashcardList());
         testResults = new HashMap<>();
-    }
-
-    public boolean isEmpty() {
-        return testQueue.isEmpty();
+        if (deck.getFlashcardList().isEmpty()) {
+            throw new EmptyDeckException();
+        }
     }
 
     /**
@@ -65,7 +66,6 @@ public class TestSession {
      * @return the {@code Question} for the next flashcard.
      */
     public Question getNextQuestion() {
-        assert !testQueue.isEmpty();
         if (testResults.containsKey(current)) { // if already tested before
             if (testResults.get(current).getResult() == Result.WRONG) { // if user got this flashcard wrong
                 testQueue.addLast(current);
@@ -83,13 +83,7 @@ public class TestSession {
         return current.getAnswer();
     }
 
-    public Flashcard getCurrentFlashcard() {
-        return current;
-    }
 
-    public LinkedList<Flashcard> getTestQueue() {
-        return testQueue;
-    }
 
     /**
      * A method that returns a boolean indicating if the TestSession is complete.
@@ -104,10 +98,10 @@ public class TestSession {
     /**
      * Takes the user's answer for the current flashcard, and tests it against the current flashcard.
      *
-     * @param userAnswer Answer object provided by the user.
+     * @param userAnswer the String representation of the user's answer
      * @return the TestResult of the test
      */
-    public TestResult test(Answer userAnswer) {
+    public TestResult submitAnswer(String userAnswer) {
         TestResult result = new TestResult(current.getAnswer(), userAnswer); // get the result of the test
         if (testResults.containsKey(current)) { // if already tested before, update numTries
             TestResult prevResult = testResults.get(current);
