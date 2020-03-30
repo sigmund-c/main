@@ -1,5 +1,6 @@
 package cardibuddy.logic;
 
+import cardibuddy.model.deck.Deck;
 import cardibuddy.ui.UiManager;
 
 /**
@@ -9,6 +10,7 @@ public class LogicToUiManager {
 
     protected UiManager ui;
     private String openedDeck;
+    private Deck displayedDeck;
     private boolean inDeck = false;
 
 
@@ -24,13 +26,15 @@ public class LogicToUiManager {
         ui.getMainWindow().fillInnerPartsWithDecks();
     }
 
-    public void setOpenedDeck(String openedDeck) {
-        if (openedDeck.equals("")) {
+    public void setOpenedDeck(Deck openedDeck) {
+        if (openedDeck == null) {
             inDeck = false;
+            this.openedDeck = "";
         } else {
             inDeck = true;
+            this.openedDeck = openedDeck.getTitle().toString().toLowerCase();
         }
-        this.openedDeck = openedDeck;
+        this.displayedDeck = openedDeck;
     }
 
     public String getOpenedDeck() {

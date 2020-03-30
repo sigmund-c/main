@@ -11,9 +11,9 @@ import cardibuddy.model.deck.SearchDeckKeywordsPredicate;
  * Finds and lists all decks and cards in cardibuddy whose title contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class SearchCommand extends Command {
+public class SearchDeckCommand extends Command {
 
-    public static final String COMMAND_WORD = "search";
+    public static final String COMMAND_WORD = "searchdeck";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all decks whose titles contain any of "
@@ -23,7 +23,7 @@ public class SearchCommand extends Command {
 
     private final SearchDeckKeywordsPredicate predicate;
 
-    public SearchCommand(SearchDeckKeywordsPredicate predicate) {
+    public SearchDeckCommand(SearchDeckKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -38,8 +38,8 @@ public class SearchCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SearchCommand // instanceof handles nulls
-                && predicate.equals(((SearchCommand) other).predicate)); // state check
+                || (other instanceof SearchDeckCommand // instanceof handles nulls
+                && predicate.equals(((SearchDeckCommand) other).predicate)); // state check
     }
 
 

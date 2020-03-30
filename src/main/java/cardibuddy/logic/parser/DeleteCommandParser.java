@@ -26,7 +26,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            logicToUiManager.setOpenedDeck("");
+            logicToUiManager.setOpenedDeck(null);
             logicToUiManager.openDeckPanel();
             return new DeleteCommand(index);
         } catch (ParseException pe) {
