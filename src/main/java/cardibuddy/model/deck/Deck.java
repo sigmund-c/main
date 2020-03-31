@@ -1,6 +1,7 @@
 package cardibuddy.model.deck;
 
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,13 +9,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.UniqueFlashcardList;
 import cardibuddy.model.tag.Tag;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
 /**
  * Represents a Deck in the cardibuddy application.
@@ -28,6 +32,7 @@ public class Deck {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
     private List<Flashcard> flashcards = new ArrayList<>();
+    private FilteredList<Flashcard> filteredFlashcards;
     private final Logger logger = LogsCenter.getLogger(Deck.class.getName());
 
     /**
@@ -38,6 +43,7 @@ public class Deck {
         this.title = title;
         this.tags.addAll(tags);
         this.flashcards.addAll(flashcards);
+        this.filteredFlashcards = new FilteredList<>(FXCollections.observableList(flashcards));
         logger.info("Created Deck");
     }
 
@@ -100,6 +106,19 @@ public class Deck {
         UniqueFlashcardList flashcardList = new UniqueFlashcardList();
         flashcardList.setFlashcards(flashcards);
         return flashcardList.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Flashcard} backed by the internal list of
+     * {@code versionedCardiBuddy}
+     */
+    public ObservableList<Flashcard> getFilteredFlashcardList() {
+        return filteredFlashcards;
+    }
+
+    public void updateFilteredFlashcardList(Predicate<Flashcard> predicate) {
+        requireNonNull(predicate);
+        filteredFlashcards.setPredicate(predicate);
     }
 
     @Override

@@ -8,6 +8,7 @@ import cardibuddy.logic.Logic;
 import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.logic.parser.exceptions.ParseException;
+import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.exceptions.DeckCannotBeCardException;
 import cardibuddy.model.deck.exceptions.InvalidDeckException;
 import cardibuddy.model.deck.exceptions.NotInDeckException;
@@ -153,6 +154,16 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    public void updateCards(Deck deck) {
+        flashcardListPanel = new FlashcardListPanel(deck.getFilteredFlashcardList());
+        flashcardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
+    }
+
+    public void removeFlashcards() {
+        flashcardListPanel = new FlashcardListPanel(null);
+        flashcardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
     }
 
     /**
