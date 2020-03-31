@@ -1,6 +1,5 @@
 package cardibuddy.logic;
 
-
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Question;
@@ -61,6 +60,9 @@ public class LogicToUiManager {
         ui.getMainWindow().fillInnerPartsWithResult(testResult);
     }
 
+    /**
+     * To show the end of test.
+     */
     public void showTestEnd() {
         ui.getMainWindow().fillInnerPartsWithDecks();
 
