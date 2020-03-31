@@ -116,6 +116,10 @@ public class Deck {
         return filteredFlashcards;
     }
 
+    /**
+     * Updates the filtered flashcards in a deck.
+     * @param predicate SearchCardPredicate or FilterCardPredicate.
+     */
     public void updateFilteredFlashcardList(Predicate<Flashcard> predicate) {
         requireNonNull(predicate);
         filteredFlashcards.setPredicate(predicate);

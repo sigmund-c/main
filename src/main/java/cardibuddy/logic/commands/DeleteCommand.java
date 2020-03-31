@@ -5,8 +5,8 @@ import java.util.List;
 
 import cardibuddy.commons.core.Messages;
 import cardibuddy.commons.core.index.Index;
-import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.logic.LogicToUiManager;
+import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
 

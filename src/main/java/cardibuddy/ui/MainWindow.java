@@ -156,11 +156,18 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
+    /**
+     * Updates the flashcard view in the Main Window.
+     * @param deck currently opened deck.
+     */
     public void updateCards(Deck deck) {
         flashcardListPanel = new FlashcardListPanel(deck.getFilteredFlashcardList());
         flashcardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
     }
 
+    /**
+     * Removes the flashcards in the Main Window.
+     */
     public void removeFlashcards() {
         flashcardListPanel = new FlashcardListPanel(null);
         flashcardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
