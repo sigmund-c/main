@@ -21,8 +21,10 @@ import cardibuddy.logic.commands.ListCommand;
 import cardibuddy.logic.commands.NextCommand;
 import cardibuddy.logic.commands.OpenCommand;
 import cardibuddy.logic.commands.QuitCommand;
+import cardibuddy.logic.commands.SearchCardCommand;
 import cardibuddy.logic.commands.SearchCommand;
 import cardibuddy.logic.commands.StatisticsCommand;
+import cardibuddy.logic.commands.SearchDeckCommand;
 import cardibuddy.logic.commands.TestCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.ReadOnlyCardiBuddy;
@@ -75,7 +77,7 @@ public class CardiBuddyParser {
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new DeleteCommandParser(logicToUiManager).parse(arguments);
 
         case TestCommand.COMMAND_WORD: // test session command
             return new TestCommandParser(logicToUiManager).parse(arguments);
@@ -99,7 +101,18 @@ public class CardiBuddyParser {
             return new FilterCommandParser().parse(arguments);
 
         case SearchCommand.COMMAND_WORD:
-            return new SearchCommandParser().parse(arguments);
+            switch (arguments.substring(1, 5)) {
+
+            case SearchDeckCommand.COMMAND_WORD:
+                return new SearchDeckCommandParser().parse(arguments.substring(5));
+
+            case SearchCardCommand.COMMAND_WORD:
+                return new SearchCardCommandParser(logicToUiManager).parse(arguments.substring(5));
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
+            }
 
         case StatisticsCommand.COMMAND_WORD:
             return new StatisticsCommandParser(logicToUiManager).parse(arguments);
