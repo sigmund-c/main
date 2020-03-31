@@ -11,9 +11,9 @@ import cardibuddy.model.deck.SearchDeckKeywordsPredicate;
  * Finds and lists all decks and cards in cardibuddy whose title contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class SearchDeckCommand extends Command {
+public class SearchDeckCommand extends SearchCommand {
 
-    public static final String COMMAND_WORD = "searchdeck";
+    public static final String COMMAND_WORD = "deck";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all decks whose titles contain any of "

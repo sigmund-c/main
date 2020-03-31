@@ -14,9 +14,9 @@ import cardibuddy.model.flashcard.SearchCardKeywordsPredicate;
  * Finds and lists all decks and cards in cardibuddy whose title contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class SearchCardCommand extends Command {
+public class SearchCardCommand extends SearchCommand {
 
-    public static final String COMMAND_WORD = "searchcard";
+    public static final String COMMAND_WORD = "card";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all decks whose titles contain any of "
@@ -44,7 +44,7 @@ public class SearchCardCommand extends Command {
 
         model.updateFilteredFlashcardList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_DECKS_LISTED_OVERVIEW, model.getFilteredDeckList().size()));
+                String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW, model.getFilteredFlashcardList().size()));
     }
 
     @Override

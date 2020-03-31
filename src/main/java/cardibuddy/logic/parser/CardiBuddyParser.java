@@ -20,6 +20,7 @@ import cardibuddy.logic.commands.HelpCommand;
 import cardibuddy.logic.commands.ListCommand;
 import cardibuddy.logic.commands.OpenCommand;
 import cardibuddy.logic.commands.SearchCardCommand;
+import cardibuddy.logic.commands.SearchCommand;
 import cardibuddy.logic.commands.SearchDeckCommand;
 import cardibuddy.logic.commands.TestCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
@@ -84,11 +85,19 @@ public class CardiBuddyParser {
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
 
-        case SearchDeckCommand.COMMAND_WORD:
-            return new SearchDeckCommandParser().parse(arguments);
+        case SearchCommand.COMMAND_WORD:
+            switch (arguments.substring(1, 5)) {
 
-        case SearchCardCommand.COMMAND_WORD:
-            return new SearchCardCommandParser(logicToUiManager).parse(arguments);
+            case SearchDeckCommand.COMMAND_WORD:
+                return new SearchDeckCommandParser().parse(arguments.substring(5));
+
+            case SearchCardCommand.COMMAND_WORD:
+                return new SearchCardCommandParser(logicToUiManager).parse(arguments.substring(5));
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
+            }
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
