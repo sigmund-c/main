@@ -40,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private DeckListPanel deckListPanel;
     private FlashcardListPanel flashcardListPanel;
     private ResultDisplay resultDisplay;
+    private StatisticsPanel statisticsPanel;
     private HelpWindow helpWindow;
 
     @FXML
@@ -147,6 +148,15 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    public void fillInnerPartsWithStatistic(int deckIndex) {
+        statisticsPanel = new StatisticsPanel(logic.getFilteredDeckList().get(deckIndex).getStatistics());
+        flashcardListPanelPlaceholder.getChildren().setAll(statisticsPanel.getRoot());
+    }
+
+    public void fillInnerPartsWithStatistic() {
+        //TODO: implement functionality for statistics of ALL decks
     }
 
     /**

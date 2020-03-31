@@ -20,6 +20,7 @@ import cardibuddy.logic.commands.HelpCommand;
 import cardibuddy.logic.commands.ListCommand;
 import cardibuddy.logic.commands.OpenCommand;
 import cardibuddy.logic.commands.SearchCommand;
+import cardibuddy.logic.commands.StatisticsCommand;
 import cardibuddy.logic.commands.TestCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.ReadOnlyCardiBuddy;
@@ -85,6 +86,9 @@ public class CardiBuddyParser {
 
         case SearchCommand.COMMAND_WORD:
             return new SearchCommandParser().parse(arguments);
+
+        case StatisticsCommand.COMMAND_WORD:
+            return new StatisticsCommandParser(logicToUiManager).parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
