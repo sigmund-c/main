@@ -1,4 +1,4 @@
-package cardibuddy.model.deck;
+package cardibuddy.model.flashcard;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,51 +9,51 @@ import cardibuddy.commons.util.StringUtil;
 
 
 /**
- * Tests that a {@code Deck or Card}'s {@code Title} matches any of the keywords given.
+ * Tests that a {@code Card}'s {@code Title} matches any of the keywords given.
  */
-public class SearchDeckKeywordsPredicate implements Predicate<Deck> {
+public class SearchCardKeywordsPredicate implements Predicate<Flashcard> {
     private final List<String> keywords;
 
-    public SearchDeckKeywordsPredicate(List<String> keywords) {
+    public SearchCardKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     /**
      * Evaluates this predicate on the given argument.
      *
-     * @param deck the input argument
+     * @param card the input argument
      * @return {@code true} if the input argument matches the predicate,
      * otherwise {@code false}
      */
     @Override
-    public boolean test(Deck deck) {
+    public boolean test(Flashcard card) {
         boolean anyMatch = false;
         if (checkAnd(keywords)) {
-            anyMatch = searchAnd(deck, keywords);
+            anyMatch = searchAnd(card, keywords);
         } else {
-            anyMatch = searchOr(deck, keywords);
+            anyMatch = searchOr(card, keywords);
         }
         return anyMatch;
     }
 
     /**
-     * Checks if deck contains either of the keywords.
-     * @param keywords list of keywords from SearchDeckCommand.
-     * @return true if deck's title contains any of the keywords.
+     * Checks if card contains either of the keywords.
+     * @param keywords list of keywords from SearchCardCommand.
+     * @return true if card's question contains any of the keywords.
      */
-    private boolean searchOr(Deck deck, List<String> keywords) {
+    private boolean searchOr(Flashcard card, List<String> keywords) {
         boolean anyMatch = false;
         anyMatch = new ArrayList<>(keywords).stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(deck.getTitle().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(card.getQuestion().toString(), keyword));
         return anyMatch;
     }
 
     /**
-     * Checks if deck contains all of the keywords with &.
-     * @param keywords list of keywords from SearchDeckCommand.
-     * @return true if deck's title contains all of the keywords with &.
+     * Checks if card contains all of the keywords with &.
+     * @param keywords list of keywords from SearchCardCommand.
+     * @return true if card's title contains all of the keywords with &.
      */
-    private boolean searchAnd(Deck deck, List<String> keywords) {
+    private boolean searchAnd(Flashcard card, List<String> keywords) {
         boolean anyMatch = false;
         List<List<String>> filteredKeywords = filterKeywords(keywords);
 
@@ -61,8 +61,8 @@ public class SearchDeckKeywordsPredicate implements Predicate<Deck> {
             boolean prevMatch = true;
             for (String keyword : keywordList) {
                 if (!anyMatch && prevMatch) {
-                    prevMatch = Arrays.stream(deck.getTitle().toString().split(" "))
-                            .anyMatch(titleWord -> StringUtil.containsWordIgnoreCase(titleWord, keyword));
+                    prevMatch = Arrays.stream(card.getQuestion().toString().split(" "))
+                            .anyMatch(question -> StringUtil.containsWordIgnoreCase(question, keyword));
                 } else {
                     break;
                 }
@@ -113,8 +113,9 @@ public class SearchDeckKeywordsPredicate implements Predicate<Deck> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SearchDeckKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((SearchDeckKeywordsPredicate) other).keywords)); // state check
+                || (other instanceof SearchCardKeywordsPredicate // instanceof handles nulls
+                && keywords.equals(((SearchCardKeywordsPredicate) other).keywords)); // state check
     }
 
 }
+
