@@ -18,4 +18,9 @@ public class Messages {
     public static final String MESSAGE_FLASHCARDS_LISTED_OVERVIEW = "%1$d cards listed!";
     public static final String MESSAGE_DECK_CANNOT_BE_FLASHCARD = "Operation would result in the object created "
             + "being both a deck and a card!";
+    public static final String MESSAGE_EMPTY_DECK = "The deck contains no flashcards to test!";
+    public static final String MESSAGE_NO_TESTSESSION = "There is no test session ongoing!";
+    public static final String MESSAGE_UNANSWERED_QUESTION = "%s: Have you answered this question yet?%s";
+    public static final String MESSAGE_USER_ANSWER = "Your input: %s";
+    public static final String MESSAGE_FLASHCARD_ANSWER = "Correct answer: %s";
 }

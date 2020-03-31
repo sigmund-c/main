@@ -11,6 +11,13 @@ import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.testsession.TestResult;
+import cardibuddy.model.testsession.TestSession;
+import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
+import cardibuddy.model.testsession.exceptions.EmptyDeckException;
+import cardibuddy.model.testsession.exceptions.NoOngoingTestException;
+import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
@@ -25,6 +32,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Flashcard> filteredFlashcards;
     private final FilteredList<Deck> filteredDecks;
+    private TestSession testSession;
 
     /**
      * Initializes a ModelManager with the given cardiBuddy and userPrefs.
@@ -127,6 +135,7 @@ public class ModelManager implements Model {
 
     /**
      * Adds Flashcard to a Deck.
+     *
      * @param flashcard new card.
      */
     @Override
@@ -143,11 +152,75 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Checks if the current {@code TestSession} is complete
+     */
+    @Override
+    public boolean isTestComplete() {
+        return testSession.isComplete();
+    }
+
+    /**
      * Starts a test session // TODO see how to update the list
+     *
      * @param deck the deck to be tested
      */
     @Override
-    public void testDeck(Deck deck) {
+    public Question testDeck(Deck deck) throws EmptyDeckException {
+        requireNonNull(deck);
+        testSession = new TestSession(deck);
+        return testSession.getFirstQuestion();
+    }
+
+    /**
+     * Gets the first question from the newly created {@code TestSession}.
+     */
+    public Question getFirstQuestion() {
+        return testSession.getFirstQuestion();
+    }
+
+    /**
+     * Gets the next question in the {@code TestSession}
+     */
+    @Override
+    public Question getNextQuestion() throws UnansweredQuestionException, NoOngoingTestException {
+        try {
+            return testSession.getNextQuestion();
+        } catch (NullPointerException e) {
+            throw new NoOngoingTestException();
+        }
+    }
+
+    /**
+     * Checks the given answer in the test session
+     *
+     * @param userAnswer a string representation of the user's answer
+     * @returns A Result enums that represents the result of the user's answer.
+     */
+    @Override
+    public TestResult submitAnswer(String userAnswer) {
+        return testSession.submitAnswer(userAnswer);
+    }
+
+    /**
+     * Marks the user's answer as correct when it was marked wrong by the {@code TestSession}.
+     * Allows for flexibility in the user's answers.
+     */
+    @Override
+    public void forceCorrect() throws UnansweredQuestionException, AlreadyCorrectException {
+        testSession.forceCorrect();
+    }
+
+    /**
+     * Clears the current {@code TestSession}.
+     * Called when the test session has ended, either when there are no more flashcards
+     * to test or when the user calls quit.
+     */
+    @Override
+    public void clearTestSession() {
+        if (testSession == null) { // if there is no test session to clear
+            throw new NoOngoingTestException();
+        }
+        testSession = null;
     }
 
     //=========== Filtered Flashcard List Accessors =============================================================
