@@ -17,7 +17,7 @@ public class ForceCommand extends Command {
             + ": Forces CardiBuddy to mark the answer you gave as correct. "
             + "The flashcard will not be added back into your test session.\n"
             + "Example: " + COMMAND_WORD;
-    public static final String MESSAGE_FORCE_SUCCESS = "Marked your answer as correct.";
+    public static final String MESSAGE_FORCE_SUCCESS = "Marked your answer as correct. Type next to move on.";
 
     public static final String MESSAGE_FORCE_FAIL_ALREADYCORRECT = "Unable to force correct: "
             + "Your answer is already correct!";

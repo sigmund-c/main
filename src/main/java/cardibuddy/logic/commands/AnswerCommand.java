@@ -18,7 +18,9 @@ public class AnswerCommand extends Command {
             + ": Submits your answer to CardiBuddy.\n"
             + "Example: " + COMMAND_WORD + " Waterfall is not an agile approach.";
 
-    public static final String MESSAGE_ANS_SUCCESS = "Submitted the answer";
+    public static final String MESSAGE_ANS_SUCCESS = "Answer submitted!"
+            + "\nType 'force' if you think your answer is correct, or"
+            + "\nType next to move on to the next question.";
 
     private LogicToUiManager logicToUiManager;
     private String userAnswer;

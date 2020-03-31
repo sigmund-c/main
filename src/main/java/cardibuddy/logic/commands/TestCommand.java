@@ -27,11 +27,12 @@ public class TestCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_TEST_SESSION_SUCCESS = "Started a test session.";
-    private static final Logger logger = LogsCenter.getLogger(TestCommand.class);
+    public static final String MESSAGE_TEST_SESSION_SUCCESS = "Started a test session."
+            + "\nType in your answer by starting with 'ans'";
 
-    private LogicToUiManager logicToUiManager;
+    private static final Logger logger = LogsCenter.getLogger(TestCommand.class);
     private final Index targetIndex;
+    private LogicToUiManager logicToUiManager;
 
     public TestCommand(Index targetIndex, LogicToUiManager logicToUiManager) {
         this.targetIndex = targetIndex;
