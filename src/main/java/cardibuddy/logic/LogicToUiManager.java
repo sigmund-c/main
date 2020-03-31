@@ -47,6 +47,7 @@ public class LogicToUiManager {
 
     public boolean isInDeck() {
         return this.inDeck;
+    }
 
     public void showTestQuestion(Question question) {
         ui.getMainWindow().fillInnerPartsWithQuestion(question);
