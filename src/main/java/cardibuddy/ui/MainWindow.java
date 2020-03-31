@@ -12,7 +12,10 @@ import cardibuddy.model.deck.exceptions.DeckCannotBeCardException;
 import cardibuddy.model.deck.exceptions.InvalidDeckException;
 import cardibuddy.model.deck.exceptions.NotInDeckException;
 import cardibuddy.model.deck.exceptions.WrongDeckException;
+import cardibuddy.model.flashcard.Answer;
+import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
+import cardibuddy.model.testsession.TestResult;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -21,7 +24,6 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -56,6 +58,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane flashcardListPanelPlaceholder;
 
     @FXML
+    private StackPane testCardPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
@@ -86,6 +91,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -117,7 +123,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up all the placeholders of this window with Decks.
      */
-    void fillInnerPartsWithDecks() {
+    public void fillInnerPartsWithDecks() {
         deckListPanel = new DeckListPanel(logic.getFilteredDeckList());
         deckListPanelPlaceholder.getChildren().add(deckListPanel.getRoot());
 
@@ -136,8 +142,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void fillInnerPartsWithCards(int deckIndex) {
         flashcardListPanel = new FlashcardListPanel(logic.getFilteredDeckList()
-                                    .get(deckIndex)
-                                    .getFlashcardList());
+                .get(deckIndex)
+                .getFlashcardList());
         flashcardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -157,6 +163,39 @@ public class MainWindow extends UiPart<Stage> {
 
     public void fillInnerPartsWithStatistic() {
         //TODO: implement functionality for statistics of ALL decks
+    }
+
+    /**
+     * Fills the placeholder of this window with the Question of the current flashcard being tested.
+     *
+     * @param question the question belonging to the current flashcard tested
+     */
+    public void fillInnerPartsWithQuestion(Question question) {
+        deckListPanelPlaceholder.getChildren().clear();
+        flashcardListPanelPlaceholder.getChildren().clear();
+        QuestionTestCard questionCard = new QuestionTestCard(question);
+        deckListPanelPlaceholder.getChildren().add(questionCard.getRoot()); // TODO: make FXML file for test card
+    }
+
+    /**
+     * Fills the placeholder of this window with the Answer of the current flashcard being tested.
+     *
+     * @param answer to display to the user
+     */
+    public void fillInnerPartsWithAnswer(Answer answer) {
+        deckListPanelPlaceholder.getChildren().clear();
+        AnswerTestCard answerTestCard = new AnswerTestCard(answer);
+        deckListPanelPlaceholder.getChildren().add(answerTestCard.getRoot());
+    }
+
+    /**
+     * Fills the placeholder of this window with the Result
+     * of the user's answer input against the current flashcard being tested.
+     */
+    public void fillInnerPartsWithResult(TestResult testResult) {
+        deckListPanelPlaceholder.getChildren().clear();
+        ResultCard resultCard = new ResultCard(testResult); // TODO: Create result card + FXML file
+        deckListPanelPlaceholder.getChildren().add(resultCard.getRoot());
     }
 
     /**
@@ -184,7 +223,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the test window.
+     * Opens the test window
      */
     @FXML
     public void handleTest() {
