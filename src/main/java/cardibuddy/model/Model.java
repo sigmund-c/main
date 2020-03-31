@@ -6,27 +6,34 @@ import java.util.function.Predicate;
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.testsession.TestResult;
+import cardibuddy.model.testsession.exceptions.EmptyDeckException;
 import javafx.collections.ObservableList;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Deck> PREDICATE_SHOW_ALL_DECKS = unused -> true;
 
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Flashcard> PREDICATE_SHOW_ALL_FLASHCARDS = unused -> true;
-
     /**
-     * Replaces user prefs data with the data in {@code userPrefs}.
+     * {@code Predicate} that always evaluate to true
      */
-    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
+    Predicate<Flashcard> PREDICATE_SHOW_ALL_FLASHCARDS = unused -> true;
 
     /**
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
+
+    /**
+     * Replaces user prefs data with the data in {@code userPrefs}.
+     */
+    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
     /**
      * Returns the user prefs' GUI settings.
@@ -49,14 +56,14 @@ public interface Model {
     void setCardiBuddyFilePath(Path cardiBuddyFilePath);
 
     /**
+     * Returns the CardiBuddy
+     */
+    ReadOnlyCardiBuddy getCardiBuddy();
+
+    /**
      * Replaces cardibuddy data with the data in {@code cardiBuddy}.
      */
     void setCardiBuddy(ReadOnlyCardiBuddy cardiBuddy);
-
-    /** Returns the CardiBuddy */
-    ReadOnlyCardiBuddy getCardiBuddy();
-
-
 
     /**
      * Returns true if a deck with the same identity as {@code deck} exists in the cardibuddy.
@@ -113,24 +120,65 @@ public interface Model {
     void setFlashcard(Flashcard target, Flashcard editedFlashcard);
 
     /**
+     * Checks if the current {@code TestSession} is complete
+     */
+    boolean isTestComplete();
+
+    /**
      * Starts the test session with {@code deck}
+     *
      * @param deck the deck to be tested
      */
-    void testDeck(Deck deck);
-    /** Returns an unmodifiable view of the filtered deck list */
+    Question testDeck(Deck deck) throws EmptyDeckException;
+
+    /**
+     * Checks the given {@code Answer} with the current flashcard's answer in the TestSession.
+     */
+    TestResult submitAnswer(String userAnswer);
+
+    /**
+     * Marks the user's answer as correct when it was marked wrong by the {@code TestSession}
+     * Allows for flexibility in the user's answers.
+     */
+    void forceCorrect();
+
+    /**
+     * Gets the first question from the newly created {@code TestSession}.
+     */
+    Question getFirstQuestion();
+
+    /**
+     * Gets the next question in the {@code TestSession}
+     */
+    Question getNextQuestion();
+
+    /**
+     * Clears the current {@code TestSession}.
+     * Called when the test session has ended, either when there are no more flashcards
+     * to test or when the user calls quit.
+     */
+    void clearTestSession();
+
+    /**
+     * Returns an unmodifiable view of the filtered deck list
+     */
     ObservableList<Deck> getFilteredDeckList();
 
-    /** Returns an unmodifiable view of the filtered flashcard list */
+    /**
+     * Returns an unmodifiable view of the filtered flashcard list
+     */
     ObservableList<Flashcard> getFilteredFlashcardList();
 
     /**
      * Updates the filter of the filtered deck list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredDeckList(Predicate<Deck> predicate);
 
     /**
      * Updates the filter of the filtered flashcard list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredFlashcardList(Predicate<Flashcard> predicate);
