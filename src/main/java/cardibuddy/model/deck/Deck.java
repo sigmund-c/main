@@ -28,6 +28,7 @@ public class Deck {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
     private List<Flashcard> flashcards = new ArrayList<>();
+    private Statistics statistics = new Statistics();
     private final Logger logger = LogsCenter.getLogger(Deck.class.getName());
 
     /**
@@ -70,6 +71,10 @@ public class Deck {
 
     public List<Flashcard> getFlashcards() {
         return Collections.unmodifiableList(flashcards);
+    }
+
+    public Statistics getStatistics() {
+        return statistics;
     }
 
     /**
