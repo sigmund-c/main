@@ -9,6 +9,9 @@ import java.util.logging.Logger;
 
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.commons.core.LogsCenter;
+import cardibuddy.logic.CommandHistory;
+import cardibuddy.logic.CommandHistoryManager;
+import cardibuddy.logic.commands.Command;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
 import javafx.collections.ObservableList;
@@ -90,6 +93,11 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyCardiBuddy getCardiBuddy() {
         return cardiBuddy;
+    }
+
+    @Override
+    public boolean canUndo(CommandHistory commandHistory) {
+        return cardiBuddy.canUndo(commandHistory);
     }
 
     @Override

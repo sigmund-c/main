@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.UniqueDeckList;
 import cardibuddy.model.flashcard.Flashcard;
@@ -11,13 +12,14 @@ import cardibuddy.model.flashcard.UniqueFlashcardList;
 import javafx.collections.ObservableList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameFlashcard comparison)
+ * Wraps all data at the CardiBuddy level
+ * Duplicates are not allowed
  */
 public class CardiBuddy implements ReadOnlyCardiBuddy {
 
     private final UniqueDeckList decks;
     private final UniqueFlashcardList flashcards;
+    private int currentPointer;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -67,6 +69,10 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
 
         setDecks(newData.getDeckList());
         setFlashcards(newData.getFlashcardList());
+    }
+
+    public boolean canUndo(CommandHistory commandHistory) {
+        return commandHistory.canUndoCommand();
     }
 
     //// deck-level operations
