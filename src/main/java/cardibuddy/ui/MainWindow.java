@@ -43,6 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private DeckListPanel deckListPanel;
     private FlashcardListPanel flashcardListPanel;
     private ResultDisplay resultDisplay;
+    private StatisticsPanel statisticsPanel;
     private HelpWindow helpWindow;
 
     @FXML
@@ -171,6 +172,15 @@ public class MainWindow extends UiPart<Stage> {
     public void removeFlashcards() {
         flashcardListPanel = new FlashcardListPanel(null);
         flashcardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
+     * Fills up the flashcard placeholder with a Statistics report.
+     */
+    public void fillInnerPartsWithStatistic(int deckIndex) {
+        statisticsPanel = new StatisticsPanel(logic.getFilteredDeckList().get(deckIndex).getStatistics());
+        flashcardListPanelPlaceholder.getChildren().setAll(statisticsPanel.getRoot());
+    }
+
+    public void fillInnerPartsWithStatistic() {
+        //TODO: implement functionality for statistics of ALL decks
     }
 
     /**

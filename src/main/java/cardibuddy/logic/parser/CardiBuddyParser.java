@@ -24,6 +24,7 @@ import cardibuddy.logic.commands.QuitCommand;
 import cardibuddy.logic.commands.SearchCardCommand;
 import cardibuddy.logic.commands.SearchCommand;
 import cardibuddy.logic.commands.SearchDeckCommand;
+import cardibuddy.logic.commands.StatisticsCommand;
 import cardibuddy.logic.commands.TestCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.ReadOnlyCardiBuddy;
@@ -112,6 +113,9 @@ public class CardiBuddyParser {
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
 
             }
+
+        case StatisticsCommand.COMMAND_WORD:
+            return new StatisticsCommandParser(logicToUiManager).parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand(logicToUiManager);
