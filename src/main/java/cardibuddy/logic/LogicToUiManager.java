@@ -32,6 +32,7 @@ public class LogicToUiManager {
 
     public void removeFlashcards() {
         ui.getMainWindow().removeFlashcards();
+    }
 
     public void openStatisticPanel(int index) { // Statistics of a specific deck
         ui.getMainWindow().fillInnerPartsWithStatistic(index);
