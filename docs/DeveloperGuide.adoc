@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103T-T10-2/main/tree/master
 
-By: `Team T10-2`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T10-2`      Since: `Jan 2020`      Licence: `MIT`
 
 == Setting up
 
