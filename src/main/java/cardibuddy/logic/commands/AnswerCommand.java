@@ -19,7 +19,7 @@ public class AnswerCommand extends Command {
             + "Example: " + COMMAND_WORD + " Waterfall is not an agile approach.";
 
     public static final String MESSAGE_ANS_SUCCESS = "Answer submitted!"
-            + "\nType 'force' if you think your answer is correct, or"
+            + "\nType 'force' to force mark your answer as correct, or"
             + "\nType next to move on to the next question.";
 
     private LogicToUiManager logicToUiManager;
