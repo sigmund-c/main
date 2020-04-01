@@ -25,13 +25,13 @@
 
       <VBox stylesheets="@DarkTheme.css">
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu fx:id="menuItem" mnemonicParsing="false" styleClass="menuItem" text="File">
+          <Menu fx:id="exitButton" mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
-          <Menu fx:id="menuItem" mnemonicParsing="false" styleClass="menubutton" text="Test">
+          <Menu fx:id="testButton" mnemonicParsing="false" text="Test">
             <MenuItem fx:id="testMenuItem" mnemonicParsing="false" onAction="#handleTest" text="Start" />
           </Menu>
-          <Menu fx:id="menuItem" mnemonicParsing="false" text="Help">
+          <Menu fx:id="helpButton" mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
@@ -51,14 +51,12 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-            
                                       <VBox fx:id="deckList" minHeight="500.0" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>
                       <StackPane fx:id="deckListPanelPlaceholder" minHeight="400.0" VBox.vgrow="ALWAYS" />
                     </VBox>
-            
                                       <VBox fx:id="flashcardList" minHeight="500.0" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
