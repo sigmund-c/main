@@ -25,6 +25,14 @@ public class LogicToUiManager {
         ui.getMainWindow().fillInnerPartsWithCards(index);
     }
 
+    public void openStatisticPanel(int index) { // Statistics of a specific deck
+        ui.getMainWindow().fillInnerPartsWithStatistic(index);
+    }
+
+    public void openStatisticPanel() { // Statistics of all the decks
+        ui.getMainWindow().fillInnerPartsWithStatistic();
+    }
+
     public void openDeckPanel() {
         ui.getMainWindow().fillInnerPartsWithDecks();
     }
