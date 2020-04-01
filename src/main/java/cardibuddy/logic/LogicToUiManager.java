@@ -25,6 +25,15 @@ public class LogicToUiManager {
         ui.getMainWindow().fillInnerPartsWithCards(index);
     }
 
+
+    public void updateFlashcardPanel() {
+        ui.getMainWindow().updateCards(displayedDeck);
+    }
+
+    public void removeFlashcards() {
+        ui.getMainWindow().removeFlashcards();
+    }
+
     public void openStatisticPanel(int index) { // Statistics of a specific deck
         ui.getMainWindow().fillInnerPartsWithStatistic(index);
     }
@@ -50,6 +59,10 @@ public class LogicToUiManager {
 
     public String getOpenedDeck() {
         return openedDeck;
+    }
+
+    public Deck getDisplayedDeck() {
+        return displayedDeck;
     }
 
     public boolean isInDeck() {

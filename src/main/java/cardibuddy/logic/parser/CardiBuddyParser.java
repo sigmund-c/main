@@ -118,7 +118,7 @@ public class CardiBuddyParser {
             return new StatisticsCommandParser(logicToUiManager).parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommand(logicToUiManager);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

@@ -5,6 +5,7 @@ import java.util.List;
 
 import cardibuddy.commons.core.Messages;
 import cardibuddy.commons.core.index.Index;
+import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
@@ -25,9 +26,11 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_DECK_SUCCESS = "Deleted Deck: %1$s";
 
     private final Index targetIndex;
+    private LogicToUiManager logicToUiManager;
 
-    public DeleteCommand(Index targetIndex) {
+    public DeleteCommand(Index targetIndex, LogicToUiManager logicToUiManager) {
         this.targetIndex = targetIndex;
+        this.logicToUiManager = logicToUiManager;
     }
 
     @Override
@@ -41,6 +44,7 @@ public class DeleteCommand extends Command {
 
         Deck deckToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteDeck(deckToDelete);
+        logicToUiManager.removeFlashcards();
         return new CommandResult(String.format(MESSAGE_DELETE_DECK_SUCCESS, deckToDelete));
     }
 
