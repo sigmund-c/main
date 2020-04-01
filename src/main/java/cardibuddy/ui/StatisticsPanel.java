@@ -12,13 +12,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
-
-
+/**
+ * Panel containing Statistics report.
+ */
 public class StatisticsPanel extends UiPart<Region> {
     private static final String FXML = "StatisticsPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(StatisticsPanel.class);
-
     private static final DecimalFormat percentFormat = new DecimalFormat("##.##%");
+
+    private final Logger logger = LogsCenter.getLogger(StatisticsPanel.class);
 
     private final Statistics statistics;
 
@@ -50,8 +51,8 @@ public class StatisticsPanel extends UiPart<Region> {
         cardsAdded.setText("No. of Cards added: " + statistics.getCardsAdded());
         cardsDeleted.setText("No. of Cards deleted: " + statistics.getCardsDeleted());
         timesPlayed.setText("No. of sessions played: " + statistics.getTimesPlayed());
-        correctPercentage.setText("Percent of correct answers: " +
-                                    percentFormat.format(statistics.getCorrectPercentage()));
+        correctPercentage.setText("Percent of correct answers: "
+                                     + percentFormat.format(statistics.getCorrectPercentage()));
         avgTriesToGetCorrect.setText("Average tries to get correct answer: " + statistics.getAvgTriesToGetCorrect());
 
         XYChart.Series series = new XYChart.Series();

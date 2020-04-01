@@ -156,6 +156,9 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
+    /**
+     * Fills up the flashcard placeholder with a Statistics report.
+     */
     public void fillInnerPartsWithStatistic(int deckIndex) {
         statisticsPanel = new StatisticsPanel(logic.getFilteredDeckList().get(deckIndex).getStatistics());
         flashcardListPanelPlaceholder.getChildren().setAll(statisticsPanel.getRoot());

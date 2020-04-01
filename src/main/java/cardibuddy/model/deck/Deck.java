@@ -74,7 +74,7 @@ public class Deck {
     }
 
     public Statistics getStatistics() {
-       return statistics;
+        return statistics;
     }
 
     /**

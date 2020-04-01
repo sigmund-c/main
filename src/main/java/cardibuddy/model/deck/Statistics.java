@@ -1,13 +1,10 @@
 package cardibuddy.model.deck;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
-import cardibuddy.model.flashcard.Flashcard;
-import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.TestSession;
 
 /**
@@ -61,12 +58,13 @@ public class Statistics {
         testHistory.add(testSession);
 
         //TODO: Finish tracking functionality after testSession is done
-//        HashMap<Flashcard, TestResult> testResults = testSession.getResults();
+        /*
+        HashMap<Flashcard, TestResult> testResults = testSession.getResults();
 
-//        for (Map.Entry<Flashcard, TestResult> result : testResults.entrySet()) {
-//            cardsPlayed++;
-        // change correctPercentage and avgTriesToGetCorrect
-//        }
+        for (Map.Entry<Flashcard, TestResult> result : testResults.entrySet()) {
+            cardsPlayed++;
+            // change correctPercentage and avgTriesToGetCorrect
+        }*/
     }
 
 

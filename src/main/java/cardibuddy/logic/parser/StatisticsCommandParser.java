@@ -9,8 +9,9 @@ import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.StatisticsCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 
-
-
+/**
+ * Parses input arguments and creates a new StatisticsCommand object
+ */
 public class StatisticsCommandParser implements Parser<StatisticsCommand> {
 
     private static Logger logger = Logger.getLogger(StatisticsCommand.COMMAND_WORD);
@@ -35,7 +36,8 @@ public class StatisticsCommandParser implements Parser<StatisticsCommand> {
         try {
             index = ParserUtil.parseIndex(args);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatisticsCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatisticsCommand.MESSAGE_USAGE), pe);
         }
 
         return new StatisticsCommand(index, logicToUiManager);
