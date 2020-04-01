@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
  * API of the CommandHistory component
  */
 public interface CommandHistory {
-    public boolean canUndoCommand();
+    // public boolean canUndoCommand();
 
     public void pushUndoCommand(Command command);
 

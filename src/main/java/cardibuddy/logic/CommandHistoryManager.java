@@ -11,20 +11,10 @@ import java.util.Stack;
 public class CommandHistoryManager implements CommandHistory {
     private Stack<UndoableCommand> undoStack;
     private Stack<UndoableCommand> redoStack;
-    private boolean canUndo;
 
     public CommandHistoryManager() {
         undoStack = new Stack<>();
         redoStack = new Stack<>();
-        canUndo = false;
-    }
-
-    @Override
-    public boolean canUndoCommand() {
-        if (sizeUndoStack() > 0) {
-            canUndo = true;
-        }
-        return canUndo;
     }
 
     /**
@@ -106,7 +96,6 @@ public class CommandHistoryManager implements CommandHistory {
         }
 
         CommandHistoryManager commandHistoryManager = (CommandHistoryManager) other;
-        return commandHistoryManager.redoStack.equals(this.redoStack)
-                && commandHistoryManager.undoStack.equals(this.undoStack);
+        return commandHistoryManager.undoStack.equals(this.undoStack);
     }
 }

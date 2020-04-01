@@ -72,9 +72,9 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
         setFlashcards(newData.getFlashcardList());
     }
 
-    public boolean canUndo(CommandHistory commandHistory) {
-        return commandHistory.canUndoCommand();
-    }
+//    public boolean canUndo(CommandHistory commandHistory) {
+//        return commandHistory.canUndoCommand();
+//    }
 
     //// deck-level operations
     /**

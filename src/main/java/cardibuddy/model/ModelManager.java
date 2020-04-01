@@ -103,10 +103,10 @@ public class ModelManager implements Model {
         return cardiBuddy;
     }
 
-    @Override
-    public boolean canUndo(CommandHistory commandHistory) {
-        return cardiBuddy.canUndo(commandHistory);
-    }
+//    @Override
+//    public boolean canUndo(CommandHistory commandHistory) {
+//        return cardiBuddy.canUndo(commandHistory);
+//    }
 
     @Override
     public boolean hasDeck(Deck deck) {

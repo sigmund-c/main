@@ -10,6 +10,9 @@ import java.util.logging.Logger;
 import static cardibuddy.commons.core.Messages.MESSAGE_NOTHING_TO_UNDO;
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Undoes last command inputted by the user.
+ */
 public class UndoCommand extends Command{
     public static final String COMMAND_WORD = "undo";
 
@@ -29,16 +32,14 @@ public class UndoCommand extends Command{
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-
-        if (model.canUndo(commandHistory)) {
+        if (commandHistory.sizeUndoStack() == 0) {
             throw new CommandException(MESSAGE_NOTHING_TO_UNDO);
         }
 
         UndoableCommand lastCommand = commandHistory.popUndoCommand();
         lastCommand.reverse(model);
 
-        logger.config("Undoing.");
+        logger.config("Undo 2");
 
         return new CommandResult(MESSAGE_UNDO_SUCCESS);
     }

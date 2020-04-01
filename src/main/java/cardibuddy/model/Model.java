@@ -66,7 +66,7 @@ public interface Model {
      */
     void setCardiBuddy(ReadOnlyCardiBuddy cardiBuddy);
 
-    boolean canUndo(CommandHistory commandHistory);
+    // boolean canUndo(CommandHistory commandHistory);
 
     /**
      * Returns true if a deck with the same identity as {@code deck} exists in the cardibuddy.
