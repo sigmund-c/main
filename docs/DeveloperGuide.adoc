@@ -277,6 +277,7 @@ The Test feature also comes with many minor enhancements. An overview of the com
 
 The following is an overview of the
 
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
