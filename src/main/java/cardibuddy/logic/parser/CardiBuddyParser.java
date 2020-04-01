@@ -3,8 +3,6 @@ package cardibuddy.logic.parser;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static cardibuddy.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-//import cardibuddy.model.CardiBuddy;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -67,10 +65,22 @@ public class CardiBuddyParser {
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new DeleteCommandParser(logicToUiManager).parse(arguments);
 
-        case TestCommand.COMMAND_WORD:
-            return new TestCommandParser().parse(arguments);
+        case TestCommand.COMMAND_WORD: // test session command
+            return new TestCommandParser(logicToUiManager).parse(arguments);
+
+        case AnswerCommand.COMMAND_WORD: // test session command
+            return new AnswerCommand(logicToUiManager, arguments.trim());
+
+        case NextCommand.COMMAND_WORD: // test session command
+            return new NextCommand(logicToUiManager);
+
+        case QuitCommand.COMMAND_WORD: // test session command
+            return new QuitCommand(logicToUiManager);
+
+        case ForceCommand.COMMAND_WORD: // test session command
+            return new ForceCommand();
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -79,7 +89,18 @@ public class CardiBuddyParser {
             return new FilterCommandParser().parse(arguments);
 
         case SearchCommand.COMMAND_WORD:
-            return new SearchCommandParser().parse(arguments);
+            switch (arguments.substring(1, 5)) {
+
+            case SearchDeckCommand.COMMAND_WORD:
+                return new SearchDeckCommandParser().parse(arguments.substring(5));
+
+            case SearchCardCommand.COMMAND_WORD:
+                return new SearchCardCommandParser(logicToUiManager).parse(arguments.substring(5));
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
+            }
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -97,5 +118,4 @@ public class CardiBuddyParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

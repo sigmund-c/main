@@ -5,7 +5,7 @@ import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_DECK;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_FLASHCARD;
 import static cardibuddy.commons.core.Messages.MESSAGE_NOT_IN_DECK;
-//import static cardibuddy.commons.core.Messages.MESSAGE_WRONG_DECK;
+import static cardibuddy.commons.core.Messages.MESSAGE_WRONG_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
@@ -28,7 +28,7 @@ import cardibuddy.model.deck.Title;
 import cardibuddy.model.deck.exceptions.DeckCannotBeCardException;
 import cardibuddy.model.deck.exceptions.InvalidDeckException;
 import cardibuddy.model.deck.exceptions.NotInDeckException;
-//import cardibuddy.model.deck.exceptions.WrongDeckException;
+import cardibuddy.model.deck.exceptions.WrongDeckException;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
@@ -42,7 +42,6 @@ import javafx.collections.ObservableList;
  */
 public class AddCommandParser implements Parser<AddCommand> {
     private static Object toAdd;
-    private boolean inDeck = true;
     private ReadOnlyCardiBuddy cardiBuddy;
     private LogicToUiManager logicToUiManager;
 
@@ -68,67 +67,101 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
+        handleInputErrors(argMultimap);
+
+        if (argMultimap.containsKey(PREFIX_DECK)) {
+            toAdd = addDeck(argMultimap);
+            return new AddCommand((Deck) toAdd);
+        } else if (argMultimap.containsKey(PREFIX_FLASHCARD)) {
+
+            toAdd = addCard(argMultimap);
+
+            return new AddCommand((Flashcard) toAdd, logicToUiManager);
+        }
+        return null;
+    }
+
+    /**
+     * Handles wrong input commands by user by throwing respective exceptions.
+     * @param argMultimap Multimap of arguments.
+     * @throws ParseException Respective exceptions.
+     */
+    private void handleInputErrors(ArgumentMultimap argMultimap) throws ParseException {
         if (arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_FLASHCARD)) {
             // both PREFIX_DECK and PREFIX_FLASHCARD are present
             throw new DeckCannotBeCardException(String.format(MESSAGE_DECK_CANNOT_BE_FLASHCARD
                     + "\n" + AddCommand.MESSAGE_USAGE));
+
         } else if (arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_QUESTION, PREFIX_ANSWER)
                 | arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_QUESTION)
                 | arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_ANSWER)) {
             //trying to add a deck with a question and/or an answer
             throw new InvalidDeckException(String.format(MESSAGE_INVALID_DECK + "\n"
                     + AddCommand.MESSAGE_ADD_DECK));
+
         } else if (arePrefixesPresent(argMultimap, PREFIX_FLASHCARD)) {
-            if (!inDeck) {
+            if (!logicToUiManager.isInDeck()) {
                 throw new NotInDeckException(String.format(MESSAGE_NOT_IN_DECK
                         + " You need to open a deck first. \n" + OpenCommand.MESSAGE_USAGE));
             }
+
             Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
-            //for (Deck d: cardiBuddy.getDeckList()) {
-            //if (d.getTitle().equals(title)) {
-            //throw new WrongDeckException(String.format(MESSAGE_WRONG_DECK));
-            //}
-            //}
+            if (!title.toString().toLowerCase().equals(logicToUiManager.getOpenedDeck())) {
+                throw new WrongDeckException(String.format(MESSAGE_WRONG_DECK));
+            }
+
             if (!arePrefixesPresent(argMultimap, PREFIX_FLASHCARD, PREFIX_QUESTION, PREFIX_ANSWER)) {
                 throw new InvalidFlashcardException(String.format(MESSAGE_INVALID_FLASHCARD + "\n"
                         + AddCommand.MESSAGE_ADD_FLASHCARD));
             }
         }
-        if (argMultimap.containsKey(PREFIX_DECK)) {
-            Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_DECK).get());
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-            List<Flashcard> flashcards = new ArrayList<>();
-            toAdd = new Deck(title, tagList, flashcards);
+    }
 
-            return new AddCommand((Deck) toAdd);
-        } else if (argMultimap.containsKey(PREFIX_FLASHCARD)) {
-            Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+    /**
+     * Adds a deck to CardiBuddy.
+     * @param argMultimap Multimap of arguments.
+     * @return New deck created.
+     * @throws ParseException if there is an error parsing the arguments.
+     */
+    private Deck addDeck(ArgumentMultimap argMultimap) throws ParseException {
+        Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_DECK).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        List<Flashcard> flashcards = new ArrayList<>();
+        return new Deck(title, tagList, flashcards);
+    }
 
-            // Search for the deck with matching title
-            Deck deck = new Deck();
-            int deckIndex = 0;
-            ObservableList<Deck> deckObservableList = cardiBuddy.getDeckList();
+    /**
+     * Adds a flashcard to a deck in CardiBuddy.
+     * @param argMultimap Multimap of arguments.
+     * @return New flashcard created.
+     * @throws ParseException if there is an error parsing the arguments.
+     */
+    private Flashcard addCard(ArgumentMultimap argMultimap) throws ParseException {
+        Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            for (int i = 0; i < cardiBuddy.getDeckList().size(); i++) {
-                Deck d = deckObservableList.get(i);
-                if (d.getTitle().equals(title)) {
-                    deck = d;
-                    deckIndex = i;
-                    break;
-                }
+        // Search for the deck with matching title
+        Deck deck = new Deck();
+        int deckIndex = 0;
+        ObservableList<Deck> deckObservableList = cardiBuddy.getDeckList();
+
+        for (int i = 0; i < cardiBuddy.getDeckList().size(); i++) {
+            Deck d = deckObservableList.get(i);
+            if (d.getTitle().equals(title)) {
+                deck = d;
+                deckIndex = i;
+                break;
             }
-
-            Question modelQuestion = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
-            Answer modelAnswer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
-            toAdd = new Flashcard(deck, modelQuestion, modelAnswer);
-            deck.addFlashcard((Flashcard) toAdd);
-
-            logicToUiManager.openFlashcardPanel(deckIndex);
-
-            return new AddCommand((Flashcard) toAdd, logicToUiManager);
         }
-        return null;
+
+        Question modelQuestion = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
+        Answer modelAnswer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
+        Flashcard flashcard = new Flashcard(deck, modelQuestion, modelAnswer, tagList);
+        deck.addFlashcard(flashcard);
+
+        logicToUiManager.openFlashcardPanel(deckIndex);
+
+        return flashcard;
     }
 
     /**

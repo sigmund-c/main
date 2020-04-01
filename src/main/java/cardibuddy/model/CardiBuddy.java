@@ -9,6 +9,7 @@ import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.UniqueDeckList;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.UniqueFlashcardList;
+import cardibuddy.model.testsession.TestSession;
 import javafx.collections.ObservableList;
 
 /**
@@ -19,7 +20,7 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
 
     private final UniqueDeckList decks;
     private final UniqueFlashcardList flashcards;
-    private int currentPointer;
+    //private TestSession testSession;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -90,6 +91,13 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
      */
     public void addDeck(Deck d) {
         decks.add(d);
+    }
+
+    /**
+     * Starts a test for the given deck
+     */
+    public void startTest(TestSession ts) {
+
     }
 
     /**
