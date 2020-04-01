@@ -172,6 +172,7 @@ public class MainWindow extends UiPart<Stage> {
     public void removeFlashcards() {
         flashcardListPanel = new FlashcardListPanel(null);
         flashcardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
+    /**
      * Fills up the flashcard placeholder with a Statistics report.
      */
     public void fillInnerPartsWithStatistic(int deckIndex) {
