@@ -48,7 +48,7 @@ public class OpenCommand extends Command {
         logicToUiManager.openFlashcardPanel(targetIndex.getZeroBased());
         logicToUiManager.setOpenedDeck(deckToOpen);
 
-        return new CommandResult(String.format(MESSAGE_OPEN_DECK_SUCCESS + deckToOpen.getFlashcards(), deckToOpen));
+        return new CommandResult(String.format(MESSAGE_OPEN_DECK_SUCCESS, deckToOpen));
     }
 
     @Override

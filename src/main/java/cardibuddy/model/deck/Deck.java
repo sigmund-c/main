@@ -134,9 +134,16 @@ public class Deck {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTitle())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+        builder.append(getTitle()).append("\nTags: ");
+
+        if (!getTags().isEmpty()) {
+            getTags().forEach(builder::append);
+        } else {
+            builder.append("None");
+        }
+
+        builder.append("\nNo. of Cards: ").append(flashcards.size());
+
         return builder.toString();
     }
 
