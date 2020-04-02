@@ -29,6 +29,8 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final CardiBuddyParser cardiBuddyParser;
+    private final CommandHistory commandHistory = CommandHistory.getCommandHistory();
+    private final CardiBuddyStack cardiBuddyStack = CardiBuddyStack.getCardiBuddyStack();
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
@@ -50,6 +52,8 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveCardiBuddy(model.getCardiBuddy());
+            commandHistory.add(commandText);
+            cardiBuddyStack.push(command);
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }

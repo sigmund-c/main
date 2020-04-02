@@ -7,25 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cardibuddy.logic.LogicToUiManager;
-import cardibuddy.logic.commands.AddCommand;
-import cardibuddy.logic.commands.AnswerCommand;
-import cardibuddy.logic.commands.ClearCommand;
-import cardibuddy.logic.commands.Command;
-import cardibuddy.logic.commands.DeleteCommand;
-import cardibuddy.logic.commands.EditCommand;
-import cardibuddy.logic.commands.ExitCommand;
-import cardibuddy.logic.commands.FilterCommand;
-import cardibuddy.logic.commands.ForceCommand;
-import cardibuddy.logic.commands.HelpCommand;
-import cardibuddy.logic.commands.ListCommand;
-import cardibuddy.logic.commands.NextCommand;
-import cardibuddy.logic.commands.OpenCommand;
-import cardibuddy.logic.commands.QuitCommand;
-import cardibuddy.logic.commands.SearchCardCommand;
-import cardibuddy.logic.commands.SearchCommand;
-import cardibuddy.logic.commands.SearchDeckCommand;
-import cardibuddy.logic.commands.StatisticsCommand;
-import cardibuddy.logic.commands.TestCommand;
+import cardibuddy.logic.commands.*;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.ReadOnlyCardiBuddy;
 
@@ -116,6 +98,12 @@ public class CardiBuddyParser {
 
         case StatisticsCommand.COMMAND_WORD:
             return new StatisticsCommandParser(logicToUiManager).parse(arguments);
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
+        case HistoryCommand.COMMAND_WORD:
+            return new HistoryCommand();
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand(logicToUiManager);
