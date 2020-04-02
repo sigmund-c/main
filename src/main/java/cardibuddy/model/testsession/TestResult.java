@@ -37,6 +37,23 @@ public class TestResult {
     }
 
     /**
+     * Constructor for TestResult, if the user skips the question when they haven't answered it before in the Test Session.
+     */
+    public TestResult(Result skippedResult) {
+        this.result = skippedResult;
+        this.numTries = 1;
+    }
+
+    /**
+     * Constructor for TestResult, if the user has answered the question previously but now chooses to skip it.
+     * Records down the number of tries (including the try that the user skips) the user has made for that question before skipping it.
+     */
+    public TestResult(TestResult prevTestResult) {
+        this.result = Result.SKIPPED;
+        this.numTries = prevTestResult.getNumTries();
+    }
+
+    /**
      * Result of test session.
      *
      * @return Result object (idk what to write here :( ).
@@ -84,7 +101,7 @@ public class TestResult {
         return flashcardAnswer;
     }
 
-    public void setUserAnswer(String userAnswer) {
-        this.userAnswer = userAnswer;
+    public void setResult(Result newResult) {
+        this.result = newResult;
     }
 }
