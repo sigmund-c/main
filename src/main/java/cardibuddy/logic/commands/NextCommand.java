@@ -1,6 +1,7 @@
 package cardibuddy.logic.commands;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
+import static cardibuddy.commons.core.Messages.MESSAGE_TEST_COMPLETE;
 import static cardibuddy.commons.core.Messages.MESSAGE_UNANSWERED_QUESTION;
 import static java.util.Objects.requireNonNull;
 
@@ -27,7 +28,7 @@ public class NextCommand extends Command {
             + "OR: " + COMMAND_WORD + " force";
 
     public static final String MESSAGE_NEXT_SUCCESS = "Showing the next question";
-    public static final String MESSAGE_TEST_COMPLETE = "No more flashcards to test!";
+
     private static final Logger logger = LogsCenter.getLogger(NextCommand.class);
 
     private LogicToUiManager logicToUiManager;
@@ -41,8 +42,8 @@ public class NextCommand extends Command {
      * Gets the next question in the test queue, if any.
      *
      * @param model {@code Model} which the command should operate on.
-     * @return
-     * @throws CommandException
+     * @return CommandResult object
+     * @throws CommandException if there is no currently ongoing test session, or if the user has not answered the question yet.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
