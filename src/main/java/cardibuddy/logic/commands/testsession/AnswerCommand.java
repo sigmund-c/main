@@ -1,9 +1,11 @@
-package cardibuddy.logic.commands;
+package cardibuddy.logic.commands.testsession;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
 import static java.util.Objects.requireNonNull;
 
 import cardibuddy.logic.LogicToUiManager;
+import cardibuddy.logic.commands.Command;
+import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.testsession.Result;
@@ -48,7 +50,7 @@ public class AnswerCommand extends Command {
             if (testResult.getResult() == Result.WRONG) { // prompt the user to force correct if they wish to
                 return new CommandResult(String.format(MESSAGE_ANS_SUCCESS, MESSAGE_FORCE_PROMPT), false, false);
             } else {
-            return new CommandResult(String.format(MESSAGE_ANS_SUCCESS, ""), false, false);
+                return new CommandResult(String.format(MESSAGE_ANS_SUCCESS, ""), false, false);
             }
         } catch (NullPointerException e) {
             throw new CommandException(MESSAGE_NO_TESTSESSION);

@@ -8,25 +8,25 @@ import java.util.regex.Pattern;
 
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.AddCommand;
-import cardibuddy.logic.commands.AnswerCommand;
 import cardibuddy.logic.commands.ClearCommand;
 import cardibuddy.logic.commands.Command;
 import cardibuddy.logic.commands.DeleteCommand;
 import cardibuddy.logic.commands.EditCommand;
 import cardibuddy.logic.commands.ExitCommand;
 import cardibuddy.logic.commands.FilterCommand;
-import cardibuddy.logic.commands.ForceCommand;
 import cardibuddy.logic.commands.HelpCommand;
 import cardibuddy.logic.commands.ListCommand;
-import cardibuddy.logic.commands.NextCommand;
 import cardibuddy.logic.commands.OpenCommand;
-import cardibuddy.logic.commands.QuitCommand;
 import cardibuddy.logic.commands.SearchCardCommand;
 import cardibuddy.logic.commands.SearchCommand;
 import cardibuddy.logic.commands.SearchDeckCommand;
-import cardibuddy.logic.commands.SkipCommand;
 import cardibuddy.logic.commands.StatisticsCommand;
 import cardibuddy.logic.commands.TestCommand;
+import cardibuddy.logic.commands.testsession.AnswerCommand;
+import cardibuddy.logic.commands.testsession.ForceCommand;
+import cardibuddy.logic.commands.testsession.NextCommand;
+import cardibuddy.logic.commands.testsession.QuitCommand;
+import cardibuddy.logic.commands.testsession.SkipCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.ReadOnlyCardiBuddy;
 
@@ -96,7 +96,7 @@ public class CardiBuddyParser {
             return new ForceCommand();
 
         case SkipCommand.COMMAND_WORD: // test session command
-                return new SkipCommand(logicToUiManager);
+            return new SkipCommand(logicToUiManager);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -106,7 +106,6 @@ public class CardiBuddyParser {
 
         case SearchCommand.COMMAND_WORD:
             switch (arguments.substring(1, 5)) {
-
             case SearchDeckCommand.COMMAND_WORD:
                 return new SearchDeckCommandParser().parse(arguments.substring(5));
 

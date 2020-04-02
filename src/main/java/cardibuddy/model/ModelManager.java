@@ -58,14 +58,14 @@ public class ModelManager implements Model {
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        requireNonNull(userPrefs);
+        this.userPrefs.resetData(userPrefs);
     }
 
     @Override
@@ -93,13 +93,13 @@ public class ModelManager implements Model {
     //=========== CardiBuddy ================================================================================
 
     @Override
-    public void setCardiBuddy(ReadOnlyCardiBuddy cardiBuddy) {
-        this.cardiBuddy.resetData(cardiBuddy);
+    public ReadOnlyCardiBuddy getCardiBuddy() {
+        return cardiBuddy;
     }
 
     @Override
-    public ReadOnlyCardiBuddy getCardiBuddy() {
-        return cardiBuddy;
+    public void setCardiBuddy(ReadOnlyCardiBuddy cardiBuddy) {
+        this.cardiBuddy.resetData(cardiBuddy);
     }
 
     @Override
@@ -178,7 +178,10 @@ public class ModelManager implements Model {
      * Gets the next question in the {@code TestSession}
      */
     @Override
-    public Question getNextQuestion() throws UnansweredQuestionException, NoOngoingTestException, EmptyTestQueueException {
+    public Question getNextQuestion() throws
+            UnansweredQuestionException,
+            NoOngoingTestException,
+            EmptyTestQueueException {
         try {
             return testSession.getNextQuestion();
         } catch (NullPointerException e) {

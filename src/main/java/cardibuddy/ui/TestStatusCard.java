@@ -6,13 +6,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 /**
-* A class for the Test Session's status view.
-* Shows the user the number of flashcards left in the {@code testQueue}, as well as an encouraging message.
-* Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-* * As a consequence, UI elements' variable names cannot be set to such keywords
-* * or an exception will be thrown by JavaFX during runtime.
-*/
-public class TestStatusCard extends UiPart<Region>{
+ * A class for the Test Session's status view.
+ * Shows the user the number of flashcards left in the {@code testQueue}, as well as an encouraging message.
+ * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
+ * * As a consequence, UI elements' variable names cannot be set to such keywords
+ * * or an exception will be thrown by JavaFX during runtime.
+ */
+public class TestStatusCard extends UiPart<Region> {
 
     public static final String MESSAGE_COUNTDOWN = "Flashcards in queue: %s\n";
     public static final String MESSAGE_ENDING_SOON = "Finishing soon!";

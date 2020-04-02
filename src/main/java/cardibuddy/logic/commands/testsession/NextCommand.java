@@ -1,4 +1,4 @@
-package cardibuddy.logic.commands;
+package cardibuddy.logic.commands.testsession;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
 import static cardibuddy.commons.core.Messages.MESSAGE_TEST_COMPLETE;
@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.logic.LogicToUiManager;
+import cardibuddy.logic.commands.Command;
+import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.flashcard.Question;
@@ -29,7 +31,7 @@ public class NextCommand extends Command {
             + "OR: " + COMMAND_WORD + " force";
 
     public static final String MESSAGE_NEXT_SUCCESS = "Answer the following question:"
-            + "\n (Format 'ans YOUR ANSWER')";
+            + "\nFormat: 'ans YOUR ANSWER'";
 
     private static final Logger logger = LogsCenter.getLogger(NextCommand.class);
 
@@ -45,7 +47,8 @@ public class NextCommand extends Command {
      *
      * @param model {@code Model} which the command should operate on.
      * @return CommandResult object
-     * @throws CommandException if there is no currently ongoing test session, or if the user has not answered the question yet.
+     * @throws CommandException if there is no currently ongoing test session,
+     * or if the user has not answered the question yet.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -60,8 +63,7 @@ public class NextCommand extends Command {
             model.clearTestSession();
             logicToUiManager.showTestEnd();
             return new CommandResult(MESSAGE_TEST_COMPLETE, false, false);
-        }
-        catch (NoOngoingTestException e) {
+        } catch (NoOngoingTestException e) {
             throw new CommandException(MESSAGE_NO_TESTSESSION);
         } catch (UnansweredQuestionException e) {
             throw new CommandException(String.format

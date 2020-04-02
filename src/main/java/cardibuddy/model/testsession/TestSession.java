@@ -93,10 +93,12 @@ public class TestSession {
      * Skips this question by removing the question from the testQueue without marking it.
      * Updates the TestResult by incrementing the variable {@code timesSkipped}
      */
-    public Question skipQuestion() throws AlreadyCorrectException{
-        if (testResults.containsKey(current)) { // if the user has already answered this question before, update the result in the testResults hashmap
+    public Question skipQuestion() throws AlreadyCorrectException {
+        if (testResults.containsKey(current)) {
+            // if the user has already answered this question before, update the result in the testResults hashmap
             TestResult prevTestResult = testResults.get(current);
-            if (prevTestResult.getResult() == Result.CORRECT) { // user should not be allowed to skip the question if they already got it correct
+            if (prevTestResult.getResult() == Result.CORRECT) {
+                // user should not be allowed to skip the question if they already got it correct
                 throw new AlreadyCorrectException();
             }
             TestResult newTestResult = new TestResult(prevTestResult);
