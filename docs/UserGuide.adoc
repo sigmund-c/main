@@ -322,22 +322,60 @@ There is no need to prioritise manually.
 
 === Testing
 
-==== Testing deck: test deck
+==== Starting a test session for a deck: `test INDEX`
+Replace `INDEX` with the index number of the deck you wish to test, which can be found in the list view of all your decks.
 
-Creates a test session that comprises all the questions of the flash card belonging to the specific deck.
-Format: `test deck INDEX`
+What it does:
+* A test session will immediately replace the normal deck and flashcard list view.
+* The first question of the test session will be displayed.
 
-* Creates a test session of the deck at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
-* Users are to input the answer in the command line.
-* If the user input does not match the answer of the flashcard, the answer will be marked as ‘WRONG’ and the flash card will be added to the back of the test session.
-* If the user input matches the answer of the flashcard, the answer will be marked as ‘CORRECT’ and the flash card will be removed from the current test session.
-* Test session also comes with an inbuilt timer. If the user is unable to answer all the questions before the timer counts down to 0, the questions that have not been answered will all be marked as wrong. The test session will end and the final grades will be displayed on the screen.
-* Test session data is saved automatically. Even if user quits the test session halfway, the current data will not be lost.
+Example Usage:
 
-Examples:
-
-* `test deck 1` +
+* `test 1` +
 Creates a test session for the 1st deck.
+
+==== Answering a question: `ans YOUR ANSWER`
+Replace `YOUR ANSWER` with your answer to the displayed question.
+
+What it does:
+* Submits your answer, and checks your answer against the flashcard's stored answer
+* Displays the result of your answer (CORRECT or WRONG)
+* Displays your answer and the flashcard's answer
+
+Example Usage:
+
+* `ans CardiBuddy` +
+To answer the question: "What is the name of this application?"
+
+==== Don't want to answer? Use: `skip`
+
+What it does:
+
+* If you already know the answer to the question, and don't want to waste your time answering it, just type `skip` to go to the next question.
+* CardiBuddy will not note down this flashcard in your test history, and will merely remove it from your current test session.
+
+==== Force correct an answer: `force`
+
+What it does:
+
+* CardiBuddy takes your answer word for word when checking against the flashcard's model answer.
+* If your answer differs by the model answer, it will be marked as wrong.
+* After viewing the model answer, if you feel that your answer still captures the gist of what the question wants, you can `force` your answer to be marked as correct.
+
+==== Go to the next question: `next`
+
+What it does:
+
+* After submitting your answer, type `next` to go to the next question (if there are any left to test).
+* You can only type `next` once you have submitted your answer.
+
+==== Quit the test session halfway: `quit`
+
+What it does:
+
+* Allows you to quit the current test session even before it is completed.
+
+
 
 === Undo/Redo
 
