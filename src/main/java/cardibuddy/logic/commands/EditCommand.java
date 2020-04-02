@@ -126,7 +126,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isFieldEdited() {
-            return CollectionUtil.isAnyNonNull(tags);
+            return !(title == null) || CollectionUtil.isAnyNonNull(tags);
         }
 
         /**

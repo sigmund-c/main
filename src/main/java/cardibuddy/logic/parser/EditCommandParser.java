@@ -51,6 +51,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         return new EditCommand(index, editDeckDescriptor);
     }
 
+    /**
+     * Parses the string into a Title object if title is non-empty.
+     * @param title string from user input.
+     * @return an optional object.
+     * @throws ParseException if there is an error.
+     */
     private Optional<Title> parseTitleForEdit(String title) throws ParseException {
         assert title != null;
 

@@ -118,17 +118,18 @@ Format: `edit INDEX [d/TITLE] [t/TAG]…`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the deck will be removed i.e adding of tags is not cumulative.
-* You can remove all the deck’s tags by typing t/ without specifying any tags after it.
+* You can remove all the deck’s tags by typing t/ without specifying any tags after it. If not, the tags will not be
+removed.
 
 Examples:
 
-* `edit 1 d/cs2103T` +
-Edits the title of the 1st deck to be `cs2103T`.
+* `edit 1 d/CS2103T` +
+Edits the title of the 1st deck to be `CS2103T` without removing existing tags.
 
-* `edit 2 d/cs2040 t/` +
-Edits the title of the 2nd deck to be `cs2040` and clears all existing tags.
+* `edit 2 d/CS2040 t/` +
+Edits the title of the 2nd deck to be `CS2040` and clears all existing tags.
 
-==== Editing a card: `edit card`
+==== Editing a card: `edit card` [coming in v2.0]
 
 Edits an existing card in the deck.
 Format: `edit card INDEX [q/QUESTION] [a/ANSWER] [t/TAG]…`
@@ -307,7 +308,7 @@ Examples:
 * `test 1` +
 Creates a test session for the 1st deck.
 
-=== Undo/Redo
+=== Undo/Redo [coming in v2.0]
 
 ==== Undoing command: `undo`
 
@@ -331,7 +332,7 @@ Upon adding a new card to a specific deck, the application automatically checks 
 
 If there is a card with the same question but it is in a different deck, the card can still be successfully added.
 
-=== Statistics
+=== Statistics [coming in v2.0]
 
 ==== Displaying all statistics: `statistics`
 
