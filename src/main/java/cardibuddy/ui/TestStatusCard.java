@@ -15,7 +15,7 @@ import javafx.scene.layout.Region;
 public class TestStatusCard extends UiPart<Region> {
 
     public static final String MESSAGE_COUNTDOWN = "Flashcards in queue: %s\n";
-    public static final String MESSAGE_ENDING_SOON = "Finishing soon!";
+    public static final String MESSAGE_ENDING_SOON = "Finishing soon hang in there!";
     public static final String MESSAGE_LETS_GO = "Let's get it!";
     private static final String FXML = "TestStatusCard.fxml";
 
