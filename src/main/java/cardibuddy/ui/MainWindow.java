@@ -1,6 +1,5 @@
 package cardibuddy.ui;
 
-import cardibuddy.logic.commands.TestCommand;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.GuiSettings;

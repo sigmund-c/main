@@ -72,7 +72,7 @@ Format: `exit`
 
 === Adding
 
-==== Adding a deck: `add deck`
+==== Adding a deck: `add d/TITLE`
 
 Creates a new deck to be added to the library.
 Format: `add d/TITLE [t/TAG]…`
@@ -82,13 +82,13 @@ A deck can have any number of tags (including 0)
 
 Examples:
 
-* `add d/cs2103T` +
-Returns a new deck titled `cs2103T`
+* `add d/CS2103` +
+Returns a new deck titled `CS2103`
 
-* `add d/cs1101s t/Hard t/CS` +
-Returns a new deck titled `cs1101s` with the tags `Hard` and `CS`
+* `add d/CS1101S t/Easy t/Basics` +
+Returns a new deck titled `CS1101S` with the tags `Easy` and `Basics`
 
-==== Adding a card: `add card`
+==== Adding a card: `add c/DECK_TITLE n/CARD_TYPE`
 
 Creates a new card to be added to the deck.
 Format: `add c/DECK_TITLE n/CARD_TYPE`
@@ -102,8 +102,8 @@ Format: `add c/DECK_TITLE n/CARD_TYPE`
 
 Examples:
 
-* `add c/cs1101s n/MCQ` +
-Returns a new card belonging to the deck `cs1101s` and of the type `MCQ`
+* `add c/CS1101S n/MCQ` +
+Returns a new card belonging to the deck `CS1101S` and of the type `MCQ`
 
 === Editing
 
@@ -216,45 +216,78 @@ Deletes the 1st card in the results of the search card command.
 
 === Searching
 
-==== Searching for a deck: `search`
+==== Searching for a deck: `search deck`
 
 Searches for the decks with titles that contain any of the given keywords or all of the keywords
 concatenated with the `&` symbol.
-Format: `search d/KEYWORD [&] [MORE_KEYWORDS]`
+Format: `search deck KEYWORD [&] [MORE_KEYWORDS]`
 
 * If the search has a `&` symbol, only decks with the words concatenated before and after
 the symbol will be returned.
 * The search is case insensitive. e.g cs2040 will match CS2040
 * The order of the keywords does not matter. e.g. Science Module will match Module Science
-* Both title and tags are searched.
+* Only titles of the decks are searched.
 * The keyword needs to match a word within the deck’s title exactly . e.g. cs will not match with cs2030
 
 Examples:
 
-* `search d/cs2106 d/easy` +
-Returns the deck titled or tagged with `cs2106` or `easy`
+* `search deck database` +
+Displays decks with the word `database` in the titles.
 
-* `search d/cs2040 & hard` +
-Returns decks titled or tagged with both `cs2040` and `cs2106`
+* `search deck database & relational` +
+Displays decks with both of the words `database` and `relational` in the titles.
 
-==== Searching for a card: `search`
+==== Searching for a card: `search card`
 
 Finds the cards with a question that contain any of the given keywords.
-Format: `search c/KEYWORD [MORE_KEYWORDS]`
+Format: `search card [&] [MORE_KEYWORDS]`
 
+* A deck needs to be opened for the `search card` command to work. The command will only search for cards in the
+opened deck.
+* If the search has a `&` symbol, only decks with the words concatenated before and after
+the symbol will be returned.
 * The search is case insensitive. e.g programming will match Programming.
 * The order of the keywords does not matter. e.g. Javascript programming language will match with programming language Javascript.
-* Both the question and the answer can be searched. As long as the flashcard has a question or answer that contains the keyword, that flashcard will be returned.
-* The keyword does not need to match a word within the question or answer exactly. e.g. Java will match with Javascript.
-* Flashcards with questions or answers that match at least one of the keywords will be returned. e.g. searching the word programming will return object-oriented programming… and Java programming language…
+* The keyword needs to match a word within the question exactly. e.g. Java will not match with Javascript.
 
 Examples:
 
-* `search c/cs2106` +
-Returns `cs2106`
+* `search card principle` +
+Displays cards with the word `principle` in the questions.
 
-* `search c/cs2040 c/cs2030` +
-Returns `cs2040` and `cs2030`
+* `search card diagram & UML` +
+Displays decks with both of the words `diagram` and `UML` in the questions.
+
+
+=== Filtering
+
+==== Filtering by tag: `filter tag`
+
+Filters across all decks and only displays the decks with the specific tag.
+Format: `filter tag t/TAG_TITLE`
+
+* Filtering by tag is case insensitive. e.g cs2040 will match CS2040
+
+Examples:
+
+* `filter tag t/Computing` +
+Returns `cs2040`, `cs3223` and `cs1101s`.
+
+==== Filtering by keyword: `filter keyword`
+
+Filters across all decks and only displays the cards with questions or answers that contain the specific keyword.
+Format: `filter keyword KEYWORD`
+
+* Filtering by keyword is case insensitive. e.g programming will match Programming.
+* The order of the keywords does not matter. e.g. Javascript programming language will match with programming language Javascript.
+* The keyword does not need to match a word within the question or answer exactly. e.g. Java will match with Javascript.
+* Flashcards that match at least one of the keywords will be returned. e.g. searching the word programming will return object-oriented programming… and Java programming language…
+
+Examples:
+
+* `filter keyword language` +
+Returns all cards that contain the word *language* in the question, answer or both.
+
 
 === Replacing image
 
@@ -284,41 +317,13 @@ Examples:
 * `replace card image n/cs3230 1 n/src/resources/images/img.PNG.` +
 Replaces the photo of the 1st card of the `cs3230` deck with the photo that the file path directs to.
 
-=== Filtering
-
-==== Filtering by tag: `filter tag`
-
-Filters across all decks and only displays the decks with the specific tag.
-Format: `filter tag t/TAG_TITLE`
-
-* Filtering by tag is case insensitive. e.g cs2040 will match CS2040
-
-Examples:
-
-* `filter tag t/Computing` +
-Returns `cs2040`, `cs3223` and `cs1101s`.
-
-
-==== Filtering by keyword: `filter keyword`
-
-Filters across all decks and only displays the cards with questions or answers that contain the specific keyword.
-Format: `filter keyword KEYWORD`
-
-* Filtering by keyword is case insensitive. e.g programming will match Programming.
-* The order of the keywords does not matter. e.g. Javascript programming language will match with programming language Javascript.
-* The keyword does not need to match a word within the question or answer exactly. e.g. Java will match with Javascript.
-* Flashcards that match at least one of the keywords will be returned. e.g. searching the word programming will return object-oriented programming… and Java programming language…
-
-Examples:
-
-* `filter keyword language` +
-Returns all cards that contain the word *language* in the question, answer or both.
 
 === Prioritising
 
 Cards that the user has answered wrongly to (user input does not match with answer) is automatically moved to the back of the testing session. The user will be able to reattempt the same flashcard again later in the testing session.
 
 There is no need to prioritise manually.
+
 
 === Testing
 
