@@ -55,13 +55,13 @@
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>
-                      <StackPane fx:id="deckListPanelPlaceholder" minHeight="600.0" VBox.vgrow="ALWAYS" />
+                      <StackPane fx:id="deckListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                     </VBox>
                                       <VBox fx:id="flashcardList" minHeight="500.0" minWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>
-                      <StackPane fx:id="flashcardListPanelPlaceholder" minHeight="400.0" VBox.vgrow="ALWAYS" />
+                      <StackPane fx:id="flashcardListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                     </VBox>
                      </children>
                   </HBox>

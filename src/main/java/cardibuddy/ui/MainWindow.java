@@ -1,5 +1,6 @@
 package cardibuddy.ui;
 
+import cardibuddy.logic.commands.TestCommand;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.GuiSettings;
@@ -254,11 +255,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleTest() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
-        }
+        resultDisplay.setFeedbackToUser("Enter the index of the deck you want to be tested on.\nThis feature is"
+                + " still not functional and being developed. Please test other functionalities.");
     }
 
     void show() {
@@ -294,6 +292,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isTest()) {
+                handleTest();
             }
 
             if (commandResult.isExit()) {

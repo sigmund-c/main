@@ -29,7 +29,7 @@ public class DeleteDeckCommandParser implements Parser<DeleteDeckCommand> {
             if (!logicToUiManager.isInDeck()) {
                 throw new ParseException(String.format(MESSAGE_NOT_IN_DECK));
             } else {
-                Index index = ParserUtil.parseIndex(args.substring(5));
+                Index index = ParserUtil.parseIndex(args);
                 logicToUiManager.setOpenedDeck(null);
                 logicToUiManager.openDeckPanel();
                 return new DeleteDeckCommand(index, logicToUiManager);

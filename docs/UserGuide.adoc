@@ -12,9 +12,9 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level3
+:repoURL: https://github.com/AY1920S2-CS2103T-T10-2/main
 
-By: `Team 10-2`      Since: `Jan 2020`      Licence: `MIT`
+By: `Team T10-2`      Since: `Jan 2020`      Licence: `MIT`
 
 == Introduction
 
@@ -23,7 +23,7 @@ Cardi Buddy (CardiB) is for students who *prefer to use a desktop app to store t
 == Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
+.  Download the latest `cardibuddy.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Address Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -33,9 +33,9 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* *`list`* : lists all decks
+* **`add`**`d/CS1101S t/Basics` : adds an empty deck titled `CS1101S` to the Cardi Buddy.
+* **`delete deck`**`3` : deletes the 3rd deck shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -46,10 +46,10 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add d/TITLE`, `TITLE` is a parameter which can be used as `add d/CS1101S`.
+* Items in square brackets are optional e.g `d/TITLE [t/TAG]` can be used as `d/CS1101S t/Basics` or as `d/CS1101S`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/Easy`, `t/Easy t/Basics` etc.
+* Parameters can be in any order e.g. if the command specifies `d/TITLE t/TAG`, `t/TAG d/TITLE` is also acceptable.
 ====
 
 === Basic Features

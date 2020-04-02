@@ -127,8 +127,12 @@
 
 .deck .big_label {
     -fx-font-family: "Poppins";
-    -fx-font-size: 16px;
+    -fx-font-size: 20px;
     -fx-text-fill: black;
+}
+
+.test .label {
+    -fx-text-fill: #EAEAEA;
 }
 
 .cell_big_label {
@@ -159,7 +163,7 @@
 .result-display {
     -fx-background-color: #333436;
     -fx-font-family: "Poppins";
-    -fx-font-size: 13pt;
+    -fx-font-size: 11pt;
     -fx-text-fill: #EAEAEA;
 }
 
@@ -210,6 +214,10 @@
     -fx-border-insets: 4;
     -fx-border-radius: 12;
     -fx-text-fill: black;
+}
+
+.test {
+    -fx-text-fill: #EAEAEA;
 }
 
 .command-box {

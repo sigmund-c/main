@@ -44,7 +44,7 @@ public class AnswerCommand extends Command {
         try {
             TestResult testResult = model.submitAnswer(userAnswer);
             logicToUiManager.showTestResult(testResult);
-            return new CommandResult(MESSAGE_ANS_SUCCESS, false, false);
+            return new CommandResult(MESSAGE_ANS_SUCCESS, false, false, false);
         } catch (NullPointerException e) {
             throw new CommandException(MESSAGE_NO_TESTSESSION);
         }

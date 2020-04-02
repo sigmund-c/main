@@ -44,7 +44,7 @@ public class QuitCommand extends Command {
             model.clearTestSession();
             logicToUiManager.showTestEnd();
 
-            return new CommandResult(MESSAGE_QUIT_SUCCESS, false, false);
+            return new CommandResult(MESSAGE_QUIT_SUCCESS, false, false, false);
         } catch (NoOngoingTestException e) {
             throw new CommandException(MESSAGE_NO_TESTSESSION);
         }

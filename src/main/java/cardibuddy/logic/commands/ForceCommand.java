@@ -39,6 +39,6 @@ public class ForceCommand extends Command {
         } catch (AlreadyCorrectException e) {
             throw new CommandException(MESSAGE_FORCE_FAIL_ALREADYCORRECT);
         }
-        return new CommandResult(MESSAGE_FORCE_SUCCESS, false, false);
+        return new CommandResult(MESSAGE_FORCE_SUCCESS, false, false, false);
     }
 }
