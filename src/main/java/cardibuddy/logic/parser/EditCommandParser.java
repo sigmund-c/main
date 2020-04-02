@@ -1,5 +1,6 @@
 package cardibuddy.logic.parser;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
@@ -12,6 +13,7 @@ import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.commands.EditCommand;
 import cardibuddy.logic.commands.EditCommand.EditDeckDescriptor;
 import cardibuddy.logic.parser.exceptions.ParseException;
+import cardibuddy.model.deck.Title;
 import cardibuddy.model.tag.Tag;
 
 /**
@@ -27,7 +29,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_DECK, PREFIX_TAG);
 
         Index index;
 
@@ -39,6 +41,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         EditDeckDescriptor editDeckDescriptor = new EditDeckDescriptor();
 
+        parseTitleForEdit(argMultimap.getValue(PREFIX_DECK).get()).ifPresent(editDeckDescriptor::setTitle);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editDeckDescriptor::setTags);
 
         if (!editDeckDescriptor.isFieldEdited()) {
@@ -46,6 +49,16 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         return new EditCommand(index, editDeckDescriptor);
+    }
+
+    private Optional<Title> parseTitleForEdit(String title) throws ParseException {
+        assert title != null;
+
+        if (title.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(ParserUtil.parseTitle(title));
     }
 
     /**

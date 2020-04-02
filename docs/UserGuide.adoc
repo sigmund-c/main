@@ -77,6 +77,8 @@ Format: `exit`
 Creates a new deck to be added to the library.
 Format: `add d/TITLE [t/TAG]…`
 
+* Tag names are alphanumeric with no spaces E.g. t/Core Module is an invalid tag while t/CoreModule is valid.
+
 [Tip]
 A deck can have any number of tags (including 0)
 
@@ -107,10 +109,10 @@ Returns a new card belonging to the deck `CS1101S` and of the type `MCQ`
 
 === Editing
 
-==== Editing a deck: `edit deck`
+==== Editing a deck: `edit`
 
 Edits an existing deck in the library.
-Format: `edit deck INDEX [d/TITLE] [t/TAG]…`
+Format: `edit INDEX [d/TITLE] [t/TAG]…`
 
 * Edits the decks at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
@@ -244,8 +246,8 @@ Format: `search card [&] [MORE_KEYWORDS]`
 
 * A deck needs to be opened for the `search card` command to work. The command will only search for cards in the
 opened deck.
-* If the search has a `&` symbol, only decks with the words concatenated before and after
-the symbol will be returned.
+* If the search has a `&` symbol, only cards with the words concatenated before and after
+the symbol, in the question, will be returned.
 * The search is case insensitive. e.g programming will match Programming.
 * The order of the keywords does not matter. e.g. Javascript programming language will match with programming language Javascript.
 * The keyword needs to match a word within the question exactly. e.g. Java will not match with Javascript.
@@ -261,61 +263,22 @@ Displays decks with both of the words `diagram` and `UML` in the questions.
 
 === Filtering
 
-==== Filtering by tag: `filter tag`
+==== Filtering by tags: `filter`
 
 Filters across all decks and only displays the decks with the specific tag.
-Format: `filter tag t/TAG_TITLE`
+Format: `filter TAGNAME [&] [MORE_TAGNAMES]`
 
-* Filtering by tag is case insensitive. e.g cs2040 will match CS2040
-
-Examples:
-
-* `filter tag t/Computing` +
-Returns `cs2040`, `cs3223` and `cs1101s`.
-
-==== Filtering by keyword: `filter keyword`
-
-Filters across all decks and only displays the cards with questions or answers that contain the specific keyword.
-Format: `filter keyword KEYWORD`
-
-* Filtering by keyword is case insensitive. e.g programming will match Programming.
-* The order of the keywords does not matter. e.g. Javascript programming language will match with programming language Javascript.
-* The keyword does not need to match a word within the question or answer exactly. e.g. Java will match with Javascript.
-* Flashcards that match at least one of the keywords will be returned. e.g. searching the word programming will return object-oriented programming… and Java programming language…
+* If the search has a `&` symbol, only decks with the tags concatenated before and after
+the symbol will be returned.
+* Filtering by tag is case insensitive. e.g hard will match Hard
 
 Examples:
 
-* `filter keyword language` +
-Returns all cards that contain the word *language* in the question, answer or both.
+* `filter hard` +
+Displays decks with the tag `hard`.
 
-
-=== Replacing image
-
-==== Replacing a deck image: `replace deck image`
-
-Replaces the photo of an existing deck in the library. By default, all decks will have a default logo as shown in our wireframe.
-Format: `replace deck photo INDEX n/PHOTO_PATH`
-
-* Replaces the photo of the deck at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
-* The application will display a text label that reads ‘You can enter the path of your image into the command field or drag and drop your image into the command field.’
-
-Examples:
-
-* `replace deck image 1 n/src/resources/images/img.PNG.` +
-Replaces the photo of the 1st deck to the photo that the file path directs to.
-
-==== Replacing a card image: `replace card image`
-
-Replaces the photo of an existing card in a specified deck. By default, all cards will have a default image as shown in our wireframe.
-Format: `replace card image n/DECK_TITLE INDEX n/PHOTO_PATH`
-
-* Replaces the photo of the card belonging to the deck with that DECK_TITLE, whereby the card is at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
-* The application will display a text label that reads ‘You can enter the path of your image into the command field or drag and drop your image into the command field.’
-
-Examples:
-
-* `replace card image n/cs3230 1 n/src/resources/images/img.PNG.` +
-Replaces the photo of the 1st card of the `cs3230` deck with the photo that the file path directs to.
+* `filter hard & coremodule` +
+Displays decks with both the tags `hard` and `coremodule`.
 
 
 === Prioritising
@@ -327,10 +290,10 @@ There is no need to prioritise manually.
 
 === Testing
 
-==== Testing deck: test deck
+==== Testing deck: test
 
 Creates a test session that comprises all the questions of the flash card belonging to the specific deck.
-Format: `test deck INDEX`
+Format: `test INDEX`
 
 * Creates a test session of the deck at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
 * Users are to input the answer in the command line.
@@ -341,7 +304,7 @@ Format: `test deck INDEX`
 
 Examples:
 
-* `test deck 1` +
+* `test 1` +
 Creates a test session for the 1st deck.
 
 === Undo/Redo
@@ -370,20 +333,12 @@ If there is a card with the same question but it is in a different deck, the car
 
 === Statistics
 
-==== Displaying all statistics: `stats all`
+==== Displaying all statistics: `statistics`
 
 Displays the statistics across all decks.
-Format: `stats all`
+Format: `statistics`
 
 * Average time spent on each deck, average number of questions completed per week, total number of questions completed for that week and the number of decks associated with each tag.
-* A graphical display in the form of a pie chart will also be used to represent the statistics.
-
-==== Displaying deck statistics: `stats deck`
-
-Displays the statistics of a specific deck.
-Format: `stats deck`
-
-* Displayed statistics consists of average time spent on the deck, total number of questions in that deck completed in that week, time spend on the test session for that deck.
 * A graphical display in the form of a pie chart will also be used to represent the statistics.
 
 === Syncing across multiple platforms: sync [coming in v2.0]
@@ -391,6 +346,36 @@ Format: `stats deck`
 === Playing memory games: game [coming in v2.0]
 
 === Customising flashcards: custom [coming in v2.0]
+
+=== Replacing image [coming in v2.0]
+
+==== Replacing a deck image: `replace deck image`
+
+Replaces the photo of an existing deck in the library. By default, all decks will have a default logo as shown in our wireframe.
+Format: `replace deck photo INDEX n/PHOTO_PATH`
+
+* Replaces the photo of the deck at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
+* The application will display a text label that reads ‘You can enter the path of your image into the command field or drag and drop your image into the command field.’
+
+Examples:
+
+* `replace deck image 1 n/src/resources/images/img.PNG.` +
+Replaces the photo of the 1st deck to the photo that the file path directs to.
+
+==== Replacing a card image: `replace card image`
+
+Replaces the photo of an existing card in a specified deck. By default, all cards will have a default image as shown in our wireframe.
+Format: `replace card image n/DECK_TITLE INDEX n/PHOTO_PATH`
+
+* Replaces the photo of the card belonging to the deck with that DECK_TITLE, whereby the card is at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
+* The application will display a text label that reads ‘You can enter the path of your image into the command field or drag and drop your image into the command field.’
+
+Examples:
+
+* `replace card image n/cs3230 1 n/src/resources/images/img.PNG.` +
+Replaces the photo of the 1st card of the `cs3230` deck with the photo that the file path directs to.
+
+
 
 == FAQ
 

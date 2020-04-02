@@ -16,6 +16,7 @@ import cardibuddy.commons.util.CollectionUtil;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.deck.Title;
 import cardibuddy.model.tag.Tag;
 
 /**
@@ -78,9 +79,10 @@ public class EditCommand extends Command {
     private static Deck createEditedDeck(Deck deckToEdit, EditDeckDescriptor editDeckDescriptor) {
         assert deckToEdit != null;
 
+        Title updatedTitle = editDeckDescriptor.getTitle().orElse(deckToEdit.getTitle());
         Set<Tag> updatedTags = editDeckDescriptor.getTags().orElse(deckToEdit.getTags());
 
-        return new Deck(deckToEdit.getTitle(), updatedTags, deckToEdit.getFlashcards());
+        return new Deck(updatedTitle, updatedTags, deckToEdit.getFlashcards());
     }
 
     @Override
@@ -107,6 +109,7 @@ public class EditCommand extends Command {
      */
     public static class EditDeckDescriptor {
         private Set<Tag> tags;
+        private Title title;
 
         public EditDeckDescriptor() {}
 
@@ -116,6 +119,7 @@ public class EditCommand extends Command {
          */
         public EditDeckDescriptor(EditDeckDescriptor toCopy) {
             setTags(toCopy.tags);
+            setTitle(toCopy.title);
         }
 
         /**
@@ -131,6 +135,14 @@ public class EditCommand extends Command {
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        public void setTitle(Title title) {
+            this.title = title;
+        }
+
+        public Optional<Title> getTitle() {
+            return (title != null) ? Optional.of(title) : Optional.empty();
         }
 
         /**
@@ -157,7 +169,7 @@ public class EditCommand extends Command {
             // state check
             EditDeckDescriptor e = (EditDeckDescriptor) other;
 
-            return getTags().equals(e.getTags());
+            return getTitle().equals(e.getTitle()) && getTags().equals(e.getTags());
         }
     }
 }
