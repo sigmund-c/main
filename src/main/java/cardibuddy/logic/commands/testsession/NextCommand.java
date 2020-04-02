@@ -1,6 +1,7 @@
-package cardibuddy.logic.commands;
+package cardibuddy.logic.commands.testsession;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
+import static cardibuddy.commons.core.Messages.MESSAGE_TEST_COMPLETE;
 import static cardibuddy.commons.core.Messages.MESSAGE_UNANSWERED_QUESTION;
 import static java.util.Objects.requireNonNull;
 
@@ -8,9 +9,12 @@ import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.logic.LogicToUiManager;
+import cardibuddy.logic.commands.Command;
+import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.testsession.exceptions.EmptyTestQueueException;
 import cardibuddy.model.testsession.exceptions.NoOngoingTestException;
 import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
 
@@ -26,8 +30,9 @@ public class NextCommand extends Command {
             + "Example: " + COMMAND_WORD + "\n"
             + "OR: " + COMMAND_WORD + " force";
 
-    public static final String MESSAGE_NEXT_SUCCESS = "Showing the next question";
-    public static final String MESSAGE_TEST_COMPLETE = "No more flashcards to test!";
+    public static final String MESSAGE_NEXT_SUCCESS = "Answer the following question:"
+            + "\nFormat: 'ans YOUR ANSWER'";
+
     private static final Logger logger = LogsCenter.getLogger(NextCommand.class);
 
     private LogicToUiManager logicToUiManager;
@@ -41,22 +46,23 @@ public class NextCommand extends Command {
      * Gets the next question in the test queue, if any.
      *
      * @param model {@code Model} which the command should operate on.
-     * @return
-     * @throws CommandException
+     * @return CommandResult object
+     * @throws CommandException if there is no currently ongoing test session,
+     * or if the user has not answered the question yet.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         try {
-            if (!model.isTestComplete()) {
-                Question question = model.getNextQuestion();
-                logicToUiManager.showTestQuestion(question);
-                return new CommandResult(MESSAGE_NEXT_SUCCESS, false, false);
-            } else { // if no more flashcards in the test queue
-                model.clearTestSession();
-                logicToUiManager.showTestEnd();
-                return new CommandResult(MESSAGE_TEST_COMPLETE, false, false);
-            }
+            Question question = model.getNextQuestion();
+            logicToUiManager.showTestQuestion(question);
+            logicToUiManager.showTestStatus(model.getTestQueueSize());
+            return new CommandResult(MESSAGE_NEXT_SUCCESS, false, false);
+        } catch (EmptyTestQueueException e) {
+            // no more flashcards left to test, return to the main window.
+            model.clearTestSession();
+            logicToUiManager.showTestEnd();
+            return new CommandResult(MESSAGE_TEST_COMPLETE, false, false);
         } catch (NoOngoingTestException e) {
             throw new CommandException(MESSAGE_NO_TESTSESSION);
         } catch (UnansweredQuestionException e) {

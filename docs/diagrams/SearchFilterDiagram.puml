@@ -17,7 +17,7 @@ end box
 activate SearchCommandParser
 
 create SearchDeckKeywordsPredicate
-SearchCommandParser -> SearchDeckKeywordsPredicate: Arrays.asList(nameKeywords)
+SearchCommandParser -> SearchDeckKeywordsPredicate: nameKeywords
 activate SearchDeckKeywordsPredicate
 SearchDeckKeywordsPredicate --> SearchCommandParser: sdkp
 deactivate SearchDeckKeywordsPredicate
@@ -49,7 +49,7 @@ Model --> SearchCommand: size
 deactivate Model
 
 create CommandResult
-SearchCommand -> CommandResult: CommandResult(String.format(Messages.MESSAGE_DECKS_LISTED_OVERVIEW, size))
+SearchCommand -> CommandResult: size
 
 activate CommandResult
 CommandResult --> SearchCommand: cr
