@@ -1,10 +1,13 @@
 package cardibuddy.logic.parser;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static cardibuddy.commons.core.Messages.MESSAGE_NOT_IN_DECK;
 
 import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.LogicToUiManager;
+import cardibuddy.logic.commands.DeleteCardCommand;
 import cardibuddy.logic.commands.DeleteCommand;
+import cardibuddy.logic.commands.DeleteDeckCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 
 /**
@@ -25,10 +28,20 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            logicToUiManager.setOpenedDeck(null);
-            logicToUiManager.openDeckPanel();
-            return new DeleteCommand(index, logicToUiManager);
+            if (args.substring(1, 5).equals("deck")) {
+                Index index = ParserUtil.parseIndex(args.substring(5));
+                logicToUiManager.setOpenedDeck(null);
+                logicToUiManager.openDeckPanel();
+                return new DeleteDeckCommand(index, logicToUiManager);
+            } else if (args.substring(1, 5).equals("card")) {
+                if (!logicToUiManager.isInDeck()) {
+                    throw new ParseException(String.format(MESSAGE_NOT_IN_DECK));
+                }
+                Index index = ParserUtil.parseIndex(args.substring(5));
+                return new DeleteCardCommand(index, logicToUiManager);
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            }
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);

@@ -45,7 +45,6 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private StatisticsPanel statisticsPanel;
     private HelpWindow helpWindow;
-    private DragAndDrop dragDrop;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -87,8 +86,6 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-
-        dragDrop = new DragAndDrop();
     }
 
     public Stage getPrimaryStage() {
