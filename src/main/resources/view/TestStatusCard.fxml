@@ -27,13 +27,10 @@
                 </Label>
             </HBox>
             <HBox spacing="5" alignment="CENTER_LEFT">
-                <Label fx:id="result" text="\$first" styleClass="cell_big_label"/>
+                <Label fx:id="testQueueCountdown" text="\$first" styleClass="cell_big_label"/>
             </HBox>
             <HBox spacing="5" alignment="CENTER_LEFT">
-                <Label fx:id="userAnswer" text="\$first" styleClass="cell_big_label"/>
-            </HBox>
-            <HBox spacing="5" alignment="CENTER_LEFT">
-                <Label fx:id="flashcardAnswer" text="\$first" styleClass="cell_big_label"/>
+                <Label fx:id="messageToUser" text="\$first" styleClass="cell_big_label"/>
             </HBox>
             <!-- <FlowPane fx:id="tags" /> -->
         </VBox>

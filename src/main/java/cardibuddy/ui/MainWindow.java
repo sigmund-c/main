@@ -199,14 +199,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Fills the placeholder of this window with the Answer of the current flashcard being tested.
-     *
-     * @param answer to display to the user
+     * Replaces the flashcardListPlaceholder with the countdown as well as other test session status messages.
+     * @param testQueueSize the number of remaining flashcards in the {@code testQueue}
      */
-    public void fillInnerPartsWithAnswer(Answer answer) {
-        deckListPanelPlaceholder.getChildren().clear();
-        AnswerTestCard answerTestCard = new AnswerTestCard(answer);
-        deckListPanelPlaceholder.getChildren().add(answerTestCard.getRoot());
+    public void showTestStatus(int testQueueSize) {
+        TestStatusCard testStatusCard = new TestStatusCard(testQueueSize);
+        flashcardListPanelPlaceholder.getChildren().clear();
+        flashcardListPanelPlaceholder.getChildren().add(testStatusCard.getRoot());
+
     }
 
     /**

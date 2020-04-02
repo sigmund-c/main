@@ -12,6 +12,7 @@ import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.testsession.exceptions.EmptyTestQueueException;
 import cardibuddy.model.testsession.exceptions.NoOngoingTestException;
 import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
 
@@ -27,7 +28,8 @@ public class NextCommand extends Command {
             + "Example: " + COMMAND_WORD + "\n"
             + "OR: " + COMMAND_WORD + " force";
 
-    public static final String MESSAGE_NEXT_SUCCESS = "Showing the next question";
+    public static final String MESSAGE_NEXT_SUCCESS = "Answer the following question:"
+            + "\n (Format 'ans YOUR ANSWER')";
 
     private static final Logger logger = LogsCenter.getLogger(NextCommand.class);
 
@@ -49,16 +51,17 @@ public class NextCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         try {
-            if (!model.isTestComplete()) {
-                Question question = model.getNextQuestion();
-                logicToUiManager.showTestQuestion(question);
-                return new CommandResult(MESSAGE_NEXT_SUCCESS, false, false);
-            } else { // if no more flashcards in the test queue
-                model.clearTestSession();
-                logicToUiManager.showTestEnd();
-                return new CommandResult(MESSAGE_TEST_COMPLETE, false, false);
-            }
-        } catch (NoOngoingTestException e) {
+            Question question = model.getNextQuestion();
+            logicToUiManager.showTestQuestion(question);
+            logicToUiManager.showTestStatus(model.getTestQueueSize());
+            return new CommandResult(MESSAGE_NEXT_SUCCESS, false, false);
+        } catch (EmptyTestQueueException e) {
+            // no more flashcards left to test, return to the main window.
+            model.clearTestSession();
+            logicToUiManager.showTestEnd();
+            return new CommandResult(MESSAGE_TEST_COMPLETE, false, false);
+        }
+        catch (NoOngoingTestException e) {
             throw new CommandException(MESSAGE_NO_TESTSESSION);
         } catch (UnansweredQuestionException e) {
             throw new CommandException(String.format

@@ -73,8 +73,8 @@ public class LogicToUiManager {
         ui.getMainWindow().fillInnerPartsWithQuestion(question);
     }
 
-    public void showTestAnswer(Answer answer) {
-        ui.getMainWindow().fillInnerPartsWithAnswer(answer);
+    public void showTestStatus(int testQueueSize) {
+        ui.getMainWindow().showTestStatus(testQueueSize);
     }
 
     public void showTestResult(TestResult testResult) {

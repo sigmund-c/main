@@ -24,6 +24,7 @@ import cardibuddy.logic.commands.QuitCommand;
 import cardibuddy.logic.commands.SearchCardCommand;
 import cardibuddy.logic.commands.SearchCommand;
 import cardibuddy.logic.commands.SearchDeckCommand;
+import cardibuddy.logic.commands.SkipCommand;
 import cardibuddy.logic.commands.StatisticsCommand;
 import cardibuddy.logic.commands.TestCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
@@ -93,6 +94,9 @@ public class CardiBuddyParser {
 
         case ForceCommand.COMMAND_WORD: // test session command
             return new ForceCommand();
+
+        case SkipCommand.COMMAND_WORD: // test session command
+                return new SkipCommand(logicToUiManager);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
