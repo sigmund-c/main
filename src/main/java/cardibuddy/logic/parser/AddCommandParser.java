@@ -73,9 +73,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             toAdd = addDeck(argMultimap);
             return new AddCommand((Deck) toAdd);
         } else if (argMultimap.containsKey(PREFIX_FLASHCARD)) {
-
             toAdd = addCard(argMultimap);
-
             return new AddCommand((Flashcard) toAdd, logicToUiManager);
         }
         return null;
@@ -114,6 +112,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                 throw new InvalidFlashcardException(String.format(MESSAGE_INVALID_FLASHCARD + "\n"
                         + AddCommand.MESSAGE_ADD_FLASHCARD));
             }
+
+            if (arePrefixesPresent(argMultimap, PREFIX_FLASHCARD, PREFIX_TAG)) {
+                throw new InvalidFlashcardException(String.format(MESSAGE_INVALID_FLASHCARD + "\n"
+                        + AddCommand.MESSAGE_ADD_FLASHCARD));
+            }
         }
     }
 
@@ -138,8 +141,6 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private Flashcard addCard(ArgumentMultimap argMultimap) throws ParseException {
         Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_FLASHCARD).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
         // Search for the deck with matching title
         Deck deck = new Deck();
         int deckIndex = 0;
@@ -156,7 +157,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Question modelQuestion = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
         Answer modelAnswer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
-        Flashcard flashcard = new Flashcard(deck, modelQuestion, modelAnswer, tagList);
+        Flashcard flashcard = new Flashcard(deck, modelQuestion, modelAnswer);
         deck.addFlashcard(flashcard);
 
         logicToUiManager.openFlashcardPanel(deckIndex);

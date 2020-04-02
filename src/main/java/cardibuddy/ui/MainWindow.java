@@ -45,6 +45,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private StatisticsPanel statisticsPanel;
     private HelpWindow helpWindow;
+    private DragAndDrop dragDrop;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -62,10 +63,16 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane testCardPanelPlaceholder;
 
     @FXML
+    private StackPane dragDropPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane dd;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -80,6 +87,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        dragDrop = new DragAndDrop();
     }
 
     public Stage getPrimaryStage() {

@@ -60,15 +60,9 @@ class JsonAdaptedFlashcard extends JsonAdaptedView {
      * @throws IllegalValueException if there were any data constraints violated in the adapted flashcard.
      */
     public Flashcard toModelType() throws IllegalValueException {
-        final List<Tag> flashcardTags = new ArrayList<>();
-        for (cardibuddy.storage.JsonAdaptedTag tag : tagged) {
-            flashcardTags.add(tag.toModelType());
-        }
-
-        final Set<Tag> modelTags = new HashSet<>(flashcardTags);
         Deck modelDeck = new Deck();
         Question modelQuestion = new Question(question);
         ShortAnswer modelAnswer = new ShortAnswer(answer);
-        return new Flashcard(modelDeck, modelQuestion, modelAnswer, modelTags);
+        return new Flashcard(modelDeck, modelQuestion, modelAnswer);
     }
 }
