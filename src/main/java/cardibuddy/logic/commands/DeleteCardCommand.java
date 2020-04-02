@@ -16,7 +16,7 @@ import cardibuddy.model.flashcard.Flashcard;
  */
 public class DeleteCardCommand extends DeleteCommand {
 
-    public static final String COMMAND_WORD = "deck";
+    public static final String COMMAND_WORD = "card";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes a flashcard identified by the index number used in the displayed cardibuddy book.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
