@@ -353,27 +353,27 @@ Format: `statistics`
 ==== Replacing a deck image: `replace deck image`
 
 Replaces the photo of an existing deck in the library. By default, all decks will have a default logo as shown in our wireframe.
-Format: `replace deck photo INDEX n/PHOTO_PATH`
+Format: `replace deck photo INDEX p/PHOTO_PATH`
 
 * Replaces the photo of the deck at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
 * The application will display a text label that reads ‘You can enter the path of your image into the command field or drag and drop your image into the command field.’
 
 Examples:
 
-* `replace deck image 1 n/src/resources/images/img.PNG.` +
+* `replace deck image 1 d/src/resources/images/img.PNG.` +
 Replaces the photo of the 1st deck to the photo that the file path directs to.
 
 ==== Replacing a card image: `replace card image`
 
 Replaces the photo of an existing card in a specified deck. By default, all cards will have a default image as shown in our wireframe.
-Format: `replace card image n/DECK_TITLE INDEX n/PHOTO_PATH`
+Format: `replace card image d/DECK_TITLE INDEX p/PHOTO_PATH`
 
 * Replaces the photo of the card belonging to the deck with that DECK_TITLE, whereby the card is at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
 * The application will display a text label that reads ‘You can enter the path of your image into the command field or drag and drop your image into the command field.’
 
 Examples:
 
-* `replace card image n/cs3230 1 n/src/resources/images/img.PNG.` +
+* `replace card image d/cs3230 1 p/src/resources/images/img.PNG.` +
 Replaces the photo of the 1st card of the `cs3230` deck with the photo that the file path directs to.
 
 
@@ -385,14 +385,18 @@ Replaces the photo of the 1st card of the `cs3230` deck with the photo that the 
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* *Add deck* : `add d/TITLE [t/TAG]...` +
+e.g. `add d/CS2030 t/Fundamentals t/Medium`
+* *Add card* : `add c/TITLE q/QUESTION a/ANSWER` +
+e.g. `add c/CS2030 q/What does OOP stand for? a/Object Oriented Programming`
 * *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
+* *Delete deck/card* : `delete deck/card INDEX` +
+e.g. `delete deck 3`
+* *Edit* : `edit INDEX [d/TITLE] [t/TAG]...` +
+e.g. `edit 2 d/CS2103T t/`
+* *Search deck/card* : `search deck/card KEYWORD [&] [MORE_KEYWORDS]` +
+e.g. `search database & relational`
+* *Test* : `test INDEX` +
+e.g. `test 1`
 * *List* : `list`
 * *Help* : `help`
