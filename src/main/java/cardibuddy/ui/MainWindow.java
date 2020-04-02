@@ -61,10 +61,16 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane testCardPanelPlaceholder;
 
     @FXML
+    private StackPane dragDropPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane dd;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -249,11 +255,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleTest() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
-        }
+        resultDisplay.setFeedbackToUser("Enter the index of the deck you want to be tested on.\nThis feature is"
+                + " still not functional and being developed. Please test other functionalities.");
     }
 
     void show() {
@@ -289,6 +292,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isTest()) {
+                handleTest();
             }
 
             if (commandResult.isExit()) {

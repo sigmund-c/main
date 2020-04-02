@@ -57,12 +57,12 @@ public class NextCommand extends Command {
             Question question = model.getNextQuestion();
             logicToUiManager.showTestQuestion(question);
             logicToUiManager.showTestStatus(model.getTestQueueSize());
-            return new CommandResult(MESSAGE_NEXT_SUCCESS, false, false);
+            return new CommandResult(MESSAGE_NEXT_SUCCESS, false, false, false);
         } catch (EmptyTestQueueException e) {
             // no more flashcards left to test, return to the main window.
             model.clearTestSession();
             logicToUiManager.showTestEnd();
-            return new CommandResult(MESSAGE_TEST_COMPLETE, false, false);
+            return new CommandResult(MESSAGE_TEST_COMPLETE, false, false, false);
         } catch (NoOngoingTestException e) {
             throw new CommandException(MESSAGE_NO_TESTSESSION);
         } catch (UnansweredQuestionException e) {

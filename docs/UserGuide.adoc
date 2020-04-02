@@ -12,9 +12,9 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level3
+:repoURL: https://github.com/AY1920S2-CS2103T-T10-2/main
 
-By: `Team 10-2`      Since: `Jan 2020`      Licence: `MIT`
+By: `Team T10-2`      Since: `Jan 2020`      Licence: `MIT`
 
 == Introduction
 
@@ -23,7 +23,7 @@ Cardi Buddy (CardiB) is for students who *prefer to use a desktop app to store t
 == Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
+.  Download the latest `cardibuddy.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Address Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -33,9 +33,10 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* *`list`* : lists all decks
+* **`add`**`d/CS1101S t/Basics` : adds an empty deck titled `CS1101S` to the Cardi Buddy.
+* *`open 1`* : opens the 1st deck shown in the current list
+* **`delete deck`**`3` : deletes the 3rd deck shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -46,10 +47,10 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add d/TITLE`, `TITLE` is a parameter which can be used as `add d/CS1101S`.
+* Items in square brackets are optional e.g `d/TITLE [t/TAG]` can be used as `d/CS1101S t/Basics` or as `d/CS1101S`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/Easy`, `t/Easy t/Basics` etc.
+* Parameters can be in any order e.g. if the command specifies `d/TITLE t/TAG`, `t/TAG d/TITLE` is also acceptable.
 ====
 
 === Basic Features
@@ -72,61 +73,57 @@ Format: `exit`
 
 === Adding
 
-==== Adding a deck: `add deck`
+==== Adding a deck: `add d/TITLE`
 
 Creates a new deck to be added to the library.
 Format: `add d/TITLE [t/TAG]…`
+
+* Tag names are alphanumeric with no spaces E.g. t/Core Module is an invalid tag while t/CoreModule is valid.
 
 [Tip]
 A deck can have any number of tags (including 0)
 
 Examples:
 
-* `add d/cs2103T` +
-Returns a new deck titled `cs2103T`
+* `add d/CS2103` +
+Returns a new deck titled `CS2103`
 
-* `add d/cs1101s t/Hard t/CS` +
-Returns a new deck titled `cs1101s` with the tags `Hard` and `CS`
+* `add d/CS1101S t/Easy t/Basics` +
+Adds a new deck titled `CS1101S` with the tags `Easy` and `Basics`
 
-==== Adding a card: `add card`
+==== Adding a card: `add c/DECK_TITLE q/QUESTION a/ANSWER`
 
 Creates a new card to be added to the deck.
-Format: `add c/DECK_TITLE n/CARD_TYPE`
-
-* The variable CARD_TYPE can only take the values of ‘MCQ’, ‘True/False’ or ‘Short Answer’ or ‘Matching’. Any other values will cause the application to display an error message.
-* When a card is created, the question field of the card will be set to the default value of ‘Please type your question here’.
-* Depending on the CARD_TYPE inputted by the user, the answer field of the card will be set to different default values.
-* For ‘MCQ’, the answer field will contain 4 options labelled ‘A’, ‘B’, ‘C’ and ‘D’, and an additional label that reads ‘You can also enter your answer in the command field’.
-* For ‘True/False’, the answer field will contain 2 options labelled ‘True’ and ‘False’, and an additional label that reads ‘You can also enter your answer in the command field’.
-* For ‘Short Answer’, the answer field will contain a label that reads ‘You can also enter your answer in the command field’.
+Format: `add c/DECK_TITLE q/QUESTION a/ANSWER`
 
 Examples:
 
-* `add c/cs1101s n/MCQ` +
-Returns a new card belonging to the deck `cs1101s` and of the type `MCQ`
+* `add c/CS1101S q/How does one go about solving recursion problems? a/Wishful thinking` +
+Adds a new card belonging to the deck `CS1101S`
 
 === Editing
 
-==== Editing a deck: `edit deck`
+==== Editing a deck: `edit`
 
 Edits an existing deck in the library.
-Format: `edit deck INDEX [d/TITLE] [t/TAG]…`
+Format: `edit INDEX [d/TITLE] [t/TAG]…`
 
 * Edits the decks at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the deck will be removed i.e adding of tags is not cumulative.
-* You can remove all the deck’s tags by typing t/ without specifying any tags after it.
+* You can remove all the deck’s tags by typing t/ without specifying any tags after it. If not, the tags will not be
+removed.
 
 Examples:
 
-* `edit 1 d/cs2103T` +
-Edits the title of the 1st deck to be `cs2103T`.
+* `edit 1 d/CS2103T` +
+Edits the title of the 1st deck to be `CS2103T` without removing existing tags.
 
-* `edit 2 d/cs2040 t/` +
-Edits the title of the 2nd deck to be `cs2040` and clears all existing tags.
+* `edit 2 d/CS2040 t/` +
+Edits the title of the 2nd deck to be `CS2040` and clears all existing tags.
 
-==== Editing a card: `edit card`
+==== Editing a card: `edit card` [coming in v2.0]
 
 Edits an existing card in the deck.
 Format: `edit card INDEX [q/QUESTION] [a/ANSWER] [t/TAG]…`
@@ -147,32 +144,27 @@ Edits the answer of the 2nd card to be `cs2040` and clears all existing tags.
 
 === Listing
 
-==== Listing all decks: `list decks`
+==== Listing all decks: `list`
 
-Shows a list of all the decks in the library. +
-Format: `list decks`
+Shows a list of all the decks in the library and hides the displayed cards (if any). +
+Format: `list`
 
-==== Listing all cards in a deck: `list cards`
+=== Opening
 
-Shows a list of all the cards in a particular deck. This command is only valid after you enter a deck.
-Format: `list cards`
+==== Opening a deck: `open`
+
+Opens an existing deck in the library.
+Format: `open INDEX`
+
+Shows a list of all the cards in the deck. +
+Format: `open 1`
 
 === Clearing
 
-==== Clearing all decks: `clear decks`
+==== Clearing all decks: `clear`
 
 Clears all entries (both decks and cards)  from the library. +
-Format: `clear decks`
-
-==== Clearing all cards in a deck: `clear cards`
-
-Clears all the cards from the specified deck.
-Format: `clear cards d/DECK_TITLE`
-
-Examples:
-
-* `clear cards d/cs2105` +
-Clears all the cards in the deck `cs2105`
+Format: `clear`
 
 === Deleting
 
@@ -216,109 +208,75 @@ Deletes the 1st card in the results of the search card command.
 
 === Searching
 
-==== Searching for a deck: `search`
+==== Searching for a deck: `search deck`
 
 Searches for the decks with titles that contain any of the given keywords or all of the keywords
 concatenated with the `&` symbol.
-Format: `search d/KEYWORD [&] [MORE_KEYWORDS]`
+Format: `search deck KEYWORD [&] [MORE_KEYWORDS]`
 
 * If the search has a `&` symbol, only decks with the words concatenated before and after
 the symbol will be returned.
 * The search is case insensitive. e.g cs2040 will match CS2040
 * The order of the keywords does not matter. e.g. Science Module will match Module Science
-* Both title and tags are searched.
+* Only titles of the decks are searched.
 * The keyword needs to match a word within the deck’s title exactly . e.g. cs will not match with cs2030
 
 Examples:
 
-* `search d/cs2106 d/easy` +
-Returns the deck titled or tagged with `cs2106` or `easy`
+* `search deck database` +
+Displays decks with the word `database` in the titles.
 
-* `search d/cs2040 & hard` +
-Returns decks titled or tagged with both `cs2040` and `cs2106`
+* `search deck database & relational` +
+Displays decks with both of the words `database` and `relational` in the titles.
 
-==== Searching for a card: `search`
+==== Searching for a card: `search card`
 
 Finds the cards with a question that contain any of the given keywords.
-Format: `search c/KEYWORD [MORE_KEYWORDS]`
+Format: `search card [&] [MORE_KEYWORDS]`
 
+* A deck needs to be opened for the `search card` command to work. The command will only search for cards in the
+opened deck.
+* If the search has a `&` symbol, only cards with the words concatenated before and after
+the symbol, in the question, will be returned.
 * The search is case insensitive. e.g programming will match Programming.
 * The order of the keywords does not matter. e.g. Javascript programming language will match with programming language Javascript.
-* Both the question and the answer can be searched. As long as the flashcard has a question or answer that contains the keyword, that flashcard will be returned.
-* The keyword does not need to match a word within the question or answer exactly. e.g. Java will match with Javascript.
-* Flashcards with questions or answers that match at least one of the keywords will be returned. e.g. searching the word programming will return object-oriented programming… and Java programming language…
+* The keyword needs to match a word within the question exactly. e.g. Java will not match with Javascript.
 
 Examples:
 
-* `search c/cs2106` +
-Returns `cs2106`
+* `search card principle` +
+Displays cards with the word `principle` in the questions.
 
-* `search c/cs2040 c/cs2030` +
-Returns `cs2040` and `cs2030`
+* `search card diagram & UML` +
+Displays decks with both of the words `diagram` and `UML` in the questions.
 
-=== Replacing image
-
-==== Replacing a deck image: `replace deck image`
-
-Replaces the photo of an existing deck in the library. By default, all decks will have a default logo as shown in our wireframe.
-Format: `replace deck photo INDEX n/PHOTO_PATH`
-
-* Replaces the photo of the deck at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
-* The application will display a text label that reads ‘You can enter the path of your image into the command field or drag and drop your image into the command field.’
-
-Examples:
-
-* `replace deck image 1 n/src/resources/images/img.PNG.` +
-Replaces the photo of the 1st deck to the photo that the file path directs to.
-
-==== Replacing a card image: `replace card image`
-
-Replaces the photo of an existing card in a specified deck. By default, all cards will have a default image as shown in our wireframe.
-Format: `replace card image n/DECK_TITLE INDEX n/PHOTO_PATH`
-
-* Replaces the photo of the card belonging to the deck with that DECK_TITLE, whereby the card is at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
-* The application will display a text label that reads ‘You can enter the path of your image into the command field or drag and drop your image into the command field.’
-
-Examples:
-
-* `replace card image n/cs3230 1 n/src/resources/images/img.PNG.` +
-Replaces the photo of the 1st card of the `cs3230` deck with the photo that the file path directs to.
 
 === Filtering
 
-==== Filtering by tag: `filter tag`
+==== Filtering by tags: `filter`
 
 Filters across all decks and only displays the decks with the specific tag.
-Format: `filter tag t/TAG_TITLE`
+Format: `filter TAGNAME [&] [MORE_TAGNAMES]`
 
-* Filtering by tag is case insensitive. e.g cs2040 will match CS2040
-
-Examples:
-
-* `filter tag t/Computing` +
-Returns `cs2040`, `cs3223` and `cs1101s`.
-
-
-==== Filtering by keyword: `filter keyword`
-
-Filters across all decks and only displays the cards with questions or answers that contain the specific keyword.
-Format: `filter keyword KEYWORD`
-
-* Filtering by keyword is case insensitive. e.g programming will match Programming.
-* The order of the keywords does not matter. e.g. Javascript programming language will match with programming language Javascript.
-* The keyword does not need to match a word within the question or answer exactly. e.g. Java will match with Javascript.
-* Flashcards that match at least one of the keywords will be returned. e.g. searching the word programming will return object-oriented programming… and Java programming language…
+* If the search has a `&` symbol, only decks with the tags concatenated before and after
+the symbol will be returned.
+* Filtering by tag is case insensitive. e.g hard will match Hard
 
 Examples:
 
-* `filter keyword language` +
-Returns all cards that contain the word *language* in the question, answer or both.
+* `filter hard` +
+Displays decks with the tag `hard`.
+
+* `filter hard & coremodule` +
+Displays decks with both the tags `hard` and `coremodule`.
+
 
 === Prioritising
 
 Cards that the user has answered wrongly to (user input does not match with answer) is automatically moved to the back of the testing session. The user will be able to reattempt the same flashcard again later in the testing session.
 
 There is no need to prioritise manually.
+
 
 === Testing
 
@@ -377,7 +335,7 @@ What it does:
 
 
 
-=== Undo/Redo
+=== Undo/Redo [coming in v2.0]
 
 ==== Undoing command: `undo`
 
@@ -401,22 +359,14 @@ Upon adding a new card to a specific deck, the application automatically checks 
 
 If there is a card with the same question but it is in a different deck, the card can still be successfully added.
 
-=== Statistics
+=== Statistics [coming in v2.0]
 
-==== Displaying all statistics: `stats all`
+==== Displaying all statistics: `statistics`
 
 Displays the statistics across all decks.
-Format: `stats all`
+Format: `statistics`
 
 * Average time spent on each deck, average number of questions completed per week, total number of questions completed for that week and the number of decks associated with each tag.
-* A graphical display in the form of a pie chart will also be used to represent the statistics.
-
-==== Displaying deck statistics: `stats deck`
-
-Displays the statistics of a specific deck.
-Format: `stats deck`
-
-* Displayed statistics consists of average time spent on the deck, total number of questions in that deck completed in that week, time spend on the test session for that deck.
 * A graphical display in the form of a pie chart will also be used to represent the statistics.
 
 === Syncing across multiple platforms: sync [coming in v2.0]
@@ -425,21 +375,55 @@ Format: `stats deck`
 
 === Customising flashcards: custom [coming in v2.0]
 
+=== Replacing image [coming in v2.0]
+
+==== Replacing a deck image: `replace deck image`
+
+Replaces the photo of an existing deck in the library. By default, all decks will have a default logo as shown in our wireframe.
+Format: `replace deck photo INDEX p/PHOTO_PATH`
+
+* Replaces the photo of the deck at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
+* The application will display a text label that reads ‘You can enter the path of your image into the command field or drag and drop your image into the command field.’
+
+Examples:
+
+* `replace deck image 1 d/src/resources/images/img.PNG.` +
+Replaces the photo of the 1st deck to the photo that the file path directs to.
+
+==== Replacing a card image: `replace card image`
+
+Replaces the photo of an existing card in a specified deck. By default, all cards will have a default image as shown in our wireframe.
+Format: `replace card image d/DECK_TITLE INDEX p/PHOTO_PATH`
+
+* Replaces the photo of the card belonging to the deck with that DECK_TITLE, whereby the card is at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
+* The application will display a text label that reads ‘You can enter the path of your image into the command field or drag and drop your image into the command field.’
+
+Examples:
+
+* `replace card image d/cs3230 1 p/src/resources/images/img.PNG.` +
+Replaces the photo of the 1st card of the `cs3230` deck with the photo that the file path directs to.
+
+
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Cardi Buddy folder.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* *Add deck* : `add d/TITLE [t/TAG]...` +
+e.g. `add d/CS2030 t/Fundamentals t/Medium`
+* *Add card* : `add c/TITLE q/QUESTION a/ANSWER` +
+e.g. `add c/CS2030 q/What does OOP stand for? a/Object Oriented Programming`
 * *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
+* *Delete deck/card* : `delete deck/card INDEX` +
+e.g. `delete deck 3`
+* *Edit* : `edit INDEX [d/TITLE] [t/TAG]...` +
+e.g. `edit 2 d/CS2103T t/`
+* *Search deck/card* : `search deck/card KEYWORD [&] [MORE_KEYWORDS]` +
+e.g. `search database & relational`
+* *Test* : `test INDEX` +
+e.g. `test 1`
 * *List* : `list`
 * *Help* : `help`
