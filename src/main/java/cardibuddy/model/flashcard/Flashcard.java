@@ -46,7 +46,7 @@ public class Flashcard {
         }
 
         return otherCard != null
-                && otherCard.getAnswer().equals(getAnswer());
+                && otherCard.getQuestion().equals(getQuestion());
     }
 
     @Override

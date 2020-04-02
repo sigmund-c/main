@@ -39,8 +39,8 @@ public class UniqueFlashcardList implements Iterable<Flashcard> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a flashcard to the list.
+     * The flashcard must not already exist in the list.
      */
     public void add(Flashcard toAdd) {
         requireNonNull(toAdd);
