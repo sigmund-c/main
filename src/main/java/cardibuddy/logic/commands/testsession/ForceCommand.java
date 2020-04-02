@@ -1,8 +1,10 @@
-package cardibuddy.logic.commands;
+package cardibuddy.logic.commands.testsession;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_UNANSWERED_QUESTION;
 import static java.util.Objects.requireNonNull;
 
+import cardibuddy.logic.commands.Command;
+import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
