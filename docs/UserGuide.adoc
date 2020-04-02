@@ -35,6 +35,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 * *`list`* : lists all decks
 * **`add`**`d/CS1101S t/Basics` : adds an empty deck titled `CS1101S` to the Cardi Buddy.
+* *`open 1`* : opens the 1st deck shown in the current list
 * **`delete deck`**`3` : deletes the 3rd deck shown in the current list
 * *`exit`* : exits the app
 
@@ -88,24 +89,17 @@ Examples:
 Returns a new deck titled `CS2103`
 
 * `add d/CS1101S t/Easy t/Basics` +
-Returns a new deck titled `CS1101S` with the tags `Easy` and `Basics`
+Adds a new deck titled `CS1101S` with the tags `Easy` and `Basics`
 
-==== Adding a card: `add c/DECK_TITLE n/CARD_TYPE`
+==== Adding a card: `add c/DECK_TITLE q/QUESTION a/ANSWER`
 
 Creates a new card to be added to the deck.
-Format: `add c/DECK_TITLE n/CARD_TYPE`
-
-* The variable CARD_TYPE can only take the values of ‘MCQ’, ‘True/False’ or ‘Short Answer’ or ‘Matching’. Any other values will cause the application to display an error message.
-* When a card is created, the question field of the card will be set to the default value of ‘Please type your question here’.
-* Depending on the CARD_TYPE inputted by the user, the answer field of the card will be set to different default values.
-* For ‘MCQ’, the answer field will contain 4 options labelled ‘A’, ‘B’, ‘C’ and ‘D’, and an additional label that reads ‘You can also enter your answer in the command field’.
-* For ‘True/False’, the answer field will contain 2 options labelled ‘True’ and ‘False’, and an additional label that reads ‘You can also enter your answer in the command field’.
-* For ‘Short Answer’, the answer field will contain a label that reads ‘You can also enter your answer in the command field’.
+Format: `add c/DECK_TITLE q/QUESTION a/ANSWER`
 
 Examples:
 
-* `add c/CS1101S n/MCQ` +
-Returns a new card belonging to the deck `CS1101S` and of the type `MCQ`
+* `add c/CS1101S q/How does one go about solving recursion problems? a/Wishful thinking` +
+Adds a new card belonging to the deck `CS1101S`
 
 === Editing
 
@@ -150,32 +144,27 @@ Edits the answer of the 2nd card to be `cs2040` and clears all existing tags.
 
 === Listing
 
-==== Listing all decks: `list decks`
+==== Listing all decks: `list`
 
-Shows a list of all the decks in the library. +
-Format: `list decks`
+Shows a list of all the decks in the library and hides the displayed cards (if any). +
+Format: `list`
 
-==== Listing all cards in a deck: `list cards`
+=== Opening
 
-Shows a list of all the cards in a particular deck. This command is only valid after you enter a deck.
-Format: `list cards`
+==== Opening a deck: `open`
+
+Opens an existing deck in the library.
+Format: `open INDEX`
+
+Shows a list of all the cards in the deck. +
+Format: `open 1`
 
 === Clearing
 
-==== Clearing all decks: `clear decks`
+==== Clearing all decks: `clear`
 
 Clears all entries (both decks and cards)  from the library. +
-Format: `clear decks`
-
-==== Clearing all cards in a deck: `clear cards`
-
-Clears all the cards from the specified deck.
-Format: `clear cards d/DECK_TITLE`
-
-Examples:
-
-* `clear cards d/cs2105` +
-Clears all the cards in the deck `cs2105`
+Format: `clear`
 
 === Deleting
 
