@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import cardibuddy.commons.core.GuiSettings;
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
@@ -64,6 +65,8 @@ public interface Model {
      * Replaces cardibuddy data with the data in {@code cardiBuddy}.
      */
     void setCardiBuddy(ReadOnlyCardiBuddy cardiBuddy);
+
+    // boolean canUndo(CommandHistory commandHistory);
 
     /**
      * Returns true if a deck with the same identity as {@code deck} exists in the cardibuddy.

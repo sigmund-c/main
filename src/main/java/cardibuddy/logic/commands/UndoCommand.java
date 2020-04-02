@@ -1,5 +1,6 @@
 package cardibuddy.logic.commands;
 
+<<<<<<< HEAD
 import cardibuddy.commons.core.Messages;
 import cardibuddy.logic.CardiBuddyStack;
 import cardibuddy.logic.commands.exceptions.CommandException;
@@ -30,5 +31,4 @@ public class UndoCommand extends Command {
         cardiBuddyStack.popUndo().undo(model);
         return new CommandResult(MESSAGE_SUCCESS);
     }
-
 }

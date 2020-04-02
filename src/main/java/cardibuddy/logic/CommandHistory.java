@@ -72,5 +72,4 @@ public class CommandHistory {
     public int hashCode() {
         return historyList.hashCode();
     }
-
 }
