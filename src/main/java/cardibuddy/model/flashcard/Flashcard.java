@@ -1,11 +1,8 @@
 package cardibuddy.model.flashcard;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import cardibuddy.model.deck.Deck;
-import cardibuddy.model.tag.Tag;
 
 /**
  * Represents a Flashcard in CardiBuddy.

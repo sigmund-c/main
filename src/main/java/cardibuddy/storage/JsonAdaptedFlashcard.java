@@ -1,9 +1,7 @@
 package cardibuddy.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,7 +11,6 @@ import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.ShortAnswer;
-import cardibuddy.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Flashcard}.
