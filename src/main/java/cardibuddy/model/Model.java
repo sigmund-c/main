@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.TestResult;
@@ -182,5 +183,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredFlashcardList(Predicate<Flashcard> predicate);
+
+    /**
+     * Returns the Statistics of the Model.
+     */
+    Statistics getStatistics();
 }
 

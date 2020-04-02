@@ -177,13 +177,26 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up the flashcard placeholder with a Statistics report.
      */
+    public void fillInnerPartsWithStatistic() {
+        statisticsPanel = new StatisticsPanel(logic.getStatistics());
+        flashcardListPanelPlaceholder.getChildren().setAll(statisticsPanel.getRoot());
+    }
+
+    /**
+     * Fills up the flashcard placeholder with a Statistics report of a specific Deck.
+     */
     public void fillInnerPartsWithStatistic(int deckIndex) {
         statisticsPanel = new StatisticsPanel(logic.getFilteredDeckList().get(deckIndex).getStatistics());
         flashcardListPanelPlaceholder.getChildren().setAll(statisticsPanel.getRoot());
     }
 
-    public void fillInnerPartsWithStatistic() {
-        //TODO: implement functionality for statistics of ALL decks
+    /**
+     * Fills up the flashcard placeholder with a Statistics report of a specific TestSession of a specific Deck.
+     */
+    public void fillInnerPartsWithStatistic(int deckIndex, int sessionIndex) {
+        statisticsPanel = new StatisticsPanel(
+                logic.getFilteredDeckList().get(deckIndex).getStatistics().getSessionStatistic(sessionIndex));
+        flashcardListPanelPlaceholder.getChildren().setAll(statisticsPanel.getRoot());
     }
 
     /**
