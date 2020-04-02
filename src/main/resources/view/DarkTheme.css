@@ -168,7 +168,7 @@
 }
 
 .result-display .label {
-    -fx-text-fill: black !important;
+    -fx-text-fill: white !important;
 }
 
 .status-bar .label {
