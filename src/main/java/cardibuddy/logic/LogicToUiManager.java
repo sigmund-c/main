@@ -1,7 +1,6 @@
 package cardibuddy.logic;
 
 import cardibuddy.model.deck.Deck;
-import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.TestResult;
