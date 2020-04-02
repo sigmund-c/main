@@ -55,7 +55,7 @@ public class TestCommand extends Command {
             Question firstQuestion = model.testDeck(deckToTest);
             logicToUiManager.showTestQuestion(firstQuestion);
             logicToUiManager.showTestStatus(model.getTestQueueSize());
-            return new CommandResult(MESSAGE_TEST_SESSION_SUCCESS, false, false);
+            return new CommandResult(MESSAGE_TEST_SESSION_SUCCESS, false, false, false);
         } catch (EmptyDeckException e) {
             throw new CommandException(MESSAGE_EMPTY_DECK);
         }
