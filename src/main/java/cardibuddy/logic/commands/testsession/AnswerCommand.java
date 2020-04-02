@@ -1,11 +1,14 @@
-package cardibuddy.logic.commands;
+package cardibuddy.logic.commands.testsession;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
 import static java.util.Objects.requireNonNull;
 
 import cardibuddy.logic.LogicToUiManager;
+import cardibuddy.logic.commands.Command;
+import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
+import cardibuddy.model.testsession.Result;
 import cardibuddy.model.testsession.TestResult;
 
 /**
@@ -18,9 +21,9 @@ public class AnswerCommand extends Command {
             + ": Submits your answer to CardiBuddy.\n"
             + "Example: " + COMMAND_WORD + " Waterfall is not an agile approach.";
 
+    public static final String MESSAGE_FORCE_PROMPT = "\nType 'force' to force mark your answer as correct, or";
     public static final String MESSAGE_ANS_SUCCESS = "Answer submitted!"
-            + "\nType 'force' if you think your answer is correct, or"
-            + "\nType next to move on to the next question.";
+            + "%s\nType next to move on to the next question.";
 
     private LogicToUiManager logicToUiManager;
     private String userAnswer;
@@ -44,7 +47,11 @@ public class AnswerCommand extends Command {
         try {
             TestResult testResult = model.submitAnswer(userAnswer);
             logicToUiManager.showTestResult(testResult);
-            return new CommandResult(MESSAGE_ANS_SUCCESS, false, false, false);
+            if (testResult.getResult() == Result.WRONG) { // prompt the user to force correct if they wish to
+                return new CommandResult(String.format(MESSAGE_ANS_SUCCESS, MESSAGE_FORCE_PROMPT), false, false, false);
+            } else {
+                return new CommandResult(String.format(MESSAGE_ANS_SUCCESS, ""), false, false, false);
+            }
         } catch (NullPointerException e) {
             throw new CommandException(MESSAGE_NO_TESTSESSION);
         }
