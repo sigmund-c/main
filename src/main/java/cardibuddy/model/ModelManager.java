@@ -101,6 +101,12 @@ public class ModelManager implements Model {
     public void setCardiBuddy(ReadOnlyCardiBuddy cardiBuddy) {
         this.cardiBuddy.resetData(cardiBuddy);
     }
+
+    @Override
+    public void addDeck(Deck deck) {
+        cardiBuddy.addDeck(deck);
+        updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
+    }
     
     @Override
     public boolean hasDeck(Deck deck) {
@@ -111,12 +117,6 @@ public class ModelManager implements Model {
     @Override
     public void deleteDeck(Deck target) {
         cardiBuddy.removeDeck(target);
-    }
-
-    @Override
-    public void addDeck(Deck deck) {
-        cardiBuddy.addDeck(deck);
-        updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
     }
 
     @Override
