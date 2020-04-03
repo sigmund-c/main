@@ -40,11 +40,8 @@ public class FlashcardCard extends UiPart<Region> {
         this.flashcard = flashcard;
         id.setText(displayedIndex + ". ");
         question.setText(flashcard.getQuestion().toString());
+        question.setWrapText(true);
         answer.setText(flashcard.getAnswer().toString());
-        // TODO tags for flashcards
-        /* flashcard.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName))); */
     }
 
     @Override

@@ -13,11 +13,18 @@ AddressBook - Level 3 is a desktop address book application used for teaching So
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: added *the ability to start a test session with a selected deck of flashcards.k*
+** What it does: allows the user to test themselves on their subject content by:
+*** 1. Fetching the flashcards of the deck at the user's specified index and displaying them question by question.
+*** 2. Adding flashcards back into the test session if they got it wrong **(prioritisation)**
+*** 3. Checking the user's answer with the flashcard's stored answer, and showing them the outcome (Right or Wrong).
+*** 4. Storing the test results (Number of tries, correct/wrong) to generate statistics for the user to view at the end of each test.
+*** 5. Giving users the ability to force correct answers if their answers differ from the flashcard's stored answer.
+*** 6. Giving users the ability to skip questions when needed.
+*** 7. Giving users the ability to quit the ongoing test session halfway.
+** Justification: This feature improves the product significantly as a flashcard application can not be without a testing feature. In addition, this feature provides certain enhancements on top of basic testing - such as prioritisation, skipping and the ability to force correct answers. This provides greater flexibility in how the user chooses to answer questions, and allows for paraphrasing of answers which improves information retention.
+
+** Highlights: This enhancement is a major overhaul to the application, and required an in-depth analysis of design alternatives. The implementation was challenging as it required deep analysis of the application in order to figure out how to replace the existing JavaFX scene with the test session. In addition, the test session required tight integration with other aspects of the application such as Flashcards and Decks, and constant communication and clarification with the team was required.
 
 * *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
 

@@ -12,24 +12,22 @@ import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
 
 /**
- * Opens the Deck that corresponds with the index and the subsequent Flashcards.
+ * Deletes a deck based on index.
  */
-public class OpenCommand extends Command {
+public class DeleteDeckCommand extends DeleteCommand {
 
-    public static final String COMMAND_WORD = "open";
-
+    public static final String COMMAND_WORD = "deck";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Opens the deck identified by the index number used in the displayed cardibuddy book.\n"
+            + ": Deletes a deck identified by the index number used in the displayed cardibuddy book.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + "1";
 
-    public static final String MESSAGE_OPEN_DECK_SUCCESS = "Opened Deck: %1$s";
-
-    private LogicToUiManager logicToUiManager;
+    public static final String MESSAGE_DELETE_DECK_SUCCESS = "Deleted Deck:\n%1$s";
 
     private final Index targetIndex;
+    private LogicToUiManager logicToUiManager;
 
-    public OpenCommand(Index targetIndex, LogicToUiManager logicToUiManager) {
+    public DeleteDeckCommand(Index targetIndex, LogicToUiManager logicToUiManager) {
         this.targetIndex = targetIndex;
         this.logicToUiManager = logicToUiManager;
     }
@@ -43,18 +41,17 @@ public class OpenCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
         }
 
-        Deck deckToOpen = lastShownList.get(targetIndex.getZeroBased());
-
-        logicToUiManager.openFlashcardPanel(targetIndex.getZeroBased());
-        logicToUiManager.setOpenedDeck(deckToOpen);
-
-        return new CommandResult(String.format(MESSAGE_OPEN_DECK_SUCCESS, deckToOpen));
+        Deck deckToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteDeck(deckToDelete);
+        logicToUiManager.removeFlashcards();
+        return new CommandResult(String.format(MESSAGE_DELETE_DECK_SUCCESS, deckToDelete));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof OpenCommand // instanceof handles nulls
-                && targetIndex.equals(((OpenCommand) other).targetIndex)); // state check
+                || (other instanceof DeleteDeckCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteDeckCommand) other).targetIndex)); // state check
     }
+
 }

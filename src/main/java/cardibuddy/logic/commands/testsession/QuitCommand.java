@@ -1,4 +1,4 @@
-package cardibuddy.logic.commands;
+package cardibuddy.logic.commands.testsession;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
 import static java.util.Objects.requireNonNull;
@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.logic.LogicToUiManager;
+import cardibuddy.logic.commands.Command;
+import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.testsession.exceptions.NoOngoingTestException;
@@ -44,7 +46,7 @@ public class QuitCommand extends Command {
             model.clearTestSession();
             logicToUiManager.showTestEnd();
 
-            return new CommandResult(MESSAGE_QUIT_SUCCESS, false, false);
+            return new CommandResult(MESSAGE_QUIT_SUCCESS, false, false, false);
         } catch (NoOngoingTestException e) {
             throw new CommandException(MESSAGE_NO_TESTSESSION);
         }

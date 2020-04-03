@@ -1,32 +1,32 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: black;
     background-color: #0C0D0D; /* Used in the default.html file */
 }
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Poppins Semibold";
+    -fx-font-family: "Poppins";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Poppins Semibold";
+    -fx-font-family: "Poppins";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
-    -fx-font-family: "Poppins Light";
+    -fx-font-family: "Poppins";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Poppins Semibold";
+    -fx-font-family: "Poppins";
 }
 
 .tab-pane {
@@ -90,29 +90,22 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #333436;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
-}
-
-.list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
-}
-
-.list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: #333436;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #8dabd3;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
+    -fx-border-color: #474748;
     -fx-border-width: 1;
 }
 
@@ -120,26 +113,47 @@
     -fx-text-fill: white;
 }
 
+.flashcard .big_label {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 16px;
+    -fx-text-fill: black;
+}
+
+.flashcard .small_label {
+    -fx-font-family: "Poppins UI Light";
+    -fx-font-size: 13px;
+    -fx-text-fill: black;
+}
+
+.deck .big_label {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 20px;
+    -fx-text-fill: black;
+}
+
+.test .label {
+    -fx-text-fill: #EAEAEA;
+}
+
 .cell_big_label {
-    -fx-font-family: "Poppins UI Semibold";
+    -fx-font-family: "Poppins";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }
 
 .cell_small_label {
-    -fx-font-family: "Poppins UI";
+    -fx-font-family: "Poppins";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: #333436;
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: #18191A;
      -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
 }
 
 .status-bar {
@@ -147,25 +161,25 @@
 }
 
 .result-display {
-    -fx-background-color: transparent;
-    -fx-font-family: "Poppins UI Light";
-    -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-background-color: #333436;
+    -fx-font-family: "Poppins";
+    -fx-font-size: 11pt;
+    -fx-text-fill: #EAEAEA;
 }
 
 .result-display .label {
-    -fx-text-fill: black !important;
+    -fx-text-fill: white !important;
 }
 
 .status-bar .label {
-    -fx-font-family: "Poppins UI Light";
+    -fx-font-family: "Poppins";
     -fx-text-fill: white;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: #333436;
     -fx-border-color: derive(#1d1d1d, 25%);
     -fx-border-width: 1px;
 }
@@ -175,13 +189,52 @@
 }
 
 .grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: #333436;
     -fx-border-color: derive(#1d1d1d, 30%);
     -fx-border-width: 1px;
 }
 
 .grid-pane .stack-pane {
     -fx-background-color: derive(#1d1d1d, 30%);
+}
+
+.flashcard {
+    -fx-background-color: #EAEAEA;
+    -fx-background-insets: 6;
+    -fx-background-radius: 8;
+    -fx-border-insets: 4;
+    -fx-border-radius: 12;
+    -fx-text-fill: black;
+}
+
+.deck {
+    -fx-background-color: #EAEAEA;
+    -fx-background-insets: 6;
+    -fx-background-radius: 8;
+    -fx-border-insets: 4;
+    -fx-border-radius: 12;
+    -fx-text-fill: black;
+}
+
+.test {
+    -fx-text-fill: #EAEAEA;
+}
+
+.command-box {
+    -fx-background-color: #EAEAEA;
+    -fx-background-insets: 2;
+    -fx-background-radius: 8;
+    -fx-border-insets: 4;
+    -fx-border-radius: 12;
+    -fx-border-colour: derive(#545454, 30%);
+}
+
+.command-box .label {
+    -fx-text-fill: white;
+}
+
+.text-field-transparent {
+    -fx-text-box-border: transparent;
 }
 
 .context-menu {
@@ -198,9 +251,85 @@
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "Poppins UI Light";
+    -fx-font-family: "Poppins";
     -fx-text-fill: black;
     -fx-opacity: 0.9;
+}
+
+* {
+    -fx-my-menu-color: #F5F5F5;
+    -fx-my-menu-color-highlighted: #E8A8B4;
+    -fx-my-menu-font-color: #263238;
+    -fx-my-menu-font-color-highlighted: black;
+}
+
+/* MENU BAR + Top-level MENU BUTTONS */
+/*** The menu bar itself ***/
+.menu-bar {
+    -fx-background-color: -fx-my-menu-color;
+}
+
+/*** Top-level menu itself (not selected / hovered) ***/
+.menu-bar > .container > .menu-button {
+    -fx-background-color: -fx-my-menu-color;
+}
+
+/*** Top-level menu's label (not selected / hovered) ***/
+.menu-bar > .container > .menu-button > .label {
+    -fx-text-fill: -fx-my-menu-font-color;
+}
+
+/*** Top-level menu's label (disabled) ***/
+.menu-bar > .container > .menu-button > .label:disabled {
+    -fx-opacity: 1.0;
+}
+
+/*** Top-level menu itself (selected / hovered) ***/
+.menu-bar > .container > .menu-button:hover,
+.menu-bar > .container > .menu-button:focused,
+.menu-bar > .container > .menu-button:showing {
+    -fx-background-color: -fx-my-menu-color-highlighted;
+    -fx-cursor: hand;
+}
+
+/*** Top-level menu's label (selected / hovered) ***/
+.menu-bar > .container > .menu-button:hover > .label,
+.menu-bar > .container > .menu-button:focused > .label,
+.menu-bar > .container > .menu-button:showing > .label {
+    -fx-text-fill: -fx-my-menu-font-color-highlighted;
+}
+
+/* MENU ITEM (children of a MENU BUTTON) */
+/*** The item itself (not hovered / focused) ***/
+.menu-item {
+    -fx-background-color: -fx-my-menu-color;
+}
+
+/*** The item's label (not hovered / focused) ***/
+.menu-item .label {
+    -fx-text-fill: -fx-my-menu-font-color;
+}
+
+/*** The item's label (disabled) ***/
+.menu-item .label:disabled {
+    -fx-opacity: 1.0;
+}
+
+/*** The item itself (hovered / focused) ***/
+.menu-item:focused, .menu-item:hovered {
+    -fx-background-color: -fx-my-menu-color-highlighted;
+    -fx-cursor: hand;
+}
+
+/*** The item's label (hovered / focused) ***/
+.menu-item:focused .label, .menu-item:hovered .label {
+    -fx-text-fill: -fx-my-menu-font-color-highlighted;
+}
+
+/* CONTEXT MENU */
+/*** The context menu that contains a menu's menu items ***/
+.context-menu {
+    -fx-background-color: -fx-my-menu-color;
 }
 
 .menu .left-container {
@@ -218,7 +347,7 @@
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #F4E7E7;
-    -fx-font-family: "Poppins UI", Helvetica, Arial, sans-serif;
+    -fx-font-family: "Poppins";
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
@@ -271,7 +400,7 @@
 }
 
 .dialog-pane:header *.header-panel {
-    -fx-background-color: derive(#1d1d1d, 25%);
+    -fx-background-color: #333436;
 }
 
 .dialog-pane:header *.header-panel *.label {
@@ -320,12 +449,12 @@
 #commandTextField {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-color: #383838 #383838 #383838 #383838;
     -fx-border-insets: 0;
     -fx-border-width: 1;
-    -fx-font-family: "Poppins UI Light";
-    -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-font-family: "Poppins";
+    -fx-font-size: 12pt;
+    -fx-text-fill: black;
 }
 
 #filterField, #deckListPanel, #deckWebpage {
@@ -343,8 +472,8 @@
 }
 
 #tags .label {
-    -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
+    -fx-text-fill: black;
+    -fx-background-color: #E8A8B4;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;

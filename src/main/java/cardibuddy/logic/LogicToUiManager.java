@@ -1,7 +1,6 @@
 package cardibuddy.logic;
 
 import cardibuddy.model.deck.Deck;
-import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.ui.UiManager;
@@ -25,8 +24,29 @@ public class LogicToUiManager {
         ui.getMainWindow().fillInnerPartsWithCards(index);
     }
 
+
+    public void updateFlashcardPanel() {
+        ui.getMainWindow().updateCards(displayedDeck);
+    }
+
+    public void removeFlashcards() {
+        ui.getMainWindow().removeFlashcards();
+    }
+
+    public void openStatisticPanel(int index) { // Statistics of a specific deck
+        ui.getMainWindow().fillInnerPartsWithStatistic(index);
+    }
+
+    public void openStatisticPanel() { // Statistics of all the decks
+        ui.getMainWindow().fillInnerPartsWithStatistic();
+    }
+
     public void openDeckPanel() {
         ui.getMainWindow().fillInnerPartsWithDecks();
+    }
+
+    public String getOpenedDeck() {
+        return openedDeck;
     }
 
     public void setOpenedDeck(Deck openedDeck) {
@@ -40,8 +60,8 @@ public class LogicToUiManager {
         this.displayedDeck = openedDeck;
     }
 
-    public String getOpenedDeck() {
-        return openedDeck;
+    public Deck getDisplayedDeck() {
+        return displayedDeck;
     }
 
     public boolean isInDeck() {
@@ -52,8 +72,8 @@ public class LogicToUiManager {
         ui.getMainWindow().fillInnerPartsWithQuestion(question);
     }
 
-    public void showTestAnswer(Answer answer) {
-        ui.getMainWindow().fillInnerPartsWithAnswer(answer);
+    public void showTestStatus(int testQueueSize) {
+        ui.getMainWindow().showTestStatus(testQueueSize);
     }
 
     public void showTestResult(TestResult testResult) {

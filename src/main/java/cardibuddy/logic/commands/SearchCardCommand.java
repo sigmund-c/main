@@ -36,15 +36,18 @@ public class SearchCardCommand extends SearchCommand {
     @Override
     public CommandResult execute(Model model) throws RuntimeException {
         requireNonNull(model);
+        assert true;
 
         if (!logicToUiManager.isInDeck()) {
             throw new NotInDeckException(String.format(MESSAGE_NOT_IN_DECK
                     + " You need to open a deck first. \n" + OpenCommand.MESSAGE_USAGE));
         }
 
-        model.updateFilteredFlashcardList(predicate);
+        logicToUiManager.getDisplayedDeck().updateFilteredFlashcardList(predicate);
+        logicToUiManager.updateFlashcardPanel();
         return new CommandResult(
-                String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW, model.getFilteredFlashcardList().size()));
+                String.format(Messages.MESSAGE_FLASHCARDS_LISTED_OVERVIEW,
+                        logicToUiManager.getDisplayedDeck().getFilteredFlashcardList().size()));
     }
 
     @Override

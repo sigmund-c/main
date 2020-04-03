@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+    <children>
+        <VBox>
+            <children>
+                <Label fx:id="cardsAdded" text="Label">
+                    <padding>
+                        <Insets left="10.0"/>
+                    </padding>
+                    <VBox.margin>
+                        <Insets/>
+                    </VBox.margin>
+                </Label>
+                <Label fx:id="cardsDeleted" text="Label">
+                    <VBox.margin>
+                        <Insets left="10.0"/>
+                    </VBox.margin>
+                </Label>
+                <Label fx:id="timesPlayed" text="Label">
+                    <VBox.margin>
+                        <Insets left="10.0"/>
+                    </VBox.margin>
+                </Label>
+                <Label fx:id="correctPercentage" text="Label">
+                    <VBox.margin>
+                        <Insets left="10.0"/>
+                    </VBox.margin>
+                </Label>
+                <Label fx:id="avgTriesToGetCorrect" text="Label">
+                    <VBox.margin>
+                        <Insets left="10.0"/>
+                    </VBox.margin>
+                </Label>
+            </children>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </padding>
+        </VBox>
+        <LineChart fx:id="correctPercentageHistory">
+            <xAxis>
+                <CategoryAxis label="Test Session No." side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="\% Correct" side="LEFT"/>
+            </yAxis>
+        </LineChart>
+    </children>
+</VBox>

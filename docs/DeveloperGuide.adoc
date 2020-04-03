@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/AY1920S2-CS2103T-T10-2/main/tree/master
 
-By: `Team T10-2`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T10-2`      Since: `Jan 2020`      Licence: `MIT`
 
 == Setting up
 
@@ -257,14 +257,26 @@ The `execute()` method is then called to filter the decks accordingly to the pre
 Future implementations would return flashcards and decks that are filtered accordingly to the predicate. (by v1.3)
 
 === Test feature
-Users can start a <<test-session>> with a chosen `Deck` by:
+Users can start a <<test-session>> with a chosen `Deck`:
 
-* The `index` of the deck will be provided byt he user and parsed by Cardi Buddy. A `TestSession` object containing the indicated `Deck` is created.
-* The `TestSession` object updates Cardibuddy's `UniqueFlashcardList` to display the first flashcard in the queue, along with the other flashcards to be tested.
+* The `index` of the deck will be provided by the user and parsed by Cardi Buddy. A `TestSession` object containing the indicated `Deck` is created.
+* The `TestSession` object creates a HashMap that contains `<Flashcard, TestResult>` for easy access to the testing history.
 
-The following is a proposed diagram of how the `test` feature should work:
+The following is a UML Sequence Diagram of how CardiBuddy works when the `test INDEX` command is called:
 
 image::TestSequenceDiagram.png[]
+
+The Test feature also comes with many minor enhancements. An overview of the commands provided by this feature:
+
+* The user will enter `test INDEX` to start the test session for the deck at the `INDEX`.
+* The user will enter `ans` followed by their answer to the question.
+* The user can use the `next` command to view the next question.
+* The user can choose to `skip` questions
+* The user can choose to `quit` the session halfway
+* The user can choose to `force` correct their answer if they feel that their answer is acceptable and similar to the `flashcard` 's answer.
+
+The following is an overview of the
+
 
 === Logging
 
