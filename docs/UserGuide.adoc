@@ -63,7 +63,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 *Special Icons*
 
-* :bulb: is used to signal information that is helpful for the users to know.
+:bulb: is used to signal information that is helpful for the users to know.
 ====
 
 === Basic Features
