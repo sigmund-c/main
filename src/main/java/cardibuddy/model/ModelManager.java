@@ -130,11 +130,6 @@ public class ModelManager implements Model {
         return cardiBuddy.hasFlashcard(flashcard);
     }
 
-    @Override
-    public void deleteFlashcard(Flashcard target) {
-        cardiBuddy.removeFlashcard(target);
-    }
-
     /**
      * Adds Flashcard to a Deck.
      *
