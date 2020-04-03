@@ -59,18 +59,18 @@ public class CommandHistory {
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<String> getCommandHistoryList() {
-        return unmodifiableHistoryList;
+        return unmodifiableHistory;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof CommandHistory // instanceof handles nulls
-                && historyList.equals(((CommandHistory) other).historyList));
+                && history.equals(((CommandHistory) other).history));
     }
 
     @Override
     public int hashCode() {
-        return historyList.hashCode();
+        return history.hashCode();
     }
 }
