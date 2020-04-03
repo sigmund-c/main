@@ -121,9 +121,10 @@ public interface Model {
     void setFlashcard(Flashcard target, Flashcard editedFlashcard);
 
     /**
-     * Checks if the current {@code TestSession} is complete
+     * Gets the number of flashcards left in the {@code testQueue}.
+     * This method is used for the countdown.
      */
-    boolean isTestComplete();
+    int getTestQueueSize();
 
     /**
      * Starts the test session with {@code deck}
@@ -144,14 +145,14 @@ public interface Model {
     void forceCorrect();
 
     /**
-     * Gets the first question from the newly created {@code TestSession}.
-     */
-    Question getFirstQuestion();
-
-    /**
      * Gets the next question in the {@code TestSession}
      */
     Question getNextQuestion();
+
+    /**
+     * Allows the user to skip the current question. Gets the next question in the test queue, if any.
+     */
+    Question skipQuestion();
 
     /**
      * Clears the current {@code TestSession}.

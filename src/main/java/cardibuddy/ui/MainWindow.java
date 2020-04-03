@@ -13,7 +13,6 @@ import cardibuddy.model.deck.exceptions.DeckCannotBeCardException;
 import cardibuddy.model.deck.exceptions.InvalidDeckException;
 import cardibuddy.model.deck.exceptions.NotInDeckException;
 import cardibuddy.model.deck.exceptions.WrongDeckException;
-import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
 import cardibuddy.model.testsession.TestResult;
@@ -62,10 +61,16 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane testCardPanelPlaceholder;
 
     @FXML
+    private StackPane dragDropPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane dd;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -159,6 +164,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Updates the flashcard view in the Main Window.
+     *
      * @param deck currently opened deck.
      */
     public void updateCards(Deck deck) {
@@ -212,14 +218,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Fills the placeholder of this window with the Answer of the current flashcard being tested.
+     * Replaces the flashcardListPlaceholder with the countdown as well as other test session status messages.
      *
-     * @param answer to display to the user
+     * @param testQueueSize the number of remaining flashcards in the {@code testQueue}
      */
-    public void fillInnerPartsWithAnswer(Answer answer) {
-        deckListPanelPlaceholder.getChildren().clear();
-        AnswerTestCard answerTestCard = new AnswerTestCard(answer);
-        deckListPanelPlaceholder.getChildren().add(answerTestCard.getRoot());
+    public void showTestStatus(int testQueueSize) {
+        TestStatusCard testStatusCard = new TestStatusCard(testQueueSize);
+        flashcardListPanelPlaceholder.getChildren().clear();
+        flashcardListPanelPlaceholder.getChildren().add(testStatusCard.getRoot());
+
     }
 
     /**
@@ -261,11 +268,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleTest() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
-        }
+        resultDisplay.setFeedbackToUser("Enter the index of the deck you want to be tested on.\nThis feature is"
+                + " still not functional and being developed. Please test other functionalities.");
     }
 
     void show() {
@@ -301,6 +305,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isTest()) {
+                handleTest();
             }
 
             if (commandResult.isExit()) {

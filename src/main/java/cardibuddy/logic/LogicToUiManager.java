@@ -1,7 +1,6 @@
 package cardibuddy.logic;
 
 import cardibuddy.model.deck.Deck;
-import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.ui.UiManager;
@@ -50,6 +49,10 @@ public class LogicToUiManager {
         ui.getMainWindow().fillInnerPartsWithDecks();
     }
 
+    public String getOpenedDeck() {
+        return openedDeck;
+    }
+
     public void setOpenedDeck(Deck openedDeck) {
         if (openedDeck == null) {
             inDeck = false;
@@ -59,10 +62,6 @@ public class LogicToUiManager {
             this.openedDeck = openedDeck.getTitle().toString().toLowerCase();
         }
         this.displayedDeck = openedDeck;
-    }
-
-    public String getOpenedDeck() {
-        return openedDeck;
     }
 
     public Deck getDisplayedDeck() {
@@ -77,8 +76,8 @@ public class LogicToUiManager {
         ui.getMainWindow().fillInnerPartsWithQuestion(question);
     }
 
-    public void showTestAnswer(Answer answer) {
-        ui.getMainWindow().fillInnerPartsWithAnswer(answer);
+    public void showTestStatus(int testQueueSize) {
+        ui.getMainWindow().showTestStatus(testQueueSize);
     }
 
     public void showTestResult(TestResult testResult) {

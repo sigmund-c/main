@@ -28,7 +28,7 @@ public class TestCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_TEST_SESSION_SUCCESS = "Started a test session."
-            + "\nType in your answer by starting with 'ans'";
+            + "\nAnswer format: 'ans YOUR ANSWER'";
 
     private static final Logger logger = LogsCenter.getLogger(TestCommand.class);
     private final Index targetIndex;
@@ -54,7 +54,8 @@ public class TestCommand extends Command {
         try {
             Question firstQuestion = model.testDeck(deckToTest);
             logicToUiManager.showTestQuestion(firstQuestion);
-            return new CommandResult(MESSAGE_TEST_SESSION_SUCCESS, false, false);
+            logicToUiManager.showTestStatus(model.getTestQueueSize());
+            return new CommandResult(MESSAGE_TEST_SESSION_SUCCESS, false, false, false);
         } catch (EmptyDeckException e) {
             throw new CommandException(MESSAGE_EMPTY_DECK);
         }

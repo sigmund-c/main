@@ -1,57 +1,17 @@
 package cardibuddy.logic.commands;
-import static java.util.Objects.requireNonNull;
-
-import java.util.List;
-
-import cardibuddy.commons.core.Messages;
-import cardibuddy.commons.core.index.Index;
-import cardibuddy.logic.LogicToUiManager;
-import cardibuddy.logic.commands.exceptions.CommandException;
-import cardibuddy.model.Model;
-import cardibuddy.model.deck.Deck;
-
 
 /**
- * Deletes the Deck that corresponds with the index and the subsequent Flashcards.
+ * Represents a delete command to be extended into search deck and search card commands.
  */
-public class DeleteCommand extends Command {
+public abstract class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes a deck/flashcard identified by the index number used in the displayed cardibuddy book.\n"
+            + ": Deletes a deck or flashcard identified by the index number used in the displayed cardibuddy book.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + "1";
+            + "Example: " + COMMAND_WORD + " deck 1";
 
-    public static final String MESSAGE_DELETE_DECK_SUCCESS = "Deleted Deck: %1$s";
+    public abstract boolean equals(Object other);
 
-    private final Index targetIndex;
-    private LogicToUiManager logicToUiManager;
-
-    public DeleteCommand(Index targetIndex, LogicToUiManager logicToUiManager) {
-        this.targetIndex = targetIndex;
-        this.logicToUiManager = logicToUiManager;
-    }
-
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        List<Deck> lastShownList = model.getFilteredDeckList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
-        }
-
-        Deck deckToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteDeck(deckToDelete);
-        logicToUiManager.removeFlashcards();
-        return new CommandResult(String.format(MESSAGE_DELETE_DECK_SUCCESS, deckToDelete));
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
-    }
 }

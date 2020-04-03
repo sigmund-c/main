@@ -90,6 +90,35 @@ public class TestSession {
     }
 
     /**
+     * Skips this question by removing the question from the testQueue without marking it.
+     * Updates the TestResult by incrementing the variable {@code timesSkipped}
+     */
+    public Question skipQuestion() throws AlreadyCorrectException {
+        if (testResults.containsKey(current)) {
+            // if the user has already answered this question before, update the result in the testResults hashmap
+            TestResult prevTestResult = testResults.get(current);
+            if (prevTestResult.getResult() == Result.CORRECT) {
+                // user should not be allowed to skip the question if they already got it correct
+                throw new AlreadyCorrectException();
+            }
+            TestResult newTestResult = new TestResult(prevTestResult);
+            // call this other TestResult constructor to remember the number of attempts
+            testResults.put(current, newTestResult);
+        } else {
+            testResults.put(current, new TestResult(Result.SKIPPED));
+        }
+
+        if (hasAnswered) {
+            testQueue.removeLast(); // remove the prioritised flashcard
+        }
+
+        current = testQueue.removeFirst();
+        hasAnswered = false;
+
+        return current.getQuestion();
+    }
+
+    /**
      * Shows the answer for the {@code current} flashcard.
      */
     public Answer getAnswer() {
@@ -99,11 +128,11 @@ public class TestSession {
 
 
     /**
-     * A method that returns a boolean indicating if the TestSession is complete.
-     * A TestSession is complete when there are no more flashcards left in the {@code testQueue}
+     * Gets the number of flashcards left in the {@code testQueue}.
+     * This method is used for the countdown.
      */
-    public boolean isComplete() {
-        return testQueue.isEmpty();
+    public int getTestQueueSize() {
+        return testQueue.size();
     }
 
     /**
