@@ -32,6 +32,7 @@ import cardibuddy.logic.commands.testsession.AnswerCommand;
 import cardibuddy.logic.commands.testsession.ForceCommand;
 import cardibuddy.logic.commands.testsession.NextCommand;
 import cardibuddy.logic.commands.testsession.QuitCommand;
+import cardibuddy.logic.commands.testsession.SkipCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.ReadOnlyCardiBuddy;
 
@@ -115,6 +116,9 @@ public class CardiBuddyParser {
 
         case ForceCommand.COMMAND_WORD: // test session command
             return new ForceCommand();
+
+        case SkipCommand.COMMAND_WORD:
+            return new SkipCommand(logicToUiManager);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

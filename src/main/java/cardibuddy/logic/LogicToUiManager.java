@@ -33,12 +33,16 @@ public class LogicToUiManager {
         ui.getMainWindow().removeFlashcards();
     }
 
-    public void openStatisticPanel(int index) { // Statistics of a specific deck
-        ui.getMainWindow().fillInnerPartsWithStatistic(index);
+    public void openStatisticPanel() {
+        ui.getMainWindow().fillInnerPartsWithStatistic();
     }
 
-    public void openStatisticPanel() { // Statistics of all the decks
-        ui.getMainWindow().fillInnerPartsWithStatistic();
+    public void openStatisticPanel(int deckIndex) {
+        ui.getMainWindow().fillInnerPartsWithStatistic(deckIndex);
+    }
+
+    public void openStatisticPanel(int deckIndex, int sessionIndex) {
+        ui.getMainWindow().fillInnerPartsWithStatistic(deckIndex, sessionIndex);
     }
 
     public void openDeckPanel() {
