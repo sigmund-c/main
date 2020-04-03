@@ -11,7 +11,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_DECK_DISPLAYED_INDEX = "The deck index provided is invalid";
     public static final String MESSAGE_INVALID_FLASHCARD = "A flashcard should have a question and an answer.";
     public static final String MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX = "The card index provided is invalid";
-    public static final String MESSAGE_NOTHING_TO_UNDO = "There are no commands to undo.";
     public static final String MESSAGE_INVALID_TWO_WORD_COMMAND = "\nRemember to add 'card' or 'deck' "
             + "after your command";
     public static final String MESSAGE_NOT_IN_DECK = "This operation can only be done in a deck.";
