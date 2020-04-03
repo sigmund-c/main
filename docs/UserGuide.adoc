@@ -45,10 +45,13 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 == Features
 
 ====
-*Command Terminologies*
+*Application-specific Terminologies*
 
 * *Decks* are the containers that contain the flashcard. A flashcard can only exist in a deck. 
 * *Flashcards* are cards that contain revision materials, specifically a question and an answer.
+
+*Common Terminologies*
+
 * *File path* specifies the unique location of a file in a file system from the root directory. 
 
 *Command Format*
@@ -60,7 +63,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 *Special Icons*
 
-* [Tip] is used to signal information that is helpful for the users to know. 
+* :bulb: is used to signal information that is helpful for the users to know. 
 ====
 
 === Basic Features
@@ -90,8 +93,8 @@ Format: `add d/TITLE [t/TAG]…`
 
 * Tag names are alphanumeric with no spaces E.g. t/Core Module is an invalid tag while t/CoreModule is valid.
 
-[Tip]
-A deck can have any number of tags (including 0)
+> [Tip] :bulb:
+> A deck can have any number of tags (including 0)
 
 Examples:
 
@@ -110,6 +113,16 @@ Examples:
 
 * `add c/CS1101S q/How does one go about solving recursion problems? a/Wishful thinking` +
 Adds a new card belonging to the deck `CS1101S`
+
+=== Opening
+
+==== Opening a deck: `open`
+
+Opens an existing deck in the library.
+Format: `open INDEX`
+
+Shows a list of all the cards in the deck. +
+Format: `open 1`
 
 === Editing
 
@@ -158,16 +171,6 @@ Edits the answer of the 2nd card to be `cs2040` and clears all existing tags.
 
 Shows a list of all the decks in the library and hides the displayed cards (if any). +
 Format: `list`
-
-=== Opening
-
-==== Opening a deck: `open`
-
-Opens an existing deck in the library.
-Format: `open INDEX`
-
-Shows a list of all the cards in the deck. +
-Format: `open 1`
 
 === Clearing
 
