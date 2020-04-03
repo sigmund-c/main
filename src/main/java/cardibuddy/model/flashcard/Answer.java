@@ -1,6 +1,6 @@
 package cardibuddy.model.flashcard;
 
-import static cardibuddy.model.tag.Tag.VALIDATION_REGEX;
+import static cardibuddy.model.flashcard.ShortAnswer.VALIDATION_REGEX;
 
 /**
  * API of Answer Component.

@@ -4,6 +4,7 @@ import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -19,6 +20,7 @@ import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.TestSession;
 import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
+import cardibuddy.model.testsession.exceptions.EmptyTestQueueException;
 import cardibuddy.model.testsession.exceptions.NoOngoingTestException;
 import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
 import javafx.collections.ObservableList;
@@ -59,14 +61,14 @@ public class ModelManager implements Model {
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        requireNonNull(userPrefs);
+        this.userPrefs.resetData(userPrefs);
     }
 
     @Override
@@ -94,13 +96,13 @@ public class ModelManager implements Model {
     //=========== CardiBuddy ================================================================================
 
     @Override
-    public void setCardiBuddy(ReadOnlyCardiBuddy cardiBuddy) {
-        this.cardiBuddy.resetData(cardiBuddy);
+    public ReadOnlyCardiBuddy getCardiBuddy() {
+        return cardiBuddy;
     }
 
     @Override
-    public ReadOnlyCardiBuddy getCardiBuddy() {
-        return cardiBuddy;
+    public void setCardiBuddy(ReadOnlyCardiBuddy cardiBuddy) {
+        this.cardiBuddy.resetData(cardiBuddy);
     }
 
 //    @Override
@@ -160,11 +162,12 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Checks if the current {@code TestSession} is complete
+     * Gets the number of flashcards left in the {@code testQueue}.
+     * This method is used for the countdown.
      */
     @Override
-    public boolean isTestComplete() {
-        return testSession.isComplete();
+    public int getTestQueueSize() {
+        return testSession.getTestQueueSize();
     }
 
     /**
@@ -180,21 +183,33 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Gets the first question from the newly created {@code TestSession}.
-     */
-    public Question getFirstQuestion() {
-        return testSession.getFirstQuestion();
-    }
-
-    /**
      * Gets the next question in the {@code TestSession}
      */
     @Override
-    public Question getNextQuestion() throws UnansweredQuestionException, NoOngoingTestException {
+    public Question getNextQuestion() throws
+            UnansweredQuestionException,
+            NoOngoingTestException,
+            EmptyTestQueueException {
         try {
             return testSession.getNextQuestion();
         } catch (NullPointerException e) {
             throw new NoOngoingTestException();
+        } catch (NoSuchElementException e) {
+            throw new EmptyTestQueueException();
+        }
+    }
+
+    /**
+     * Allows the user to skip the current question. Gets the next question in the test queue, if any.
+     */
+    @Override
+    public Question skipQuestion() throws NoOngoingTestException, AlreadyCorrectException, EmptyTestQueueException {
+        try {
+            return testSession.skipQuestion();
+        } catch (NullPointerException e) {
+            throw new NoOngoingTestException();
+        } catch (NoSuchElementException e) {
+            throw new EmptyTestQueueException();
         }
     }
 
@@ -202,7 +217,7 @@ public class ModelManager implements Model {
      * Checks the given answer in the test session
      *
      * @param userAnswer a string representation of the user's answer
-     * @returns A Result enums that represents the result of the user's answer.
+     * @return A Result enums that represents the result of the user's answer.
      */
     @Override
     public TestResult submitAnswer(String userAnswer) {

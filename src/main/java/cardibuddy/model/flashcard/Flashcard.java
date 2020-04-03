@@ -1,11 +1,8 @@
 package cardibuddy.model.flashcard;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import cardibuddy.model.deck.Deck;
-import cardibuddy.model.tag.Tag;
 
 /**
  * Represents a Flashcard in CardiBuddy.
@@ -15,13 +12,11 @@ public class Flashcard {
     private final Question question;
     private final Answer answer;
     private final Deck deck;
-    private final Set<Tag> tags = new HashSet<>();
 
-    public Flashcard(Deck deck, Question question, Answer answer, Set<Tag> tags) {
+    public Flashcard(Deck deck, Question question, Answer answer) {
         this.deck = deck;
         this.question = question;
         this.answer = answer;
-        this.tags.addAll(tags);
     }
 
     public Deck getDeck() {
@@ -40,10 +35,6 @@ public class Flashcard {
         return answer.checkAnswer(toCheck);
     }
 
-    public Set<Tag> getTags() {
-        return this.tags;
-    }
-
     /**
      * Checks if the flashcards are of the same identity.
      * @param otherCard
@@ -55,7 +46,7 @@ public class Flashcard {
         }
 
         return otherCard != null
-                && otherCard.getAnswer().equals(getAnswer());
+                && otherCard.getQuestion().equals(getQuestion());
     }
 
     @Override

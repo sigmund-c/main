@@ -10,7 +10,7 @@ import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.flashcard.SearchCardKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new SearchCardCommand object
+ * Parses input arguments and creates a new SearchCardCommand object.
  */
 public class SearchCardCommandParser implements Parser<SearchCardCommand> {
 

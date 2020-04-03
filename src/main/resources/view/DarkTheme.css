@@ -1,5 +1,5 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: black;
     background-color: #0C0D0D; /* Used in the default.html file */
 }
 
@@ -90,29 +90,22 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #333436;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
-}
-
-.list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
-}
-
-.list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: #333436;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #8dabd3;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
+    -fx-border-color: #474748;
     -fx-border-width: 1;
 }
 
@@ -120,16 +113,26 @@
     -fx-text-fill: white;
 }
 
-.card_big_label .label {
+.flashcard .big_label {
     -fx-font-family: "Poppins";
     -fx-font-size: 16px;
     -fx-text-fill: black;
 }
 
-.card_small_label .label {
-    -fx-font-family: "Poppins";
+.flashcard .small_label {
+    -fx-font-family: "Poppins UI Light";
     -fx-font-size: 13px;
     -fx-text-fill: black;
+}
+
+.deck .big_label {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 20px;
+    -fx-text-fill: black;
+}
+
+.test .label {
+    -fx-text-fill: #EAEAEA;
 }
 
 .cell_big_label {
@@ -145,13 +148,12 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: #333436;
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: #18191A;
      -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
 }
 
 .status-bar {
@@ -159,14 +161,14 @@
 }
 
 .result-display {
-    -fx-background-color: transparent;
+    -fx-background-color: #333436;
     -fx-font-family: "Poppins";
-    -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #EAEAEA;
 }
 
 .result-display .label {
-    -fx-text-fill: black !important;
+    -fx-text-fill: white !important;
 }
 
 .status-bar .label {
@@ -177,7 +179,7 @@
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: #333436;
     -fx-border-color: derive(#1d1d1d, 25%);
     -fx-border-width: 1px;
 }
@@ -187,7 +189,7 @@
 }
 
 .grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: #333436;
     -fx-border-color: derive(#1d1d1d, 30%);
     -fx-border-width: 1px;
 }
@@ -196,8 +198,30 @@
     -fx-background-color: derive(#1d1d1d, 30%);
 }
 
+.flashcard {
+    -fx-background-color: #EAEAEA;
+    -fx-background-insets: 6;
+    -fx-background-radius: 8;
+    -fx-border-insets: 4;
+    -fx-border-radius: 12;
+    -fx-text-fill: black;
+}
+
+.deck {
+    -fx-background-color: #EAEAEA;
+    -fx-background-insets: 6;
+    -fx-background-radius: 8;
+    -fx-border-insets: 4;
+    -fx-border-radius: 12;
+    -fx-text-fill: black;
+}
+
+.test {
+    -fx-text-fill: #EAEAEA;
+}
+
 .command-box {
-    -fx-background-color: #F4F4F4;
+    -fx-background-color: #EAEAEA;
     -fx-background-insets: 2;
     -fx-background-radius: 8;
     -fx-border-insets: 4;
@@ -234,9 +258,9 @@
 
 * {
     -fx-my-menu-color: #F5F5F5;
-    -fx-my-menu-color-highlighted: #301934;
+    -fx-my-menu-color-highlighted: #E8A8B4;
     -fx-my-menu-font-color: #263238;
-    -fx-my-menu-font-color-highlighted: #FFFFFF;
+    -fx-my-menu-font-color-highlighted: black;
 }
 
 /* MENU BAR + Top-level MENU BUTTONS */
@@ -376,7 +400,7 @@
 }
 
 .dialog-pane:header *.header-panel {
-    -fx-background-color: derive(#1d1d1d, 25%);
+    -fx-background-color: #333436;
 }
 
 .dialog-pane:header *.header-panel *.label {
@@ -448,8 +472,8 @@
 }
 
 #tags .label {
-    -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
+    -fx-text-fill: black;
+    -fx-background-color: #E8A8B4;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;

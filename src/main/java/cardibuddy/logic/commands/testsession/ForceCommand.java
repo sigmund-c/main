@@ -1,8 +1,10 @@
-package cardibuddy.logic.commands;
+package cardibuddy.logic.commands.testsession;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_UNANSWERED_QUESTION;
 import static java.util.Objects.requireNonNull;
 
+import cardibuddy.logic.commands.Command;
+import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
@@ -39,6 +41,6 @@ public class ForceCommand extends Command {
         } catch (AlreadyCorrectException e) {
             throw new CommandException(MESSAGE_FORCE_FAIL_ALREADYCORRECT);
         }
-        return new CommandResult(MESSAGE_FORCE_SUCCESS, false, false);
+        return new CommandResult(MESSAGE_FORCE_SUCCESS, false, false, false);
     }
 }

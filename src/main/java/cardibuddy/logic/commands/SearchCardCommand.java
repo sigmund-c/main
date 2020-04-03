@@ -36,6 +36,7 @@ public class SearchCardCommand extends SearchCommand {
     @Override
     public CommandResult execute(Model model) throws RuntimeException {
         requireNonNull(model);
+        assert true;
 
         if (!logicToUiManager.isInDeck()) {
             throw new NotInDeckException(String.format(MESSAGE_NOT_IN_DECK

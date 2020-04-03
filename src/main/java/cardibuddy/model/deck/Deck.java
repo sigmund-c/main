@@ -35,6 +35,7 @@ public class Deck {
     private FilteredList<Flashcard> filteredFlashcards;
     private Statistics statistics = new Statistics();
     private final Logger logger = LogsCenter.getLogger(Deck.class.getName());
+    private Predicate predicate;
 
     /**
      * Every field must be present and not null.
@@ -77,6 +78,16 @@ public class Deck {
 
     public List<Flashcard> getFlashcards() {
         return Collections.unmodifiableList(flashcards);
+    }
+
+    /**
+     * Delete card from the flashcards and filteredFlashcards list.
+     * @param card to be deleted.
+     */
+    public void deleteCard(Flashcard card) {
+        flashcards.remove(card);
+        filteredFlashcards = new FilteredList<>(FXCollections.observableList(flashcards));
+        filteredFlashcards.setPredicate(predicate);
     }
 
     public Statistics getStatistics() {
@@ -127,6 +138,7 @@ public class Deck {
      */
     public void updateFilteredFlashcardList(Predicate<Flashcard> predicate) {
         requireNonNull(predicate);
+        this.predicate = predicate;
         filteredFlashcards.setPredicate(predicate);
     }
 

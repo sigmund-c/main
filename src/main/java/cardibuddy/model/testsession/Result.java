@@ -5,8 +5,8 @@ package cardibuddy.model.testsession;
  */
 public enum Result {
     CORRECT("Correct!"),
-    WRONG("You got it wrong!");
-
+    WRONG("You got it wrong!"),
+    SKIPPED("You skipped this question.");
     private String resultString;
 
     Result(String resultString) {
