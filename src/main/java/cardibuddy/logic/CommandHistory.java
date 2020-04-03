@@ -2,20 +2,22 @@ package cardibuddy.logic;
 
 import static java.util.Objects.requireNonNull;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import cardibuddy.commons.core.Messages;
 import cardibuddy.logic.commands.exceptions.CommandException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
+/**
+ * Represents the history of commands.
+ */
 public class CommandHistory {
 
     private static final CommandHistory commandHistory = new CommandHistory();
 
-    private final ObservableList<String> historyList = FXCollections.observableArrayList();
-    private final ObservableList<String> unmodifiableHistoryList =
-            FXCollections.unmodifiableObservableList(historyList);
+    private final ObservableList<String> history = FXCollections.observableArrayList();
+    private final ObservableList<String> unmodifiableHistory =
+            FXCollections.unmodifiableObservableList(history);
 
     private CommandHistory() {
 
@@ -30,9 +32,12 @@ public class CommandHistory {
      */
     public void add(String commandString) {
         requireNonNull(commandString);
-        historyList.add(commandString);
+        history.add(commandString);
     }
 
+    public static CommandHistory getCommandHistory() {
+        return commandHistory;
+    }
 
     /**
      * Removes the equivalent string from the list.
@@ -40,18 +45,14 @@ public class CommandHistory {
      */
     public void remove(String commandString) throws CommandException {
         requireNonNull(commandString);
-        if (!historyList.remove(commandString)) {
+        if (!history.remove(commandString)) {
             throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
         }
     }
 
     public void setList(CommandHistory replacement) {
         requireNonNull(replacement);
-        historyList.setAll(replacement.historyList);
-    }
-
-    public static CommandHistory getCommandHistory() {
-        return commandHistory;
+        history.setAll(replacement.history);
     }
 
     /**

@@ -1,12 +1,12 @@
 package cardibuddy.logic.commands;
 
+import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
+
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.CardiBuddy;
 import cardibuddy.model.Model;
 import cardibuddy.model.ReadOnlyCardiBuddy;
-
-import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
-import static java.util.Objects.requireNonNull;
 
 /**
  * Represents the commands that can be undone/redone.

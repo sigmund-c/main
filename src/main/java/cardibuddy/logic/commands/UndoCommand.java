@@ -1,11 +1,11 @@
 package cardibuddy.logic.commands;
 
+import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
+
 import cardibuddy.commons.core.Messages;
 import cardibuddy.logic.CardiBuddyStack;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
-
-import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Undo the last {@code UndoableCommand}.

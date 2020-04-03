@@ -1,12 +1,12 @@
 package cardibuddy.logic.commands;
 
-import cardibuddy.logic.CommandHistory;
-import cardibuddy.model.Model;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Collections;
 import java.util.LinkedList;
 
-import static java.util.Objects.requireNonNull;
+import cardibuddy.logic.CommandHistory;
+import cardibuddy.model.Model;
 
 /**
  * Shows the history of commands.

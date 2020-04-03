@@ -1,12 +1,15 @@
 package cardibuddy.logic;
 
+import java.util.LinkedList;
+
 import cardibuddy.logic.commands.Command;
 import cardibuddy.logic.commands.RedoCommand;
 import cardibuddy.logic.commands.UndoCommand;
 import cardibuddy.logic.commands.UndoableCommand;
 
-import java.util.LinkedList;
-
+/**
+ * Represents the stacks containing undoable commands to be undone/redone.
+ */
 public class CardiBuddyStack {
     private static CardiBuddyStack cardiBuddyStack = new CardiBuddyStack();
 
