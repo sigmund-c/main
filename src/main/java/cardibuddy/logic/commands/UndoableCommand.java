@@ -16,7 +16,7 @@ public abstract class UndoableCommand extends Command {
 
     protected abstract CommandResult executeUndoableCommand(Model model) throws CommandException;
 
-        /**
+    /**
      * Stores the current state of {@code model#archivedOrderBook}.
      */
     private void saveCardiBuddy(Model model) {

@@ -4,11 +4,9 @@ import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_TWO_WORD_COMMAND;
 import static cardibuddy.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.AddCommand;
 import cardibuddy.logic.commands.ClearCommand;
@@ -41,11 +39,6 @@ import cardibuddy.model.ReadOnlyCardiBuddy;
  * Parses user input.
  */
 public class CardiBuddyParser {
-    private CommandHistory commandHistory;
-
-    public CardiBuddyParser(CommandHistory commandHistory) {
-        this.commandHistory = commandHistory;
-    }
 
     /**
      * Used for initial separation of command word and args.
