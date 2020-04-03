@@ -47,12 +47,12 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Application-specific Terminologies*
 
-* *Decks* are the containers that contain the flashcard. A flashcard can only exist in a deck. 
+* *Decks* are the containers that contain the flashcard. A flashcard can only exist in a deck.
 * *Flashcards* are cards that contain revision materials, specifically a question and an answer.
 
 *Common Terminologies*
 
-* *File path* specifies the unique location of a file in a file system from the root directory. 
+* *File path* specifies the unique location of a file in a file system from the root directory.
 
 *Command Format*
 
@@ -63,7 +63,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 *Special Icons*
 
-* :bulb: is used to signal information that is helpful for the users to know. 
+* :bulb: is used to signal information that is helpful for the users to know.
 ====
 
 === Basic Features
@@ -348,10 +348,10 @@ What it does:
 
 === Displaying History
 
-==== Displaying the command history: 'history' 
+==== Displaying the command history: 'history'
 
-Displays all the commands that has been inputted by the user during the current session. 
-Format: 'history' 
+Displays all the commands that has been inputted by the user during the current session.
+Format: 'history'
 
 === Undo/Redo [Still in Working Progress]
 
@@ -377,7 +377,7 @@ Upon adding a new card to a specific deck, the application automatically checks 
 
 If there is a card with the same question but it is in a different deck, the card can still be successfully added.
 
-=== Statistics 
+=== Statistics
 
 ==== Displaying all statistics: `statistics`
 
