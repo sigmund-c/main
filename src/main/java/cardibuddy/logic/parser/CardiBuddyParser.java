@@ -12,24 +12,25 @@ import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.AddCommand;
-import cardibuddy.logic.commands.AnswerCommand;
 import cardibuddy.logic.commands.ClearCommand;
 import cardibuddy.logic.commands.Command;
+import cardibuddy.logic.commands.DeleteCardCommand;
 import cardibuddy.logic.commands.DeleteCommand;
+import cardibuddy.logic.commands.DeleteDeckCommand;
 import cardibuddy.logic.commands.EditCommand;
 import cardibuddy.logic.commands.ExitCommand;
 import cardibuddy.logic.commands.FilterCommand;
-import cardibuddy.logic.commands.ForceCommand;
 import cardibuddy.logic.commands.HelpCommand;
+import cardibuddy.logic.commands.HistoryCommand;
 import cardibuddy.logic.commands.ListCommand;
-import cardibuddy.logic.commands.NextCommand;
 import cardibuddy.logic.commands.OpenCommand;
-import cardibuddy.logic.commands.QuitCommand;
+import cardibuddy.logic.commands.RedoCommand;
 import cardibuddy.logic.commands.SearchCardCommand;
 import cardibuddy.logic.commands.SearchCommand;
 import cardibuddy.logic.commands.SearchDeckCommand;
+import cardibuddy.logic.commands.StatisticsCommand;
 import cardibuddy.logic.commands.TestCommand;
-
+import cardibuddy.logic.commands.UndoCommand;
 import cardibuddy.logic.commands.testsession.AnswerCommand;
 import cardibuddy.logic.commands.testsession.ForceCommand;
 import cardibuddy.logic.commands.testsession.NextCommand;
@@ -168,7 +169,7 @@ public class CardiBuddyParser {
 
         case UndoCommand.COMMAND_WORD:
             logger.config("undo 1");
-            return new UndoCommand(commandHistory);
+            return new UndoCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

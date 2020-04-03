@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import cardibuddy.logic.CommandHistory;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.UniqueDeckList;
 import cardibuddy.model.flashcard.Flashcard;
@@ -71,10 +70,6 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
         setDecks(newData.getDeckList());
         setFlashcards(newData.getFlashcardList());
     }
-
-//    public boolean canUndo(CommandHistory commandHistory) {
-//        return commandHistory.canUndoCommand();
-//    }
 
     //// deck-level operations
     /**

@@ -10,9 +10,6 @@ import java.util.logging.Logger;
 
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.commons.core.LogsCenter;
-import cardibuddy.logic.CommandHistory;
-import cardibuddy.logic.CommandHistoryManager;
-import cardibuddy.logic.commands.Command;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
@@ -104,12 +101,7 @@ public class ModelManager implements Model {
     public void setCardiBuddy(ReadOnlyCardiBuddy cardiBuddy) {
         this.cardiBuddy.resetData(cardiBuddy);
     }
-
-//    @Override
-//    public boolean canUndo(CommandHistory commandHistory) {
-//        return cardiBuddy.canUndo(commandHistory);
-//    }
-
+    
     @Override
     public boolean hasDeck(Deck deck) {
         requireNonNull(deck);
