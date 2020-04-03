@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.TestResult;
@@ -34,6 +35,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Flashcard> filteredFlashcards;
     private final FilteredList<Deck> filteredDecks;
+    private final Statistics statistics;
     private TestSession testSession;
 
     /**
@@ -49,6 +51,8 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredFlashcards = new FilteredList<>(this.cardiBuddy.getFlashcardList());
         filteredDecks = new FilteredList<>(this.cardiBuddy.getDeckList());
+
+        this.statistics = new Statistics();
     }
 
     public ModelManager() {
@@ -109,9 +113,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteDeck(Deck target) {
+        cardiBuddy.removeDeck(target);
+
+        target.getStatistics().trackDeckDeleted();
+        statistics.trackDeckDeleted();
+    }
+
+    @Override
     public void addDeck(Deck deck) {
         cardiBuddy.addDeck(deck);
         updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
+
+        deck.getStatistics().trackDeckAdded();
+        statistics.trackDeckAdded();
     }
 
     @Override
@@ -133,6 +148,9 @@ public class ModelManager implements Model {
     @Override
     public void deleteFlashcard(Flashcard target) {
         cardiBuddy.removeFlashcard(target);
+
+        target.getDeck().getStatistics().trackCardDeleted();
+        statistics.trackCardDeleted();
     }
 
     /**
@@ -144,6 +162,9 @@ public class ModelManager implements Model {
     public void addFlashcard(Flashcard flashcard) {
         cardiBuddy.addFlashcard(flashcard);
         updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+
+        flashcard.getDeck().getStatistics().trackCardAdded();
+        statistics.trackCardAdded();
     }
 
     @Override
@@ -235,6 +256,9 @@ public class ModelManager implements Model {
         if (testSession == null) { // if there is no test session to clear
             throw new NoOngoingTestException();
         }
+
+        testSession.getDeck().getStatistics().recordHistory(testSession);
+        statistics.recordHistory(testSession);
         testSession = null;
     }
 
@@ -268,6 +292,11 @@ public class ModelManager implements Model {
     public void updateFilteredFlashcardList(Predicate<Flashcard> predicate) {
         requireNonNull(predicate);
         filteredFlashcards.setPredicate(predicate);
+    }
+
+    @Override
+    public Statistics getStatistics() {
+        return statistics;
     }
 
     @Override

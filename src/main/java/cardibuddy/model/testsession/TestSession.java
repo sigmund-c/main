@@ -177,6 +177,18 @@ public class TestSession {
         return testResult;
     }
 
+    /**
+     * Returns the session's results.
+     * @return a Hashmap of TestResults corresponding to each question
+     */
+    public HashMap<Flashcard, TestResult> getTestResults() {
+        return testResults;
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
     @Override
     public boolean equals(Object other) {
         return this == other

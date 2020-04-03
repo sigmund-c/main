@@ -19,71 +19,91 @@ public class StatisticsCommand extends Command {
     public static final String COMMAND_WORD = "statistics";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Shows the user's statistics in general or on a particular deck. "
-            + "Parameters: (optional) INDEX (must be a positive integer)\n"
+            + ": Shows the user's statistics in general (if no parameters),\n"
+            + " of a deck (if deck_index is included),\n"
+            + " or of a testSession of a deck (if deck_index AND test_index is included.\n"
+            + "Parameters: (optional) DECK_INDEX (optional) TEST_INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_OPEN_STATISTIC_SUCCESS = "Opened statistics";
-
     public static final String MESSAGE_OPEN_DECK_STATISTIC_SUCCESS = "Opened statistics of Deck: %1$s";
+    public static final String MESSAGE_OPEN_SESSION_STATISTIC_SUCCESS =
+                                                "Opened statistics of Session %1$d of Deck %2$s";
 
     private LogicToUiManager logicToUiManager;
 
-    private final Index targetIndex;
-
-    /**
-     * Opens the Statistic report of a specific Deck.
-     * @param index target Deck
-     * @param logicToUiManager manager to set the UI into
-     */
-    public StatisticsCommand(Index index, LogicToUiManager logicToUiManager) {
-        this.targetIndex = index;
-        this.logicToUiManager = logicToUiManager;
-    }
+    private final Index deckIndex;
+    private final Index sessionIndex;
 
     /**
      * Opens the Statistic report of all the Decks.
      * @param logicToUiManager manager to set the UI into
      */
     public StatisticsCommand(LogicToUiManager logicToUiManager) {
-        this.targetIndex = null;
+        this.deckIndex = null;
+        this.sessionIndex = null;
         this.logicToUiManager = logicToUiManager;
     }
+
+    /**
+     * Opens the Statistic report of a specific Deck.
+     * @param deckIndex target Deck
+     * @param logicToUiManager manager to set the UI into
+     */
+    public StatisticsCommand(Index deckIndex, LogicToUiManager logicToUiManager) {
+        this.deckIndex = deckIndex;
+        this.sessionIndex = null;
+        this.logicToUiManager = logicToUiManager;
+    }
+
+    /**
+     * Opens the Statistic report of a specific Deck.
+     * @param deckIndex target Deck
+     * @param logicToUiManager manager to set the UI into
+     */
+    public StatisticsCommand(Index deckIndex, Index sessionIndex, LogicToUiManager logicToUiManager) {
+        this.deckIndex = deckIndex;
+        this.sessionIndex = sessionIndex;
+        this.logicToUiManager = logicToUiManager;
+    }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (targetIndex == null) { // execute if index isn't specified (Statistics of all the Decks)
+        // result to show statistics (in general)
+        if (deckIndex == null) {
             logicToUiManager.openStatisticPanel();
-
-            //TODO: implement functionality for statistics of ALL decks
-
             return new CommandResult(
                     String.format(MESSAGE_OPEN_STATISTIC_SUCCESS));
         }
 
         List<Deck> lastShownList = model.getFilteredDeckList();
-
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (deckIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
         }
+        Deck deckToShow = lastShownList.get(deckIndex.getZeroBased());
 
-        Deck deckToShow = lastShownList.get(targetIndex.getZeroBased());
+        // result to show statistics of a Deck
+        if (sessionIndex == null) {
+            logicToUiManager.openStatisticPanel(deckIndex.getZeroBased());
+            return new CommandResult(
+                    String.format(MESSAGE_OPEN_DECK_STATISTIC_SUCCESS, deckToShow));
+        }
 
-        System.out.println(targetIndex.getZeroBased());
-        logicToUiManager.openStatisticPanel(targetIndex.getZeroBased());
-
+        // result to show statistics of a TestSession of a Deck
+        logicToUiManager.openStatisticPanel(deckIndex.getZeroBased(), sessionIndex.getZeroBased());
         return new CommandResult(
-                String.format(MESSAGE_OPEN_DECK_STATISTIC_SUCCESS, deckToShow));
+                String.format(MESSAGE_OPEN_SESSION_STATISTIC_SUCCESS, sessionIndex.getOneBased(), deckToShow));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof StatisticsCommand) // instanceof handles nulls
-                && targetIndex.equals(((StatisticsCommand) other).targetIndex); // state check
+                && deckIndex.equals(((StatisticsCommand) other).deckIndex)
+                && sessionIndex.equals(((StatisticsCommand) other).sessionIndex); // state check
     }
 
 

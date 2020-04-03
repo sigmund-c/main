@@ -1,15 +1,17 @@
 package cardibuddy.ui;
 
 import java.text.DecimalFormat;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
+import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Statistics;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 
 /**
@@ -24,22 +26,7 @@ public class StatisticsPanel extends UiPart<Region> {
     private final Statistics statistics;
 
     @FXML
-    private HBox statisticsPane;
-
-    @FXML
-    private Label cardsAdded;
-
-    @FXML
-    private Label cardsDeleted;
-
-    @FXML
-    private Label timesPlayed;
-
-    @FXML
-    private Label correctPercentage;
-
-    @FXML
-    private Label avgTriesToGetCorrect;
+    private ListView statsList;
 
     @FXML
     private LineChart correctPercentageHistory;
@@ -48,22 +35,45 @@ public class StatisticsPanel extends UiPart<Region> {
     public StatisticsPanel(Statistics statistics) {
         super(FXML);
         this.statistics = statistics;
-        cardsAdded.setText("No. of Cards added: " + statistics.getCardsAdded());
-        cardsDeleted.setText("No. of Cards deleted: " + statistics.getCardsDeleted());
-        timesPlayed.setText("No. of sessions played: " + statistics.getTimesPlayed());
-        correctPercentage.setText("Percent of correct answers: "
-                                     + percentFormat.format(statistics.getCorrectPercentage()));
-        avgTriesToGetCorrect.setText("Average tries to get correct answer: " + statistics.getAvgTriesToGetCorrect());
-
-        XYChart.Series series = new XYChart.Series();
-        int recordIndex = 1;
-        for (Double record : statistics.getCorrectPercentageHistory()) {
-            series.getData().add(new XYChart.Data(recordIndex, record));
-            recordIndex++;
+        if (statistics.getCardsAdded() != 0) {
+            statsList.getItems().add("No of Cards added: " + statistics.getCardsAdded());
+        }
+        if (statistics.getCardsDeleted() != 0) {
+            statsList.getItems().add("No of Cards deleted: " + statistics.getCardsDeleted());
+        }
+        if (statistics.getDecksAdded() > 1) {
+            statsList.getItems().add("No of Decks added: " + statistics.getDecksAdded());
+        }
+        if (statistics.getDecksDeleted() != 0) {
+            statsList.getItems().add("No of Decks deleted: " + statistics.getDecksDeleted());
+        }
+        if (statistics.getTimesPlayed() != 0) {
+            statsList.getItems().add("Test Sessions played: " + statistics.getTimesPlayed());
+        }
+        if (statistics.getCardsPlayed() != 0) {
+            statsList.getItems().add("Total Cards played: " + statistics.getCardsPlayed());
+        }
+        if (statistics.getAvgTriesToGetCorrect() != 0.0) {
+            statsList.getItems().add("Average tries to get correct: " + statistics.getAvgTriesToGetCorrect());
+        }
+        if (statistics.getAvgCorrectPercentage() != 0) {
+            statsList.getItems().add("Average correct percentage: "
+                                    + percentFormat.format(statistics.getAvgCorrectPercentage()));
         }
 
-        correctPercentageHistory.getData().setAll(series);
-        correctPercentageHistory.setLegendVisible(false);
+        for (Map.Entry<Deck, List<Double>> deckHistory: statistics.getCorrectPercentageHistory().entrySet()) {
+            XYChart.Series newSeries = new XYChart.Series();
+            newSeries.setName(deckHistory.getKey().getTitle().toString());
+
+            int recordIndex = 1;
+            for (Double record : deckHistory.getValue()) {
+                newSeries.getData().add(new XYChart.Data("" + recordIndex, record * 100));
+                recordIndex++;
+            }
+
+            correctPercentageHistory.getData().add(newSeries);
+        }
+
     }
 
 
