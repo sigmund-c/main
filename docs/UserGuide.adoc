@@ -388,7 +388,7 @@ If there is a card with the same question but it is in a different deck, the car
 Displays the statistics across all decks.
 Format: `statistics`
 
-==== Displaying statistics of a certain Deck: `statistics INDEX`
+==== Displaying statistics of a certain Deck: `statistics`
 
 Displays the statistics of a specific deck.
 Format: `statistics INDEX`
@@ -399,7 +399,7 @@ Example:
 Shows the statistics of the deck with the shown index of 2.
 
 
-==== Displaying statistics of a test session of a certain Deck: `statistics INDEX TEST_SESSION_INDEX`
+==== Displaying statistics of a test session of a certain Deck: `statistics`
 
 Displays the statistics of a test session of a specific deck.
 Format: `statistics INDEX TEST_SESSION_INDEX`
