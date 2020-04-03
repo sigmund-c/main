@@ -27,20 +27,38 @@ public class StatisticsCommandParser implements Parser<StatisticsCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public StatisticsCommand parse(String args) throws ParseException {
-        if (args.isEmpty()) {
-            return new StatisticsCommand(logicToUiManager);
+        Index deckIndex;
+        Index sessionIndex;
+
+        String trimmedArgs = args.trim();
+        String[] splitArgs = trimmedArgs.split(" ");
+
+        if (splitArgs.length == 1) {
+            if (splitArgs[0].isEmpty()) {
+                return new StatisticsCommand(logicToUiManager);
+            }
+            try {
+                deckIndex = ParserUtil.parseIndex(splitArgs[0]);
+            } catch (ParseException pe) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatisticsCommand.MESSAGE_USAGE), pe);
+            }
+
+            return new StatisticsCommand(deckIndex, logicToUiManager);
+        } else if (splitArgs.length == 2) {
+            try {
+                deckIndex = ParserUtil.parseIndex(splitArgs[0]);
+                sessionIndex = ParserUtil.parseIndex(splitArgs[1]);
+            } catch (ParseException pe) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatisticsCommand.MESSAGE_USAGE), pe);
+            }
+
+            return new StatisticsCommand(deckIndex, sessionIndex, logicToUiManager);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatisticsCommand.MESSAGE_USAGE));
         }
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(args);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatisticsCommand.MESSAGE_USAGE), pe);
-        }
-
-        return new StatisticsCommand(index, logicToUiManager);
     }
 
 }
