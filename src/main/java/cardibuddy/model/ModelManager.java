@@ -130,11 +130,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteDeck(Deck target) {
-        cardiBuddy.removeDeck(target);
-    }
-
-    @Override
     public void setDeck(Deck target, Deck editedDeck) {
         cardiBuddy.setDeck(target, editedDeck);
     }
@@ -164,6 +159,14 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedFlashcard);
 
         cardiBuddy.setFlashcard(target, editedFlashcard);
+    }
+
+    @Override
+    public void deleteFlashcard(Flashcard target) {
+        cardiBuddy.removeFlashcard(target);
+
+        target.getDeck().getStatistics().trackCardDeleted();
+        statistics.trackCardDeleted();
     }
 
     /**
