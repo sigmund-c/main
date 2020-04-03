@@ -103,15 +103,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addDeck(Deck deck) {
-        cardiBuddy.addDeck(deck);
-        updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
-    }
-    
-    @Override
     public boolean hasDeck(Deck deck) {
         requireNonNull(deck);
         return cardiBuddy.hasDeck(deck);
+    }
+
+    @Override
+    public void addDeck(Deck deck) {
+        cardiBuddy.addDeck(deck);
+        updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
     }
 
     @Override
