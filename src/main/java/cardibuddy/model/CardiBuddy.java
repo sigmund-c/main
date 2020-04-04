@@ -12,14 +12,15 @@ import cardibuddy.model.testsession.TestSession;
 import javafx.collections.ObservableList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameFlashcard comparison)
+ * Wraps all data at the CardiBuddy level
+ * Duplicates are not allowed
  */
 public class CardiBuddy implements ReadOnlyCardiBuddy {
 
     private final UniqueDeckList decks;
     private final UniqueFlashcardList flashcards;
     //private TestSession testSession;
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html

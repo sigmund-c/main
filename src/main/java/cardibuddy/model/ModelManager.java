@@ -140,14 +140,6 @@ public class ModelManager implements Model {
         return cardiBuddy.hasFlashcard(flashcard);
     }
 
-    @Override
-    public void deleteFlashcard(Flashcard target) {
-        cardiBuddy.removeFlashcard(target);
-
-        target.getDeck().getStatistics().trackCardDeleted();
-        statistics.trackCardDeleted();
-    }
-
     /**
      * Adds Flashcard to a Deck.
      *
@@ -167,6 +159,14 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedFlashcard);
 
         cardiBuddy.setFlashcard(target, editedFlashcard);
+    }
+
+    @Override
+    public void deleteFlashcard(Flashcard target) {
+        cardiBuddy.removeFlashcard(target);
+
+        target.getDeck().getStatistics().trackCardDeleted();
+        statistics.trackCardDeleted();
     }
 
     /**

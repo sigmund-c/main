@@ -25,6 +25,8 @@ public class Messages {
     public static final String MESSAGE_UNANSWERED_QUESTION = "%s: Have you answered this question yet?%s";
     public static final String MESSAGE_USER_ANSWER = "Your input: %s";
     public static final String MESSAGE_FLASHCARD_ANSWER = "Correct answer: %s";
+    public static final String MESSAGE_NOTHING_TO_REDO = "There are no commands to redo.";
+    public static final String MESSAGE_NOTHING_TO_UNDO = "There are no commands to undo. ";
     public static final String MESSAGE_TEST_COMPLETE = "Test has ended!\n"
             + "Type 'statistics' to show the statistics for this question, or type 'end' to return to the home page.";
 }

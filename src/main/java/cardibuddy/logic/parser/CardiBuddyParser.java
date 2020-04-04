@@ -18,13 +18,16 @@ import cardibuddy.logic.commands.EditCommand;
 import cardibuddy.logic.commands.ExitCommand;
 import cardibuddy.logic.commands.FilterCommand;
 import cardibuddy.logic.commands.HelpCommand;
+import cardibuddy.logic.commands.HistoryCommand;
 import cardibuddy.logic.commands.ListCommand;
 import cardibuddy.logic.commands.OpenCommand;
+import cardibuddy.logic.commands.RedoCommand;
 import cardibuddy.logic.commands.SearchCardCommand;
 import cardibuddy.logic.commands.SearchCommand;
 import cardibuddy.logic.commands.SearchDeckCommand;
 import cardibuddy.logic.commands.StatisticsCommand;
 import cardibuddy.logic.commands.TestCommand;
+import cardibuddy.logic.commands.UndoCommand;
 import cardibuddy.logic.commands.testsession.AnswerCommand;
 import cardibuddy.logic.commands.testsession.ForceCommand;
 import cardibuddy.logic.commands.testsession.NextCommand;
@@ -42,6 +45,7 @@ public class CardiBuddyParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
     private ReadOnlyCardiBuddy cardiBuddy;
     private LogicToUiManager logicToUiManager;
 
@@ -143,6 +147,12 @@ public class CardiBuddyParser {
         case StatisticsCommand.COMMAND_WORD:
             return new StatisticsCommandParser(logicToUiManager).parse(arguments);
 
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
+        case HistoryCommand.COMMAND_WORD:
+            return new HistoryCommand();
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand(logicToUiManager);
 
@@ -151,6 +161,9 @@ public class CardiBuddyParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
