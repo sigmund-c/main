@@ -245,7 +245,7 @@ Displays decks with both of the words `database` and `relational` in the titles.
 ==== Searching for a card: `search card`
 
 Finds the cards with a question that contain any of the given keywords.
-Format: `search card [&] [MORE_KEYWORDS]`
+Format: `search card KEYWORD [&] [MORE_KEYWORDS]`
 
 * A deck needs to be opened for the `search card` command to work. The command will only search for cards in the
 opened deck.
