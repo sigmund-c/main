@@ -25,10 +25,10 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="question" styleClass="big_label" text="\$first" />
+                <Label fx:id="question" styleClass="big_label" text="\$first" wrapText="true" />
             </HBox>
 
-             <Label fx:id="answer" styleClass="small_label" text="\$first">
+             <Label fx:id="answer" styleClass="small_label" text="\$first" wrapText="true">
             <padding>
                <Insets left="8.0" />
             </padding>

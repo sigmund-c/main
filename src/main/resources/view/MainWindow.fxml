@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600.0" minWidth="450" onCloseRequest="#handleExit" title="CardiBuddy" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600.0" minWidth="900.0" onCloseRequest="#handleExit" title="CardiBuddy" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/CardiBuddy_noBG.png" />
   </icons>
@@ -23,7 +23,7 @@
         <URL value="@Extensions.css" />
       </stylesheets>
 
-      <VBox minHeight="600.0" stylesheets="@DarkTheme.css">
+      <VBox minHeight="600.0" minWidth="870.0" stylesheets="@DarkTheme.css">
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu fx:id="exitButton" mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
@@ -47,21 +47,27 @@
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-            <StackPane prefHeight="500.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <StackPane minWidth="900.0" prefHeight="500.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" minWidth="870.0" prefWidth="870.0">
                      <children>
-                                      <VBox fx:id="deckList" minHeight="500.0" minWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+                                      <VBox fx:id="deckList" minHeight="500.0" minWidth="435.0" prefWidth="435.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>
-                      <StackPane fx:id="deckListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                      <StackPane fx:id="deckListPanelPlaceholder" minWidth="405.0" VBox.vgrow="ALWAYS">
+                              <VBox.margin>
+                                 <Insets left="5.0" />
+                              </VBox.margin></StackPane>
                     </VBox>
-                                      <VBox fx:id="flashcardList" minHeight="500.0" minWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+                                      <VBox fx:id="flashcardList" minHeight="500.0" minWidth="435.0" prefWidth="435.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>
-                      <StackPane fx:id="flashcardListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                      <StackPane fx:id="flashcardListPanelPlaceholder" minWidth="405.0" VBox.vgrow="ALWAYS">
+                              <VBox.margin>
+                                 <Insets left="5.0" />
+                              </VBox.margin></StackPane>
                     </VBox>
                      </children>
                   </HBox>
