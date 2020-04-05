@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 
 /**
  * An UI component that displays information of a {@code deck}.
@@ -25,6 +26,7 @@ public class DeckCard extends UiPart<Region> {
      */
 
     public final Deck deck;
+    private MainWindow mainWindow;
 
     @FXML
     private HBox cardPane;
@@ -35,6 +37,7 @@ public class DeckCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+
     public DeckCard(Deck deck, int displayedIndex) {
         super(FXML);
         this.deck = deck;
@@ -44,6 +47,16 @@ public class DeckCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
+
+    /**
+     * Opens selected deck.
+     */
+    @FXML
+    public void openDeck() {
+
+        //resultDisplay.setFeedbackToUser("Selected deck is opened");
+    }
+
 
     @Override
     public boolean equals(Object other) {

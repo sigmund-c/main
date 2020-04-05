@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
@@ -38,6 +39,9 @@
             <VBox.margin>
                <Insets bottom="10.0" />
             </VBox.margin></FlowPane>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
     </VBox>
       <rowConstraints>
          <RowConstraints />

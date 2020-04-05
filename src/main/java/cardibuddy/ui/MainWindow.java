@@ -41,7 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private DeckListPanel deckListPanel;
     private FlashcardListPanel flashcardListPanel;
-    private ResultDisplay resultDisplay;
+    protected ResultDisplay resultDisplay;
     private StatisticsPanel statisticsPanel;
     private HelpWindow helpWindow;
 
