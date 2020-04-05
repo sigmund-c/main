@@ -1,8 +1,7 @@
 package cardibuddy.ui;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
@@ -23,17 +22,22 @@ public class DragDropCard extends UiPart<Region> {
 
     @javafx.fxml.FXML
     private HBox cardPane;
-    @FXML
-    private Label question;
-    @FXML
-    private Label answer;
-    @FXML
-    private Label id;
-    @FXML
-    private FlowPane tags;
+
+
+    @javafx.fxml.FXML
+    private ImageView imageView;
+
 
     public DragDropCard() {
         super(FXML);
+        imageView = new ImageView();
     }
 
+    public void setImage(Image image) {
+        imageView.setImage(image);
+    }
+
+    public void setCache(boolean bool) {
+        imageView.setCache(bool);
+    }
 }
