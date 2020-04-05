@@ -7,7 +7,7 @@ public class Title {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Titles should only contain alphanumeric characters and spaces, and it should not be blank";
-    public static final String VALIDATION_REGEX = "^[\\w]+([-_\\s]{1}[a-z0-9]+)*$";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9 ]*$";
 
     private String titleString;
 

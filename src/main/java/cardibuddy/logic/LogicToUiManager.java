@@ -49,10 +49,6 @@ public class LogicToUiManager {
         ui.getMainWindow().fillInnerPartsWithDecks();
     }
 
-    public String getOpenedDeck() {
-        return openedDeck;
-    }
-
     public void setOpenedDeck(Deck openedDeck) {
         if (openedDeck == null) {
             inDeck = false;

@@ -1,8 +1,10 @@
 package cardibuddy.model.deck;
 
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
+import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 import static java.util.Objects.requireNonNull;
 
+import cardibuddy.model.flashcard.Question;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -101,6 +103,7 @@ public class Deck {
      */
     public List<Flashcard> addFlashcard(Flashcard card) {
         flashcards.add(card);
+        filteredFlashcards = new FilteredList<>(FXCollections.observableList(flashcards));
         return Collections.unmodifiableList(flashcards);
     }
 
@@ -140,6 +143,17 @@ public class Deck {
         requireNonNull(predicate);
         this.predicate = predicate;
         filteredFlashcards.setPredicate(predicate);
+    }
+
+    public boolean hasFlashcard(Flashcard card) {
+        Question cardQuestion = card.getQuestion();
+        for (Flashcard c : flashcards) {
+            if (cardQuestion.equals(c.getQuestion())) {
+                System.out.println(c.getQuestion().toString());
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

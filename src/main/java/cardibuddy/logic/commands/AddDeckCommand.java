@@ -1,0 +1,65 @@
+package cardibuddy.logic.commands;
+
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
+import static java.util.Objects.requireNonNull;
+
+import cardibuddy.logic.commands.exceptions.CommandException;
+import cardibuddy.model.Model;
+import cardibuddy.model.deck.Deck;
+import cardibuddy.model.flashcard.Flashcard;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AddDeckCommand extends AddCommand {
+
+    public static final String COMMAND_WORD = "d";
+
+    public static final String MESSAGE_USAGE = "add d/: Adds a deck to the cardibuddy book. \n"
+            + "Parameters: "
+            + PREFIX_DECK + "DECK_TITLE "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example (adding a deck): " + COMMAND_WORD + " "
+            + PREFIX_DECK + "CS2103T "
+            + PREFIX_TAG + "Hard "
+            + PREFIX_TAG + "Software Engineering";
+
+    public static final String MESSAGE_SUCCESS = "New deck added: %1$s";
+    public static final String MESSAGE_DUPLICATE_DECK = "This deck already exists in the cardibuddy library";
+
+    private static List<Flashcard> flashcards = new ArrayList<>();
+
+    private final Deck toAdd;
+
+    /**
+     * Creates an AddCommand to add the specified {@code Deck}
+     */
+    public AddDeckCommand(Deck deck) {
+        requireNonNull(deck);
+        toAdd = deck;
+        flashcards = deck.getFlashcards();
+    }
+
+    @Override
+    public CommandResult executeUndoableCommand(Model model) throws CommandException {
+        requireNonNull(model);
+        if (model.hasDeck(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_DECK);
+        }
+        model.addDeck(toAdd);
+
+        logger.info("Deck has been added");
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddDeckCommand // instanceof handles nulls
+                && toAdd.equals(((AddDeckCommand) other).toAdd));
+    }
+}

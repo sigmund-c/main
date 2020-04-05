@@ -1,9 +1,13 @@
 package cardibuddy.logic.parser;
 
+import static cardibuddy.commons.core.Messages.MESSAGE_DECK_OR_FLASHCARD_PREFIX;
+import static cardibuddy.commons.core.Messages.MESSAGE_INCOMPLETE_COMMAND;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_TWO_WORD_COMMAND;
 import static cardibuddy.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import cardibuddy.logic.commands.AddCardCommand;
+import cardibuddy.logic.commands.AddDeckCommand;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -79,7 +83,23 @@ public class CardiBuddyParser {
             return new OpenCommandParser(logicToUiManager).parse(arguments);
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser(cardiBuddy, logicToUiManager).parse(arguments);
+            try {
+                switch (arguments.substring(1, 2)) {
+
+                case AddDeckCommand.COMMAND_WORD:
+                    System.out.println(arguments);
+                    return new AddDeckCommandParser().parse(arguments);
+
+                case AddCardCommand.COMMAND_WORD:
+                    return new AddCardCommandParser(cardiBuddy, logicToUiManager).parse(arguments);
+
+                default:
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
+                }
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new ParseException(MESSAGE_INCOMPLETE_COMMAND + MESSAGE_DECK_OR_FLASHCARD_PREFIX);
+            }
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -95,11 +115,11 @@ public class CardiBuddyParser {
                     return new DeleteCardCommandParser(logicToUiManager).parse(arguments.substring(5));
 
                 default:
-                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND + " " + MESSAGE_INVALID_TWO_WORD_COMMAND);
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND + "\n" + MESSAGE_INVALID_TWO_WORD_COMMAND);
 
                 }
             } catch (StringIndexOutOfBoundsException e) {
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+                throw new ParseException(MESSAGE_INCOMPLETE_COMMAND + MESSAGE_INVALID_TWO_WORD_COMMAND);
             }
 
         case TestCommand.COMMAND_WORD: // test session command

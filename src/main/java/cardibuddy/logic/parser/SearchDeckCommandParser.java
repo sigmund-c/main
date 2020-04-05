@@ -10,7 +10,7 @@ import cardibuddy.model.deck.SearchDeckKeywordsPredicate;
 
 
 /**
- * Parses input arguments and creates a new SearchDeckCommand object
+ * Parses input arguments and creates a new SearchDeckCommand object.
  */
 public class SearchDeckCommandParser implements Parser<SearchDeckCommand> {
 
