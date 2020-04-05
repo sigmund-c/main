@@ -41,7 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private DeckListPanel deckListPanel;
     private FlashcardListPanel flashcardListPanel;
-    protected ResultDisplay resultDisplay;
+    private ResultDisplay resultDisplay;
     private StatisticsPanel statisticsPanel;
     private HelpWindow helpWindow;
 
@@ -152,7 +152,7 @@ public class MainWindow extends UiPart<Stage> {
         flashcardListPanel = new FlashcardListPanel(logic.getFilteredDeckList()
                 .get(deckIndex)
                 .getFlashcardList());
-        flashcardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
+        flashcardListPanelPlaceholder.getChildren().addAll(flashcardListPanel.getRoot());
     }
 
     /**
