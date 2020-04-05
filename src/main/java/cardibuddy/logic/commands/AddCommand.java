@@ -11,7 +11,7 @@ public abstract class AddCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "add";
 
-    protected static final Logger logger = LogsCenter.getLogger(AddCommand.class);
+    protected static final Logger LOGGER = LogsCenter.getLogger(AddCommand.class);
 
     public abstract boolean equals(Object other);
 }

@@ -6,13 +6,13 @@ import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_TWO_WORD_COMMAND;
 import static cardibuddy.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import cardibuddy.logic.commands.AddCardCommand;
-import cardibuddy.logic.commands.AddDeckCommand;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cardibuddy.logic.LogicToUiManager;
+import cardibuddy.logic.commands.AddCardCommand;
 import cardibuddy.logic.commands.AddCommand;
+import cardibuddy.logic.commands.AddDeckCommand;
 import cardibuddy.logic.commands.ClearCommand;
 import cardibuddy.logic.commands.Command;
 import cardibuddy.logic.commands.DeleteCardCommand;

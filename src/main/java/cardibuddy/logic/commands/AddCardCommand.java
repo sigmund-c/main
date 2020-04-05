@@ -12,7 +12,9 @@ import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.flashcard.Flashcard;
 
-
+/**
+ * Adds a Flashcard to the specified deck.
+ */
 public class AddCardCommand extends AddCommand {
 
     public static final String COMMAND_WORD = "c";
@@ -63,7 +65,7 @@ public class AddCardCommand extends AddCommand {
 
         model.addFlashcard(toAdd);
         logicToUiManager.getDisplayedDeck().addFlashcard(toAdd);
-        logger.info("Flashcard has been added");
+        LOGGER.info("Flashcard has been added");
 
         logicToUiManager.getDisplayedDeck().updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
         logicToUiManager.updateFlashcardPanel();

@@ -1,10 +1,8 @@
 package cardibuddy.model.deck;
 
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
-import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 import static java.util.Objects.requireNonNull;
 
-import cardibuddy.model.flashcard.Question;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -16,6 +14,7 @@ import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.UniqueFlashcardList;
 import cardibuddy.model.tag.Tag;
 import javafx.collections.FXCollections;
@@ -145,6 +144,11 @@ public class Deck {
         filteredFlashcards.setPredicate(predicate);
     }
 
+    /**
+     * Check if deck contains the flashcard to prevent duplicates.
+     * @param card new card to be added.
+     * @return true if card's question already exists.
+     */
     public boolean hasFlashcard(Flashcard card) {
         Question cardQuestion = card.getQuestion();
         for (Flashcard c : flashcards) {

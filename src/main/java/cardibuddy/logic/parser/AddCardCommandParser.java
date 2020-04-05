@@ -1,35 +1,21 @@
 package cardibuddy.logic.parser;
 
-import static cardibuddy.commons.core.Messages.MESSAGE_DECK_CANNOT_BE_FLASHCARD;
-import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_DECK;
-import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_FLASHCARD;
 import static cardibuddy.commons.core.Messages.MESSAGE_NOT_IN_DECK;
 import static cardibuddy.commons.core.Messages.MESSAGE_WRONG_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
 import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.AddCardCommand;
-import cardibuddy.logic.commands.AddCommand;
-import cardibuddy.logic.commands.OpenCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.ReadOnlyCardiBuddy;
 import cardibuddy.model.deck.Deck;
-import cardibuddy.model.deck.Title;
-import cardibuddy.model.deck.exceptions.DeckCannotBeCardException;
-import cardibuddy.model.deck.exceptions.InvalidDeckException;
-import cardibuddy.model.deck.exceptions.NotInDeckException;
-import cardibuddy.model.deck.exceptions.WrongDeckException;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
-import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
 import javafx.collections.ObservableList;
 
 /**
