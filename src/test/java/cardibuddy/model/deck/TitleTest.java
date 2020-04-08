@@ -13,11 +13,6 @@ public class TitleTest {
         assertThrows(NullPointerException.class, () -> new Title(null));
     }
 
-    @Test
-    public void constructor_invalidTitle_throwsIllegalArgumentException() {
-        String invalidTitle = "";
-        assertThrows(IllegalArgumentException.class, () -> new Title(invalidTitle));
-    }
 
     @Test
     public void isValidTitle() {

@@ -17,24 +17,24 @@ import cardibuddy.model.deck.Deck;
  */
 public class TypicalDecks {
 
-    public static final Deck ASYNCHRONOUS = new DeckBuilder().withName("Asynchronous Programming")
-            .withTags("Hard").build();
-    public static final Deck BENSON = new DeckBuilder().withName("Benson Meier")
+    public static final Deck ASYNCHRONOUS = new DeckBuilder().withTitle("Asynchronous Programming")
+            .withTags("Difficult").build();
+    public static final Deck BENSON = new DeckBuilder().withTitle("Benson Meier")
             .withTags("owesMoney", "friends").build();
-    public static final Deck CARL = new DeckBuilder().withName("Carl Kurz").build();
-    public static final Deck DANIEL = new DeckBuilder().withName("Daniel Meier").withTags("friends").build();
-    public static final Deck ELLE = new DeckBuilder().withName("Elle Meyer").build();
-    public static final Deck FIONA = new DeckBuilder().withName("Fiona Kunz").build();
-    public static final Deck GEORGE = new DeckBuilder().withName("George Best").build();
+    public static final Deck CARL = new DeckBuilder().withTitle("Carl Kurz").build();
+    public static final Deck DANIEL = new DeckBuilder().withTitle("Daniel Meier").withTags("friends").build();
+    public static final Deck ELLE = new DeckBuilder().withTitle("Elle Meyer").build();
+    public static final Deck FIONA = new DeckBuilder().withTitle("Fiona Kunz").build();
+    public static final Deck GEORGE = new DeckBuilder().withTitle("George Best").build();
 
     // Manually added
-    public static final Deck HOON = new DeckBuilder().withName("Hoon Meier").build();
-    public static final Deck IDA = new DeckBuilder().withName("Ida Mueller").build();
+    public static final Deck HOON = new DeckBuilder().withTitle("Hoon Meier").build();
+    public static final Deck IDA = new DeckBuilder().withTitle("Ida Mueller").build();
 
     // Manually added - Deck's details found in {@code CommandTestUtil}
-    public static final Deck DJANGO = new DeckBuilder().withName(VALID_TITLE_DJANGO)
+    public static final Deck DJANGO = new DeckBuilder().withTitle(VALID_TITLE_DJANGO)
             .withTags(VALID_TAG_FRONTEND).build();
-    public static final Deck REACT = new DeckBuilder().withName(VALID_TITLE_REACT)
+    public static final Deck REACT = new DeckBuilder().withTitle(VALID_TITLE_REACT)
             .withTags(VALID_TAG_HARD, VALID_TAG_FRONTEND)
             .build();
 

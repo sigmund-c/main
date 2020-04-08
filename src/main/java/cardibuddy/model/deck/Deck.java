@@ -48,7 +48,7 @@ public class Deck {
         this.title = title;
         this.tags.addAll(tags);
         this.flashcards.addAll(flashcards);
-        this.filteredFlashcards = new FilteredList<Card>(FXCollections.observableList(flashcards));
+        this.filteredFlashcards = new FilteredList<>(FXCollections.observableList(flashcards));
         logger.info("Created Deck");
     }
 
@@ -171,6 +171,22 @@ public class Deck {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Deck)) {
+            return false;
+        }
+
+        Deck otherDeck = (Deck) other;
+        return otherDeck.getTitle().equals(getTitle())
+                && otherDeck.getFlashcards().equals(getFlashcards())
+                && otherDeck.getTags().equals(getTags());
     }
 
     @Override

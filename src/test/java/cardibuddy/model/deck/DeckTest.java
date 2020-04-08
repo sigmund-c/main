@@ -28,34 +28,30 @@ public class DeckTest {
         // null -> returns false
         assertFalse(ASYNCHRONOUS.isSameDeck(null));
 
-        // different phone and email -> returns false
-        Deck editedAlice = new DeckBuilder(ASYNCHRONOUS).build();
-        assertFalse(ASYNCHRONOUS.isSameDeck(editedAlice));
-
         // different name -> returns false
-        editedAlice = new DeckBuilder(ASYNCHRONOUS).withName(VALID_TITLE_REACT).build();
-        assertFalse(ASYNCHRONOUS.isSameDeck(editedAlice));
+        Deck editedAsync = new DeckBuilder(ASYNCHRONOUS).withTitle(VALID_TITLE_REACT).build();
+        assertFalse(ASYNCHRONOUS.isSameDeck(editedAsync));
 
         // same name, same phone, different attributes -> returns true
-        editedAlice = new DeckBuilder(ASYNCHRONOUS)
+        editedAsync = new DeckBuilder(ASYNCHRONOUS)
                 .withTags(VALID_TAG_HARD).build();
-        assertTrue(ASYNCHRONOUS.isSameDeck(editedAlice));
+        assertTrue(ASYNCHRONOUS.isSameDeck(editedAsync));
 
         // same name, same email, different attributes -> returns true
-        editedAlice = new DeckBuilder(ASYNCHRONOUS)
+        editedAsync = new DeckBuilder(ASYNCHRONOUS)
                 .withTags(VALID_TAG_HARD).build();
-        assertTrue(ASYNCHRONOUS.isSameDeck(editedAlice));
+        assertTrue(ASYNCHRONOUS.isSameDeck(editedAsync));
 
         // same name, same phone, same email, different attributes -> returns true
-        editedAlice = new DeckBuilder(ASYNCHRONOUS).withTags(VALID_TAG_HARD).build();
-        assertTrue(ASYNCHRONOUS.isSameDeck(editedAlice));
+        editedAsync = new DeckBuilder(ASYNCHRONOUS).withTags(VALID_TAG_HARD).build();
+        assertTrue(ASYNCHRONOUS.isSameDeck(editedAsync));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Deck aliceCopy = new DeckBuilder(ASYNCHRONOUS).build();
-        assertTrue(ASYNCHRONOUS.equals(aliceCopy));
+        Deck asyncCopy = new DeckBuilder(ASYNCHRONOUS).build();
+        assertTrue(ASYNCHRONOUS.equals(asyncCopy));
 
         // same object -> returns true
         assertTrue(ASYNCHRONOUS.equals(ASYNCHRONOUS));
@@ -70,23 +66,11 @@ public class DeckTest {
         assertFalse(ASYNCHRONOUS.equals(REACT));
 
         // different name -> returns false
-        Deck editedAlice = new DeckBuilder(ASYNCHRONOUS).withName(VALID_TITLE_REACT).build();
-        assertFalse(ASYNCHRONOUS.equals(editedAlice));
-
-        // different phone -> returns false
-        editedAlice = new DeckBuilder(ASYNCHRONOUS).build();
-        assertFalse(ASYNCHRONOUS.equals(editedAlice));
-
-        // different email -> returns false
-        editedAlice = new DeckBuilder(ASYNCHRONOUS).build();
-        assertFalse(ASYNCHRONOUS.equals(editedAlice));
-
-        // different address -> returns false
-        editedAlice = new DeckBuilder(ASYNCHRONOUS).build();
-        assertFalse(ASYNCHRONOUS.equals(editedAlice));
+        Deck editedAsync = new DeckBuilder(ASYNCHRONOUS).withTitle(VALID_TITLE_REACT).build();
+        assertFalse(ASYNCHRONOUS.equals(editedAsync));
 
         // different tags -> returns false
-        editedAlice = new DeckBuilder(ASYNCHRONOUS).withTags(VALID_TAG_HARD).build();
-        assertFalse(ASYNCHRONOUS.equals(editedAlice));
+        editedAsync = new DeckBuilder(ASYNCHRONOUS).withTags(VALID_TAG_HARD).build();
+        assertFalse(ASYNCHRONOUS.equals(editedAsync));
     }
 }

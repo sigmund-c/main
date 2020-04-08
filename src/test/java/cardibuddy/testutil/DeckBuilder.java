@@ -40,7 +40,7 @@ public class DeckBuilder {
     /**
      * Sets the {@code Title} of the {@code Deck} that we are building.
      */
-    public DeckBuilder withName(String title) {
+    public DeckBuilder withTitle(String title) {
         this.title = new Title(title);
         return this;
     }
