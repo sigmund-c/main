@@ -299,10 +299,13 @@ public class MainWindow extends UiPart<Stage> {
                             commandBox.getCommandExecutor().execute("add p/" + file.toURI().toString()
                                     + " " + qA);
                             event.consume();
+                            setCommandBox();
                         } catch (CommandException e) {
                             e.printStackTrace();
+                            setCommandBox();
                         } catch (ParseException e) {
                             e.printStackTrace();
+                            setCommandBox();
                         }
                     }
                 };

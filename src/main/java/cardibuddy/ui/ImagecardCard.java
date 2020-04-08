@@ -50,7 +50,7 @@ public class ImagecardCard extends CardUi {
         question.setText(flashcard.getQuestion().toString());
         question.setWrapText(true);
         imageView.setImage(new Image(card.getPath()));
-        imageView.setFitWidth(400);
+        imageView.setFitWidth(360);
         imageView.setPreserveRatio(true);
         answer.setText(flashcard.getAnswer().toString());
     }

@@ -69,8 +69,6 @@ public class InsertImageCommand extends AddCardCommand {
         logicToUiManager.getDisplayedDeck().updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
         logicToUiManager.updateFlashcardPanel();
 
-        logicToUiManager.setNewCommandBox();
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), false, false, false, false);
     }
 
