@@ -1,0 +1,12 @@
+{
+  "decks": [ {
+    "title": "Valid Deck",
+    "flashcards" : [ ],
+    "tagged" : [ ]
+  }, {
+    "title": "Deck With Invalid Card",
+    "cards" : [ {"question": null} ],
+    "tagged" : [ ]
+  } ],
+  "flashcards" : [ ]
+}

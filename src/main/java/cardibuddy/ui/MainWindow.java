@@ -18,10 +18,12 @@ import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
 import cardibuddy.model.testsession.TestResult;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -47,6 +49,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private StatisticsPanel statisticsPanel;
     private HelpWindow helpWindow;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -88,6 +91,11 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+    }
+
+    public void setCommandBox() {
+        CommandBox commandBox = new CommandBox(this::executeCommand);
+        this.commandBox = commandBox;
     }
 
     public Stage getPrimaryStage() {
@@ -146,6 +154,7 @@ public class MainWindow extends UiPart<Stage> {
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
+        this.commandBox = commandBox;
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -279,12 +288,37 @@ public class MainWindow extends UiPart<Stage> {
         fileChooser.getExtensionFilters().add(imgFilter);
         File file = fileChooser.showOpenDialog(primaryStage);
 
+        boolean hasInput = false;
+
         if (file != null) {
             Image image = new Image(file.toURI().toString());
-            DragDropCard imageCard = new DragDropCard(image);
-            imageCard.setCache(true);
-            flashcardListPanelPlaceholder.getChildren().add(imageCard.getRoot());
-            resultDisplay.setFeedbackToUser("Type in a question and answer to be associated with this image.");
+            //DragDropCard imageCard = new DragDropCard(image);
+            //imageCard.setCache(true);
+            //flashcardListPanelPlaceholder.getChildren().add(imageCard.getRoot());
+            resultDisplay.setFeedbackToUser("Type in the deck index, a question and an answer to be associated"
+                    + " with this image.\nParameters: c/DECK_INDEX q/QUESTION a/ANSWER\n\nNote: The deck indicated"
+                    + " in DECK_INDEX should be currently open for the command to work.");
+            try {
+                EventHandler<KeyEvent> getQa = event -> {
+                    if (event.getCode() == KeyCode.ENTER) {
+                        String qA = commandBox.getCommandTextField().getText();
+                        try {
+                            commandBox.getCommandTextField().setText("");
+                            commandBox.getCommandExecutor().execute("add p/" + file.toURI().toString()
+                                    + " " + qA);
+                            event.consume();
+                            setCommandBox();
+                        } catch (Exception e) {
+                            resultDisplay.setFeedbackToUser("Previous command aborted!");
+                            setCommandBox();
+                        }
+                    }
+                };
+                commandBox.getCommandTextField().setOnKeyPressed(getQa);
+            } catch (Exception e) {
+                resultDisplay.setFeedbackToUser("Invalid format to add a flashcard!\n"
+                        + "Parameters: c/DECK_INDEX q/QUESTION a/ANSWER");
+            }
         } else {
             resultDisplay.setFeedbackToUser("Please attach a valid file. "
                     + "Only image files ending with .png or .jpg are accepted.");
@@ -296,8 +330,19 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleTest() {
-        resultDisplay.setFeedbackToUser("Enter the index of the deck you want to be tested on.\nThis feature is"
-                + " still not functional and being developed. Please test other functionalities.");
+        resultDisplay.setFeedbackToUser("Enter the index of the deck you want to be tested on.");
+        commandBox.getCommandTextField().setOnAction(actionEvent -> {
+            String deckNumber = commandBox.getCommandTextField().getText();
+            try {
+                commandBox.getCommandTextField().setText("");
+                actionEvent.consume();
+                commandBox.getCommandExecutor().execute("test " + deckNumber);
+            } catch (CommandException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     void show() {

@@ -11,7 +11,7 @@ import java.util.List;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
-import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Card;
 
 /**
  * Adds a deck to the cardibuddy storage.
@@ -32,7 +32,7 @@ public class AddDeckCommand extends AddCommand {
     public static final String MESSAGE_SUCCESS = "New deck added: %1$s";
     public static final String MESSAGE_DUPLICATE_DECK = "This deck already exists in the cardibuddy library";
 
-    private static List<Flashcard> flashcards = new ArrayList<>();
+    private static List<Card> flashcards = new ArrayList<>();
 
     private final Deck toAdd;
 

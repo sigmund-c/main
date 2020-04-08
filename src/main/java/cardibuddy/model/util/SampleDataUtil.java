@@ -27,18 +27,18 @@ public class SampleDataUtil {
         Deck deckA = new Deck(new Title("CS2103"), tagsA);
         Flashcard cardA = new Flashcard(deckA,
                 new Question("What does UML stand for?"),
-                new ShortAnswer("Unified Modelling Language"));
+                new ShortAnswer("Unified Modelling Language"), "");
         Flashcard cardB = new Flashcard(deckA,
                 new Question("As per the KISS principle, should one always prefer the simpler solution over more"
                         + " clever solutions?"),
-                new ShortAnswer("False"));
+                new ShortAnswer("False"), "");
         Flashcard cardC = new Flashcard(deckA,
                 new Question("Do non-functional requirements specify the constraints under which system is developed"
                         + " and operated?"),
-                new ShortAnswer("True"));
+                new ShortAnswer("True"), "");
         Flashcard cardD = new Flashcard(deckA,
                 new Question("Is defensive code desirable at all times?"),
-                new ShortAnswer("False"));
+                new ShortAnswer("False"), "");
         deckA.addFlashcard(cardA);
         deckA.addFlashcard(cardB);
         deckA.addFlashcard(cardC);
