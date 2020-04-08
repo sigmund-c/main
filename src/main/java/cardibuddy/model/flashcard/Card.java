@@ -46,17 +46,15 @@ public abstract class Card {
 
     @Override
     public boolean equals(Object other) {
-        //if (other == this) {
-        //    return true;
-        //}
-        //
-        //if (!(other instanceof Card)) {
-        //    return false;
-        //}
-        //
-        //return ((Card) other).getQuestion().equals(getQuestion());
-        //TODO Edit the equals method
-        return false;
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Card)) {
+            return false;
+        }
+
+        return ((Card) other).getQuestion().equals(getQuestion());
     }
 
     @Override

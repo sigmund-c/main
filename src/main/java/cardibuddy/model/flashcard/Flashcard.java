@@ -38,19 +38,19 @@ public class Flashcard extends Card {
         return answer.checkAnswer(toCheck);
     }
 
-    ///**
-    // * Checks if the flashcards are of the same identity.
-    // * @param otherCard
-    // * @return true if they are the same and false otherwise.
-    // */
-    //public boolean isSameFlashcard(Flashcard otherCard) {
-    //    if (otherCard == this) {
-    //        return true;
-    //    }
-    //
-    //    return otherCard != null
-    //            && otherCard.getQuestion().equals(getQuestion());
-    //}
+    /**
+     * Checks if the flashcards are of the same identity.
+     * @param otherCard
+     * @return true if they are the same and false otherwise.
+     */
+    public boolean isSameFlashcard(Flashcard otherCard) {
+        if (otherCard == this) {
+            return true;
+        }
+
+        return otherCard != null
+                && otherCard.getQuestion().equals(getQuestion());
+    }
 
     public CardType getCardType() {
         return CardType.FLASHCARD;
