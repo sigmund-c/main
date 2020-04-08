@@ -18,7 +18,7 @@ By: `Team T10-2`      Since: `Jan 2020`      Licence: `MIT`
 
 == Introduction
 
-Cardi Buddy (CardiB) is for students who *prefer to use a desktop app to store their revision materials as flashcards*. More importantly, CardiB is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CardiB can help you to store revision materials quickly. The self-testing features will definitely help you to ace your examinations as opposed to traditional ways of revision by re-reading lecture notes. Interested? Jump to Section 2, <<Quick Start>> to get started. Enjoy!
+Cardi Buddy (CardiB) is for students who *prefer to use a desktop app to store their revision materials as flashcards*. More importantly, CardiB is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CardiB can help you to store revision materials quickly. The self-testing features will definitely help you to ace your examinations as opposed to traditional ways of revision by re-reading lecture notes. Interested? Jump to <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -45,12 +45,26 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 == Features
 
 ====
+*Application-specific Terminologies*
+
+* *Decks* are the containers that contain the flashcard. A flashcard can only exist in a deck.
+* *Flashcards* are cards that contain revision materials, specifically a question and an answer.
+* *Statistics* is the numererical, summarized version of your data, based on your test history. Your statistics can serve as a guideline for you to decide which areas you need to work on, and which areas you are familiar with. 
+
+*Common Terminologies*
+
+* *File path* specifies the unique location of a file in a file system from the root directory.
+
 *Command Format*
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add d/TITLE`, `TITLE` is a parameter which can be used as `add d/CS1101S`.
 * Items in square brackets are optional e.g `d/TITLE [t/TAG]` can be used as `d/CS1101S t/Basics` or as `d/CS1101S`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/Easy`, `t/Easy t/Basics` etc.
 * Parameters can be in any order e.g. if the command specifies `d/TITLE t/TAG`, `t/TAG d/TITLE` is also acceptable.
+
+*Special Icons*
+
+* :bulb: is used to signal information that is helpful for the users to know.
 ====
 
 === Basic Features
@@ -71,6 +85,16 @@ There is no need to save manually.
 Exits the program.
 Format: `exit`
 
+=== Opening
+
+==== Opening a deck: `open`
+
+Opens an existing deck in the library.
+Format: `open INDEX`
+
+Shows a list of all the cards in the deck. +
+Format: `open 1`
+
 === Adding
 
 ==== Adding a deck: `add d/TITLE`
@@ -80,8 +104,7 @@ Format: `add d/TITLE [t/TAG]…`
 
 * Tag names are alphanumeric with no spaces E.g. t/Core Module is an invalid tag while t/CoreModule is valid.
 
-[Tip]
-A deck can have any number of tags (including 0)
+> :bulb: A deck can have any number of tags (including 0)
 
 Examples:
 
@@ -94,12 +117,15 @@ Adds a new deck titled `CS1101S` with the tags `Easy` and `Basics`
 ==== Adding a card: `add c/DECK_TITLE q/QUESTION a/ANSWER`
 
 Creates a new card to be added to the deck.
-Format: `add c/DECK_TITLE q/QUESTION a/ANSWER`
+Format: `add c/DECK_INDEX q/QUESTION a/ANSWER`
+
+* You must open a deck before you can add a flashcard. A flashcard can only exist inside a deck.
 
 Examples:
 
-* `add c/CS1101S q/How does one go about solving recursion problems? a/Wishful thinking` +
-Adds a new card belonging to the deck `CS1101S`
+* `open 1` +
+`add c/1 q/How does one go about solving recursion problems? a/Wishful thinking` +
+Opens the first deck and adds a new flashcard to the deck.
 
 === Editing
 
@@ -128,6 +154,7 @@ Edits the title of the 2nd deck to be `CS2040` and clears all existing tags.
 Edits an existing card in the deck.
 Format: `edit card INDEX [q/QUESTION] [a/ANSWER] [t/TAG]…`
 
+* You must open a deck before you can edit a flashcard. A flashcard can only exist inside a deck.
 * Edits the card at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -136,10 +163,12 @@ Format: `edit card INDEX [q/QUESTION] [a/ANSWER] [t/TAG]…`
 
 Examples:
 
-* `edit card 1 q/What does MVC stand for?` +
-Edits the question of the 1st card to be `What does MVC stand for?`.
+* `open 1` +
+`edit card 1 q/What does MVC stand for?` +
+Opens the first deck and tEdits the question of the 1st card to be `What does MVC stand for?`.
 
-* `edit card 2 a/cs2040 t/` +
+* `open 1` +
+`edit card 2 a/cs2040 t/` +
 Edits the answer of the 2nd card to be `cs2040` and clears all existing tags.
 
 === Listing
@@ -149,21 +178,11 @@ Edits the answer of the 2nd card to be `cs2040` and clears all existing tags.
 Shows a list of all the decks in the library and hides the displayed cards (if any). +
 Format: `list`
 
-=== Opening
-
-==== Opening a deck: `open`
-
-Opens an existing deck in the library.
-Format: `open INDEX`
-
-Shows a list of all the cards in the deck. +
-Format: `open 1`
-
 === Clearing
 
 ==== Clearing all decks: `clear`
 
-Clears all entries (both decks and cards)  from the library. +
+Clears all deck entries from the library. +
 Format: `clear`
 
 === Deleting
@@ -192,15 +211,16 @@ Deletes the 1st deck in the results of the search command.
 Deletes the specified card from a specific deck.
 Format: `delete INDEX d/DECK_TITLE`
 
+* You must open a deck before you can delete a flashcard. A flashcard can only exist inside a deck.
 * Deletes the card at the specified INDEX of the deck.
 * The index refers to the index number shown in the complete list of flashcards in the deck.
 * The index must be a positive integer 1, 2, 3, …
 
 Examples:
 
-* `list cards` +
-`delete card 2` d/2030 +
-Deletes the 2nd flash card in the `cs2030` deck.
+* `open 1` +
+`delete card 2` d/cs2030 +
+Opens the first deck and deletes the 2nd flash card in the deck.
 
 * `search card java` +
 `delete card 1` +
@@ -310,13 +330,13 @@ To answer the question: "What is the name of this application?"
 What it does:
 
 * If you already know the answer to the question, and don't want to waste your time answering it, just type `skip` to go to the next question.
-* CardiBuddy will not note down this flashcard in your test history, and will merely remove it from your current test session.
+* CardiB will not note down this flashcard in your test history, and will merely remove it from your current test session.
 
 ==== Force correct an answer: `force`
 
 What it does:
 
-* CardiBuddy takes your answer word for word when checking against the flashcard's model answer.
+* CardiB takes your answer word for word when checking against the flashcard's model answer.
 * If your answer differs by the model answer, it will be marked as wrong.
 * After viewing the model answer, if you feel that your answer still captures the gist of what the question wants, you can `force` your answer to be marked as correct.
 
@@ -333,9 +353,14 @@ What it does:
 
 * Allows you to quit the current test session even before it is completed.
 
+=== Displaying History
 
+==== Displaying the command history: 'history'
 
-=== Undo/Redo [coming in v2.0]
+Displays all the commands that has been inputted by the user during the current session.
+Format: 'history'
+
+=== Undo/Redo 
 
 ==== Undoing command: `undo`
 
@@ -359,7 +384,7 @@ Upon adding a new card to a specific deck, the application automatically checks 
 
 If there is a card with the same question but it is in a different deck, the card can still be successfully added.
 
-=== Statistics [coming in v2.0]
+=== Statistics
 
 ==== Displaying all statistics: `statistics`
 
@@ -377,34 +402,6 @@ Format: `statistics`
 
 === Replacing image [coming in v2.0]
 
-==== Replacing a deck image: `replace deck image`
-
-Replaces the photo of an existing deck in the library. By default, all decks will have a default logo as shown in our wireframe.
-Format: `replace deck photo INDEX p/PHOTO_PATH`
-
-* Replaces the photo of the deck at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
-* The application will display a text label that reads ‘You can enter the path of your image into the command field or drag and drop your image into the command field.’
-
-Examples:
-
-* `replace deck image 1 d/src/resources/images/img.PNG.` +
-Replaces the photo of the 1st deck to the photo that the file path directs to.
-
-==== Replacing a card image: `replace card image`
-
-Replaces the photo of an existing card in a specified deck. By default, all cards will have a default image as shown in our wireframe.
-Format: `replace card image d/DECK_TITLE INDEX p/PHOTO_PATH`
-
-* Replaces the photo of the card belonging to the deck with that DECK_TITLE, whereby the card is at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
-* The application will display a text label that reads ‘You can enter the path of your image into the command field or drag and drop your image into the command field.’
-
-Examples:
-
-* `replace card image d/cs3230 1 p/src/resources/images/img.PNG.` +
-Replaces the photo of the 1st card of the `cs3230` deck with the photo that the file path directs to.
-
-
-
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
@@ -421,9 +418,24 @@ e.g. `add c/CS2030 q/What does OOP stand for? a/Object Oriented Programming`
 e.g. `delete deck 3`
 * *Edit* : `edit INDEX [d/TITLE] [t/TAG]...` +
 e.g. `edit 2 d/CS2103T t/`
+* *Exit* : `exit`
+* *Force* : `force`
+* *Filter* : `filter TAGNAME [&] [MORE_TAGNAMES]` +
+e.g. `filter hard & CS`
+* *History* : `history`
+* *Next* : `next`
+* *List* : `list`
+* *Next* : `next`
+* *Open* : `open INDEX` +
+e.g. `open 2`
+* *Quit* : `quit`
 * *Search deck/card* : `search deck/card KEYWORD [&] [MORE_KEYWORDS]` +
 e.g. `search database & relational`
+* *Statistics deck/card* : `search deck/card KEYWORD [&] [MORE_KEYWORDS]` +
+e.g. `search database & relational`
+* *Redo* : `redo`
+* *Statistics* : `statistics`
 * *Test* : `test INDEX` +
 e.g. `test 1`
-* *List* : `list`
-* *Help* : `help`
+* *Undo* : `undo`
+
