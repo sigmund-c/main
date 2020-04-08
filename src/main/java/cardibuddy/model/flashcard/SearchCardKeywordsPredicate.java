@@ -11,7 +11,7 @@ import cardibuddy.commons.util.StringUtil;
 /**
  * Tests that a {@code Card}'s {@code Title} matches any of the keywords given.
  */
-public class SearchCardKeywordsPredicate implements Predicate<Flashcard> {
+public class SearchCardKeywordsPredicate implements Predicate<Card> {
     private final List<String> keywords;
 
     public SearchCardKeywordsPredicate(List<String> keywords) {
@@ -26,7 +26,7 @@ public class SearchCardKeywordsPredicate implements Predicate<Flashcard> {
      * otherwise {@code false}
      */
     @Override
-    public boolean test(Flashcard card) {
+    public boolean test(Card card) {
         boolean anyMatch = false;
         if (checkAnd(keywords)) {
             anyMatch = searchAnd(card, keywords);
@@ -41,7 +41,7 @@ public class SearchCardKeywordsPredicate implements Predicate<Flashcard> {
      * @param keywords list of keywords from SearchCardCommand.
      * @return true if card's question contains any of the keywords.
      */
-    private boolean searchOr(Flashcard card, List<String> keywords) {
+    private boolean searchOr(Card card, List<String> keywords) {
         boolean anyMatch = false;
         anyMatch = new ArrayList<>(keywords).stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(card.getQuestion().toString(), keyword));
@@ -53,7 +53,7 @@ public class SearchCardKeywordsPredicate implements Predicate<Flashcard> {
      * @param keywords list of keywords from SearchCardCommand.
      * @return true if card's title contains all of the keywords with &.
      */
-    private boolean searchAnd(Flashcard card, List<String> keywords) {
+    private boolean searchAnd(Card card, List<String> keywords) {
         boolean anyMatch = false;
         List<List<String>> filteredKeywords = filterKeywords(keywords);
 

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Answer;
-import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
@@ -32,7 +32,7 @@ import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
 public class TestSession {
 
     private Deck deck;
-    private Flashcard current;
+    private Card current;
     private boolean isOngoing;
     private boolean hasAnswered;
     // public Statistic statistics; // for recording statistics
@@ -41,10 +41,10 @@ public class TestSession {
 
 
     // hashmap to store the user's answer history
-    private HashMap<Flashcard, TestResult> testResults;
+    private HashMap<Card, TestResult> testResults;
 
     // test queue
-    private LinkedList<Flashcard> testQueue;
+    private LinkedList<Card> testQueue;
 
     /**
      * Constructor for test session. Initiates the test session.
@@ -181,7 +181,7 @@ public class TestSession {
      * Returns the session's results.
      * @return a Hashmap of TestResults corresponding to each question
      */
-    public HashMap<Flashcard, TestResult> getTestResults() {
+    public HashMap<Card, TestResult> getTestResults() {
         return testResults;
     }
 

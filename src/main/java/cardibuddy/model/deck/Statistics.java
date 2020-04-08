@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
-import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.TestSession;
 
@@ -70,12 +70,12 @@ public class Statistics {
      * @param testSession history of testSession to record
      */
     public void recordHistory(TestSession testSession) {
-        HashMap<Flashcard, TestResult> testResults = testSession.getTestResults();
+        HashMap<Card, TestResult> testResults = testSession.getTestResults();
 
         int totalTries = 0;
         int numCorrect = 0;
         int noOfQuestions = testResults.size();
-        for (Map.Entry<Flashcard, TestResult> result : testResults.entrySet()) {
+        for (Map.Entry<Card, TestResult> result : testResults.entrySet()) {
             cardsPlayed++;
             totalTries += result.getValue().getNumTries();
             if (result.getValue().getNumTries() == 1) {

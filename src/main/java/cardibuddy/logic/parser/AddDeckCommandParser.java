@@ -12,7 +12,7 @@ import cardibuddy.logic.commands.AddDeckCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Title;
-import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.tag.Tag;
 
 /**
@@ -40,7 +40,7 @@ public class AddDeckCommandParser implements Parser<AddDeckCommand> {
 
         Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_DECK).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        List<Flashcard> flashcards = new ArrayList<>();
+        List<Card> flashcards = new ArrayList<>();
 
         return new AddDeckCommand(new Deck(title, tagList, flashcards));
     }
