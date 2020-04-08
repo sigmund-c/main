@@ -73,4 +73,13 @@ public class DeckTest {
         editedAsync = new DeckBuilder(ASYNCHRONOUS).withTags(VALID_TAG_HARD).build();
         assertFalse(ASYNCHRONOUS.equals(editedAsync));
     }
+
+    @Test
+    public void isSameString() {
+        //same Title
+        Deck editedAsync = new DeckBuilder(ASYNCHRONOUS).build();
+        assertTrue(ASYNCHRONOUS.toString().equals(editedAsync.toString()));
+    }
+
+
 }
