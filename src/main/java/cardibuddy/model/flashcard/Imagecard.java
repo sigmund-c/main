@@ -47,6 +47,13 @@ public class Imagecard extends Card {
 
     @Override
     public String toString() {
-        return null;
+        final StringBuilder builder = new StringBuilder();
+        builder.append("\nQ: ")
+                .append(getQuestion())
+                .append("\nA: ")
+                .append(getAnswer())
+                .append("\nFile Path: ")
+                .append(getPath());
+        return builder.toString();
     }
 }
