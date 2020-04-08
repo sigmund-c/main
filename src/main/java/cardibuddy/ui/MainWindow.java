@@ -1,5 +1,6 @@
 package cardibuddy.ui;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.GuiSettings;
@@ -20,9 +21,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -133,6 +136,9 @@ public class MainWindow extends UiPart<Stage> {
         deckListPanel = new DeckListPanel(logic.getFilteredDeckList());
         deckListPanelPlaceholder.getChildren().add(deckListPanel.getRoot());
 
+        flashcardListPanel = new FlashcardListPanel();
+        //flashcardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -150,16 +156,7 @@ public class MainWindow extends UiPart<Stage> {
         flashcardListPanel = new FlashcardListPanel(logic.getFilteredDeckList()
                 .get(deckIndex)
                 .getFlashcardList());
-        flashcardListPanelPlaceholder.getChildren().add(flashcardListPanel.getRoot());
-
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getCardiBuddyFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        CommandBox commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        flashcardListPanelPlaceholder.getChildren().addAll(flashcardListPanel.getRoot());
     }
 
     /**
@@ -264,7 +261,30 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the test window
+     * Inserts an image into the flashcard.
+     */
+    @FXML
+    public void handleInsert() {
+        resultDisplay.setFeedbackToUser("Choose an image to insert into your flashcard.");
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter imgFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
+        fileChooser.getExtensionFilters().add(imgFilter);
+        File file = fileChooser.showOpenDialog(primaryStage);
+
+        if (file != null) {
+            Image image = new Image(file.toURI().toString());
+            DragDropCard imageCard = new DragDropCard(image);
+            imageCard.setCache(true);
+            flashcardListPanelPlaceholder.getChildren().add(imageCard.getRoot());
+            resultDisplay.setFeedbackToUser("Type in a question and answer to be associated with this image.");
+        } else {
+            resultDisplay.setFeedbackToUser("Please attach a valid file. "
+                    + "Only image files ending with .png or .jpg are accepted.");
+        }
+    }
+
+    /**
+     * Opens the test window.
      */
     @FXML
     public void handleTest() {
@@ -309,6 +329,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isTest()) {
                 handleTest();
+            }
+
+            if (commandResult.isInsert()) {
+                handleInsert();
             }
 
             if (commandResult.isExit()) {

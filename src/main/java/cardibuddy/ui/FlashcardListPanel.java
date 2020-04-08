@@ -26,6 +26,10 @@ public class FlashcardListPanel extends UiPart<Region> {
         flashcardListView.setCellFactory(listView -> new FlashcardListViewCell());
     }
 
+    public FlashcardListPanel() {
+        super(FXML);
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Flashcard} using a {@code FlashcardCard}
      */

@@ -24,7 +24,7 @@ Cardi Buddy (CardiB) is for students who *prefer to use a desktop app to store t
 
 .  Ensure you have Java `11` or above installed in your Computer.
 .  Download the latest `cardibuddy.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Copy the file to the folder you want to use as the home folder for your Cardi Buddy.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -107,19 +107,22 @@ Adds a new deck titled `CS1101S` with the tags `Easy` and `Basics`
 ==== Adding a card: `add c/DECK_TITLE q/QUESTION a/ANSWER`
 
 Creates a new card to be added to the deck.
-Format: `add c/DECK_TITLE q/QUESTION a/ANSWER`
+Format: `add c/DECK_INDEX q/QUESTION a/ANSWER`
+
+* The deck specified in DECK_INDEX must be open for you to add a card.
 
 Examples:
 
-* `add c/CS1101S q/How does one go about solving recursion problems? a/Wishful thinking` +
-Adds a new card belonging to the deck `CS1101S`
+* `open 1` +
+`add c/1 q/How does one go about solving recursion problems? a/Wishful thinking` +
+Adds a new card belonging to the deck indexed at 1.
 
 === Opening
 
 ==== Opening a deck: `open`
 
 Opens an existing deck in the library.
-Format: `open INDEX`
+Format: `open DECK_INDEX`
 
 Shows a list of all the cards in the deck. +
 Format: `open 1`
@@ -129,9 +132,9 @@ Format: `open 1`
 ==== Editing a deck: `edit`
 
 Edits an existing deck in the library.
-Format: `edit INDEX [d/TITLE] [t/TAG]…`
+Format: `edit DECK_INDEX [d/TITLE] [t/TAG]…`
 
-* Edits the decks at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
+* Edits the decks at the specified DECK_INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the deck will be removed i.e adding of tags is not cumulative.
@@ -149,9 +152,9 @@ Edits the title of the 2nd deck to be `CS2040` and clears all existing tags.
 ==== Editing a card: `edit card` [coming in v2.0]
 
 Edits an existing card in the deck.
-Format: `edit card INDEX [q/QUESTION] [a/ANSWER] [t/TAG]…`
+Format: `edit card CARD_INDEX [q/QUESTION] [a/ANSWER] [t/TAG]…`
 
-* Edits the card at the specified INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
+* Edits the card at the specified CARD_INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the card will be removed i.e adding of tags is not cumulative.
@@ -184,9 +187,9 @@ Format: `clear`
 ==== Deleting a deck: `delete deck`
 
 Deletes the specified deck from the library.
-Format: `delete deck INDEX`
+Format: `delete deck DECK_INDEX`
 
-* Deletes the deck at the specified INDEX.
+* Deletes the deck at the specified DECK_INDEX.
 * The index refers to the index number shown in the complete list of decks.
 * The index must be a positive integer 1, 2, 3, …
 
@@ -245,7 +248,7 @@ Displays decks with both of the words `database` and `relational` in the titles.
 ==== Searching for a card: `search card`
 
 Finds the cards with a question that contain any of the given keywords.
-Format: `search card [&] [MORE_KEYWORDS]`
+Format: `search card KEYWORD [&] [MORE_KEYWORDS]`
 
 * A deck needs to be opened for the `search card` command to work. The command will only search for cards in the
 opened deck.

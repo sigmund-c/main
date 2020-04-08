@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.UniqueFlashcardList;
 import cardibuddy.model.tag.Tag;
 import javafx.collections.FXCollections;
@@ -101,6 +102,7 @@ public class Deck {
      */
     public List<Flashcard> addFlashcard(Flashcard card) {
         flashcards.add(card);
+        filteredFlashcards = new FilteredList<>(FXCollections.observableList(flashcards));
         return Collections.unmodifiableList(flashcards);
     }
 
@@ -140,6 +142,22 @@ public class Deck {
         requireNonNull(predicate);
         this.predicate = predicate;
         filteredFlashcards.setPredicate(predicate);
+    }
+
+    /**
+     * Check if deck contains the flashcard to prevent duplicates.
+     * @param card new card to be added.
+     * @return true if card's question already exists.
+     */
+    public boolean hasFlashcard(Flashcard card) {
+        Question cardQuestion = card.getQuestion();
+        for (Flashcard c : flashcards) {
+            if (cardQuestion.equals(c.getQuestion())) {
+                System.out.println(c.getQuestion().toString());
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
