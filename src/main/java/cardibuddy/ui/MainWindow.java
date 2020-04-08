@@ -267,17 +267,19 @@ public class MainWindow extends UiPart<Stage> {
     public void handleInsert() {
         resultDisplay.setFeedbackToUser("Choose an image to insert into your flashcard.");
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilterJpg = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
-        FileChooser.ExtensionFilter extFilterPng = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+        FileChooser.ExtensionFilter imgFilter = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
+        fileChooser.getExtensionFilters().add(imgFilter);
         File file = fileChooser.showOpenDialog(primaryStage);
 
         if (file != null) {
             Image image = new Image(file.toURI().toString());
-            System.out.println(file.toURI().toString().substring(5));
-            DragDropCard imageCard = new DragDropCard();
-            imageCard.setImage(image);
+            DragDropCard imageCard = new DragDropCard(image);
             imageCard.setCache(true);
             flashcardListPanelPlaceholder.getChildren().add(imageCard.getRoot());
+            resultDisplay.setFeedbackToUser("Type in a question and answer to be associated with this image.");
+        } else {
+            resultDisplay.setFeedbackToUser("Please attach a valid file. "
+                    + "Only image files ending with .png or .jpg are accepted.");
         }
     }
 

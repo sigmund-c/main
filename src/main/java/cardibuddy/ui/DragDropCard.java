@@ -1,9 +1,10 @@
 package cardibuddy.ui;
 
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 
 /**
  * An UI component that for users to drag and drop images.
@@ -21,20 +22,22 @@ public class DragDropCard extends UiPart<Region> {
      */
 
     @javafx.fxml.FXML
-    private HBox cardPane;
+    private StackPane cardPane;
 
+    @javafx.fxml.FXML
+    private Label title;
 
     @javafx.fxml.FXML
     private ImageView imageView;
 
 
-    public DragDropCard() {
+    public DragDropCard(Image image) {
         super(FXML);
-        imageView = new ImageView();
-    }
-
-    public void setImage(Image image) {
-        imageView.setImage(image);
+        title.setText("Chosen image:\n");
+        imageView = new ImageView(image);
+        imageView.setFitWidth(200);
+        imageView.setPreserveRatio(true);
+        cardPane.getChildren().add(imageView);
     }
 
     public void setCache(boolean bool) {
