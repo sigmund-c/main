@@ -300,11 +300,8 @@ public class MainWindow extends UiPart<Stage> {
                                     + " " + qA);
                             event.consume();
                             setCommandBox();
-                        } catch (CommandException e) {
-                            e.printStackTrace();
-                            setCommandBox();
-                        } catch (ParseException e) {
-                            e.printStackTrace();
+                        } catch (Exception e) {
+                            resultDisplay.setFeedbackToUser("Previous command aborted!");
                             setCommandBox();
                         }
                     }
