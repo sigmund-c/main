@@ -1,5 +1,6 @@
 package cardibuddy.logic.commands;
 
+import static cardibuddy.commons.core.Messages.MESSAGE_TEST_ONGOING;
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
 
@@ -42,8 +43,11 @@ public abstract class UndoableCommand extends Command {
      * Executes the command and updates the filtered person
      * list to show all persons.
      */
-    protected final void redo(Model model) {
+    protected final void redo(Model model) throws CommandException {
         requireNonNull(model);
+        if (model.hasOngoingTestSession()) {
+            throw new CommandException(MESSAGE_TEST_ONGOING);
+        }
         try {
             executeUndoableCommand(model);
         } catch (CommandException ce) {

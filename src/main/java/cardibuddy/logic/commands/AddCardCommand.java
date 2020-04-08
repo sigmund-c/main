@@ -1,5 +1,6 @@
 package cardibuddy.logic.commands;
 
+import static cardibuddy.commons.core.Messages.MESSAGE_TEST_ONGOING;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
@@ -59,9 +60,14 @@ public class AddCardCommand extends AddCommand {
     public CommandResult executeUndoableCommand(Model model) throws CommandException {
         requireNonNull(model);
 
+        if (model.hasOngoingTestSession()) {
+            throw new CommandException(MESSAGE_TEST_ONGOING);
+        }
+
         if (logicToUiManager.getDisplayedDeck().hasFlashcard(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_FLASHCARD);
         }
+
 
         model.addFlashcard(toAdd);
         logicToUiManager.getDisplayedDeck().addFlashcard(toAdd);
