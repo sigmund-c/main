@@ -65,8 +65,15 @@ public class JsonAdaptedDeck extends JsonAdaptedView {
      */
     public Deck toModelType() throws IllegalValueException {
         final List<Tag> deckTags = new ArrayList<>();
-        for (cardibuddy.storage.JsonAdaptedTag tag : tagged) {
+        for (JsonAdaptedTag tag : tagged) {
             deckTags.add(tag.toModelType());
+        }
+
+        if (title == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Title.class.getSimpleName()));
+        }
+        if (!Title.isValidTitle(title)) {
+            throw new IllegalValueException(Title.MESSAGE_CONSTRAINTS);
         }
 
         final List<Card> modelFlashcards = new ArrayList<>();

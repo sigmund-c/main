@@ -45,8 +45,8 @@ public class JsonCardiBuddyStorage implements CardiBuddyStorage {
     public Optional<ReadOnlyCardiBuddy> readCardiBuddy(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<cardibuddy.storage.JsonSerializableCardiBuddy> jsonCardiBuddy = JsonUtil.readJsonFile(
-                filePath, cardibuddy.storage.JsonSerializableCardiBuddy.class);
+        Optional<JsonSerializableCardiBuddy> jsonCardiBuddy = JsonUtil.readJsonFile(
+                filePath, JsonSerializableCardiBuddy.class);
         if (!jsonCardiBuddy.isPresent()) {
             return Optional.empty();
         }
