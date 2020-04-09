@@ -9,27 +9,36 @@
 
 == Overview
 
-Cardi Buddy (CardiB) is for students who *prefer to use a desktop app to store their revision materials as flashcards*.
+*Cardi Buddy (CardiB)* is a flash cards application that allows students to generate their own flash cards and test
+themselves through a simple Command Line Interface. It is specially designed for SoC students as a desktop
+application as they are generally comfortable with typing.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
+* *Major enhancement*: added *the ability to insert images into flashcards*
 ** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
 ** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
 ** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
 ** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Minor enhancement*: added a filter command that allows the user to filter decks via tags.
 
-* *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=haveaqiupill&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Functional code]] [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=haveaqiupill&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=haveaqiupill&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Functional code]]
+[https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=haveaqiupill&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Test code]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Managed releases `v1.3.1` (1 release) on GitHub for the product to be tested in the Mock Practical Examination
+
 ** Enhancements to existing features:
 *** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
+*** Re-designed UI
+*** Improved on existing find command (renamed to search command) that allows the user to search for
+decks and cards that contains all of the keywords instead of any of the keywords.
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+
+
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
 ** Community:
