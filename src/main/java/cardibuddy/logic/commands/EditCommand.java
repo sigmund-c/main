@@ -1,5 +1,6 @@
 package cardibuddy.logic.commands;
 
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_DECKS;
 import static java.util.Objects.requireNonNull;
@@ -28,10 +29,12 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the deck identified "
-            + "by the index number used in the displayed deck list. "
+            + "by the index number used in the displayed deck list.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "" + PREFIX_TAG + "TAG...\n";
+            + PREFIX_DECK + "DECK_TITLE "
+            + PREFIX_TAG + "TAG... or t/ to clear all existing tags\n"
+            + "Example: " + COMMAND_WORD + " 1 d/ t/Hard";
 
     public static final String MESSAGE_EDIT_DECK_SUCCESS = "Edited deck" + ": %1$s";
     public static final String MESSAGE_NOT_EDITED = "All fields to edit must be provided.";

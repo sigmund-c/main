@@ -43,6 +43,19 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
+     * For commands that involve button inputs.
+     * @return Command Executor
+     */
+    public CommandExecutor getCommandExecutor() {
+        return this.commandExecutor;
+    }
+
+
+    public TextField getCommandTextField() {
+        return this.commandTextField;
+    }
+
+    /**
      * Sets the command box style to use the default style.
      */
     private void setStyleToDefault() {

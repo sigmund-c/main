@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Statistics;
-import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
@@ -24,7 +24,7 @@ public interface Model {
     /**
      * {@code Predicate} that always evaluate to true
      */
-    Predicate<Flashcard> PREDICATE_SHOW_ALL_FLASHCARDS = unused -> true;
+    Predicate<Card> PREDICATE_SHOW_ALL_FLASHCARDS = unused -> true;
 
     /**
      * Returns the user prefs.
@@ -98,19 +98,19 @@ public interface Model {
     /**
      * Returns true if a flashcard with the same identity as {@code flashcard} exists in the cardibuddy.
      */
-    boolean hasFlashcard(Flashcard flashcard);
+    boolean hasFlashcard(Card flashcard);
 
     /**
      * Deletes the given flashcard.
      * The flashcard must exist in the cardibuddy.
      */
-    void deleteFlashcard(Flashcard target);
+    void deleteFlashcard(Card target);
 
     /**
      * Adds the given flashcard.
      * {@code flashcard} must not already exist in the cardibuddy.
      */
-    void addFlashcard(Flashcard flashcard);
+    void addFlashcard(Card flashcard);
 
     /**
      * Replaces the given flashcard {@code target} with {@code editedFlashcard}.
@@ -118,7 +118,7 @@ public interface Model {
      * The flashcard identity of {@code editedFlashcard} must not
      * be the same as another existing flashcard in the cardibuddy.
      */
-    void setFlashcard(Flashcard target, Flashcard editedFlashcard);
+    void setFlashcard(Card target, Card editedFlashcard);
 
     /**
      * Gets the number of flashcards left in the {@code testQueue}.
@@ -169,7 +169,7 @@ public interface Model {
     /**
      * Returns an unmodifiable view of the filtered flashcard list
      */
-    ObservableList<Flashcard> getFilteredFlashcardList();
+    ObservableList<Card> getFilteredFlashcardList();
 
     /**
      * Updates the filter of the filtered deck list to filter by the given {@code predicate}.
@@ -183,7 +183,7 @@ public interface Model {
      *
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredFlashcardList(Predicate<Flashcard> predicate);
+    void updateFilteredFlashcardList(Predicate<Card> predicate);
 
     /**
      * Returns true if the model has previous address book states to restore.

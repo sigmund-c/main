@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "Open Sans";
+}
+
 .background {
     -fx-background-color: black;
     background-color: #0C0D0D; /* Used in the default.html file */
@@ -5,28 +9,28 @@
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Poppins";
+    -fx-font-family: "Open Sans";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Poppins";
+    -fx-font-family: "Open Sans";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
-    -fx-font-family: "Poppins";
+    -fx-font-family: "Open Sans";
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Poppins";
+    -fx-font-family: "Open Sans";
 }
 
 .tab-pane {
@@ -66,7 +70,7 @@
 
 .table-view .column-header .label {
     -fx-font-size: 20pt;
-    -fx-font-family: "Poppins Light";
+    -fx-font-family: "Open Sans Light";
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
@@ -114,19 +118,19 @@
 }
 
 .flashcard .big_label {
-    -fx-font-family: "Poppins";
+    -fx-font-family: "Open Sans";
     -fx-font-size: 16px;
     -fx-text-fill: black;
 }
 
 .flashcard .small_label {
-    -fx-font-family: "Poppins UI Light";
+    -fx-font-family: "Open Sans Light";
     -fx-font-size: 13px;
     -fx-text-fill: black;
 }
 
 .deck .big_label {
-    -fx-font-family: "Poppins";
+    -fx-font-family: "Open Sans";
     -fx-font-size: 20px;
     -fx-text-fill: black;
 }
@@ -136,13 +140,13 @@
 }
 
 .cell_big_label {
-    -fx-font-family: "Poppins";
+    -fx-font-family: "Open Sans";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }
 
 .cell_small_label {
-    -fx-font-family: "Poppins";
+    -fx-font-family: "Open Sans";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
 }
@@ -162,7 +166,7 @@
 
 .result-display {
     -fx-background-color: #333436;
-    -fx-font-family: "Poppins";
+    -fx-font-family: "Open Sans";
     -fx-font-size: 11pt;
     -fx-text-fill: #EAEAEA;
 }
@@ -172,7 +176,7 @@
 }
 
 .status-bar .label {
-    -fx-font-family: "Poppins";
+    -fx-font-family: "Open Sans";
     -fx-text-fill: white;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
@@ -251,7 +255,7 @@
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "Poppins";
+    -fx-font-family: "Open Sans";
     -fx-text-fill: black;
     -fx-opacity: 0.9;
 }
@@ -347,7 +351,7 @@
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #F4E7E7;
-    -fx-font-family: "Poppins";
+    -fx-font-family: "Open Sans";
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
@@ -451,8 +455,8 @@
     -fx-background-insets: 0;
     -fx-border-color: #383838 #383838 #383838 #383838;
     -fx-border-insets: 0;
-    -fx-border-width: 1;
-    -fx-font-family: "Poppins";
+    -fx-border-width: 0;
+    -fx-font-family: "Open Sans";
     -fx-font-size: 12pt;
     -fx-text-fill: black;
 }

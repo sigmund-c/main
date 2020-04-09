@@ -1,14 +1,5 @@
 package cardibuddy.logic.commands;
 
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
-import static java.util.Objects.requireNonNull;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
@@ -20,7 +11,7 @@ import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
 
 /**
- * Adds a deck to the cardibuddy.
+ * Represents an add command to be extended into add deck and add card commands.
  */
 public class AddCommand extends Command {
 
@@ -120,10 +111,5 @@ public class AddCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
-    }
+    public abstract boolean equals(Object other);
 }

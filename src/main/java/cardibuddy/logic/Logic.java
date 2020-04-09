@@ -9,7 +9,7 @@ import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.ReadOnlyCardiBuddy;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Statistics;
-import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Card;
 import javafx.collections.ObservableList;
 
 
@@ -37,7 +37,7 @@ public interface Logic {
     ObservableList<Deck> getFilteredDeckList();
 
     /** Returns an unmodifiable view of the filtered list of flashcards */
-    ObservableList<Flashcard> getFilteredFlashcardList();
+    ObservableList<Card> getFilteredFlashcardList();
 
     /**
      * Returns the Statistics of the Model.

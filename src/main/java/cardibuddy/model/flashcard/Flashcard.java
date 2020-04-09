@@ -7,16 +7,19 @@ import cardibuddy.model.deck.Deck;
 /**
  * Represents a Flashcard in CardiBuddy.
  */
-public class Flashcard {
+public class Flashcard extends Card {
 
-    private final Question question;
-    private final Answer answer;
-    private final Deck deck;
+    private Question question;
+    private Answer answer;
+    private Deck deck;
+    private String path;
 
-    public Flashcard(Deck deck, Question question, Answer answer) {
+    public Flashcard(Deck deck, Question question, Answer answer, String path) {
+        super(deck, question, answer, "");
         this.deck = deck;
         this.question = question;
         this.answer = answer;
+        this.path = "";
     }
 
     public Deck getDeck() {
@@ -49,17 +52,8 @@ public class Flashcard {
                 && otherCard.getQuestion().equals(getQuestion());
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        if (!(other instanceof Flashcard)) {
-            return false;
-        }
-
-        return ((Flashcard) other).getQuestion().equals(getQuestion());
+    public CardType getCardType() {
+        return CardType.FLASHCARD;
     }
 
     @Override
@@ -74,7 +68,6 @@ public class Flashcard {
                 .append(getQuestion())
                 .append("\nA:")
                 .append(getAnswer());
-        //getTags().forEach(builder::append); tags integration
         return builder.toString();
     }
 }
