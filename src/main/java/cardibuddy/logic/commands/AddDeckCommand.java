@@ -51,6 +51,7 @@ public class AddDeckCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_DECK);
         }
         model.addDeck(toAdd);
+        model.commitCardiBuddy();
 
         LOGGER.info("Deck has been added");
 
