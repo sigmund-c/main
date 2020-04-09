@@ -1,5 +1,12 @@
 package cardibuddy.logic.commands;
 
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -10,10 +17,8 @@ import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Flashcard;
-
-import static cardibuddy.logic.parser.CliSyntax.*;
-import static java.util.Objects.requireNonNull;
 
 /**
  * Represents an add command to be extended into add deck and add card commands.
@@ -68,7 +73,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the deck";
 
     private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
-    private static List<Flashcard> flashcards = new ArrayList<>();
+    private static List<Card> flashcards = new ArrayList<>();
 
     private final Object toAdd;
     private final Boolean isDeck;
@@ -116,5 +121,9 @@ public class AddCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
-    public abstract boolean equals(Object other);
-}
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddCommand // instanceof handles nulls
+                && toAdd.equals(((AddCommand) other).toAdd));
+    }}
