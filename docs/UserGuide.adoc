@@ -455,7 +455,7 @@ Shows the statistics of the 3rd test session of the deck with the shown index of
 
 === Playing memory games: game [coming in v2.0]
 
-=== Customising flashcards: custom [coming in v2.0]
+=== Customising flashcards UI: custom [coming in v2.0]
 
 === Replacing image [coming in v2.0]
 
@@ -468,8 +468,10 @@ Shows the statistics of the 3rd test session of the deck with the shown index of
 
 * *Add deck* : `add d/TITLE [t/TAG]...` +
 e.g. `add d/CS2030 t/Fundamentals t/Medium`
-* *Add card* : `add c/TITLE q/QUESTION a/ANSWER` +
-e.g. `add c/CS2030 q/What does OOP stand for? a/Object Oriented Programming`
+* *Add normal card* : `add c/DECK_INDEX q/QUESTION a/ANSWER` +
+e.g. `add c/1 q/What does OOP stand for? a/Object Oriented Programming`
+* *Add image card* : `add p/file:FILE_PATH_TO_IMAGE c/TITLE q/QUESTION a/ANSWER` +
+e.g. `add p/file:/Users/foo/ObjectDiagram.png c/1 q/Which SOLID principle did the code not adhere to? a/Single Responsibility Principle`
 * *Clear* : `clear`
 * *Delete deck/card* : `delete deck/card INDEX` +
 e.g. `delete deck 3`
