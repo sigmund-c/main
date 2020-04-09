@@ -52,7 +52,7 @@ public class ModelManager implements Model {
         this.cardiBuddy = new CardiBuddy(cardiBuddy);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredFlashcards = new FilteredList<>(this.versionedCardiBuddy.getFlashcardList());
-        filteredDecks = new FilteredList<>(versionedCardiBuddy.getDeckList());
+        filteredDecks = new FilteredList<>(this.versionedCardiBuddy.getDeckList());
 
         this.statistics = new Statistics();
     }
@@ -100,23 +100,23 @@ public class ModelManager implements Model {
 
     @Override
     public ReadOnlyCardiBuddy getCardiBuddy() {
-        return cardiBuddy;
+        return versionedCardiBuddy;
     }
 
     @Override
     public void setCardiBuddy(ReadOnlyCardiBuddy cardiBuddy) {
-        this.cardiBuddy.resetData(cardiBuddy);
+        versionedCardiBuddy.resetData(cardiBuddy);
     }
 
     @Override
     public boolean hasDeck(Deck deck) {
         requireNonNull(deck);
-        return cardiBuddy.hasDeck(deck);
+        return versionedCardiBuddy.hasDeck(deck);
     }
 
     @Override
     public void deleteDeck(Deck target) {
-        cardiBuddy.removeDeck(target);
+        versionedCardiBuddy.removeDeck(target);
 
         target.getStatistics().trackDeckDeleted();
         statistics.trackDeckDeleted();
@@ -124,7 +124,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addDeck(Deck deck) {
-        cardiBuddy.addDeck(deck);
+        versionedCardiBuddy.addDeck(deck);
         updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
 
         deck.getStatistics().trackDeckAdded();
@@ -133,13 +133,13 @@ public class ModelManager implements Model {
 
     @Override
     public void setDeck(Deck target, Deck editedDeck) {
-        cardiBuddy.setDeck(target, editedDeck);
+        versionedCardiBuddy.setDeck(target, editedDeck);
     }
 
     @Override
     public boolean hasFlashcard(Flashcard flashcard) {
         requireNonNull(flashcard);
-        return cardiBuddy.hasFlashcard(flashcard);
+        return versionedCardiBuddy.hasFlashcard(flashcard);
     }
 
     /**
@@ -149,7 +149,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void addFlashcard(Flashcard flashcard) {
-        cardiBuddy.addFlashcard(flashcard);
+        versionedCardiBuddy.addFlashcard(flashcard);
         updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
 
         flashcard.getDeck().getStatistics().trackCardAdded();
@@ -160,12 +160,12 @@ public class ModelManager implements Model {
     public void setFlashcard(Flashcard target, Flashcard editedFlashcard) {
         requireAllNonNull(target, editedFlashcard);
 
-        cardiBuddy.setFlashcard(target, editedFlashcard);
+        versionedCardiBuddy.setFlashcard(target, editedFlashcard);
     }
 
     @Override
     public void deleteFlashcard(Flashcard target) {
-        cardiBuddy.removeFlashcard(target);
+        versionedCardiBuddy.removeFlashcard(target);
 
         target.getDeck().getStatistics().trackCardDeleted();
         statistics.trackCardDeleted();
@@ -310,7 +310,7 @@ public class ModelManager implements Model {
 
         // state check
         cardibuddy.model.ModelManager other = (cardibuddy.model.ModelManager) obj;
-        return cardiBuddy.equals(other.cardiBuddy)
+        return versionedCardiBuddy.equals(other.versionedCardiBuddy)
                 && userPrefs.equals(other.userPrefs)
                 && filteredDecks.equals(other.filteredDecks)
                 && filteredFlashcards.equals(other.filteredFlashcards);
