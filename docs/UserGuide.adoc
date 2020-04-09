@@ -151,6 +151,11 @@ image::AddImageCard.png[width="800", align="center"]
 
 [TIP]
 You can drag and drop the image you want to add into a terminal window to obtain its file path. File paths may differ across operating systems (Windows vs Mac).
+
+==== Adding an image card via the Image button: `c/DECK_INDEX q/QUESTION a/ANSWER`
+Shortcut for users who do not want to search for the file path.
+
+
 // end::addingImage[]
 
 === Opening
