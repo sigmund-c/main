@@ -31,6 +31,10 @@ public class UiManager implements Ui {
         this.logic = logic;
     }
 
+    public void setNewCommandBox() {
+        mainWindow.setCommandBox();
+    }
+
     public MainWindow getMainWindow() {
         return mainWindow;
     }

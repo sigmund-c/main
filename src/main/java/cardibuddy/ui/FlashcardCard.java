@@ -1,16 +1,16 @@
 package cardibuddy.ui;
 
+import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Flashcard;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 
 /**
  * An UI component that displays information of a {@code Flashcard}.
  */
-public class FlashcardCard extends UiPart<Region> {
+public class FlashcardCard extends CardUi {
 
     private static final String FXML = "FlashcardListCard.fxml";
 
@@ -35,8 +35,9 @@ public class FlashcardCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public FlashcardCard(Flashcard flashcard, int displayedIndex) {
+    public FlashcardCard(Card card, int displayedIndex) {
         super(FXML);
+        Flashcard flashcard = new Flashcard(card.getDeck(), card.getQuestion(), card.getAnswer(), "");
         this.flashcard = flashcard;
         id.setText(displayedIndex + ". ");
         question.setText(flashcard.getQuestion().toString());

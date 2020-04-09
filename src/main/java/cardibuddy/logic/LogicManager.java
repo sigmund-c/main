@@ -15,7 +15,7 @@ import cardibuddy.model.Model;
 import cardibuddy.model.ReadOnlyCardiBuddy;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Statistics;
-import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Card;
 import cardibuddy.storage.Storage;
 import javafx.collections.ObservableList;
 
@@ -30,6 +30,8 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final CardiBuddyParser cardiBuddyParser;
+    private final CommandHistory commandHistory = CommandHistory.getCommandHistory();
+    private final CardiBuddyStack cardiBuddyStack = CardiBuddyStack.getCardiBuddyStack();
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
@@ -51,6 +53,8 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveCardiBuddy(model.getCardiBuddy());
+            commandHistory.add(commandText);
+            cardiBuddyStack.push(command);
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -69,7 +73,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Flashcard> getFilteredFlashcardList() {
+    public ObservableList<Card> getFilteredFlashcardList() {
         return model.getFilteredFlashcardList();
     }
 

@@ -1,5 +1,7 @@
 package cardibuddy.logic.parser;
 
+import static cardibuddy.commons.core.Messages.MESSAGE_DECK_OR_FLASHCARD_PREFIX;
+import static cardibuddy.commons.core.Messages.MESSAGE_INCOMPLETE_COMMAND;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_TWO_WORD_COMMAND;
 import static cardibuddy.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -9,6 +11,8 @@ import java.util.regex.Pattern;
 
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.AddCommand;
+import cardibuddy.logic.commands.AddDeckCommand;
+import cardibuddy.logic.commands.AddFlashcardCommand;
 import cardibuddy.logic.commands.ClearCommand;
 import cardibuddy.logic.commands.Command;
 import cardibuddy.logic.commands.DeleteCardCommand;
@@ -18,13 +22,17 @@ import cardibuddy.logic.commands.EditCommand;
 import cardibuddy.logic.commands.ExitCommand;
 import cardibuddy.logic.commands.FilterCommand;
 import cardibuddy.logic.commands.HelpCommand;
+import cardibuddy.logic.commands.HistoryCommand;
+import cardibuddy.logic.commands.InsertImageCommand;
 import cardibuddy.logic.commands.ListCommand;
 import cardibuddy.logic.commands.OpenCommand;
+import cardibuddy.logic.commands.RedoCommand;
 import cardibuddy.logic.commands.SearchCardCommand;
 import cardibuddy.logic.commands.SearchCommand;
 import cardibuddy.logic.commands.SearchDeckCommand;
 import cardibuddy.logic.commands.StatisticsCommand;
 import cardibuddy.logic.commands.TestCommand;
+import cardibuddy.logic.commands.UndoCommand;
 import cardibuddy.logic.commands.testsession.AnswerCommand;
 import cardibuddy.logic.commands.testsession.ForceCommand;
 import cardibuddy.logic.commands.testsession.NextCommand;
@@ -42,6 +50,7 @@ public class CardiBuddyParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
     private ReadOnlyCardiBuddy cardiBuddy;
     private LogicToUiManager logicToUiManager;
 
@@ -75,7 +84,29 @@ public class CardiBuddyParser {
             return new OpenCommandParser(logicToUiManager).parse(arguments);
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser(cardiBuddy, logicToUiManager).parse(arguments);
+            try {
+                switch (arguments.substring(1, 2)) {
+
+                case AddDeckCommand.COMMAND_WORD:
+                    System.out.println(arguments);
+                    return new AddDeckCommandParser().parse(arguments);
+
+                case AddFlashcardCommand.COMMAND_WORD:
+                    return new AddFlashcardCommandParser(cardiBuddy, logicToUiManager).parse(arguments);
+
+                case InsertImageCommand.COMMAND_WORD:
+                    return new InsertImageCommandParser(cardiBuddy, logicToUiManager).parse(arguments);
+
+                default:
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
+                }
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new ParseException(MESSAGE_INCOMPLETE_COMMAND + MESSAGE_DECK_OR_FLASHCARD_PREFIX);
+            }
+
+        case InsertImageCommand.COMMAND_WORD:
+            return new InsertImageCommandParser(cardiBuddy, logicToUiManager).parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -91,11 +122,11 @@ public class CardiBuddyParser {
                     return new DeleteCardCommandParser(logicToUiManager).parse(arguments.substring(5));
 
                 default:
-                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND + " " + MESSAGE_INVALID_TWO_WORD_COMMAND);
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND + "\n" + MESSAGE_INVALID_TWO_WORD_COMMAND);
 
                 }
             } catch (StringIndexOutOfBoundsException e) {
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+                throw new ParseException(MESSAGE_INCOMPLETE_COMMAND + MESSAGE_INVALID_TWO_WORD_COMMAND);
             }
 
         case TestCommand.COMMAND_WORD: // test session command
@@ -143,6 +174,12 @@ public class CardiBuddyParser {
         case StatisticsCommand.COMMAND_WORD:
             return new StatisticsCommandParser(logicToUiManager).parse(arguments);
 
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
+        case HistoryCommand.COMMAND_WORD:
+            return new HistoryCommand();
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand(logicToUiManager);
 
@@ -151,6 +188,9 @@ public class CardiBuddyParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

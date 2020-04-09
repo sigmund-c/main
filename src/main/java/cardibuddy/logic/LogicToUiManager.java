@@ -24,6 +24,9 @@ public class LogicToUiManager {
         ui.getMainWindow().fillInnerPartsWithCards(index);
     }
 
+    public void setNewCommandBox() {
+        ui.setNewCommandBox();
+    }
 
     public void updateFlashcardPanel() {
         ui.getMainWindow().updateCards(displayedDeck);
@@ -47,10 +50,6 @@ public class LogicToUiManager {
 
     public void openDeckPanel() {
         ui.getMainWindow().fillInnerPartsWithDecks();
-    }
-
-    public String getOpenedDeck() {
-        return openedDeck;
     }
 
     public void setOpenedDeck(Deck openedDeck) {

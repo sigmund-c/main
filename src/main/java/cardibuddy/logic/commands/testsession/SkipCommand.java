@@ -46,11 +46,11 @@ public class SkipCommand extends Command {
             Question question = model.skipQuestion();
             logicToUiManager.showTestQuestion(question);
             logicToUiManager.showTestStatus(model.getTestQueueSize());
-            return new CommandResult(MESSAGE_SKIP_SUCCESS, false, false, false);
+            return new CommandResult(MESSAGE_SKIP_SUCCESS, false, false, false, false);
         } catch (EmptyTestQueueException e) {
             model.clearTestSession();
             logicToUiManager.showTestEnd();
-            return new CommandResult(MESSAGE_TEST_COMPLETE, false, false, false);
+            return new CommandResult(MESSAGE_TEST_COMPLETE, false, false, false, false);
         } catch (NoOngoingTestException e) {
             throw new CommandException(MESSAGE_NO_TESTSESSION);
         } catch (AlreadyCorrectException e) {

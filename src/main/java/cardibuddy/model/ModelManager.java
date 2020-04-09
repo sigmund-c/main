@@ -12,7 +12,7 @@ import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Statistics;
-import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.TestSession;
@@ -33,7 +33,7 @@ public class ModelManager implements Model {
 
     private final CardiBuddy cardiBuddy;
     private final UserPrefs userPrefs;
-    private final FilteredList<Flashcard> filteredFlashcards;
+    private final FilteredList<Card> filteredFlashcards;
     private final FilteredList<Deck> filteredDecks;
     private final Statistics statistics;
     private TestSession testSession;
@@ -135,17 +135,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasFlashcard(Flashcard flashcard) {
+    public boolean hasFlashcard(Card flashcard) {
         requireNonNull(flashcard);
         return cardiBuddy.hasFlashcard(flashcard);
-    }
-
-    @Override
-    public void deleteFlashcard(Flashcard target) {
-        cardiBuddy.removeFlashcard(target);
-
-        target.getDeck().getStatistics().trackCardDeleted();
-        statistics.trackCardDeleted();
     }
 
     /**
@@ -154,7 +146,7 @@ public class ModelManager implements Model {
      * @param flashcard new card.
      */
     @Override
-    public void addFlashcard(Flashcard flashcard) {
+    public void addFlashcard(Card flashcard) {
         cardiBuddy.addFlashcard(flashcard);
         updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
 
@@ -163,10 +155,18 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setFlashcard(Flashcard target, Flashcard editedFlashcard) {
+    public void setFlashcard(Card target, Card editedFlashcard) {
         requireAllNonNull(target, editedFlashcard);
 
         cardiBuddy.setFlashcard(target, editedFlashcard);
+    }
+
+    @Override
+    public void deleteFlashcard(Card target) {
+        cardiBuddy.removeFlashcard(target);
+
+        target.getDeck().getStatistics().trackCardDeleted();
+        statistics.trackCardDeleted();
     }
 
     /**
@@ -273,7 +273,7 @@ public class ModelManager implements Model {
      * {@code versionedCardiBuddy}
      */
     @Override
-    public ObservableList<Flashcard> getFilteredFlashcardList() {
+    public ObservableList<Card> getFilteredFlashcardList() {
         return filteredFlashcards;
     }
 
@@ -284,7 +284,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredFlashcardList(Predicate<Flashcard> predicate) {
+    public void updateFilteredFlashcardList(Predicate<Card> predicate) {
         requireNonNull(predicate);
         filteredFlashcards.setPredicate(predicate);
     }

@@ -6,20 +6,21 @@ import java.util.List;
 
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.UniqueDeckList;
-import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.UniqueFlashcardList;
 import cardibuddy.model.testsession.TestSession;
 import javafx.collections.ObservableList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameFlashcard comparison)
+ * Wraps all data at the CardiBuddy level
+ * Duplicates are not allowed
  */
 public class CardiBuddy implements ReadOnlyCardiBuddy {
 
     private final UniqueDeckList decks;
     private final UniqueFlashcardList flashcards;
     //private TestSession testSession;
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -56,7 +57,7 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
      * Replaces the contents of the flashcard list with {@code flashcards}.
      * {@code flashcards} must not contain duplicate flashcards.
      */
-    public void setFlashcards(List<Flashcard> flashcards) {
+    public void setFlashcards(List<Card> flashcards) {
         this.flashcards.setFlashcards(flashcards);
     }
 
@@ -117,7 +118,7 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
     /**
      * Returns true if a deck with the same identity as {@code card} exists in cardibuddy.
      */
-    public boolean hasFlashcard(Flashcard card) {
+    public boolean hasFlashcard(Card card) {
         requireNonNull(card);
         return flashcards.contains(card);
     }
@@ -126,7 +127,7 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
      * Adds a flashcard to the cardi buddy.
      * The flashcard must not already exist in the cardi buddy.
      */
-    public void addFlashcard(Flashcard p) {
+    public void addFlashcard(Card p) {
         flashcards.add(p);
     }
 
@@ -136,7 +137,7 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
      * The flashcard identity of {@code editedFlashcard} must not be the
      * same as another existing flashcard in the cardi buddy.
      */
-    public void setFlashcard(Flashcard target, Flashcard editedFlashcard) {
+    public void setFlashcard(Card target, Card editedFlashcard) {
         requireNonNull(editedFlashcard);
 
         flashcards.setFlashcard(target, editedFlashcard);
@@ -146,7 +147,7 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
      * Removes {@code key} from this {@code CardiBuddy}.
      * {@code key} must exist in the cardi buddy.
      */
-    public void removeFlashcard(Flashcard key) {
+    public void removeFlashcard(Card key) {
         flashcards.remove(key);
     }
 
@@ -164,7 +165,7 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
     }
 
     @Override
-    public ObservableList<Flashcard> getFlashcardList() {
+    public ObservableList<Card> getFlashcardList() {
         return flashcards.asUnmodifiableObservableList();
     }
 

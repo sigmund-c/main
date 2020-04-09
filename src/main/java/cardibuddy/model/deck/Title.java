@@ -1,5 +1,8 @@
 package cardibuddy.model.deck;
 
+import static cardibuddy.commons.util.AppUtil.checkArgument;
+import static java.util.Objects.requireNonNull;
+
 /**
  * Deck Title class.
  */
@@ -7,11 +10,14 @@ public class Title {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Titles should only contain alphanumeric characters and spaces, and it should not be blank";
-    public static final String VALIDATION_REGEX = "^[\\w]+([-_\\s]{1}[a-z0-9]+)*$";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     private String titleString;
 
     public Title(String titleString) {
+        requireNonNull(titleString);
+
+        checkArgument(isValidTitle(titleString), MESSAGE_CONSTRAINTS);
         this.titleString = titleString;
     }
 

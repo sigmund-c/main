@@ -3,7 +3,8 @@ package cardibuddy.ui;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
-import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Card;
+import cardibuddy.model.flashcard.CardType;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -18,27 +19,35 @@ public class FlashcardListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(FlashcardListPanel.class);
 
     @FXML
-    private ListView<Flashcard> flashcardListView;
+    private ListView<Card> flashcardListView;
 
-    public FlashcardListPanel(ObservableList<Flashcard> flashcardList) {
+    public FlashcardListPanel(ObservableList<Card> flashcardList) {
         super(FXML);
         flashcardListView.setItems(flashcardList);
         flashcardListView.setCellFactory(listView -> new FlashcardListViewCell());
     }
 
+    public FlashcardListPanel() {
+        super(FXML);
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Flashcard} using a {@code FlashcardCard}
      */
-    class FlashcardListViewCell extends ListCell<Flashcard> {
+    class FlashcardListViewCell extends ListCell<Card> {
         @Override
-        protected void updateItem(Flashcard flashcard, boolean empty) {
+        protected void updateItem(Card flashcard, boolean empty) {
             super.updateItem(flashcard, empty);
 
             if (empty || flashcard == null) {
                 setGraphic(null);
                 setText(null);
+            } else if (flashcard.getCardType() == CardType.FLASHCARD) {
+                FlashcardCard card = new FlashcardCard(flashcard, getIndex() + 1);
+                setGraphic(card.getRoot());
             } else {
-                setGraphic(new FlashcardCard(flashcard, getIndex() + 1).getRoot());
+                ImagecardCard card = new ImagecardCard(flashcard, getIndex() + 1);
+                setGraphic(card.getRoot());
             }
         }
     }

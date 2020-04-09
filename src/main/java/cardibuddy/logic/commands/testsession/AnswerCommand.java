@@ -48,9 +48,10 @@ public class AnswerCommand extends Command {
             TestResult testResult = model.submitAnswer(userAnswer);
             logicToUiManager.showTestResult(testResult);
             if (testResult.getResult() == Result.WRONG) { // prompt the user to force correct if they wish to
-                return new CommandResult(String.format(MESSAGE_ANS_SUCCESS, MESSAGE_FORCE_PROMPT), false, false, false);
+                return new CommandResult(String.format(MESSAGE_ANS_SUCCESS, MESSAGE_FORCE_PROMPT),
+                        false, false, false, false);
             } else {
-                return new CommandResult(String.format(MESSAGE_ANS_SUCCESS, ""), false, false, false);
+                return new CommandResult(String.format(MESSAGE_ANS_SUCCESS, ""), false, false, false, false);
             }
         } catch (NullPointerException e) {
             throw new CommandException(MESSAGE_NO_TESTSESSION);

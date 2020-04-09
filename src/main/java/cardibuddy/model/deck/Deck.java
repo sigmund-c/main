@@ -13,7 +13,10 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
+import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Imagecard;
+import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.UniqueFlashcardList;
 import cardibuddy.model.tag.Tag;
 import javafx.collections.FXCollections;
@@ -31,8 +34,8 @@ public class Deck {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private List<Flashcard> flashcards = new ArrayList<>();
-    private FilteredList<Flashcard> filteredFlashcards;
+    private List<Card> flashcards = new ArrayList<>();
+    private FilteredList<Card> filteredFlashcards;
     private Statistics statistics = new Statistics();
     private final Logger logger = LogsCenter.getLogger(Deck.class.getName());
     private Predicate predicate;
@@ -40,7 +43,7 @@ public class Deck {
     /**
      * Every field must be present and not null.
      */
-    public Deck(Title title, Set<Tag> tags, List<Flashcard> flashcards) {
+    public Deck(Title title, Set<Tag> tags, List<Card> flashcards) {
         requireAllNonNull(title, tags);
         this.title = title;
         this.tags.addAll(tags);
@@ -76,7 +79,7 @@ public class Deck {
         return Collections.unmodifiableSet(tags);
     }
 
-    public List<Flashcard> getFlashcards() {
+    public List<Card> getFlashcards() {
         return Collections.unmodifiableList(flashcards);
     }
 
@@ -84,7 +87,7 @@ public class Deck {
      * Delete card from the flashcards and filteredFlashcards list.
      * @param card to be deleted.
      */
-    public void deleteCard(Flashcard card) {
+    public void deleteCard(Card card) {
         flashcards.remove(card);
         filteredFlashcards = new FilteredList<>(FXCollections.observableList(flashcards));
         filteredFlashcards.setPredicate(predicate);
@@ -99,8 +102,20 @@ public class Deck {
      * @param card
      * @return the set of Flashcards from the Deck.
      */
-    public List<Flashcard> addFlashcard(Flashcard card) {
+    public List<Card> addFlashcard(Flashcard card) {
         flashcards.add(card);
+        filteredFlashcards = new FilteredList<>(FXCollections.observableList(flashcards));
+        return Collections.unmodifiableList(flashcards);
+    }
+
+    /**
+     * Adds an Imagecard to a Deck.
+     * @param card
+     * @return the set of Flashcards from the Deck.
+     */
+    public List<Card> addImagecard(Imagecard card) {
+        flashcards.add(card);
+        filteredFlashcards = new FilteredList<>(FXCollections.observableList(flashcards));
         return Collections.unmodifiableList(flashcards);
     }
 
@@ -118,7 +133,7 @@ public class Deck {
                 && otherDeck.getTitle().equals(getTitle());
     }
 
-    public ObservableList<Flashcard> getFlashcardList() {
+    public ObservableList<Card> getFlashcardList() {
         UniqueFlashcardList flashcardList = new UniqueFlashcardList();
         flashcardList.setFlashcards(flashcards);
         return flashcardList.asUnmodifiableObservableList();
@@ -128,7 +143,7 @@ public class Deck {
      * Returns an unmodifiable view of the list of {@code Flashcard} backed by the internal list of
      * {@code versionedCardiBuddy}
      */
-    public ObservableList<Flashcard> getFilteredFlashcardList() {
+    public ObservableList<Card> getFilteredFlashcardList() {
         return filteredFlashcards;
     }
 
@@ -136,10 +151,42 @@ public class Deck {
      * Updates the filtered flashcards in a deck.
      * @param predicate SearchCardPredicate or FilterCardPredicate.
      */
-    public void updateFilteredFlashcardList(Predicate<Flashcard> predicate) {
+    public void updateFilteredFlashcardList(Predicate<Card> predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;
         filteredFlashcards.setPredicate(predicate);
+    }
+
+    /**
+     * Check if deck contains the flashcard to prevent duplicates.
+     * @param card new card to be added.
+     * @return true if card's question already exists.
+     */
+    public boolean hasFlashcard(Card card) {
+        Question cardQuestion = card.getQuestion();
+        for (Card c : flashcards) {
+            if (cardQuestion.equals(c.getQuestion())) {
+                System.out.println(c.getQuestion().toString());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Deck)) {
+            return false;
+        }
+
+        Deck otherDeck = (Deck) other;
+        return otherDeck.getTitle().equals(getTitle())
+                && otherDeck.getFlashcards().equals(getFlashcards())
+                && otherDeck.getTags().equals(getTags());
     }
 
     @Override
