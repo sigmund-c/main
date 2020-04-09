@@ -63,7 +63,7 @@ public class AddFlashcardCommand extends AddCardCommand {
         }
 
         model.addFlashcard(toAdd);
-        logicToUiManager.getDisplayedDeck().addFlashcard(toAdd);
+        logicToUiManager.getDisplayedDeck().addCard(toAdd);
         LOGGER.info("Flashcard has been added");
 
         logicToUiManager.getDisplayedDeck().updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);

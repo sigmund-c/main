@@ -39,10 +39,10 @@ public class SampleDataUtil {
         Flashcard cardD = new Flashcard(deckA,
                 new Question("Is defensive code desirable at all times?"),
                 new ShortAnswer("False"), "");
-        deckA.addFlashcard(cardA);
-        deckA.addFlashcard(cardB);
-        deckA.addFlashcard(cardC);
-        deckA.addFlashcard(cardD);
+        deckA.addCard(cardA);
+        deckA.addCard(cardB);
+        deckA.addCard(cardC);
+        deckA.addCard(cardD);
 
         // Deck B
         Set<Tag> tagsB = new HashSet<>();

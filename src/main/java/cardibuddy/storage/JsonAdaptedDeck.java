@@ -76,15 +76,18 @@ public class JsonAdaptedDeck extends JsonAdaptedView {
             throw new IllegalValueException(Title.MESSAGE_CONSTRAINTS);
         }
 
+        Title modelTitle = new Title(title);
+        final Set<Tag> modelTags = new HashSet<>(deckTags);
+        Deck newDeck = new Deck(modelTitle, modelTags);
+
         final List<Card> modelFlashcards = new ArrayList<>();
         for (JsonAdaptedFlashcard flashcard : flashcards) {
-            modelFlashcards.add(flashcard.toModelType());
+            newDeck.addCard(flashcard.toModelType(newDeck));
         }
 
         // TODO: add if conditions here to check formatting
-        Title modelTitle = new Title(title);
-        final Set<Tag> modelTags = new HashSet<>(deckTags);
-        return new Deck(modelTitle, modelTags, modelFlashcards); // TODO: to replace params with actual values
+
+        return newDeck; // TODO: to replace params with actual values
     }
 
 }

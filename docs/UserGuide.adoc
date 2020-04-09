@@ -114,7 +114,7 @@ Returns a new deck titled `CS2103`
 * `add d/CS1101S t/Easy t/Basics` +
 Adds a new deck titled `CS1101S` with the tags `Easy` and `Basics`
 
-==== Adding a card: `add c/DECK_TITLE q/QUESTION a/ANSWER`
+==== Adding a normal card: `add c/DECK_INDEX q/QUESTION a/ANSWER`
 
 Creates a new card to be added to the deck.
 Format: `add c/DECK_INDEX q/QUESTION a/ANSWER`
@@ -124,6 +124,18 @@ Examples:
 
 * `open 1` +
 `add c/1 q/How does one go about solving recursion problems? a/Wishful thinking` +
+Adds a new card belonging to the deck indexed at 1.
+
+==== Adding an image card: `add p/FILE_PATH_TO_IMAGE c/DECK_INDEX q/QUESTION a/ANSWER`
+
+Creates a new image card to be added to the deck.
+Format: `add c/DECK_INDEX q/QUESTION a/ANSWER`
+* The deck specified in DECK_INDEX must be open for you to add a card.
+
+Examples:
+
+* `open 1` +
+`add p/file:/Users/haveaqiupill/Documents/GitHub/cs2103/main/docs/images/ArchitectureSequenceDiagram.png c/1 q/How does one go about solving recursion problems? a/Wishful thinking` +
 Adds a new card belonging to the deck indexed at 1.
 
 === Opening
@@ -235,6 +247,8 @@ Opens the first deck and deletes the 2nd flash card in the deck.
 `delete card 1` +
 Deletes the 1st card in the results of the search card command.
 
+// tag::search[]
+
 === Searching
 
 ==== Searching for a deck: `search deck`
@@ -278,8 +292,9 @@ Displays cards with the word `principle` in the questions.
 
 * `search card diagram & UML` +
 Displays decks with both of the words `diagram` and `UML` in the questions.
+// end::search[]
 
-
+// tag::filter[]
 === Filtering
 
 ==== Filtering by tags: `filter`
@@ -298,7 +313,7 @@ Displays decks with the tag `hard`.
 
 * `filter hard & coremodule` +
 Displays decks with both the tags `hard` and `coremodule`.
-
+// end::filter[]
 
 === Prioritising
 
