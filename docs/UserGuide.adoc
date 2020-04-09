@@ -49,7 +49,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 * *Decks* are the containers that contain the flashcard. A flashcard can only exist in a deck.
 * *Flashcards* are cards that contain revision materials, specifically a question and an answer.
-* *Statistics* is the numererical, summarized version of your data, based on your test history. Your statistics can serve as a guideline for you to decide which areas you need to work on, and which areas you are familiar with. 
+* *Statistics* is the numererical, summarized version of your data, based on your test history. Your statistics can serve as a guideline for you to decide which areas you need to work on, and which areas you are familiar with.
 
 *Common Terminologies*
 
@@ -360,7 +360,7 @@ What it does:
 Displays all the commands that has been inputted by the user during the current session.
 Format: 'history'
 
-=== Undo/Redo 
+=== Undo/Redo
 
 ==== Undoing command: `undo`
 
