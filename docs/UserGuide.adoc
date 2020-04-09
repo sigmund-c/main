@@ -27,7 +27,7 @@ Cardi Buddy (CardiB) is for students who *prefer to use a desktop app to store t
 .  Copy the file to the folder you want to use as the home folder for your Cardi Buddy.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+image::Ui.png[width="790", align="center"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -122,9 +122,11 @@ Format: `add c/DECK_INDEX q/QUESTION a/ANSWER`
 
 Examples:
 
-* `open 1` +
-`add c/1 q/How does one go about solving recursion problems? a/Wishful thinking` +
-Adds a new card belonging to the deck indexed at 1.
+* `open 2` +
+`add c/2 q/How does one go about solving recursion problems? a/Wishful thinking` +
+Adds a new card belonging to the deck indexed at 2.
+
+image::AddCard.png[width="800", align="center"]
 
 // tag::addingImage[]
 ==== Adding an image card: `add p/FILE_PATH_TO_IMAGE c/DECK_INDEX q/QUESTION a/ANSWER`
@@ -136,8 +138,13 @@ Format: `add p/FILE_PATH_TO_IMAGE c/DECK_INDEX q/QUESTION a/ANSWER`
 Examples:
 
 * `open 1` +
-`add p/file:/Users/haveaqiupill/Documents/GitHub/cs2103/main/docs/images/ArchitectureSequenceDiagram.png c/1 q/What type of UML diagram is this? a/Architecture Diagram` +
+`add p/file:/Users/qiujingying/Documents/GitHub/cs2103/main/docs/images/ArchitectureDiagram.png c/1 q/What type of diagram is this? a/Architecture Diagram` +
 Adds a new card with an image belonging to the deck indexed at 1.
+
+image::AddImageCard.png[width="800", align="center"]
+
+[:bulb:]
+You can drag and drop the image you want to add into a terminal window to obtain its file path. File paths may differ across operating systems (Windows vs Mac).
 // end::addingImage[]
 
 === Opening

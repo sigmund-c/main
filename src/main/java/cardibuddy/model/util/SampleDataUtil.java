@@ -55,7 +55,7 @@ public class SampleDataUtil {
         tagsC.add(new Tag("HTML"));
         tagsC.add(new Tag("CSS"));
         tagsC.add(new Tag("Framework"));
-        Deck deckC = new Deck(new Title("Vue.js"), tagsC);
+        Deck deckC = new Deck(new Title("Vuejs"), tagsC);
 
         // Deck D
         Set<Tag> tagsD = new HashSet<>();
