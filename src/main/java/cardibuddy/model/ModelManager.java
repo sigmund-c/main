@@ -13,6 +13,7 @@ import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.flashcard.Card;
+import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.TestSession;
@@ -33,7 +34,7 @@ public class ModelManager implements Model {
 
     private final CardiBuddy cardiBuddy;
     private final UserPrefs userPrefs;
-    private final FilteredList<Card> filteredFlashcards;
+    private final FilteredList<Flashcard> filteredFlashcards;
     private final FilteredList<Deck> filteredDecks;
     private final Statistics statistics;
     private final VersionedCardiBuddy versionedCardiBuddy;
