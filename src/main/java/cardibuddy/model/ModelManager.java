@@ -36,6 +36,7 @@ public class ModelManager implements Model {
     private final FilteredList<Flashcard> filteredFlashcards;
     private final FilteredList<Deck> filteredDecks;
     private final Statistics statistics;
+    private final VersionedCardiBuddy versionedCardiBuddy;
     private TestSession testSession;
 
     /**
@@ -47,10 +48,11 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with CardiBuddy: " + cardiBuddy + " and user prefs " + userPrefs);
 
+        versionedCardiBuddy = new VersionedCardiBuddy(cardiBuddy);
         this.cardiBuddy = new CardiBuddy(cardiBuddy);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredFlashcards = new FilteredList<>(this.cardiBuddy.getFlashcardList());
-        filteredDecks = new FilteredList<>(this.cardiBuddy.getDeckList());
+        filteredFlashcards = new FilteredList<>(this.versionedCardiBuddy.getFlashcardList());
+        filteredDecks = new FilteredList<>(versionedCardiBuddy.getDeckList());
 
         this.statistics = new Statistics();
     }
@@ -314,4 +316,30 @@ public class ModelManager implements Model {
                 && filteredFlashcards.equals(other.filteredFlashcards);
     }
 
+    //=========== Undo/Redo =================================================================================
+
+    @Override
+    public boolean canUndo() {
+        return versionedCardiBuddy.canUndo();
+    }
+
+    @Override
+    public boolean canRedo() {
+        return versionedCardiBuddy.canRedo();
+    }
+
+    @Override
+    public void undo() {
+        versionedCardiBuddy.undo();
+    }
+
+    @Override
+    public void redo() {
+        versionedCardiBuddy.redo();
+    }
+
+    @Override
+    public void commitCardiBuddy() {
+        versionedCardiBuddy.commit();
+    }
 }

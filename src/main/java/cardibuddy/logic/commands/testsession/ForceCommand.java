@@ -3,6 +3,7 @@ package cardibuddy.logic.commands.testsession;
 import static cardibuddy.commons.core.Messages.MESSAGE_UNANSWERED_QUESTION;
 import static java.util.Objects.requireNonNull;
 
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.commands.Command;
 import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.logic.commands.exceptions.CommandException;
@@ -32,7 +33,7 @@ public class ForceCommand extends Command {
      * Gets the current {@code TestSession} to change the {@code TestResult} of the current flashcard.
      */
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
         try {
             model.forceCorrect();

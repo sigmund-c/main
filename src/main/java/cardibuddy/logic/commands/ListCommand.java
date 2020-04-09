@@ -3,6 +3,7 @@ package cardibuddy.logic.commands;
 import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_DECKS;
 import static java.util.Objects.requireNonNull;
 
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
@@ -23,7 +24,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
         model.updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
         return new CommandResult(MESSAGE_SUCCESS);

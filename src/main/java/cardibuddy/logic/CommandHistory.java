@@ -19,12 +19,10 @@ public class CommandHistory {
     private final ObservableList<String> unmodifiableHistory =
             FXCollections.unmodifiableObservableList(history);
 
-    private CommandHistory() {
-
-    }
+    public CommandHistory() {}
 
     public CommandHistory(CommandHistory commandHistory) {
-        setList(commandHistory);
+        history.addAll(commandHistory.history);
     }
 
     /**
@@ -35,38 +33,28 @@ public class CommandHistory {
         history.add(commandString);
     }
 
-    public static CommandHistory getCommandHistory() {
-        return commandHistory;
-    }
-
     /**
-     * Removes the equivalent string from the list.
-     * The string must exist in the list.
+     * Returns an unmodifiable view of {@code userInputHistory}.
      */
-    public void remove(String commandString) throws CommandException {
-        requireNonNull(commandString);
-        if (!history.remove(commandString)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
-        }
-    }
-
-    public void setList(CommandHistory replacement) {
-        requireNonNull(replacement);
-        history.setAll(replacement.history);
-    }
-
-    /**
-     * Returns the backing list as an unmodifiable {@code ObservableList}.
-     */
-    public ObservableList<String> getCommandHistoryList() {
+    public ObservableList<String> getHistory() {
         return unmodifiableHistory;
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof CommandHistory // instanceof handles nulls
-                && history.equals(((CommandHistory) other).history));
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof CommandHistory)) {
+            return false;
+        }
+
+        // state check
+        CommandHistory other = (CommandHistory) obj;
+        return history.equals(other.history);
     }
 
     @Override

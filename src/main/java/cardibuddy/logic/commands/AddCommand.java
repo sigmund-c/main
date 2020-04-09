@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
@@ -21,7 +22,7 @@ import cardibuddy.model.flashcard.Flashcard;
 /**
  * Adds a deck to the cardibuddy.
  */
-public class AddCommand extends UndoableCommand {
+public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
@@ -96,7 +97,7 @@ public class AddCommand extends UndoableCommand {
     }
 
     @Override
-    public CommandResult executeUndoableCommand(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
 
         if (isDeck) {
@@ -104,6 +105,7 @@ public class AddCommand extends UndoableCommand {
                 throw new CommandException(MESSAGE_DUPLICATE_DECK);
             }
             model.addDeck((Deck) toAdd);
+            model.commitCardiBuddy();
 
             logger.info("Deck has been added");
         } else {
@@ -111,6 +113,7 @@ public class AddCommand extends UndoableCommand {
                 throw new CommandException(MESSAGE_DUPLICATE_FLASHCARD);
             }
             model.addFlashcard((Flashcard) toAdd);
+            model.commitCardiBuddy();
             flashcards.add((Flashcard) toAdd);
             logger.info("Flashcard has been added");
         }

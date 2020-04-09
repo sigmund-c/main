@@ -30,12 +30,13 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final CardiBuddyParser cardiBuddyParser;
-    private final CommandHistory commandHistory = CommandHistory.getCommandHistory();
-    private final CardiBuddyStack cardiBuddyStack = CardiBuddyStack.getCardiBuddyStack();
+    private final CommandHistory commandHistory;
+    private boolean cardiBuddyModified;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
+        commandHistory = new CommandHistory();
         cardiBuddyParser = new CardiBuddyParser(model.getCardiBuddy());
     }
 
@@ -46,17 +47,24 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+        cardiBuddyModified = false;
 
         CommandResult commandResult;
-        Command command = cardiBuddyParser.parseCommand(commandText);
-        commandResult = command.execute(model);
 
         try {
-            storage.saveCardiBuddy(model.getCardiBuddy());
+            Command command = cardiBuddyParser.parseCommand(commandText);
+            commandResult = command.execute(model, commandHistory);
+        } finally {
             commandHistory.add(commandText);
-            cardiBuddyStack.push(command);
-        } catch (IOException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        }
+
+        if (cardiBuddyModified) {
+            logger.info("CardiBuddy has been modified, saving to file.");
+            try {
+                storage.saveCardiBuddy(model.getCardiBuddy());
+            } catch (IOException ioe) {
+                throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+            }
         }
 
         return commandResult;
