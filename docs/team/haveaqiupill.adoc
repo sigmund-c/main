@@ -1,4 +1,4 @@
-= Jing Ying - Project Portfolio
+= Qiu Jing Ying - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
@@ -16,12 +16,20 @@ application as they are generally comfortable with typing.
 == Summary of contributions
 
 * *Major enhancement*: added *the ability to insert images into flashcards*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** What it does: allows the user to add images from their local drive into flashcards.
+** Justification: This feature improves the product significantly because users are able to include images such as
+diagrams to illustrate more complex concepts (such as UML diagrams for CS2103).
+** Highlights: This enhancement affects the Model and Logic section of Cardi Buddy.
+It required an in-depth analysis of design alternatives.
+The implementation too was challenging as it required changes to existing commands such as the add command and the
+creation of a new type of object (Imagecard object). In addition, changes were made to the UI in the FlashcardListPanel
+to display images in the flashcard.
 ** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
 * *Minor enhancement*: added a filter command that allows the user to filter decks via tags.
+
+* *Minor enhancement*: added an insert image button that shows a popup window for the user to choose the .png and .jpg
+files they want to insert into their flashcards.
 
 * *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=haveaqiupill&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Functional code]]
 [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=haveaqiupill&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Test code]]
@@ -29,25 +37,24 @@ application as they are generally comfortable with typing.
 * *Other contributions*:
 
 ** Project management:
+*** Morphed entire code base from AB3 to Cardi Buddy https://github.com/AY1920S2-CS2103T-T10-2/main/pull/84[#84], https://github.com/AY1920S2-CS2103T-T10-2/main/pull/85[#85], https://github.com/AY1920S2-CS2103T-T10-2/main/pull/96[#96]
 *** Managed releases `v1.3.1` (1 release) on GitHub for the product to be tested in the Mock Practical Examination
 
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Re-designed UI
+*** Re-designed UI (Pull requests https://github.com/AY1920S2-CS2103T-T10-2/main/pull/114[#114], https://github.com/AY1920S2-CS2103T-T10-2/main/pull/199[#199])
 *** Improved on existing find command (renamed to search command) that allows the user to search for
 decks and cards that contains all of the keywords instead of any of the keywords.
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Wrote additional tests for existing features to increase coverage from 13% to 27% (Pull requests https://github.com/AY1920S2-CS2103T-T10-2/main/pull/200[#200], https://github.com[#38])
 
 
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Wrote the whole README and designed the Ui mock-up: https://github.com/AY1920S2-CS2103T-T10-2/main/pull/54[#54], https://github.com/AY1920S2-CS2103T-T10-2/main/pull/57[#57]
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
 ** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
+*** Integrated automated hosting platform (Netlify) to the project (https://github.com/AY1920S2-CS2103T-T10-2/main/pull/60[#60])
 *** Integrated a new Github plugin (CircleCI) to the team repo
 
 _{you can add/remove categories in the list above}_
