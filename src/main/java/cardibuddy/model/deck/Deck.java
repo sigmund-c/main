@@ -14,8 +14,6 @@ import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.flashcard.Card;
-import cardibuddy.model.flashcard.Flashcard;
-import cardibuddy.model.flashcard.Imagecard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.UniqueFlashcardList;
 import cardibuddy.model.tag.Tag;
