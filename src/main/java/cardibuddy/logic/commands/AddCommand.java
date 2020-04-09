@@ -1,5 +1,7 @@
 package cardibuddy.logic.commands;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
@@ -9,6 +11,9 @@ import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Flashcard;
+
+import static cardibuddy.logic.parser.CliSyntax.*;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Represents an add command to be extended into add deck and add card commands.
