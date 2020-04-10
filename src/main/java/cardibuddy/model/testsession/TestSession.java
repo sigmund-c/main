@@ -135,6 +135,10 @@ public class TestSession {
         return testQueue.size();
     }
 
+    public LinkedList<Card> getTestQueue() {
+        return testQueue;
+    }
+
     /**
      * Performs the force correct option.
      * Allows the user to manually mark their answer as correct, if it was initially marked wrong by {@code TestResult}.
