@@ -7,7 +7,7 @@ import cardibuddy.commons.core.LogsCenter;
 /**
  * Represents an add command to be extended into add deck and add card commands.
  */
-public abstract class AddCommand extends UndoableCommand {
+public abstract class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 

@@ -14,6 +14,7 @@ import java.util.Set;
 import cardibuddy.commons.core.Messages;
 import cardibuddy.commons.core.index.Index;
 import cardibuddy.commons.util.CollectionUtil;
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
@@ -55,7 +56,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
         List<Deck> lastShownList = model.getFilteredDeckList();
 
@@ -72,12 +73,13 @@ public class EditCommand extends Command {
 
         model.setDeck(deckToEdit, editedDeck);
         model.updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
+        model.commitCardiBuddy();
         return new CommandResult(String.format(MESSAGE_EDIT_DECK_SUCCESS, editedDeck));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Deck} with the details of {@code deckToEdit}
+     * edited with {@code editDeckDescriptor}.
      */
     private static Deck createEditedDeck(Deck deckToEdit, EditDeckDescriptor editDeckDescriptor) {
         assert deckToEdit != null;

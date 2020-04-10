@@ -27,7 +27,7 @@ Cardi Buddy (CardiB) is for students who *prefer to use a desktop app to store t
 .  Copy the file to the folder you want to use as the home folder for your Cardi Buddy.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+image::Ui.png[width="790", align="center"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -114,17 +114,49 @@ Returns a new deck titled `CS2103`
 * `add d/CS1101S t/Easy t/Basics` +
 Adds a new deck titled `CS1101S` with the tags `Easy` and `Basics`
 
-==== Adding a card: `add c/DECK_TITLE q/QUESTION a/ANSWER`
+==== Adding a normal card: `add c/DECK_INDEX q/QUESTION a/ANSWER`
 
 Creates a new card to be added to the deck.
 Format: `add c/DECK_INDEX q/QUESTION a/ANSWER`
+
 * The deck specified in DECK_INDEX must be open for you to add a card.
 
 Examples:
 
+* `open 2` +
+`add c/2 q/How does one go about solving recursion problems? a/Wishful thinking` +
+Adds a new card belonging to the deck indexed at 2.
+
+image::AddCard.png[width="800", align="center"]
+
+// tag::addingImage[]
+==== Adding an image card: `add p/file:FILE_PATH_TO_IMAGE c/DECK_INDEX q/QUESTION a/ANSWER`
+
+Creates a new image card to be added to the deck.
+Format: `add p/file:FILE_PATH_TO_IMAGE c/DECK_INDEX q/QUESTION a/ANSWER`
+
+* The deck specified in DECK_INDEX must be open for you to add a card.
+
+* The images can only be PNG or JPG files.
+
+* The FILE_PATH_TO_IMAGE must end with .png or .jpg suffix.
+
+Examples:
+
 * `open 1` +
-`add c/1 q/How does one go about solving recursion problems? a/Wishful thinking` +
-Adds a new card belonging to the deck indexed at 1.
+`add p/file:/Users/qiujingying/Documents/GitHub/cs2103/main/docs/images/ArchitectureDiagram.png c/1 q/What type of diagram is this? a/Architecture Diagram` +
+Adds a new card with an image belonging to the deck indexed at 1.
+
+image::AddImageCard.png[width="800", align="center"]
+
+[TIP]
+You can drag and drop the image you want to add into a terminal window to obtain its file path. File paths may differ across operating systems (Windows vs Mac).
+
+==== Adding an image card via the Image button: `c/DECK_INDEX q/QUESTION a/ANSWER`
+Shortcut for users who do not want to search for the file path.
+
+
+// end::addingImage[]
 
 === Opening
 
@@ -235,6 +267,8 @@ Opens the first deck and deletes the 2nd flash card in the deck.
 `delete card 1` +
 Deletes the 1st card in the results of the search card command.
 
+// tag::search[]
+
 === Searching
 
 ==== Searching for a deck: `search deck`
@@ -278,8 +312,9 @@ Displays cards with the word `principle` in the questions.
 
 * `search card diagram & UML` +
 Displays decks with both of the words `diagram` and `UML` in the questions.
+// end::search[]
 
-
+// tag::filter[]
 === Filtering
 
 ==== Filtering by tags: `filter`
@@ -298,7 +333,7 @@ Displays decks with the tag `hard`.
 
 * `filter hard & coremodule` +
 Displays decks with both the tags `hard` and `coremodule`.
-
+// end::filter[]
 
 === Prioritising
 
@@ -431,7 +466,7 @@ Shows the statistics of the 3rd test session of the deck with the shown index of
 
 === Playing memory games: game [coming in v2.0]
 
-=== Customising flashcards: custom [coming in v2.0]
+=== Customising flashcards UI: custom [coming in v2.0]
 
 === Replacing image [coming in v2.0]
 
@@ -444,8 +479,10 @@ Shows the statistics of the 3rd test session of the deck with the shown index of
 
 * *Add deck* : `add d/TITLE [t/TAG]...` +
 e.g. `add d/CS2030 t/Fundamentals t/Medium`
-* *Add card* : `add c/TITLE q/QUESTION a/ANSWER` +
-e.g. `add c/CS2030 q/What does OOP stand for? a/Object Oriented Programming`
+* *Add normal card* : `add c/DECK_INDEX q/QUESTION a/ANSWER` +
+e.g. `add c/1 q/What does OOP stand for? a/Object Oriented Programming`
+* *Add image card* : `add p/file:FILE_PATH_TO_IMAGE c/DECK_INDEX q/QUESTION a/ANSWER` +
+e.g. `add p/file:/Users/foo/ObjectDiagram.png c/1 q/Which SOLID principle did the code not adhere to? a/Single Responsibility Principle`
 * *Clear* : `clear`
 * *Delete deck/card* : `delete deck/card INDEX` +
 e.g. `delete deck 3`

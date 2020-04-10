@@ -54,13 +54,13 @@ class JsonAdaptedFlashcard extends JsonAdaptedView {
      * Converts this Jackson-friendly adapted flashcard object into the model's {@code Flashcard} object.
      * @throws IllegalValueException if there were any data constraints violated in the adapted flashcard.
      */
-    public Card toModelType() throws IllegalValueException {
-        Deck modelDeck = new Deck();
+    public Card toModelType(Deck modelDeck) throws IllegalValueException {
         Question modelQuestion = new Question(question);
         ShortAnswer modelAnswer = new ShortAnswer(answer);
 
         if (deck == null || question == null || answer == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Deck.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Deck.class.getSimpleName()));
         }
 
         if (path.equals("")) {

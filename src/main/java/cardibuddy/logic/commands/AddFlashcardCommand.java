@@ -7,6 +7,7 @@ import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 import static java.util.Objects.requireNonNull;
 
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
@@ -41,7 +42,7 @@ public class AddFlashcardCommand extends AddCardCommand {
             + PREFIX_ANSWER + "False "
             + PREFIX_TAG + "Programming";
 
-    public static final String MESSAGE_SUCCESS = "New flashcard added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New flashcard added:\n%1$s";
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the deck";
 
     private final Flashcard toAdd;
@@ -55,7 +56,7 @@ public class AddFlashcardCommand extends AddCardCommand {
     }
 
     @Override
-    public CommandResult executeUndoableCommand(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
 
         if (logicToUiManager.getDisplayedDeck().hasFlashcard(toAdd)) {
@@ -63,7 +64,7 @@ public class AddFlashcardCommand extends AddCardCommand {
         }
 
         model.addFlashcard(toAdd);
-        logicToUiManager.getDisplayedDeck().addFlashcard(toAdd);
+        logicToUiManager.getDisplayedDeck().addCard(toAdd);
         LOGGER.info("Flashcard has been added");
 
         logicToUiManager.getDisplayedDeck().updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);

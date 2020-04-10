@@ -4,6 +4,7 @@ https://travis-ci.com/AY1920S2-CS2103T-T10-2/main[image:https://travis-ci.com/AY
 https://coveralls.io/github/AY1920S2-CS2103T-T10-2/main?branch=master[image:https://coveralls.io/repos/github/AY1920S2-CS2103T-T10-2/main/badge.svg?branch=master[Coverage Status]]
 image:https://api.codacy.com/project/badge/Grade/f8b5ed4e9c134355b556b8fc55befef4[link="https://app.codacy.com/gh/AY1920S2-CS2103T-T10-2/main?utm_source=github.com&utm_medium=referral&utm_content=AY1920S2-CS2103T-T10-2/main&utm_campaign=Badge_Grade_Settings"]
 image:https://img.shields.io/badge/license-MIT-blue.svg[MIT License, link=LICENSE]
+image:https://api.netlify.com/api/v1/badges/bae88b55-91f5-422d-9af1-880149df0478/deploy-status[link="https://app.netlify.com/sites/cardi-buddy/deploys"]
 
 ifdef::env-github[]
 image::docs/images/Ui.png[width="900"]

@@ -4,6 +4,7 @@ import static cardibuddy.commons.core.Messages.MESSAGE_NOT_IN_DECK;
 import static java.util.Objects.requireNonNull;
 
 import cardibuddy.commons.core.Messages;
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.exceptions.NotInDeckException;
@@ -34,7 +35,7 @@ public class SearchCardCommand extends SearchCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws RuntimeException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws RuntimeException {
         requireNonNull(model);
         assert true;
 
