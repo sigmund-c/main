@@ -26,7 +26,7 @@ HiddenUI -up[hidden]-> UI
 HiddenModel -left[hidden]-> Model
 Main -up-> HiddenUI
 Main -left-> HiddenModel
-UI -> Logic
+UI <-> Logic
 UI -right-> Model
 Logic -> Storage
 Logic -down-> Model
