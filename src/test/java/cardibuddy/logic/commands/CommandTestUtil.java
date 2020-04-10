@@ -82,13 +82,14 @@ public class CommandTestUtil {
      * - the CommandException message matches {@code expectedMessage} <br>
      * - the address book, filtered deck list and selected deck in {@code actualModel} remain unchanged
      */
-    public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
+    public static void assertCommandFailure(Command command, Model actualModel, CommandHistory commandHistory,
+                                            String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         CardiBuddy expectedCardiBuddy = new CardiBuddy(actualModel.getCardiBuddy());
         List<Deck> expectedFilteredList = new ArrayList<>(actualModel.getFilteredDeckList());
 
-        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel, commandHistory));
         assertEquals(expectedCardiBuddy, actualModel.getCardiBuddy());
         assertEquals(expectedFilteredList, actualModel.getFilteredDeckList());
     }
