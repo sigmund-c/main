@@ -112,10 +112,9 @@ image::DeleteSequenceDiagram.png[]
 NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 == LogicToUiManager
-This class serves as a bridge between relevant `Command` classes and the `Ui`.
-It calls specific methods in the `MainWindow` class to modify the display to the user according to the `Command` executed.
+This class serves as a bridge between relevant `Command` classes and the `Ui`, for use cases that do not update the `ObservableList`. It calls specific methods in the `MainWindow` class to modify the display to the user according to the `Command` executed.
 
-The `LogicToUiManager` object is created upon startup in the MainApp class, and there exists only one instance of it throughout the use of CardiBuddy.
+The `LogicToUiManager` object is created upon startup in the MainApp class, and there can exist only one instance of it throughout the use of CardiBuddy.
 
 *Commands that make use of `LogicToUiManager`:*
 
@@ -280,9 +279,38 @@ The `execute()` method is then called to filter the decks accordingly to the pre
 Future implementations would return flashcards and decks that are filtered accordingly to the predicate. (by v1.3)
 
 === Test feature
+==== Design
+A flashcard application is not complete without the ability to test oneself.
 
-==== Creating a test
-Users can start a <<test-session>> with a chosen `Deck`:
+The Test Feature makes use of 2 classes in the `Model` component: `TestSession` and `TestResult`, as well as a `Result` enums class as only one of 3 result outcomes are allowed for a flashcard - wrong, correct or skipped.
+
+
+
+During a test session:
+
+* The user will enter `test INDEX` to start the test session for the deck at the `INDEX`.
+* The user will enter `ans` followed by their answer to the question.
+* The user can use the `next` command to view the next question.
+* The user can choose to `skip` questions
+* The user can choose to `quit` the session halfway
+* The user can choose to `force` correct their answer if they wish to manually mark their answer as correct.
+
+The above commands can only be triggered when certain conditions are met. The following table provides a summary of all the `Command` classes related to the test feature. These classes are part of the *Logic* component, and can be found in the *testsession* package.
+
+.Summary of Test Feature Commands
+[width="%",cols="5%,<5%,<25%,<60%,<5%",options="header",]
+|=======================================================================
+|Command Class|Corresponding user input|Description|Conditions|Exceptions Thrown
+|TestCommand|`test INDEX`|Creates a `TestSession` for the specified deck at that index.|-|EmptyDeckException
+|AnswerCommand|`ans USER_ANSWER`|Submits the user's answer to the `TestSession`.|The user has not already submitted an answer to the displayed question.|AlreadyAnsweredException
+|NextCommand|`next`|Displays the next question.|The user must already have answered the question.|UnansweredQuestionException
+|SkipCommand|`skip`|Skips the current question. Does not require the user to submit an answer.|The user must not have submitted a correct answer.|AlreadyCorrectException
+|QuitCommand|`quit`|Quits the test session.|-|-
+|ForceCommand|`force`|Forces CardiBuddy to mark the user's submitted answer as correct.|The user must have submitted an incorrect answer.|UnansweredQuestionException, AlreadyCorrectException
+|=======================================================================
+==== Using the test feature
+===== Starting a Test Session
+Users can start a TestSession with a chosen `Deck`:
 
 * The `index` of the deck will be provided by the user and parsed by Cardi Buddy. A `TestSession` object containing the indicated `Deck` is created.
 * The `TestSession` object creates a HashMap named `testResults` that contains `<Flashcard, TestResult>` for easy access to the testing history.
@@ -292,17 +320,30 @@ The following is a UML Sequence Diagram of how a `TestSession` object is created
 .A sequence diagram illustrating the logic flow when a TestSession is created. The first question in the provided deck will immediately be displayed.
 image::TestSequenceDiagram.png[]
 
-The Test feature also comes with many minor enhancements. An overview of the commands provided by this feature:
+===== Other commands included in the Test Feature
+Aside from `TestCommand` which is called to create the `TestSession`, there are specific commands that can be used only when a TestSession is running. These commands have certain *conditions* that must be met before they can be executed. Otherwise, they will throw a `CommandException`.
 
-* The user will enter `test INDEX` to start the test session for the deck at the `INDEX`.
-* The user will enter `ans` followed by their answer to the question.
-* The user can use the `next` command to view the next question.
-* The user can choose to `skip` questions
-* The user can choose to `quit` the session halfway
-* The user can choose to `force` correct their answer if they feel that their answer is acceptable and similar to the `flashcard` 's answer.
+For example, other application-wide commands, such as `add deck` and `delete card` will not be allowed to be executed during the TestSession.
 
-==== TestSession Commands
-There exist specific commands that can be used only when a TestSession is running. Other application-wide commands, such as `add deck` and `delete card` will not be allowed to be executed during the TestSession.
+
+
+The following activity diagrams describe the logic flow.
+
+Note the following terminology used in the activity diagrams:
+
+* `tr` stands for a `TestResult` object
+* `testResults` stands for a `HashMap<Flashcard, TestResult>` object stored in the `TestSession` object
+* `testQueue` is a `LinkedList<Flashcard>` that stores the queue of flashcards to be tested.
+
+.Overall activity diagram for the different use cases, extension cases omitted.
+image::TestSessionActivityDiagram.png[]
+
+
+
+
+For more descriptive use case scenarios from a user perspectives, please take a look at <<Use Cases>>.
+
+
 
 
 
@@ -364,7 +405,7 @@ Refer to the guide <<DevOps#, here>>.
 * Command words are intuitive and uncomplicated
 * Easy for computing students to learn and remember
 
-3. Retests cards
+3. Prioritises cards
 * More tests for flashcards that the student got wrong
 
 4. Flexible answering
