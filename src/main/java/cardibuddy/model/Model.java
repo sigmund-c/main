@@ -7,6 +7,7 @@ import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.flashcard.Card;
+import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
@@ -183,7 +184,7 @@ public interface Model {
      *
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredFlashcardList(Predicate<Card> predicate);
+    void updateFilteredFlashcardList(Predicate<Flashcard> predicate);
 
     /**
      * Returns true if the model has previous address book states to restore.

@@ -52,8 +52,8 @@ public class ModelManager implements Model {
         versionedCardiBuddy = new VersionedCardiBuddy(cardiBuddy);
         this.cardiBuddy = new CardiBuddy(cardiBuddy);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredFlashcards = new FilteredList<>(this.versionedCardiBuddy.getFlashcardList());
-        filteredDecks = new FilteredList<>(this.versionedCardiBuddy.getDeckList());
+        filteredFlashcards = new FilteredList<Flashcard>(this.versionedCardiBuddy.getFlashcardList());
+        filteredDecks = new FilteredList<Deck>(this.versionedCardiBuddy.getDeckList());
 
         this.statistics = new Statistics();
     }
@@ -143,13 +143,21 @@ public class ModelManager implements Model {
         return versionedCardiBuddy.hasFlashcard(flashcard);
     }
 
+    @Override
+    public void deleteFlashcard(Card target) {
+        versionedCardiBuddy.removeFlashcard(target);
+
+        target.getDeck().getStatistics().trackCardDeleted();
+        statistics.trackCardDeleted();
+    }
+
     /**
      * Adds Flashcard to a Deck.
      *
      * @param flashcard new card.
      */
     @Override
-    public void addFlashcard(Flashcard flashcard) {
+    public void addFlashcard(Card flashcard) {
         versionedCardiBuddy.addFlashcard(flashcard);
         updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
 
@@ -162,14 +170,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedFlashcard);
 
         versionedCardiBuddy.setFlashcard(target, editedFlashcard);
-    }
-
-    @Override
-    public void deleteFlashcard(Flashcard target) {
-        versionedCardiBuddy.removeFlashcard(target);
-
-        target.getDeck().getStatistics().trackCardDeleted();
-        statistics.trackCardDeleted();
     }
 
     /**
@@ -276,7 +276,7 @@ public class ModelManager implements Model {
      * {@code versionedCardiBuddy}
      */
     @Override
-    public ObservableList<Card> getFilteredFlashcardList() {
+    public ObservableList<Flashcard> getFilteredFlashcardList() {
         return filteredFlashcards;
     }
 
@@ -287,7 +287,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredFlashcardList(Predicate<Card> predicate) {
+    public void updateFilteredFlashcardList(Predicate<Flashcard> predicate) {
         requireNonNull(predicate);
         filteredFlashcards.setPredicate(predicate);
     }
