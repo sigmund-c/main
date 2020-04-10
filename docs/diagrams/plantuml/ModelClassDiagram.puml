@@ -1,0 +1,58 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model <<Rectangle>>{
+Interface ReadOnlyCardiBuddy <<Interface>>
+Interface Model <<Interface>>
+Interface ObservableList <<Interface>>
+Class CardiBuddy
+Class ReadOnlyCardiBuddy
+Class Model
+Class ModelManager
+Class UserPrefs
+Class ReadOnlyUserPrefs
+
+Package Deck {
+Class Deck
+Class Title
+Class UniqueDeckList
+}
+
+Package Flashcards {
+Class Flashcard
+Class Question
+Class Answer
+UniqueFlashcardList
+}
+
+Package Tag {
+Class Tag
+}
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Model
+
+CardiBuddy .up.|> ReadOnlyCardiBuddy
+
+ModelManager .up.|> Model
+Model .right.> ObservableList
+ModelManager o--> "1" CardiBuddy
+ModelManager o-left-> "1" UserPrefs
+UserPrefs .up.|> ReadOnlyUserPrefs
+
+CardiBuddy *--> "1" UniqueDeckList
+UniqueDeckList o--> "*" Deck
+Deck *--> Title
+Deck *--> "*" Flashcard
+Deck *--> "*" Tag
+
+Name -[hidden]right-> Phone
+Phone -[hidden]right-> Address
+Address -[hidden]right-> Email
+
+ModelManager -->"1" Deck : filtered list
+@enduml
