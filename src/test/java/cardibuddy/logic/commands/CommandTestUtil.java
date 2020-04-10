@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import cardibuddy.commons.core.index.Index;
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.CardiBuddy;
 import cardibuddy.model.Model;
@@ -55,9 +56,9 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel, CommandHistory commandHistory) {
         try {
-            CommandResult result = command.execute(actualModel);
+            CommandResult result = command.execute(actualModel, commandHistory);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
@@ -70,9 +71,9 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+            Model expectedModel, CommandHistory commandHistory) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
-        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel, commandHistory);
     }
 
     /**
