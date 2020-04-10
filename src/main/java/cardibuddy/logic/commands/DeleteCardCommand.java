@@ -9,7 +9,7 @@ import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
-import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Card;
 
 /**
  * Deletes a card from the opened deck.
@@ -35,13 +35,13 @@ public class DeleteCardCommand extends DeleteCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Flashcard> lastShownList = logicToUiManager.getDisplayedDeck().getFilteredFlashcardList();
+        List<Card> lastShownList = logicToUiManager.getDisplayedDeck().getFilteredFlashcardList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
         }
 
-        Flashcard cardToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Card cardToDelete = lastShownList.get(targetIndex.getZeroBased());
         logicToUiManager.getDisplayedDeck().deleteCard(cardToDelete);
         logicToUiManager.updateFlashcardPanel();
 

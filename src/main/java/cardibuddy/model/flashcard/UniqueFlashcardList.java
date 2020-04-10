@@ -22,18 +22,18 @@ import javafx.collections.ObservableList;
  *
  * Supports a minimal set of list operations.
  *
- * @see Flashcard#isSameFlashcard(Flashcard) (Flashcard)
+ * @see Card#isSameFlashcard(Object) (Flashcard)
  */
-public class UniqueFlashcardList implements Iterable<Flashcard> {
+public class UniqueFlashcardList implements Iterable<Card> {
 
-    private final ObservableList<Flashcard> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Flashcard> internalUnmodifiableList =
+    private final ObservableList<Card> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Card> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
-    public boolean contains(Flashcard toCheck) {
+    public boolean contains(Card toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameFlashcard);
     }
@@ -42,7 +42,7 @@ public class UniqueFlashcardList implements Iterable<Flashcard> {
      * Adds a flashcard to the list.
      * The flashcard must not already exist in the list.
      */
-    public void add(Flashcard toAdd) {
+    public void add(Card toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateFlashcardException();
@@ -55,7 +55,7 @@ public class UniqueFlashcardList implements Iterable<Flashcard> {
      * {@code target} must exist in the list.
      * The person identity of {@code editedFlashcard} must not be the same as another existing person in the list.
      */
-    public void setFlashcard(Flashcard target, Flashcard editedFlashcard) {
+    public void setFlashcard(Card target, Card editedFlashcard) {
         requireAllNonNull(target, editedFlashcard);
 
         int index = internalList.indexOf(target);
@@ -74,7 +74,7 @@ public class UniqueFlashcardList implements Iterable<Flashcard> {
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */
-    public void remove(Flashcard toRemove) {
+    public void remove(Card toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new FlashcardNotFoundException();
@@ -90,7 +90,7 @@ public class UniqueFlashcardList implements Iterable<Flashcard> {
      * Replaces the contents of this list with {@code flashcards}.
      * {@code flashcards} must not contain duplicate flashcards.
      */
-    public void setFlashcards(List<Flashcard> flashcards) {
+    public void setFlashcards(List<Card> flashcards) {
         requireAllNonNull(flashcards);
         if (!flashcardsAreUnique(flashcards)) {
             throw new DuplicateFlashcardException();
@@ -102,12 +102,12 @@ public class UniqueFlashcardList implements Iterable<Flashcard> {
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
-    public ObservableList<Flashcard> asUnmodifiableObservableList() {
+    public ObservableList<Card> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
 
     @Override
-    public Iterator<Flashcard> iterator() {
+    public Iterator<Card> iterator() {
         return internalList.iterator();
     }
 
@@ -126,7 +126,7 @@ public class UniqueFlashcardList implements Iterable<Flashcard> {
     /**
      * Returns true if {@code flashcards} contains only unique flashcards.
      */
-    private boolean flashcardsAreUnique(List<Flashcard> flashcards) {
+    private boolean flashcardsAreUnique(List<Card> flashcards) {
         for (int i = 0; i < flashcards.size() - 1; i++) {
             for (int j = i + 1; j < flashcards.size(); j++) {
                 if (flashcards.get(i).isSameFlashcard(flashcards.get(j))) {
