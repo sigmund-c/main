@@ -33,7 +33,6 @@ public class DragDropCard extends UiPart<Region> {
 
     public DragDropCard(Image image) {
         super(FXML);
-        title.setText("Chosen image:\n");
         imageView = new ImageView(image);
         imageView.setFitWidth(200);
         imageView.setPreserveRatio(true);

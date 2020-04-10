@@ -74,13 +74,14 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
+                && insert == otherCommandResult.insert
                 && test == otherCommandResult.test
                 && exit == otherCommandResult.exit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, test, exit);
+        return Objects.hash(feedbackToUser, showHelp, insert, test, exit);
     }
 
 }
