@@ -34,7 +34,11 @@ public class AppUtil {
      */
     public static void checkArgument(Boolean condition, String errorMessage) {
         if (!condition) {
-            throw new IllegalArgumentException(errorMessage);
+            try {
+                throw new IllegalArgumentException(errorMessage);
+            } catch (IllegalArgumentException e) {
+                System.out.println(errorMessage);
+            }
         }
     }
 }

@@ -13,7 +13,6 @@ import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.flashcard.Card;
-import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.TestSession;
@@ -34,7 +33,7 @@ public class ModelManager implements Model {
 
     private final CardiBuddy cardiBuddy;
     private final UserPrefs userPrefs;
-    private final FilteredList<Flashcard> filteredFlashcards;
+    private final FilteredList<Card> filteredFlashcards;
     private final FilteredList<Deck> filteredDecks;
     private final Statistics statistics;
     private final VersionedCardiBuddy versionedCardiBuddy;
@@ -52,7 +51,7 @@ public class ModelManager implements Model {
         versionedCardiBuddy = new VersionedCardiBuddy(cardiBuddy);
         this.cardiBuddy = new CardiBuddy(cardiBuddy);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredFlashcards = new FilteredList<Flashcard>(this.versionedCardiBuddy.getFlashcardList());
+        filteredFlashcards = new FilteredList<Card>(this.versionedCardiBuddy.getFlashcardList());
         filteredDecks = new FilteredList<Deck>(this.versionedCardiBuddy.getDeckList());
 
         this.statistics = new Statistics();
@@ -276,7 +275,7 @@ public class ModelManager implements Model {
      * {@code versionedCardiBuddy}
      */
     @Override
-    public ObservableList<Flashcard> getFilteredFlashcardList() {
+    public ObservableList<Card> getFilteredFlashcardList() {
         return filteredFlashcards;
     }
 
@@ -287,7 +286,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredFlashcardList(Predicate<Flashcard> predicate) {
+    public void updateFilteredFlashcardList(Predicate<Card> predicate) {
         requireNonNull(predicate);
         filteredFlashcards.setPredicate(predicate);
     }
