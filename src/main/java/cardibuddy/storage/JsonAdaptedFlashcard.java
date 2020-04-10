@@ -71,5 +71,6 @@ class JsonAdaptedFlashcard extends JsonAdaptedView {
                 return new Imagecard(modelDeck, modelQuestion, modelAnswer, path);
             }
         }
+    return null;
     }
 }
