@@ -64,9 +64,9 @@ public class Flashcard extends Card {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Q:")
+        builder.append("Q: ")
                 .append(getQuestion())
-                .append("\nA:")
+                .append("\nA: ")
                 .append(getAnswer());
         return builder.toString();
     }

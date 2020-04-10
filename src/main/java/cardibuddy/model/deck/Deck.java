@@ -14,8 +14,6 @@ import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.flashcard.Card;
-import cardibuddy.model.flashcard.Flashcard;
-import cardibuddy.model.flashcard.Imagecard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.UniqueFlashcardList;
 import cardibuddy.model.tag.Tag;
@@ -62,11 +60,6 @@ public class Deck {
         logger.info("Created Deck");
     }
 
-    public Deck() {
-        title = new Title("");
-        flashcards = new ArrayList<>();
-    }
-
     public Title getTitle() {
         return this.title;
     }
@@ -98,22 +91,11 @@ public class Deck {
     }
 
     /**
-     * Adds a Flashcard to a Deck.
+     * Adds a Card to a Deck.
      * @param card
-     * @return the set of Flashcards from the Deck.
+     * @return the set of Cards from the Deck.
      */
-    public List<Card> addFlashcard(Flashcard card) {
-        flashcards.add(card);
-        filteredFlashcards = new FilteredList<>(FXCollections.observableList(flashcards));
-        return Collections.unmodifiableList(flashcards);
-    }
-
-    /**
-     * Adds an Imagecard to a Deck.
-     * @param card
-     * @return the set of Flashcards from the Deck.
-     */
-    public List<Card> addImagecard(Imagecard card) {
+    public List<Card> addCard(Card card) {
         flashcards.add(card);
         filteredFlashcards = new FilteredList<>(FXCollections.observableList(flashcards));
         return Collections.unmodifiableList(flashcards);
