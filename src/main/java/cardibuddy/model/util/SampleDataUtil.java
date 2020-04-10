@@ -39,10 +39,10 @@ public class SampleDataUtil {
         Flashcard cardD = new Flashcard(deckA,
                 new Question("Is defensive code desirable at all times?"),
                 new ShortAnswer("False"), "");
-        deckA.addFlashcard(cardA);
-        deckA.addFlashcard(cardB);
-        deckA.addFlashcard(cardC);
-        deckA.addFlashcard(cardD);
+        deckA.addCard(cardA);
+        deckA.addCard(cardB);
+        deckA.addCard(cardC);
+        deckA.addCard(cardD);
 
         // Deck B
         Set<Tag> tagsB = new HashSet<>();
@@ -55,7 +55,7 @@ public class SampleDataUtil {
         tagsC.add(new Tag("HTML"));
         tagsC.add(new Tag("CSS"));
         tagsC.add(new Tag("Framework"));
-        Deck deckC = new Deck(new Title("Vue.js"), tagsC);
+        Deck deckC = new Deck(new Title("Vuejs"), tagsC);
 
         // Deck D
         Set<Tag> tagsD = new HashSet<>();

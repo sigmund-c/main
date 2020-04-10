@@ -64,7 +64,7 @@ public class InsertImageCommand extends AddCardCommand {
             throw new CommandException(MESSAGE_DUPLICATE_FLASHCARD);
         }
 
-        logicToUiManager.getDisplayedDeck().addImagecard(toAdd);
+        logicToUiManager.getDisplayedDeck().addCard(toAdd);
         LOGGER.info("Flashcard has been added");
 
         logicToUiManager.getDisplayedDeck().updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
