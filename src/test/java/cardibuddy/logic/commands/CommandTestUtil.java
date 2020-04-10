@@ -2,7 +2,7 @@ package cardibuddy.logic.commands;
 
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
-import static cardibuddy.testutil.Assert.assertThrows;
+//import static cardibuddy.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
