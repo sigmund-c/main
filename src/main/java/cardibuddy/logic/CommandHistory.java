@@ -2,9 +2,6 @@ package cardibuddy.logic;
 
 import static java.util.Objects.requireNonNull;
 
-import cardibuddy.commons.core.Messages;
-import cardibuddy.logic.commands.exceptions.CommandException;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

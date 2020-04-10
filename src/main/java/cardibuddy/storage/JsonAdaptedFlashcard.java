@@ -14,8 +14,6 @@ import cardibuddy.model.flashcard.Imagecard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.ShortAnswer;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  * Jackson-friendly version of {@link Flashcard}.
  */
@@ -62,7 +60,8 @@ class JsonAdaptedFlashcard extends JsonAdaptedView {
             ShortAnswer modelAnswer = new ShortAnswer(answer);
 
             if (deck == null || question == null || answer == null) {
-                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Deck.class.getSimpleName()));
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        Deck.class.getSimpleName()));
             }
 
             if (path.equals("")) {
@@ -71,6 +70,6 @@ class JsonAdaptedFlashcard extends JsonAdaptedView {
                 return new Imagecard(modelDeck, modelQuestion, modelAnswer, path);
             }
         }
-    return null;
+        return null;
     }
 }
