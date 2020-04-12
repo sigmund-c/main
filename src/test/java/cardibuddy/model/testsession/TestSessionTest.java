@@ -20,19 +20,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestSessionTest {
 
-//    static final Deck DECK_EMPTY = new DeckStub(0);
-//    static final Deck[] DECKS_NON_EMPTY = new Deck[]{new DeckStub(1), new DeckStub(2), new DeckStub(10), new DeckStub(15)};
-//    static final Deck[] DECKS_MORE_THAN_ONE_CARD = new Deck[]{new DeckStub(2), new DeckStub(5), new DeckStub(10), new DeckStub(12)};
-
-    ArrayList<Card> getFlashcard(Deck deck) {
-        ArrayList<Card> result = new ArrayList<>();
-        result.add(new Flashcard(deck, new Question("Hello"), new McqAnswer("A"), ""));
-        return result;
-    }
-
     String randomString1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
     String randomString2 = "abcdefghijklmnopqrstuvwxyz";
 
+    /**
+     * A method to generate a flashcard of random type, and with a random question string.
+     * @return
+     */
     Flashcard generateRandomCard() {
         int option = new Random().nextInt(2 + 1);
         int random1 = new Random().nextInt(26);
@@ -140,6 +134,17 @@ public class TestSessionTest {
         assertThrows(AlreadyCorrectException.class, testSession::skipQuestion);
     }
 
+    @Description("Ensure that the TestResult for a skipped question has been stored as such.")
+    @Test
+    void testSkippedQuestionStoredAsSkipped() {
+        TestSession testSession = new TestSession(deck);
+        testSession.getFirstQuestion();
+        Card flashcardToCheck = deck.getFlashcardList().get(0);
+        testSession.skipQuestion();
+        Result storedResult = testSession.getTestResults().get(flashcardToCheck).getResult();
+        assertEquals(Result.SKIPPED, storedResult);
+    }
+
     @Description("Test that the correct second question is returned.")
     @Test
     void testGetNextQuestion() {
@@ -172,7 +177,7 @@ public class TestSessionTest {
 
     @Description("Test that force correct leads to the test queue size decreasing by 1")
     @Test
-    void testForceCorrectRemovesReaddedFlashcard() {
+    void testForceCorrectRemovesReAddedFlashcard() {
         TestSession testSession = new TestSession(deck);
         testSession.getFirstQuestion();
         testSession = submitWrongAnswer(testSession);
@@ -189,134 +194,4 @@ public class TestSessionTest {
         testSession = submitCorrectAnswer(testSession, 0);
         assertThrows(AlreadyCorrectException.class, testSession::forceCorrect);
     }
-//    /**
-//     * Test the creation of the test queue in the constructor based on the given non empty deck.
-//     */
-//    @Test
-//    static void testConstructorWithNonEmptyDeck() {
-//        Deck[] decks = DECKS_NON_EMPTY;
-//        ArrayList<TestSession> testSessions = getNewlyCreatedTestSessions(decks);
-//        for (int i = 0; i < decks.length; i++) {
-//            Deck deck = decks[i];
-//            TestSession testSession = testSessions.get(i);
-//            LinkedList<Card> expectedTestQueue = ((DeckStub) deck).getExpectedTestQueue();
-//            assertEquals(expectedTestQueue, testSession.getTestQueue());
-//        }
-//    }
-//
-//    /**
-//     * Ensure that an {@code EmptyDeckException} is thrown when an empty deck is passed to the constructor.
-//     */
-//    @Test
-//    static void testConstructorWithEmptyDeck() {
-//        assertThrows(EmptyDeckException.class, () -> new TestSession(DECK_EMPTY));
-//    }
-//
-//    /**
-//     * Test that the correct first question is received when the deck given is non empty.
-//     */
-//    @Test
-//    static void testGetFirstQuestionWithNonEmptyDeck() {
-//        ArrayList<TestSession> testSessions = getNewlyCreatedTestSessions(DECKS_NON_EMPTY);
-//        Card[] firstExpectedCards = getFirstExpectedCards(DECKS_NON_EMPTY);
-//        for (int i = 0; i < testSessions.size(); i++) {
-//            TestSession testSession = testSessions.get(i);
-//            Card firstExpectedCard = firstExpectedCards[i];
-//            assertEquals(firstExpectedCard.getQuestion(), testSession.getFirstQuestion());
-//        }
-//    }
-//
-//    /**
-//     * Ensure that when a correct answer is submitted to the test session, a {@code TestResult} object is created with the correct parameters.
-//     * Note that the actual testing of TestResult class will be in a separate test class itself.
-//     */
-//    @Test
-//    static void testSubmitAnswerCreatesCorrectParameters() {
-//        ArrayList<TestSession> testSessions = getNewlyCreatedTestSessions(DECKS_NON_EMPTY);
-//        Card[] firstExpectedCards = getFirstExpectedCards(DECKS_NON_EMPTY);
-//        for (int i = 0; i < testSessions.size(); i++) {
-//            TestSession testSession = testSessions.get(i);
-//            testSession.getFirstQuestion();
-//            Card firstExpectedCard = firstExpectedCards[i];
-//            TestResult testResult = testSession.submitAnswer(firstExpectedCard.getAnswer().toString());
-//            assertEquals(testResult.getNumTries(), 1);
-//            assertEquals(testResult.getFlashcardAnswer(), firstExpectedCard.getAnswer());
-//            assertEquals(testResult.getUserAnswer(), firstExpectedCard.getAnswer().toString());
-//        }
-//    }
-//
-//    /**
-//     * Ensure that an {@code UnansweredQuestionException} is thrown when the user tries to get the next question without answering the current question.
-//     */
-//    @Test
-//    static void testGetNextQuestionThrowsUnansweredQuestionException() {
-//        ArrayList<TestSession> testSessions = getNewlyCreatedTestSessions(DECKS_NON_EMPTY);
-//        for (TestSession testSession : testSessions) {
-//            assertThrows(UnansweredQuestionException.class,  testSession::getNextQuestion);
-//        }
-//    }
-//
-//    /**
-//     * Ensure that an {@code AlreadyCorrectException} will be thrown if the user tries to skip a question when the user has already answered it correctly.
-//     */
-//    @Test
-//    static void testSkipQuestionThrowsAlreadyCorrectException() {
-//        ArrayList<TestSession> newTestSessions = getNewlyCreatedTestSessions(DECKS_NON_EMPTY);
-//        ArrayList<TestSession> firstAnsweredCorrectlyTestSessions = submitCorrectAnswerToQuestions(newTestSessions, DECKS_NON_EMPTY, 0);
-//        for (TestSession testSession : firstAnsweredCorrectlyTestSessions) { // test test sessions with their first questions answered
-//            assertThrows(AlreadyCorrectException.class, testSession::skipQuestion);
-//        }
-//    }
-//
-//    /**
-//     * Ensure that when an answer is wrongly answered, skip allows the user to skip the question.
-//     * Check that: the test queue has its first card removed, and is not added back into the test.
-//     */
-//    @Test
-//    static void testSkipQuestionDecreasesTestQueueSize() {
-//        ArrayList<TestSession> newTestSessions = getNewlyCreatedTestSessions(DECKS_MORE_THAN_ONE_CARD);
-//        ArrayList<TestSession> firstAnsweredWronglyTestSessions = submitWrongAnswerToQuestions(newTestSessions, DECKS_MORE_THAN_ONE_CARD, 0);
-//        for (int i = 0; i < firstAnsweredWronglyTestSessions.size(); i++) {
-//            DeckStub deck = (DeckStub) DECKS_MORE_THAN_ONE_CARD[i];
-//            TestSession testSession = firstAnsweredWronglyTestSessions.get(i);
-//            LinkedList<Card> expectedTestQueue = deck.getExpectedTestQueue();
-//            expectedTestQueue.removeFirst();
-//            assertEquals(testSession.getTestQueue(), expectedTestQueue);
-//        }
-//    }
-//
-//    /**
-//     * Ensure that after submitting the answer, the boolean {@code hasAnswered} will be toggled correctly and the user is able to move to the next question.
-//     * Ensure that the size of the testQueue is decremented by 1 as the first question was answered correctly.
-//     */
-//    @Test
-//    static void testGetNextQuestionAfterAnsweringCorrectly() {
-//        ArrayList<TestSession> newTestSessions = getNewlyCreatedTestSessions(DECKS_MORE_THAN_ONE_CARD);
-//        ArrayList<TestSession> firstAnsweredCorrectlyTestSessions = submitCorrectAnswerToQuestions(newTestSessions, DECKS_MORE_THAN_ONE_CARD, 0);
-//        for (int i = 0; i < firstAnsweredCorrectlyTestSessions.size(); i++) {
-//            DeckStub deck = (DeckStub) DECKS_MORE_THAN_ONE_CARD[i];
-//            Card secondExpectedCard = deck.getSecondExpectedCard(); // get the second flashcard in the deck
-//            LinkedList<Card> expectedTestQueue = deck.getExpectedTestQueue();
-//            expectedTestQueue.removeFirst();
-//
-//            TestSession testSession = firstAnsweredCorrectlyTestSessions.get(i);
-//            Question nextQuestion = testSession.getNextQuestion(); // the next question in the test queue
-//            assertEquals(secondExpectedCard.getQuestion(), nextQuestion);
-//            assertEquals(expectedTestQueue, testSession.getTestQueue());
-//        }
-//    }
-//
-////    @Test
-////    static void testGetNextQuestionAfterAnsweringWrongly() {
-////
-////    }
-//
-//    @Test
-//    static void testForceCorrectThrowsUnansweredQuestionException() {
-//        ArrayList<TestSession> testSessions = getNewlyCreatedTestSessions(DECKS_NON_EMPTY);
-//        for (TestSession testSession : testSessions) {
-//            assertThrows(UnansweredQuestionException.class, testSession::forceCorrect);
-//        }
-//    }
-//
 }
