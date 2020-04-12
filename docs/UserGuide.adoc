@@ -120,6 +120,7 @@ Returns a new deck titled `CS2103`
 * `add d/CS1101S t/Easy t/Basics` +
 Adds a new deck titled `CS1101S` with the tags `Easy` and `Basics`
 
+// tag::addingImage[]
 ==== Adding a normal card: `add q/QUESTION a/ANSWER`
 
 Creates a new card to be added to the deck.
@@ -143,12 +144,7 @@ Adds a new card with a `Short Answer` type belonging to the opened deck indexed 
 `add q/Is defensive code desirable at all times? a/F` +
 Adds a new card with a `T/F` answer type belonging to the opened deck indexed at 1.
 
-* `open 1` +
-`add q/Is defensive code desirable at all times? a/F` +
-Adds a new card with a `T/F` answer type belonging to the opened deck indexed at 1.
 
-
-// tag::addingImage[]
 ==== Adding an image card: `add p/file:FILE_PATH_TO_IMAGE q/QUESTION a/ANSWER`
 
 Creates a new image card to be added to the deck.
