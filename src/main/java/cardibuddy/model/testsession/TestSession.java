@@ -10,7 +10,6 @@ import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.McqAnswer;
 import cardibuddy.model.flashcard.Question;
-import cardibuddy.model.flashcard.ShortAnswer;
 import cardibuddy.model.flashcard.TfAnswer;
 import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
@@ -214,10 +213,10 @@ public class TestSession {
      * Returns the {@code AnswerType} of the current flashcard, based on its Answer class.
      */
     public AnswerType getCurrentAnswerType() {
-        Answer answerType = current.getAnswer();
-        if (answerType instanceof TfAnswer) {
+        Answer answer = current.getAnswer();
+        if (answer instanceof TfAnswer) {
             return AnswerType.TRUE_FALSE;
-        } else if (answerType instanceof McqAnswer) {
+        } else if (answer instanceof McqAnswer) {
             return AnswerType.MCQ;
         } else {
             return AnswerType.SHORT_ANSWER;
