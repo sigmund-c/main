@@ -11,8 +11,10 @@ import cardibuddy.commons.util.StringUtil;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.deck.Title;
 import cardibuddy.model.flashcard.Answer;
+import cardibuddy.model.flashcard.McqAnswer;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.ShortAnswer;
+import cardibuddy.model.flashcard.TfAnswer;
 import cardibuddy.model.tag.Tag;
 
 /**
@@ -101,9 +103,13 @@ public class ParserUtil {
     public static Answer parseAnswer(String answer) throws ParseException {
         requireNonNull(answer);
         String trimmedAnswer = answer.trim();
-        if (!Answer.isValidAnswer(trimmedAnswer)) {
-            throw new ParseException(Answer.MESSAGE_CONSTRAINTS);
+        if (Answer.isTrueFalseAnswer(answer)) {
+            return new TfAnswer(answer);
+        } else if (Answer.isMcqAnswer(answer)) {
+            return new McqAnswer(answer);
+        } else {
+            Answer.isValidShortAnswer(trimmedAnswer);
+            return new ShortAnswer(trimmedAnswer);
         }
-        return new ShortAnswer(trimmedAnswer);
     }
 }

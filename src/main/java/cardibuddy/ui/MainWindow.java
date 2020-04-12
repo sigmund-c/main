@@ -16,6 +16,7 @@ import cardibuddy.model.deck.exceptions.NotInDeckException;
 import cardibuddy.model.deck.exceptions.WrongDeckException;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
+import cardibuddy.model.flashcard.exceptions.WrongAnswerTypeException;
 import cardibuddy.model.testsession.TestResult;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -397,6 +398,10 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
+        } catch (WrongAnswerTypeException e) {
+            resultDisplay.setFeedbackToUser("This card has a T/F answer! Please type T or F instead of "
+                + e.getMessage() + ".");
+            throw e;
         } catch (CommandException | ParseException | DeckCannotBeCardException | InvalidDeckException
                 | InvalidFlashcardException | NotInDeckException | WrongDeckException e) {
             logger.info("Invalid command: " + commandText);
