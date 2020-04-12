@@ -289,11 +289,27 @@ Future implementations would return flashcards and decks that are filtered accor
 ==== Design
 A flashcard application is not complete without the ability to test oneself.
 
-The Test Feature makes use of 2 classes in the `Model` component: `TestSession` and `TestResult`, as well as a `Result` enums class as only one of 3 result outcomes are allowed for a flashcard - wrong, correct or skipped.
+===== Model Component
+The following classes can be found inside _cardibuddy/model/testsession_.
+
+The test feature revolves around 2 classes: `TestSession` and `TestResult`.
+
+`TestSession` stores the tested deck, retrieves the questions to be tested, acts according to the user's commands and manages the <<test-queue, test queue>>.
+
+`TestResult` stores the `Result` (explained below) of each _individual_ test on a flashcard. That is, whether the flashcard was answered wrongly, correctly, or was skipped. `Result` is an enums class to store these 3 outcomes.
+
+Another enums class used is `AnswerType` which contains 3 answering options to display to the user - True/False, MCQ or Short Answer.
+
+To ensure good design practice, `Test Session` is not exposed to the other classes, but is instead called using the `ModelManager`.
+
+Click <<Design-Model, here>> to view the class diagram for the `Model` component, to see how the above classes interact with other classes within `Model`.
 
 
 
-During a test session:
+===== Logic Component
+The test feature makes use of a suite of `Command` classes exclusive to a `TestSession`. These `Command` classes are part of the *Logic* component of CardiBuddy, and can be found within the _cardibuddy/logic/testsession_ package.
+
+These commands allow the user to perform the following during a test session:
 
 * The user will enter `test INDEX` to start the test session for the deck at the `INDEX`.
 * The user will enter `ans` followed by their answer to the question.
@@ -302,10 +318,10 @@ During a test session:
 * The user can choose to `quit` the session halfway
 * The user can choose to `force` correct their answer if they wish to manually mark their answer as correct.
 
-The above commands can only be triggered when certain conditions are met. The following table provides a summary of all the `Command` classes related to the test feature. These classes are part of the *Logic* component, and can be found in the *testsession* package.
+The above commands can only be triggered when certain conditions are met. The following table provides a summary of all the `Command` classes related to the test feature, as well as the conditions for their execution and exceptions thrown when these conditions are not met.
 
 .Summary of Test Feature Commands
-[width="%",cols="5%,<5%,<25%,<60%,<5%",options="header",]
+[width="59%",cols="5%,<5%,<25%,<60%,<5%",options="header",]
 |=======================================================================
 |Command Class|Corresponding user input|Description|Conditions|Exceptions Thrown
 |TestCommand|`test INDEX`|Creates a `TestSession` for the specified deck at that index.|-|EmptyDeckException
@@ -315,6 +331,7 @@ The above commands can only be triggered when certain conditions are met. The fo
 |QuitCommand|`quit`|Quits the test session.|-|-
 |ForceCommand|`force`|Forces CardiBuddy to mark the user's submitted answer as correct.|The user must have submitted an incorrect answer.|UnansweredQuestionException, AlreadyCorrectException
 |=======================================================================
+
 ==== Using the test feature
 ===== Starting a Test Session
 Users can start a TestSession with a chosen `Deck`:
