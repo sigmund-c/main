@@ -19,6 +19,7 @@ public class RedoCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireAllNonNull(model);
+        String lastCommand = commandHistory.getHistory().get(0);
 
         if (!model.canRedo()) {
             throw new CommandException(Messages.MESSAGE_NOTHING_TO_REDO);
@@ -27,6 +28,6 @@ public class RedoCommand extends Command {
         model.redo();
         model.updateFilteredDeckList(Model.PREDICATE_SHOW_ALL_DECKS);
         model.updateFilteredFlashcardList(Model.PREDICATE_SHOW_ALL_FLASHCARDS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS + "\nRedone command: " + lastCommand);
     }
 }
