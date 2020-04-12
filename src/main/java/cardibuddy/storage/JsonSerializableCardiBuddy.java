@@ -20,11 +20,8 @@ import cardibuddy.model.deck.Deck;
 class JsonSerializableCardiBuddy {
 
     public static final String MESSAGE_DUPLICATE_DECK = "Decks list contains duplicate deck(s).";
-    public static final String MESSAGE_DUPLICATE_FLASHCARDS = "Flashcards list contains duplicate flashcard(s).";
 
     private final List<JsonAdaptedDeck> decks = new ArrayList<>();
-    private final List<JsonAdaptedFlashcard> flashcards = new ArrayList<>();
-
     /**
      * Constructs a {@code JsonSerializableCardiBuddy} with the given flashcards.
      */
