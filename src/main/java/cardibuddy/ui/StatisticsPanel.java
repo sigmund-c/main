@@ -11,6 +11,7 @@ import cardibuddy.model.deck.Statistics;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 
@@ -34,8 +35,12 @@ public class StatisticsPanel extends UiPart<Region> {
 
     public StatisticsPanel(Statistics statistics) {
         super(FXML);
+
+        statsList.setStyle("-fx-control-inner-background: blue;");
+
         this.statistics = statistics;
         if (statistics.getCardsAdded() != 0) {
+
             statsList.getItems().add("No of Cards added: " + statistics.getCardsAdded());
         }
         if (statistics.getCardsDeleted() != 0) {
@@ -75,6 +80,5 @@ public class StatisticsPanel extends UiPart<Region> {
         }
 
     }
-
 
 }
