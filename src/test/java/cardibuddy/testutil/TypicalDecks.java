@@ -21,11 +21,6 @@ public class TypicalDecks {
             .withTags("Difficult").build();
     public static final Deck POSTGRESQL = new DeckBuilder().withTitle("PostgreSQL")
             .withTags("Database", "Relational").build();
-    public static final Deck CARL = new DeckBuilder().withTitle("Carl Kurz").build();
-    public static final Deck DANIEL = new DeckBuilder().withTitle("Daniel Meier").withTags("friends").build();
-    public static final Deck ELLE = new DeckBuilder().withTitle("Elle Meyer").build();
-    public static final Deck FIONA = new DeckBuilder().withTitle("Fiona Kunz").build();
-    public static final Deck GEORGE = new DeckBuilder().withTitle("George Best").build();
 
     // Manually added
     public static final Deck HOON = new DeckBuilder().withTitle("Hoon Meier").build();
@@ -54,6 +49,6 @@ public class TypicalDecks {
     }
 
     public static List<Deck> getTypicalDecks() {
-        return new ArrayList<>(Arrays.asList(ASYNCHRONOUS, POSTGRESQL, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ASYNCHRONOUS, POSTGRESQL));
     }
 }
