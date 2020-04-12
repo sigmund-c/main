@@ -1,30 +1,37 @@
 package cardibuddy.model.testsession;
 
-import cardibuddy.model.deck.Deck;
-import cardibuddy.model.deck.Title;
-import cardibuddy.model.flashcard.*;
-import cardibuddy.model.tag.Tag;
-import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
-import cardibuddy.model.testsession.exceptions.EmptyDeckException;
-import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
-import cardibuddy.ui.FlashcardCard;
-import jdk.jfr.Description;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Random;
+
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.*;
+import cardibuddy.model.deck.Deck;
+import cardibuddy.model.deck.Title;
+import cardibuddy.model.flashcard.Answer;
+import cardibuddy.model.flashcard.Card;
+import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
+import cardibuddy.model.testsession.exceptions.EmptyDeckException;
+import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
+import jdk.jfr.Description;
 
 public class TestSessionTest {
 
-    String randomString1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
-    String randomString2 = "abcdefghijklmnopqrstuvwxyz";
+    private String randomString1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+    private String randomString2 = "abcdefghijklmnopqrstuvwxyz";
+    private DeckStub deck = new DeckStub(new Title("HELLO"), new HashSet<>());
 
     /**
      * A method to generate a flashcard of random type, and with a random question string.
+     *
      * @return
      */
     Flashcard generateRandomCard() {
@@ -34,8 +41,10 @@ public class TestSessionTest {
         int random3 = new Random().nextInt(26);
         QuestionStub question;
         Answer answer;
-        String questionString = "HELLO" + randomString1.charAt(random1) + randomString2.charAt(random2) + randomString1.charAt(random3);
-        switch (option){
+        String questionString = "HELLO" + randomString1.charAt(random1)
+                + randomString2.charAt(random2)
+                + randomString1.charAt(random3);
+        switch (option) {
         case 0: // for MCQ questions
             question = new QuestionStub(questionString);
             answer = new McqAnswerStub("A");
@@ -63,24 +72,17 @@ public class TestSessionTest {
         return testSession;
     }
 
-
-
-    private DeckStub deck = new DeckStub(new Title("HELLO"), new HashSet<>());
-   // private final DeckStub deck = new DeckStub(flashcards);
-   // private final DeckStub deck = new DeckStub(10);
-    //private TestSession testSession;
-
     @BeforeEach
     void setUp() {
         deck = new DeckStub(new Title("HELLO"), new HashSet<>());
-        deck.addFlashcard(generateRandomCard());
-        deck.addFlashcard(generateRandomCard());
-        deck.addFlashcard(generateRandomCard());
+        deck.addCard(generateRandomCard());
+        deck.addCard(generateRandomCard());
+        deck.addCard(generateRandomCard());
     }
 
     @AfterEach
     void tearDown() {
-       deck = null;
+        deck = null;
     }
 
     @Description("Test that getFirstQuestion() method works as expected by returning the correct question.")
@@ -93,7 +95,8 @@ public class TestSessionTest {
     @Description("Ensure that the constructor throws an EmptyDeckException if the deck provided has no flashcards.")
     @Test
     void testConstructorWithEmptyDeck() {
-        assertThrows(EmptyDeckException.class, () -> new TestSession(new Deck(new Title("HELLO"), new HashSet<>(), new ArrayList<Card>())));
+        assertThrows(EmptyDeckException.class, () -> new TestSession(new Deck(
+                new Title("HELLO"), new HashSet<>(), new ArrayList<Card>())));
     }
 
     @Description("Ensure that the proper test queue is created when a non empty deck is passed to the constructor.")
@@ -102,7 +105,7 @@ public class TestSessionTest {
         TestSession testSession = new TestSession(deck);
         LinkedList<Card> createdQueue = testSession.getTestQueue();
         LinkedList<Card> expectedQueue = new LinkedList<>(deck.getFlashcardList());
-        assertEquals(expectedQueue,createdQueue);
+        assertEquals(expectedQueue, createdQueue);
     }
 
     @Description("Test the submission of a correct answer by ensuring that the size of the test queue decreases by 1.")
@@ -115,7 +118,8 @@ public class TestSessionTest {
         assertEquals(expectedTestQueueSize, testSession.getTestQueueSize());
     }
 
-    @Description("Test the submission of a wrong answer by ensuring that the size of the test queue remains the same (as the wrong answer is added back into the test queue).")
+    @Description("Test the submission of a wrong answer by ensuring that "
+            + "the size of the test queue remains the same (as the wrong answer is added back into the test queue).")
     @Test
     void testSubmitWrongAnswer() {
         TestSession testSession = new TestSession(deck);
@@ -155,6 +159,7 @@ public class TestSessionTest {
         Question expectedQuestion = deck.getFlashcardList().get(1).getQuestion();
         assertEquals(expectedQuestion, nextQuestion);
     }
+
     @Description("Test that results of the test session are stored in the {@code HashMap}.")
     @Test
     void testAnsweringQuestions() {

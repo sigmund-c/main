@@ -2,8 +2,11 @@ package cardibuddy.model.testsession;
 
 import cardibuddy.model.flashcard.Question;
 
+/**
+ * Stub class for Question.
+ */
 public class QuestionStub extends Question {
-    String question;
+    private String question;
     public QuestionStub(String questionString) {
         super(questionString);
         question = questionString;

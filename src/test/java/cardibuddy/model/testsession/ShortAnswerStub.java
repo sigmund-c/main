@@ -1,11 +1,13 @@
 package cardibuddy.model.testsession;
 
-import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.ShortAnswer;
 
+/**
+ * Stub class for ShortAnswer.
+ */
 public class ShortAnswerStub extends ShortAnswer {
 
-    String answer;
+    private String answer;
 
     public ShortAnswerStub(String answerString) {
         super(answerString);

@@ -2,8 +2,11 @@ package cardibuddy.model.testsession;
 
 import cardibuddy.model.flashcard.McqAnswer;
 
+/**
+ * Stub class for McqAnswer.
+ */
 public class McqAnswerStub extends McqAnswer {
-    String answer;
+    private String answer;
 
     public McqAnswerStub(String answerString) {
         super(answerString);
