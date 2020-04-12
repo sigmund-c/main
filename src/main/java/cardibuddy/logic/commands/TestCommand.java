@@ -29,7 +29,7 @@ public class TestCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_TEST_SESSION_SUCCESS = "Started a test session."
-            + "\nAnswer format: 'ans YOUR ANSWER'";
+            + "\nAnswer format: 'ans YOUR_ANSWER'";
 
     private static final Logger logger = LogsCenter.getLogger(TestCommand.class);
     private final Index targetIndex;

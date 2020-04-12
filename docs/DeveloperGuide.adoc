@@ -131,7 +131,11 @@ The `LogicToUiManager` object is created upon startup in the MainApp class, and 
 . `StatisticsCommand`
 . `ListCommand`
 
-The following diagram illustrates how the `LogicToUiManager` can be used to modify the `MainWindow`.
+The following sequence diagram illustrates how the `LogicToUiManager` can be used to modify the `MainWindow`. This diagram is also an extension of the sequence diagram shown in <<test-session>> (_Figure 9_).
+
+
+
+
 
 [[Design-Model]]
 === Model component
