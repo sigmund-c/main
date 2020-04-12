@@ -16,7 +16,7 @@ AddressBook - Level 3 is a desktop address book application used for teaching So
 * *Major enhancement*: added *the ability to start a test session with a selected deck of flashcards.k*
 ** What it does: allows the user to test themselves on their subject content by:
 *** 1. Fetching the flashcards of the deck at the user's specified index and displaying them question by question.
-*** 2. Adding flashcards back into the test session if they got it wrong **(prioritisation)**
+*** 2. Adding flashcards back into the test session if they got it wrong **(retesting)**
 *** 3. Checking the user's answer with the flashcard's stored answer, and showing them the outcome (Right or Wrong).
 *** 4. Storing the test results (Number of tries, correct/wrong) to generate statistics for the user to view at the end of each test.
 *** 5. Giving users the ability to force correct answers if their answers differ from the flashcard's stored answer.
@@ -28,7 +28,7 @@ AddressBook - Level 3 is a desktop address book application used for teaching So
 
 * *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
 
-* *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=airshhlay&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=airshhlay&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Functional code]] [https://github.com[Test code]]
 
 * *Other contributions*:
 
@@ -70,10 +70,3 @@ include::../UserGuide.adoc[tag=dataencryption]
 include::../DeveloperGuide.adoc[tag=undoredo]
 
 include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
