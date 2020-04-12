@@ -3,18 +3,57 @@ package cardibuddy.model.flashcard;
 import static cardibuddy.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * McqAnswer class.
  */
 public class McqAnswer implements Answer {
     public static final String MESSAGE_CONSTRAINTS = "MCQ answers should be a single letter corresponding to answer.";
+    private static final String MCQ_REGEX = "[a][)].*|[b][)].*|[c][)].*";
 
     private String correctAnswer; // should be "a" or "b" or "c" or ....
+    private List<String> answerList;
 
-    public McqAnswer(String correctAnswer) {
-        requireNonNull(correctAnswer);
-        checkArgument(isValid(correctAnswer), MESSAGE_CONSTRAINTS);
-        this.correctAnswer = correctAnswer;
+    public McqAnswer(String answer) {
+        requireNonNull(answer);
+        checkArgument(isValid(answer), MESSAGE_CONSTRAINTS);
+        answerList = new ArrayList();
+
+        int indexA = answer.indexOf("a)");
+        int indexB = answer.indexOf("b)");
+        int indexC = answer.indexOf("c)");
+
+        int first = Math.min(indexA, Math.min(indexB, indexC));
+        int second;
+        int third;
+
+        if (indexA == first) {
+            correctAnswer = "a";
+            second = Math.min(indexB, indexC);
+            third = Math.max(indexB, indexC);
+        } else if (indexB == first) {
+            correctAnswer = "b";
+            second = Math.min(indexA, indexC);
+            third = Math.max(indexA, indexC);
+        } else {
+            correctAnswer = "c";
+            second = Math.min(indexA, indexB);
+            third = Math.max(indexA, indexB);
+        }
+
+        if (indexA == first) {
+            answerList.add(answer.substring(indexA, second));
+        } else if (indexA == second) {
+            answerList.add(answer.substring(indexA, third));
+        } else {
+            answerList.add(answer.substring(indexA));
+        }
+    }
+
+    public List getAnswerList() {
+        return this.answerList;
     }
 
     /**
@@ -23,14 +62,7 @@ public class McqAnswer implements Answer {
      * @return true if ...
      */
     public boolean isValid(String test) {
-        if (test.length() != 1) {
-            return false;
-        }
-        if (getNumberForChar(test.charAt(0)) == -1) {
-            return false;
-        }
-
-        return true;
+        return test.matches(MCQ_REGEX);
     }
 
     /**
