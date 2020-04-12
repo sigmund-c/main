@@ -36,7 +36,7 @@ import java.nio.file.Paths;
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
  * {@code DeleteCommand}.
  */
-public class DeleteDeckCommandTest {
+public class DeleteCardCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
     UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(Paths.get("preferences.json"));
     UserPrefs userPrefs = new UserPrefs();
@@ -65,9 +65,10 @@ public class DeleteDeckCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredDeckList().size() + 1);
-        DeleteDeckCommand deleteDeckCommand = new DeleteDeckCommand(outOfBoundIndex, logicToUiManager);
+        DeleteCardCommand deleteCardCommand = new DeleteCardCommand(outOfBoundIndex, logicToUiManager);
 
-        assertCommandFailure(deleteDeckCommand, model, commandHistory, Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCardCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
 
 //    @Test
@@ -89,7 +90,7 @@ public class DeleteDeckCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showDeckAtIndex(model, INDEX_FIRST_DECK);
+        showCardatIndex(model, INDEX_FIRST_CARD;
 
         Index outOfBoundIndex = INDEX_SECOND_DECK;
         // ensures that outOfBoundIndex is still in bounds of cardibuddy list

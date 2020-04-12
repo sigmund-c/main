@@ -33,6 +33,10 @@ public class DeleteDeckCommand extends DeleteCommand {
         this.logicToUiManager = logicToUiManager;
     }
 
+    public DeleteDeckCommand(Index targetIndex) {
+        this.targetIndex = targetIndex;
+    }
+
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);

@@ -46,7 +46,7 @@ public class MainApp extends Application {
     protected LogicToUiManager logicToUiManager;
     protected Storage storage;
     protected Model model;
-    protected Config config;
+    public Config config;
 
     @Override
     public void init() throws Exception {
@@ -79,7 +79,7 @@ public class MainApp extends Application {
      * The data from the sample cardibuddy book will be used instead if {@code storage}'s cardibuddy book is not found,
      * or an empty cardibuddy book will be used instead if errors occur when reading {@code storage}'s cardibuddy book.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    public Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyCardiBuddy> cardiBuddyOptional;
         ReadOnlyCardiBuddy initialData;
         try {
@@ -99,7 +99,7 @@ public class MainApp extends Application {
         return new ModelManager(initialData, userPrefs);
     }
 
-    private void initLogging(Config config) {
+    public void initLogging(Config config) {
         LogsCenter.init(config);
     }
 
@@ -108,7 +108,7 @@ public class MainApp extends Application {
      * The default file path {@code Config#DEFAULT_CONFIG_FILE} will be used instead
      * if {@code configFilePath} is null.
      */
-    protected Config initConfig(Path configFilePath) {
+    public Config initConfig(Path configFilePath) {
         Config initializedConfig;
         Path configFilePathUsed;
 
@@ -144,7 +144,7 @@ public class MainApp extends Application {
      * or a new {@code UserPrefs} with default configuration if errors occur when
      * reading from the file.
      */
-    protected UserPrefs initPrefs(UserPrefsStorage storage) {
+    public UserPrefs initPrefs(UserPrefsStorage storage) {
         Path prefsFilePath = storage.getUserPrefsFilePath();
         logger.info("Using prefs file : " + prefsFilePath);
 

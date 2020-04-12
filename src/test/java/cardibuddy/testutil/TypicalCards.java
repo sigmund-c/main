@@ -11,14 +11,16 @@ import java.util.List;
 
 import cardibuddy.model.CardiBuddy;
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.flashcard.Card;
 
 /**
  * A utility class containing a list of {@code Deck} objects to be used in tests.
  */
-public class TypicalDecks {
+public class TypicalCards {
+    public static final Card q1 = new CardBuilder().withQuestion("This is question 1").
+            withTFAnswer("true").buildFlashcard();
 
-    public static final Deck ASYNCHRONOUS = new DeckBuilder().withTitle("Asynchronous Programming")
-            .withTags("Difficult").build();
+
     public static final Deck POSTGRESQL = new DeckBuilder().withTitle("PostgreSQL")
             .withTags("Database", "Relational").build();
     public static final Deck CARL = new DeckBuilder().withTitle("Carl Kurz").build();
@@ -57,3 +59,4 @@ public class TypicalDecks {
         return new ArrayList<>(Arrays.asList(ASYNCHRONOUS, POSTGRESQL, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }
+

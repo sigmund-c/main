@@ -49,10 +49,50 @@ public class CardBuilder {
     }
 
     /**
+     * Sets the deck of the {@code Flashcard} that we are building.
+     */
+    public CardBuilder withDeck(String title, Set<Tag> tags) {
+        this.deck = new Deck(new Title(title), tags);
+        return this;
+    }
+
+    /**
      * Sets the {@code Question} of the {@code Flashcard} that we are building.
      */
     public CardBuilder withQuestion(String question) {
         this.question = new Question(question);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Answer} of the {@code Flashcard} that we are building.
+     */
+    public CardBuilder withTFAnswer(String answer) {
+        this.answer = new TfAnswer(answer);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Answer} of the {@code Flashcard} that we are building.
+     */
+    public CardBuilder withMcqAnswer(String answer) {
+        this.answer = new McqAnswer(answer);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Answer} of the {@code Flashcard} that we are building.
+     */
+    public CardBuilder withShortAnswer(String answer) {
+        this.answer = new ShortAnswer(answer);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Path} of the {@code Flashcard} that we are building.
+     */
+    public CardBuilder withPath(String path) {
+        this.path = path;
         return this;
     }
 
