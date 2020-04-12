@@ -199,4 +199,37 @@ public class TestSessionTest {
         testSession = submitCorrectAnswer(testSession, 0);
         assertThrows(AlreadyCorrectException.class, testSession::forceCorrect);
     }
+
+    @Description("Test that the correct True_False AnswerType is received.")
+    @Test
+    void testGetCurrentAnswerTypeTrueFalse() {
+        DeckStub deck = new DeckStub(new Title("Hi"), new HashSet<>());
+        Card card = new CardStub(deck, new Question("Hello"), new TfAnswerStub("T"), "");
+        deck.addCard(card);
+        TestSession testSession = new TestSession(deck);
+        testSession.getFirstQuestion();
+        assertEquals(AnswerType.TRUE_FALSE, testSession.getCurrentAnswerType());
+    }
+
+    @Description("Test that the correct MCQ AnswerType is received.")
+    @Test
+    void testGetCurrentAnswerTypeMcq() {
+        DeckStub deck = new DeckStub(new Title("Hi"), new HashSet<>());
+        Card card = new CardStub(deck, new Question("Hello"), new McqAnswerStub("B"), "");
+        deck.addCard(card);
+        TestSession testSession = new TestSession(deck);
+        testSession.getFirstQuestion();
+        assertEquals(AnswerType.MCQ, testSession.getCurrentAnswerType());
+    }
+
+    @Description("Test that the correct SHORT_ANSWER AnswerType is received.")
+    @Test
+    void testGetCurrentAnswerTypeShortAnswer() {
+        DeckStub deck = new DeckStub(new Title("Hi"), new HashSet<>());
+        Card card = new CardStub(deck, new Question("Hello"), new ShortAnswerStub("yes no"), "");
+        deck.addCard(card);
+        TestSession testSession = new TestSession(deck);
+        testSession.getFirstQuestion();
+        assertEquals(AnswerType.SHORT_ANSWER, testSession.getCurrentAnswerType());
+    }
 }
