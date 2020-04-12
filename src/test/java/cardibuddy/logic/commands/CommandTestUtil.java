@@ -17,6 +17,8 @@ import cardibuddy.model.CardiBuddy;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.SearchDeckKeywordsPredicate;
+import cardibuddy.model.flashcard.Card;
+import cardibuddy.model.flashcard.SearchCardKeywordsPredicate;
 import cardibuddy.testutil.EditDeckDescriptorBuilder;
 
 /**
@@ -93,6 +95,7 @@ public class CommandTestUtil {
         assertEquals(expectedCardiBuddy, actualModel.getCardiBuddy());
         assertEquals(expectedFilteredList, actualModel.getFilteredDeckList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the deck at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -107,4 +110,17 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredDeckList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the deck at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showCardAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredFlashcardList().size());
+
+        Card card = model.getFilteredFlashcardList().get(targetIndex.getZeroBased());
+        final String[] splitName = card.getQuestion().toString().split("\\s+");
+        model.updateFilteredFlashcardList(new SearchCardKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredFlashcardList().size());
+    }
 }

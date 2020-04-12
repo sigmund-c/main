@@ -1,5 +1,6 @@
 package cardibuddy.logic.commands;
 
+import static cardibuddy.logic.commands.CommandTestUtil.*;
 import static cardibuddy.testutil.TypicalIndexes.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -7,9 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static cardibuddy.logic.commands.CommandTestUtil.assertCommandFailure;
-import static cardibuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static cardibuddy.logic.commands.CommandTestUtil.showDeckAtIndex;
 import static cardibuddy.testutil.TypicalDecks.getTypicalCardiBuddy;
 
 import cardibuddy.AppParameters;
@@ -17,6 +15,8 @@ import cardibuddy.MainApp;
 import cardibuddy.commons.core.Config;
 import cardibuddy.logic.*;
 import cardibuddy.logic.commands.exceptions.CommandException;
+import cardibuddy.model.flashcard.Card;
+import cardibuddy.model.flashcard.SearchCardKeywordsPredicate;
 import cardibuddy.storage.*;
 import cardibuddy.ui.Ui;
 import cardibuddy.ui.UiManager;
@@ -31,6 +31,7 @@ import cardibuddy.model.deck.Deck;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -90,15 +91,23 @@ public class DeleteCardCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showCardatIndex(model, INDEX_FIRST_CARD;
+//        showCardAtIndex(model, INDEX_FIRST_CARD);
+
+        assertTrue(INDEX_FIRST_CARD.getZeroBased() < model.getFilteredFlashcardList().size());
+
+        Card card = model.getFilteredFlashcardList().get(INDEX_FIRST_CARD.getZeroBased());
+        final String[] splitName = card.getQuestion().toString().split("\\s+");
+        model.updateFilteredFlashcardList(new SearchCardKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredFlashcardList().size());
 
         Index outOfBoundIndex = INDEX_SECOND_CARD;
         // ensures that outOfBoundIndex is still in bounds of cardibuddy list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getCardiBuddy().getDeckList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getCardiBuddy().getFlashcardList().size());
 
-        DeleteDeckCommand deleteDeckCommand = new DeleteDeckCommand(outOfBoundIndex, logicToUiManager);
+        DeleteCardCommand deleteCardCommand = new DeleteCardCommand(outOfBoundIndex, logicToUiManager);
 
-        assertCommandFailure(deleteDeckCommand, model, commandHistory, Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCardCommand, model, commandHistory, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
 
 //    @Test
@@ -123,11 +132,11 @@ public class DeleteCardCommandTest {
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredDeckList().size() + 1);
-        DeleteDeckCommand deleteDeckCommand = new DeleteDeckCommand(outOfBoundIndex, logicToUiManager);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFlashcardList().size() + 1);
+        DeleteCardCommand deleteCardCommand = new DeleteCardCommand(outOfBoundIndex, logicToUiManager);
 
         // execution failed -> cardibuddy state not added into model
-        assertCommandFailure(deleteDeckCommand, model, commandHistory, Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCardCommand, model, commandHistory, Messages.MESSAGE_INVALID_DECK_DISPLAYED_INDEX);
 
         // single cardibuddy state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, Messages.MESSAGE_NOTHING_TO_UNDO);
@@ -166,32 +175,32 @@ public class DeleteCardCommandTest {
 
     @Test
     public void equals() {
-        DeleteDeckCommand deleteDeckFirstCommand = new DeleteDeckCommand(INDEX_FIRST_DECK, logicToUiManager);
-        DeleteDeckCommand deleteDeckSecondCommand = new DeleteDeckCommand(INDEX_SECOND_DECK, logicToUiManager);
+        DeleteCardCommand deleteCardFirstCommand = new DeleteCardCommand(INDEX_FIRST_CARD, logicToUiManager);
+        DeleteCardCommand deleteCardSecondCommand = new DeleteCardCommand(INDEX_SECOND_CARD, logicToUiManager);
 
         // same object -> returns true
-        assertTrue(deleteDeckFirstCommand.equals(deleteDeckFirstCommand));
+        assertTrue(deleteCardFirstCommand.equals(deleteCardFirstCommand));
 
         // same values -> returns true
-        DeleteDeckCommand deleteDeckFirstCommandCopy = new DeleteDeckCommand(INDEX_FIRST_DECK, logicToUiManager);
-        assertTrue(deleteDeckFirstCommand.equals(deleteDeckFirstCommandCopy));
+        DeleteCardCommand deleteCardFirstCommandCopy = new DeleteCardCommand(INDEX_FIRST_CARD, logicToUiManager);
+        assertTrue(deleteCardFirstCommand.equals(deleteCardFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteDeckFirstCommand.equals(1));
+        assertFalse(deleteCardFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteDeckFirstCommand.equals(null));
+        assertFalse(deleteCardFirstCommand.equals(null));
 
         // different deck -> returns false
-        assertFalse(deleteDeckFirstCommand.equals(deleteDeckSecondCommand));
+        assertFalse(deleteCardFirstCommand.equals(deleteCardSecondCommand));
     }
 
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoDeck(Model model) {
-        model.updateFilteredDeckList(p -> false);
+    private void showNoCard(Model model) {
+        model.updateFilteredFlashcardList(p -> false);
 
-        assertTrue(model.getFilteredDeckList().isEmpty());
+        assertTrue(model.getFilteredFlashcardList().isEmpty());
     }
 }
