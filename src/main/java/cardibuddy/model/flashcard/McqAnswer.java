@@ -50,6 +50,22 @@ public class McqAnswer implements Answer {
         } else {
             answerList.add(answer.substring(indexA));
         }
+
+        if (indexB == first) {
+            answerList.add(answer.substring(indexB, second));
+        } else if (indexB == second) {
+            answerList.add(answer.substring(indexB, third));
+        } else {
+            answerList.add(answer.substring(indexB));
+        }
+
+        if (indexC == first) {
+            answerList.add(answer.substring(indexC, second));
+        } else if (indexC == second) {
+            answerList.add(answer.substring(indexC, third));
+        } else {
+            answerList.add(answer.substring(indexC));
+        }
     }
 
     public List getAnswerList() {
