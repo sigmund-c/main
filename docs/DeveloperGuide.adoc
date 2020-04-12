@@ -490,25 +490,22 @@ _{More to be added}_
 (For all use cases below, the *System* is the `CardiBuddy` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Start a test session
+=== Test Sessions
+
+=== Use case: Starting a test session
 
 *MSS*
 
-1.  User requests to start a test session with a chosen deck.
-2.  CardiBuddy shows the user the questions in the flashcards, one by one
-3.  User inputs the correct answer
-4.  CardiBuddy compares the user's input with the flashcard's stored answer, and shows the user the outcome (CORRECT) as well as the flashcard's stored answer.
-5. The user chooses to go to the next flashcard
-6. CardiBuddy removes the flashcard from the <<test-queue,test queue>>.
-7. CardiBuddy shows user the question on the next flashcard in the queue.
-
+1. User requests to start a test session with a chosen deck.
+2. CardiBuddy displays the test session page to the user, with the first question displayed.
+3. CardiBuddy awaits the user's answer.
 +
-Use case ends when there are no more flashcards in the test queue.
+Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. The given index is invalid.
+* 1a. The given index is invalid
 +
 ** i. CardiBuddy shows an error message
 +
@@ -520,20 +517,116 @@ Use case ends when there are no more flashcards in the test queue.
 +
 ** i. Use case ends.
 
+=== Use case: Submitting an answer
+
+*MSS*
+
+1. User submits their answer to a question not tested before.
+2. CardiBuddy gets the result of the user's answer. The user answered the question correctly.
+3. CardiBuddy creates a new record for this flashcard to save this correct result.
+4. CardiBuddy displays the result to the user.
++
+Use case ends.
+
 *Inclusions*
 [none]
-* 3a. The user inputs the wrong answer
+* 1a. The current flashcard has been answered before.
 +
-** i. When the user chooses to show the next flash card, CardiBuddy adds the flashcard that was wrongly answered to the back of the test queue, to test again later.
-** ii. Use case resumes at 4.
+** i. CardiBuddy modifies its records by increasing the number of tries logged for this flashcard.
++
+** ii. Use case resumes at step 3.
 
 [none]
-* 5a. The user forces CardiBuddy to mark the flashcard as correct, despite the user's answer and flashcard's answers not matching up. _(for non-MCQ and non-True-False questions)_
+* 2a. The user got the question wrong.
 +
-** i. Use case resumes at 6.
+** i. CardiBuddy creates a new record for this flashcard to save this wrong result.
++
+** ii. CardiBuddy appends this flashcard to the back of the queue for retesting later.
++
+** iii. Use case resumes at step 4.
 
 
+=== Use case: Skipping a question
 
+*MSS*
+
+1. User requests to skip the current question.
+2. CardiBuddy modifies its records to show that this flashcard was skipped
+3. CardiBuddy removes the next flashcard in the queue.
+4. CardiBuddy displays the question on this flashcard to the user.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The user has already answered this question correctly
++
+** i. CardiBuddy shows an error message and prompts user to type 'next' instead
++
+** ii. Use case ends.
+
+[none]
+*Inclusions*
+
+* 1a. The user has already answered this question wrongly
++
+** i. CardiBuddy removes this flashcard, that was set to be retested, from the back of the queue
++
+** ii. Use case resumes at step 2.
+
+=== Use case: Forcing a wrong answer to be marked correct
+
+*MSS*
+
+1. User requests to force their answer to be marked as correct
+2. CardiBuddy acknowledges the user's request and changes the recorded result for this flashcard
++ Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The user has not answered the question yet
++
+** i. CardiBuddy shows an error message and tells the user to answer the question first, or skip it
++
+** ii. Use case ends.
+
+[none]
+* 1a. The user is trying to force correct their already correct answer
++
+** i. CardiBuddy shows an error message and prompts the user to type 'next'
++
+** ii. Use case ends.
+
+=== Use case: Going to the next question
+
+*MSS*
+
+1. User requests to go to the next question.
+2. CardiBuddy removes the next flashcard in the queue and displays its question to the user.
++
+Use case ends.
+
+[none]
+*Inclusions*
+
+* 2a. There are no more flashcards in the queue
++
+** i. CardiBuddy ends the test session, and returns the user to the home page
++
+** ii. Use case ends.
+
+[none]
+*Extensions*
+
+* 1a. The user has not answered the question yet
++
+** i. CardiBuddy shows an error message and prompts the user to answer the question or skip it.
++
+** ii. Use case ends.
+
+==== Adding Decks and Flashcards
 [discrete]
 === Use case: Add a new deck
 
