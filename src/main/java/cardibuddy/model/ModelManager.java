@@ -14,6 +14,7 @@ import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.TestSession;
 import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
@@ -267,6 +268,14 @@ public class ModelManager implements Model {
     @Override
     public boolean hasOngoingTestSession() {
         return testSession != null;
+    }
+
+    /**
+     * Retrieve's the current question's corresponding {@code AnswerType}.
+     */
+    @Override
+    public AnswerType getCurrentAnswerType() {
+        return testSession.getCurrentAnswerType();
     }
 
 

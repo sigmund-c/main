@@ -8,6 +8,7 @@ import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
 import javafx.collections.ObservableList;
@@ -168,6 +169,10 @@ public interface Model {
      */
     boolean hasOngoingTestSession();
 
+    /**
+     * Retrieve's the current question's answer type.
+     */
+    AnswerType getCurrentAnswerType();
     /**
      * Returns an unmodifiable view of the filtered deck list
      */

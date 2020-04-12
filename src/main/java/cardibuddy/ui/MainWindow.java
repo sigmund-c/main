@@ -16,6 +16,7 @@ import cardibuddy.model.deck.exceptions.NotInDeckException;
 import cardibuddy.model.deck.exceptions.WrongDeckException;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
+import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.TestResult;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -224,10 +225,10 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @param question the question belonging to the current flashcard tested
      */
-    public void fillInnerPartsWithQuestion(Question question) {
+    public void fillInnerPartsWithQuestion(Question question, AnswerType answerType) {
         clearDeckListPanel();
         flashcardListPanelPlaceholder.getChildren().clear();
-        QuestionTestCard questionCard = new QuestionTestCard(question);
+        QuestionTestCard questionCard = new QuestionTestCard(question, answerType);
         deckListPanelPlaceholder.getChildren().add(questionCard.getRoot()); // TODO: make FXML file for test card
     }
 
