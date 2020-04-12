@@ -24,7 +24,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -297,13 +296,9 @@ public class MainWindow extends UiPart<Stage> {
         boolean hasInput = false;
 
         if (file != null) {
-            Image image = new Image(file.toURI().toString());
-            //DragDropCard imageCard = new DragDropCard(image);
-            //imageCard.setCache(true);
-            //flashcardListPanelPlaceholder.getChildren().add(imageCard.getRoot());
-            resultDisplay.setFeedbackToUser("Type in the deck index, a question and an answer to be associated"
-                    + " with this image.\nParameters: c/DECK_INDEX q/QUESTION a/ANSWER\n\nNote: The deck indicated"
-                    + " in DECK_INDEX should be currently open for the command to work.");
+            resultDisplay.setFeedbackToUser("Type in the question and answer to be associated"
+                    + " with this image.\nParameters: q/QUESTION a/ANSWER\n\nNote: A deck to be added into"
+                    + " should be currently open for the command to work.");
             try {
                 EventHandler<KeyEvent> getQa = event -> {
                     if (event.getCode() == KeyCode.ENTER) {
@@ -323,7 +318,7 @@ public class MainWindow extends UiPart<Stage> {
                 commandBox.getCommandTextField().setOnKeyPressed(getQa);
             } catch (Exception e) {
                 resultDisplay.setFeedbackToUser("Invalid format to add a flashcard!\n"
-                        + "Parameters: c/DECK_INDEX q/QUESTION a/ANSWER");
+                        + "Parameters: q/QUESTION a/ANSWER");
             }
         } else {
             resultDisplay.setFeedbackToUser("Please attach a valid file. "

@@ -136,12 +136,12 @@ Adds a new card belonging to the deck indexed at 2.
 image::AddCard.png[width="800", align="center"]
 
 // tag::addingImage[]
-==== Adding an image card: `add p/file:FILE_PATH_TO_IMAGE c/DECK_INDEX q/QUESTION a/ANSWER`
+==== Adding an image card: `add p/file:FILE_PATH_TO_IMAGE q/QUESTION a/ANSWER`
 
 Creates a new image card to be added to the deck.
-Format: `add p/file:FILE_PATH_TO_IMAGE c/DECK_INDEX q/QUESTION a/ANSWER`
+Format: `add p/file:FILE_PATH_TO_IMAGE q/QUESTION a/ANSWER`
 
-* The deck specified in DECK_INDEX must be open for you to add a card.
+* The deck to be added in must be open for you to add a card.
 
 * The images can only be PNG or JPG files.
 
@@ -150,15 +150,15 @@ Format: `add p/file:FILE_PATH_TO_IMAGE c/DECK_INDEX q/QUESTION a/ANSWER`
 Examples:
 
 * `open 1` +
-`add p/file:/Users/qiujingying/Documents/GitHub/cs2103/main/docs/images/ArchitectureDiagram.png c/1 q/What type of diagram is this? a/Architecture Diagram` +
-Adds a new card with an image belonging to the deck indexed at 1.
+`add p/file:/Users/qiujingying/Documents/GitHub/cs2103/main/docs/images/ArchitectureDiagram.png q/What type of diagram is this? a/Architecture Diagram` +
+Adds a new card with an image belonging to the opened deck.
 
 image::AddImageCard.png[width="800", align="center"]
 
 [TIP]
 You can drag and drop the image you want to add into a terminal window to obtain its file path. File paths may differ across operating systems (Windows vs Mac).
 
-==== Adding an image card via the Image button: `c/DECK_INDEX q/QUESTION a/ANSWER`
+==== Adding an image card via the Image button: `q/QUESTION a/ANSWER`
 Shortcut for users who do not want to search for the file path.
 
 
@@ -516,10 +516,10 @@ Shows the statistics of the 3rd test session of the deck with the shown index of
 
 * *Add deck* : `add d/TITLE [t/TAG]...` +
 e.g. `add d/CS2030 t/Fundamentals t/Medium`
-* *Add normal card* : `add c/DECK_INDEX q/QUESTION a/ANSWER` +
-e.g. `add c/1 q/What does OOP stand for? a/Object Oriented Programming`
-* *Add image card* : `add p/file:FILE_PATH_TO_IMAGE c/DECK_INDEX q/QUESTION a/ANSWER` +
-e.g. `add p/file:/Users/foo/ObjectDiagram.png c/1 q/Which SOLID principle did the code not adhere to? a/Single Responsibility Principle`
+* *Add normal card* : `add q/QUESTION a/ANSWER` +
+e.g. `add q/What does OOP stand for? a/Object Oriented Programming`
+* *Add image card* : `add p/file:FILE_PATH_TO_IMAGE q/QUESTION a/ANSWER` +
+e.g. `add p/file:/Users/foo/ObjectDiagram.png q/Which SOLID principle did the code not adhere to? a/Single Responsibility Principle`
 * *Clear* : `clear`
 * *Delete deck/card* : `delete deck/card INDEX` +
 e.g. `delete deck 3`
