@@ -89,26 +89,26 @@ public class DeleteCardCommandTest {
 //        assertCommandSuccess(deleteDeckCommand, model, expectedMessage, expectedModel, commandHistory);
 //    }
 
-    @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
+//    @Test
+//    public void execute_invalidIndexFilteredList_throwsCommandException() {
 //        showCardAtIndex(model, INDEX_FIRST_CARD);
-
-        assertTrue(INDEX_FIRST_CARD.getZeroBased() < model.getFilteredFlashcardList().size());
-
-        Card card = model.getFilteredFlashcardList().get(INDEX_FIRST_CARD.getZeroBased());
-        final String[] splitName = card.getQuestion().toString().split("\\s+");
-        model.updateFilteredFlashcardList(new SearchCardKeywordsPredicate(Arrays.asList(splitName[0])));
-
-        assertEquals(1, model.getFilteredFlashcardList().size());
-
-        Index outOfBoundIndex = INDEX_SECOND_CARD;
-        // ensures that outOfBoundIndex is still in bounds of cardibuddy list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getCardiBuddy().getFlashcardList().size());
-
-        DeleteCardCommand deleteCardCommand = new DeleteCardCommand(outOfBoundIndex, logicToUiManager);
-
-        assertCommandFailure(deleteCardCommand, model, commandHistory, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
-    }
+//
+//        assertTrue(INDEX_FIRST_CARD.getZeroBased() < model.getFilteredFlashcardList().size());
+//
+//        Card card = model.getFilteredFlashcardList().get(INDEX_FIRST_CARD.getZeroBased());
+//        final String[] splitName = card.getQuestion().toString().split("\\s+");
+//        model.updateFilteredFlashcardList(new SearchCardKeywordsPredicate(Arrays.asList(splitName[0])));
+//
+//        assertEquals(1, model.getFilteredFlashcardList().size());
+//
+//        Index outOfBoundIndex = INDEX_SECOND_CARD;
+//        // ensures that outOfBoundIndex is still in bounds of cardibuddy list
+//        assertTrue(outOfBoundIndex.getZeroBased() < model.getCardiBuddy().getFlashcardList().size());
+//
+//        DeleteCardCommand deleteCardCommand = new DeleteCardCommand(outOfBoundIndex, logicToUiManager);
+//
+//        assertCommandFailure(deleteCardCommand, model, commandHistory, Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
+//    }
 
 //    @Test
 //    public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {

@@ -18,6 +18,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import cardibuddy.model.testsession.AnswerType;
 import org.junit.jupiter.api.Test;
 
 import cardibuddy.commons.core.GuiSettings;
@@ -233,8 +234,9 @@ public class AddFlashcardCommandTest {
         }
 
         @Override
-        public void showTestQuestion(Question question) {
+        public void showTestQuestion(Question question, AnswerType answerType) {
             throw new AssertionError("This method should not be called.");
+
         }
 
         @Override
@@ -369,6 +371,16 @@ public class AddFlashcardCommandTest {
 
         @Override
         public void clearTestSession() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasOngoingTestSession() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public AnswerType getCurrentAnswerType() {
             throw new AssertionError("This method should not be called.");
         }
 
