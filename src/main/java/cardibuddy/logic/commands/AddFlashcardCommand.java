@@ -41,7 +41,7 @@ public class AddFlashcardCommand extends AddCardCommand {
             + PREFIX_ANSWER + "False "
             + PREFIX_TAG + "Programming";
 
-    public static final String MESSAGE_SUCCESS = "New flashcard added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New flashcard added:\n%1$s";
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the deck";
 
     private final Flashcard toAdd;
@@ -63,7 +63,7 @@ public class AddFlashcardCommand extends AddCardCommand {
         }
 
         model.addFlashcard(toAdd);
-        logicToUiManager.getDisplayedDeck().addFlashcard(toAdd);
+        logicToUiManager.getDisplayedDeck().addCard(toAdd);
         LOGGER.info("Flashcard has been added");
 
         logicToUiManager.getDisplayedDeck().updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
