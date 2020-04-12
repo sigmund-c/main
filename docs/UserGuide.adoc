@@ -12,7 +12,6 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:bl: pass:[+]
 :repoURL: https://github.com/AY1920S2-CS2103T-T10-2/main
 
 By: `Team T10-2`      Since: `Jan 2020`      Licence: `MIT`
@@ -42,9 +41,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 .  Refer to <<Features>> for details of each command.
 
-+
-+
-
 [[Features]]
 == Features
 
@@ -71,6 +67,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * :bulb: is used to signal information that is helpful for the users to know.
 ====
 
+{empty} +
+
 === Basic Features
 
 ==== Viewing help : `help`
@@ -89,15 +87,19 @@ There is no need to save manually.
 Exits the program.
 Format: `exit`
 
+{empty} +
+
 === Opening
 
 ==== Opening a deck: `open`
 
 Opens an existing deck in the library.
-Format: `open INDEX`
+Format: `open DECK_INDEX`
 
 Shows a list of all the cards in the deck. +
 Format: `open 1`
+
+{empty} +
 
 === Adding
 
@@ -162,15 +164,7 @@ Shortcut for users who do not want to search for the file path.
 
 // end::addingImage[]
 
-=== Opening
-
-==== Opening a deck: `open`
-
-Opens an existing deck in the library.
-Format: `open DECK_INDEX`
-
-Shows a list of all the cards in the deck. +
-Format: `open 1`
+{empty} +
 
 === Editing
 
@@ -216,6 +210,8 @@ Opens the first deck and tEdits the question of the 1st card to be `What does MV
 `edit card 2 a/cs2040 t/` +
 Edits the answer of the 2nd card to be `cs2040` and clears all existing tags.
 
+{empty} +
+
 === Listing
 
 ==== Listing all decks: `list`
@@ -223,12 +219,16 @@ Edits the answer of the 2nd card to be `cs2040` and clears all existing tags.
 Shows a list of all the decks in the library and hides the displayed cards (if any). +
 Format: `list`
 
+{empty} +
+
 === Clearing
 
 ==== Clearing all decks: `clear`
 
 Clears all deck entries from the library. +
 Format: `clear`
+
+{empty} +
 
 === Deleting
 
@@ -272,6 +272,8 @@ Opens the first deck and deletes the 2nd flash card in the deck.
 Deletes the 1st card in the results of the search card command.
 
 // tag::search[]
+
+{empty} +
 
 === Searching
 
@@ -318,6 +320,8 @@ Displays cards with the word `principle` in the questions.
 Displays decks with both of the words `diagram` and `UML` in the questions.
 // end::search[]
 
+{empty} +
+
 // tag::filter[]
 === Filtering
 
@@ -339,6 +343,8 @@ Displays decks with the tag `hard`.
 Displays decks with both the tags `hard` and `coremodule`.
 <<<<<<< HEAD
 // end::filter[]
+
+{empty} +
 
 === Testing
 Of course, you did not create all those decks and flashcards just so you can admire them! It's time to get your revision on. Start a `test session` for a deck to begin testing yourself!
@@ -420,12 +426,16 @@ What this command does:
 
 * Allows you to quit the current test session even before it is completed.
 
+{empty} +
+
 === Displaying History
 
 ==== Displaying the command history: 'history'
 
 Displays all the commands that has been inputted by the user during the current session.
 Format: 'history'
+
+{empty} +
 
 === Undo/Redo
 
@@ -439,6 +449,8 @@ Format: `undo`
 Redoes latest command.
 Format: `redo`
 
+{empty} +
+
 === Detecting duplicates
 
 ==== Detecting duplicate deck
@@ -450,6 +462,8 @@ Upon adding a new deck, the application automatically checks if there are any ex
 Upon adding a new card to a specific deck, the application automatically checks if there are any existing cards with the same question in that deck. Only cards with unique questions can be successfully added.
 
 If there is a card with the same question but it is in a different deck, the card can still be successfully added.
+
+{empty} +
 
 === Statistics
 
@@ -483,7 +497,7 @@ Example:
 * `statistics 2 3` +
 Shows the statistics of the 3rd test session of the deck with the shown index of 2.
 
-
+{empty} +
 
 === Syncing across multiple platforms: sync [coming in v2.0]
 
