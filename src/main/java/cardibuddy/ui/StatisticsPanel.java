@@ -66,9 +66,9 @@ public class StatisticsPanel extends UiPart<Region> {
                                     + percentFormat.format(statistics.getAvgCorrectPercentage()));
         }
 
-        for (Map.Entry<Deck, List<Double>> deckHistory: statistics.getCorrectPercentageHistory().entrySet()) {
+        for (Map.Entry<String, List<Double>> deckHistory: statistics.getCorrectPercentageHistory().entrySet()) {
             XYChart.Series newSeries = new XYChart.Series();
-            newSeries.setName(deckHistory.getKey().getTitle().toString());
+            newSeries.setName(deckHistory.getKey());
 
             int recordIndex = 1;
             for (Double record : deckHistory.getValue()) {

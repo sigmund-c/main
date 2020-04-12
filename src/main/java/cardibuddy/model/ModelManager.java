@@ -35,7 +35,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Card> filteredFlashcards;
     private final FilteredList<Deck> filteredDecks;
-    private final Statistics statistics;
     private TestSession testSession;
 
     /**
@@ -51,8 +50,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredFlashcards = new FilteredList<>(this.cardiBuddy.getFlashcardList());
         filteredDecks = new FilteredList<>(this.cardiBuddy.getDeckList());
-
-        this.statistics = new Statistics();
     }
 
     public ModelManager() {
@@ -115,18 +112,12 @@ public class ModelManager implements Model {
     @Override
     public void deleteDeck(Deck target) {
         cardiBuddy.removeDeck(target);
-
-        target.getStatistics().trackDeckDeleted();
-        statistics.trackDeckDeleted();
     }
 
     @Override
     public void addDeck(Deck deck) {
         cardiBuddy.addDeck(deck);
         updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
-
-        deck.getStatistics().trackDeckAdded();
-        statistics.trackDeckAdded();
     }
 
     @Override
@@ -149,9 +140,6 @@ public class ModelManager implements Model {
     public void addFlashcard(Card flashcard) {
         cardiBuddy.addFlashcard(flashcard);
         updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
-
-        flashcard.getDeck().getStatistics().trackCardAdded();
-        statistics.trackCardAdded();
     }
 
     @Override
@@ -164,9 +152,6 @@ public class ModelManager implements Model {
     @Override
     public void deleteFlashcard(Card target) {
         cardiBuddy.removeFlashcard(target);
-
-        target.getDeck().getStatistics().trackCardDeleted();
-        statistics.trackCardDeleted();
     }
 
     /**
@@ -253,7 +238,7 @@ public class ModelManager implements Model {
         }
 
         testSession.getDeck().getStatistics().recordHistory(testSession);
-        statistics.recordHistory(testSession);
+        cardiBuddy.getStatistics().recordHistory(testSession);
         testSession = null;
     }
 
@@ -291,7 +276,7 @@ public class ModelManager implements Model {
 
     @Override
     public Statistics getStatistics() {
-        return statistics;
+        return cardiBuddy.getStatistics();
     }
 
     @Override

@@ -29,7 +29,7 @@ public class Statistics {
     private double avgCorrectPercentage;
     private double avgTriesToGetCorrect;
     // Keeps a list of correctPercentage for every recorded Deck
-    private HashMap<Deck, List<Double>> correctPercentageHistory;
+    private HashMap<String, List<Double>> correctPercentageHistory;
     /**
      * Initialize everything to 0
      */
@@ -89,10 +89,10 @@ public class Statistics {
         avgTriesToGetCorrect = (avgTriesToGetCorrect * timesPlayed + triesToGetCorrect) / (timesPlayed + 1);
         avgCorrectPercentage = (avgCorrectPercentage * timesPlayed + correctPercentage) / (timesPlayed + 1);
 
-        if (correctPercentageHistory.get(testSession.getDeck()) == null) {
-            correctPercentageHistory.put(testSession.getDeck(), new ArrayList<>());
+        if (correctPercentageHistory.get(testSession.getDeck().getTitle().toString()) == null) {
+            correctPercentageHistory.put(testSession.getDeck().getTitle().toString(), new ArrayList<>());
         }
-        correctPercentageHistory.get(testSession.getDeck()).add(correctPercentage);
+        correctPercentageHistory.get(testSession.getDeck().getTitle().toString()).add(correctPercentage);
 
         timesPlayed++;
         testHistory.add(testSession);
@@ -133,8 +133,44 @@ public class Statistics {
         return avgTriesToGetCorrect;
     }
 
-    public HashMap<Deck, List<Double>> getCorrectPercentageHistory() {
+    public void setCardsAdded(int cardsAdded) {
+        this.cardsAdded = cardsAdded;
+    }
+
+    public void setCardsDeleted(int cardsDeleted) {
+        this.cardsDeleted = cardsDeleted;
+    }
+
+    public void setDecksAdded(int decksAdded) {
+        this.decksAdded = decksAdded;
+    }
+
+    public void setDecksDeleted(int decksDeleted) {
+        this.decksDeleted = decksDeleted;
+    }
+
+    public void setCardsPlayed(int cardsPlayed) {
+        this.cardsPlayed = cardsPlayed;
+    }
+
+    public void setTimesPlayed(int timesPlayed) {
+        this.timesPlayed = timesPlayed;
+    }
+
+    public void setAvgCorrectPercentage(double avgCorrectPercentage) {
+        this.avgCorrectPercentage = avgCorrectPercentage;
+    }
+
+    public void setAvgTriesToGetCorrect(double avgTriesToGetCorrect) {
+        this.avgTriesToGetCorrect = avgTriesToGetCorrect;
+    }
+
+    public HashMap<String, List<Double>> getCorrectPercentageHistory() {
         return correctPercentageHistory;
+    }
+
+    public void setCorrectPercentageHistory(HashMap<String, List<Double>> correctPercentageHistory) {
+        this.correctPercentageHistory = correctPercentageHistory;
     }
 
     public Statistics getSessionStatistic(int index) {

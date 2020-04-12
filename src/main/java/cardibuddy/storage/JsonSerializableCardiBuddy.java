@@ -24,13 +24,16 @@ class JsonSerializableCardiBuddy {
 
     private final List<JsonAdaptedDeck> decks = new ArrayList<>();
     private final List<JsonAdaptedFlashcard> flashcards = new ArrayList<>();
+    private final JsonAdaptedStatistic statistics;
 
     /**
      * Constructs a {@code JsonSerializableCardiBuddy} with the given flashcards.
      */
     @JsonCreator
-    public JsonSerializableCardiBuddy(@JsonProperty("decks") List<JsonAdaptedDeck> decks) {
+    public JsonSerializableCardiBuddy(@JsonProperty("decks") List<JsonAdaptedDeck> decks,
+                                      @JsonProperty("statistics") JsonAdaptedStatistic statistics) {
         this.decks.addAll(decks);
+        this.statistics = statistics;
     }
 
     /**
@@ -40,6 +43,7 @@ class JsonSerializableCardiBuddy {
     public JsonSerializableCardiBuddy(ReadOnlyCardiBuddy source) {
         decks.addAll(source.getDeckList().stream()
             .map(JsonAdaptedDeck::new).collect(Collectors.toList()));
+        statistics = new JsonAdaptedStatistic(source.getStatistics());
     }
 
 
@@ -57,6 +61,7 @@ class JsonSerializableCardiBuddy {
             }
             cardibuddy.addDeck(deck);
         }
+        cardibuddy.setStatistics(statistics.toModeltype());
         return cardibuddy;
     }
 }
