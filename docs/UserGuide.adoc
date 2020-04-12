@@ -333,21 +333,28 @@ Displays decks with the tag `hard`.
 
 * `filter hard & coremodule` +
 Displays decks with both the tags `hard` and `coremodule`.
+<<<<<<< HEAD
 // end::filter[]
 
-=== Prioritising
-
-Cards that the user has answered wrongly to (user input does not match with answer) is automatically moved to the back of the testing session. The user will be able to reattempt the same flashcard again later in the testing session.
-
-There is no need to prioritise manually.
-
-
 === Testing
+Of course, you did not create all those decks and flashcards just so you can admire them! It's time to get your revision on. Start a `test session` for a deck to begin testing yourself!
+
+A `test session` works just like how flashcard testing works in real life - You look at the question, think of the answer, and 'flip' the card around to see if your answer matches the one on the flashcard.
+
+The difference here is that you do not need to manually keep track of how many flashcards you got right and wrong -- CardiBuddy does all that for you!
+
+==== Retesting
+A `test session` in CardiBuddy is special - it includes a *retesting* feature to make sure you know your content well.
+
+When you answer a flashcard's question wrongly, you will encounter it again later on in the same `test session`. There is no need to do this manually - CardiBuddy does this for you too.
+
+Hence if you keep getting a question wrong, a `test session` can go on and on forever - unless you finally get it right, or you quit the test session!
 
 ==== Starting a test session for a deck: `test INDEX`
-Replace `INDEX` with the index number of the deck you wish to test, which can be found in the list view of all your decks.
+To start your `test session`, replace `INDEX` with the index number of the deck you wish to test. This number will be to the _left_ of the title of your deck, when you are viewing all your decks as a list.
 
-What it does:
+What this command does:
+
 * A test session will immediately replace the normal deck and flashcard list view.
 * The first question of the test session will be displayed.
 
@@ -356,10 +363,11 @@ Example Usage:
 * `test 1` +
 Creates a test session for the 1st deck.
 
-==== Answering a question: `ans YOUR ANSWER`
+==== To answer the question: `ans YOUR_ANSWER`
 Replace `YOUR ANSWER` with your answer to the displayed question.
 
-What it does:
+What this command does:
+
 * Submits your answer, and checks your answer against the flashcard's stored answer
 * Displays the result of your answer (CORRECT or WRONG)
 * Displays your answer and the flashcard's answer
@@ -369,31 +377,42 @@ Example Usage:
 * `ans CardiBuddy` +
 To answer the question: "What is the name of this application?"
 
-==== Don't want to answer? Use: `skip`
-
-What it does:
+==== Don't want to answer? Skip a question with: `skip`
+What this command does:
 
 * If you already know the answer to the question, and don't want to waste your time answering it, just type `skip` to go to the next question.
-* CardiB will not note down this flashcard in your test history, and will merely remove it from your current test session.
+* Your skipped flashcard will not impact your overall test score, and CardiBuddy will merely remove it from your current test session.
 
-==== Force correct an answer: `force`
+Note:
 
-What it does:
+* You can use this command if either:
+** You have not answered the question.
+** You have answered the question, but you got it wrong.
+* CardiBuddy will not let you use `skip` if you have already gotten that question correct.
 
-* CardiB takes your answer word for word when checking against the flashcard's model answer.
-* If your answer differs by the model answer, it will be marked as wrong.
-* After viewing the model answer, if you feel that your answer still captures the gist of what the question wants, you can `force` your answer to be marked as correct.
 
-==== Go to the next question: `next`
+==== To force your wrong answer to be marked as correct: `force`
 
-What it does:
+What this command does:
+
+* CardiBuddy's uses automated marking to mark your answers. It takes your answer _word for word_ when checking against the model answer stored in your flashcard.
+* If your answer differs from the model answer, it will be marked as wrong.
+* After submitting your answer, you will get to see the model answer and your answer, for you to compare them.
+* If you feel that your answer still meets the question's requirements, you can `force` your answer to be marked as correct.
+
+==== To go to the next question: `next`
+
+What this command does:
 
 * After submitting your answer, type `next` to go to the next question (if there are any left to test).
+
+Note:
+
 * You can only type `next` once you have submitted your answer.
 
 ==== Quit the test session halfway: `quit`
 
-What it does:
+What this command does:
 
 * Allows you to quit the current test session even before it is completed.
 
