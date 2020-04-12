@@ -131,9 +131,12 @@ The `LogicToUiManager` object is created upon startup in the MainApp class, and 
 . `StatisticsCommand`
 . `ListCommand`
 
-The following sequence diagram illustrates how the `LogicToUiManager` can be used to modify the `MainWindow`. This diagram is also an extension of the sequence diagram shown in <<test-session>> (_Figure 9_).
+The following sequence diagram illustrates how the `LogicToUiManager` can be used to modify the `MainWindow`, when CardiBuddy needs to display the flashcard question to the user during a `Test Session`. More details on `Test Session` in the section: <<test-session>>.
 
+This diagram is also an extension of the <<test-sequence-diagram, sequence diagram>> found in that section.
 
+.Sequence diagram showing how LogicToUiManager accesses the Ui to display a question during a test session.
+image::LogicToUiSequenceDiagram.png[]
 
 
 
@@ -320,6 +323,9 @@ Users can start a TestSession with a chosen `Deck`:
 * The `TestSession` object creates a HashMap named `testResults` that contains `<Flashcard, TestResult>` for easy access to the testing history.
 
 The following is a UML Sequence Diagram of how a `TestSession` object is created when the `test INDEX` command is called:
+
+[[test-sequence-diagram]]
+
 
 .A sequence diagram illustrating the logic flow when a TestSession is created. The first question in the provided deck will immediately be displayed.
 image::TestSequenceDiagram.png[]
