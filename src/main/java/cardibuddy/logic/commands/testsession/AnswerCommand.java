@@ -3,6 +3,7 @@ package cardibuddy.logic.commands.testsession;
 import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
 import static java.util.Objects.requireNonNull;
 
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.Command;
 import cardibuddy.logic.commands.CommandResult;
@@ -42,7 +43,7 @@ public class AnswerCommand extends Command {
      * @throws CommandException when there is no ongoing test session
      */
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
         try {
             TestResult testResult = model.submitAnswer(userAnswer);

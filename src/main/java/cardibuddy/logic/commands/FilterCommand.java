@@ -3,6 +3,7 @@ package cardibuddy.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import cardibuddy.commons.core.Messages;
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.FilterDeckKeywordsPredicate;
 
@@ -32,7 +33,7 @@ public class FilterCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model, CommandHistory commandHistory) {
         requireNonNull(model);
         model.updateFilteredDeckList(predicate);
         return new CommandResult(

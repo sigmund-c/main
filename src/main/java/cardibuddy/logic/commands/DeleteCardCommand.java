@@ -6,6 +6,7 @@ import java.util.List;
 
 import cardibuddy.commons.core.Messages;
 import cardibuddy.commons.core.index.Index;
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
@@ -33,7 +34,7 @@ public class DeleteCardCommand extends DeleteCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
         List<Card> lastShownList = logicToUiManager.getDisplayedDeck().getFilteredFlashcardList();
 
@@ -44,6 +45,7 @@ public class DeleteCardCommand extends DeleteCommand {
         Card cardToDelete = lastShownList.get(targetIndex.getZeroBased());
         logicToUiManager.getDisplayedDeck().deleteCard(cardToDelete);
         logicToUiManager.updateFlashcardPanel();
+        model.commitCardiBuddy();
 
         return new CommandResult(String.format(MESSAGE_DELETE_CARD_SUCCESS, cardToDelete));
     }
