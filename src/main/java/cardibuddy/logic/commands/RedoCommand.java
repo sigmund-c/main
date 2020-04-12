@@ -1,35 +1,36 @@
 package cardibuddy.logic.commands;
 
+import static cardibuddy.commons.core.Messages.MESSAGE_TEST_ONGOING;
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
 
 import cardibuddy.commons.core.Messages;
-import cardibuddy.logic.CardiBuddyStack;
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 
 /**
- * Redo the last command that was undone.
+ * Reverts the {@code model}'s CardiBuddy to its previously undone state.
  */
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redoes the last command by the user.\n"
-            + "Example: " + COMMAND_WORD;
-
     public static final String MESSAGE_SUCCESS = "Redone last command: %1$s";
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        CardiBuddyStack cardiBuddyStack = CardiBuddyStack.getCardiBuddyStack();
-        requireAllNonNull(model, cardiBuddyStack);
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+        requireAllNonNull(model);
+        if (model.hasOngoingTestSession()) {
+            throw new CommandException(MESSAGE_TEST_ONGOING);
+        }
 
-        if (!cardiBuddyStack.canRedo()) {
+        if (!model.canRedo()) {
             throw new CommandException(Messages.MESSAGE_NOTHING_TO_REDO);
         }
 
-        cardiBuddyStack.popRedo().redo(model);
+        model.redo();
+        model.updateFilteredDeckList(Model.PREDICATE_SHOW_ALL_DECKS);
+        model.updateFilteredFlashcardList(Model.PREDICATE_SHOW_ALL_FLASHCARDS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
-
 }

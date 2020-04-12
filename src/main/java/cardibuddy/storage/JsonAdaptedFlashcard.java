@@ -59,7 +59,8 @@ class JsonAdaptedFlashcard extends JsonAdaptedView {
         ShortAnswer modelAnswer = new ShortAnswer(answer);
 
         if (deck == null || question == null || answer == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Deck.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Deck.class.getSimpleName()));
         }
 
         if (path.equals("")) {

@@ -4,6 +4,7 @@ import static cardibuddy.commons.core.Messages.MESSAGE_NO_TESTSESSION;
 import static cardibuddy.commons.core.Messages.MESSAGE_TEST_COMPLETE;
 import static java.util.Objects.requireNonNull;
 
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.Command;
 import cardibuddy.logic.commands.CommandResult;
@@ -40,7 +41,7 @@ public class SkipCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
         try {
             Question question = model.skipQuestion();

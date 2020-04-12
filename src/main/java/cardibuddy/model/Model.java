@@ -120,6 +120,7 @@ public interface Model {
      */
     void setFlashcard(Card target, Card editedFlashcard);
 
+    // ======================== TEST SESSION METHODS =========================================================
     /**
      * Gets the number of flashcards left in the {@code testQueue}.
      * This method is used for the countdown.
@@ -162,6 +163,12 @@ public interface Model {
     void clearTestSession();
 
     /**
+     * Checks if there is an ongoing {@code TestSession}.
+     * @return boolean
+     */
+    boolean hasOngoingTestSession();
+
+    /**
      * Returns an unmodifiable view of the filtered deck list
      */
     ObservableList<Deck> getFilteredDeckList();
@@ -184,6 +191,31 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredFlashcardList(Predicate<Card> predicate);
+
+    /**
+     * Returns true if the model has previous address book states to restore.
+     */
+    boolean canUndo();
+
+    /**
+     * Returns true if the model has undone address book states to restore.
+     */
+    boolean canRedo();
+
+    /**
+     * Restores the model's address book to its previous state.
+     */
+    void undo();
+
+    /**
+     * Restores the model's address book to its previously undone state.
+     */
+    void redo();
+
+    /**
+     * Saves the current address book state for undo/redo.
+     */
+    void commitCardiBuddy();
 
     /**
      * Returns the Statistics of the Model.

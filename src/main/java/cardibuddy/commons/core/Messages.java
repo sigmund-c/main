@@ -31,4 +31,6 @@ public class Messages {
     public static final String MESSAGE_NOTHING_TO_UNDO = "There are no commands to undo. ";
     public static final String MESSAGE_TEST_COMPLETE = "Test has ended!\n"
             + "Type 'statistics' to show the statistics for this question, or type 'end' to return to the home page.";
+    public static final String MESSAGE_TEST_ONGOING = "You can't use this command right now, a test is still ongoing!"
+            + "\nType 'quit' if you wish to quit the test.";
 }
