@@ -5,6 +5,7 @@ import static cardibuddy.commons.core.Messages.MESSAGE_TEST_ONGOING;
 import static java.util.Objects.requireNonNull;
 
 import cardibuddy.commons.core.Messages;
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
@@ -36,7 +37,7 @@ public class SearchCardCommand extends SearchCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws RuntimeException, CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws RuntimeException, CommandException {
         requireNonNull(model);
         if (model.hasOngoingTestSession()) {
             throw new CommandException(MESSAGE_TEST_ONGOING);

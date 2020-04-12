@@ -4,34 +4,31 @@ import static cardibuddy.commons.core.Messages.MESSAGE_TEST_ONGOING;
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
 
 import cardibuddy.commons.core.Messages;
-import cardibuddy.logic.CardiBuddyStack;
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 
 /**
- * Undo the last {@code UndoableCommand}.
+ * Reverts the {@code model}'s CardiBuddy to its previous state.
  */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undoes the last command by the user.\n"
-            + "Example: " + COMMAND_WORD;
-
     public static final String MESSAGE_SUCCESS = "Undone last command: %1$s";
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        CardiBuddyStack cardiBuddyStack = CardiBuddyStack.getCardiBuddyStack();
-        requireAllNonNull(model, cardiBuddyStack);
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+        requireAllNonNull(model);
         if (model.hasOngoingTestSession()) {
             throw new CommandException(MESSAGE_TEST_ONGOING);
         }
 
-        if (!cardiBuddyStack.canUndo()) {
+        if (!model.canUndo()) {
             throw new CommandException(Messages.MESSAGE_NOTHING_TO_UNDO);
         }
 
-        cardiBuddyStack.popUndo().undo(model);
+        model.undo();
+        model.updateFilteredDeckList(Model.PREDICATE_SHOW_ALL_DECKS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

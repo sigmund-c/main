@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 
 import cardibuddy.commons.core.Messages;
 import cardibuddy.logic.commands.exceptions.CommandException;
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.SearchDeckKeywordsPredicate;
 
@@ -30,7 +31,7 @@ public class SearchDeckCommand extends SearchCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException{
         requireNonNull(model);
         if (model.hasOngoingTestSession()) {
             throw new CommandException(MESSAGE_TEST_ONGOING);

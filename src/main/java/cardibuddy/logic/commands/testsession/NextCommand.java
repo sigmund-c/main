@@ -8,6 +8,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.Command;
 import cardibuddy.logic.commands.CommandResult;
@@ -51,7 +52,7 @@ public class NextCommand extends Command {
      * or if the user has not answered the question yet.
      */
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
         try {
             Question question = model.getNextQuestion();

@@ -7,6 +7,7 @@ import java.util.List;
 
 import cardibuddy.commons.core.Messages;
 import cardibuddy.commons.core.index.Index;
+import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
@@ -36,7 +37,7 @@ public class OpenCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
         if (model.hasOngoingTestSession()) {
             throw new CommandException(MESSAGE_TEST_ONGOING);
