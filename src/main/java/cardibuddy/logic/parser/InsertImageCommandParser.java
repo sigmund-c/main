@@ -11,7 +11,7 @@ import static java.util.Objects.requireNonNull;
 import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.AddCardCommand;
-import cardibuddy.logic.commands.InsertImageCommand;
+import cardibuddy.logic.commands.AddImagecardCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.ReadOnlyCardiBuddy;
 import cardibuddy.model.deck.Deck;
@@ -34,7 +34,7 @@ public class InsertImageCommandParser implements Parser<AddCardCommand> {
     }
 
     @Override
-    public InsertImageCommand parse(String args) throws ParseException {
+    public AddImagecardCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
@@ -61,6 +61,6 @@ public class InsertImageCommandParser implements Parser<AddCardCommand> {
         Answer modelAnswer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
         Imagecard imagecard = new Imagecard(deck, modelQuestion, modelAnswer, path);
 
-        return new InsertImageCommand(imagecard, logicToUiManager);
+        return new AddImagecardCommand(imagecard, logicToUiManager);
     }
 }

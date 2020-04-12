@@ -46,7 +46,7 @@ public class AddDeckCommandParser implements Parser<AddDeckCommand> {
     }
 
     ///**
-    // * Handles wrong input commands by user by throwing respective exceptions.
+    // * Handles wrong input exceptions by user by throwing respective exceptions.
     // * @param argMultimap Multimap of arguments.
     // * @throws ParseException Respective exceptions.
     // */

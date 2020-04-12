@@ -8,7 +8,7 @@ import cardibuddy.ui.UiManager;
 /**
  * Allows the Commands to control the change in view of the MainWindow panel.
  */
-public class LogicToUiManager {
+public class LogicToUiManager implements LogicToUi{
 
     protected UiManager ui;
     private String openedDeck;
@@ -79,16 +79,18 @@ public class LogicToUiManager {
         ui.getMainWindow().showTestStatus(testQueueSize);
     }
 
+    /**
+     * To show the result of the test.
+     */
     public void showTestResult(TestResult testResult) {
         ui.getMainWindow().fillInnerPartsWithResult(testResult);
     }
 
     /**
-     * To show the end of test.
+     * To show the end of the test.
      */
     public void showTestEnd() {
         ui.getMainWindow().fillInnerPartsWithDecks();
 
     }
-
 }

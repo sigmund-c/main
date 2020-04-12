@@ -20,7 +20,7 @@ import cardibuddy.model.deck.SearchDeckKeywordsPredicate;
 import cardibuddy.testutil.EditDeckDescriptorBuilder;
 
 /**
- * Contains helper methods for testing commands.
+ * Contains helper methods for testing exceptions.
  */
 public class CommandTestUtil {
 

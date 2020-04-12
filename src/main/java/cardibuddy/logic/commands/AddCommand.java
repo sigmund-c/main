@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import cardibuddy.commons.core.LogsCenter;
 
 /**
- * Represents an add command to be extended into add deck and add card commands.
+ * Represents an add command to be extended into add deck and add card exceptions.
  */
 public abstract class AddCommand extends Command {
 

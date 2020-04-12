@@ -60,6 +60,10 @@ public class Deck {
         logger.info("Created Deck");
     }
 
+    public Deck() {
+        title = new Title("");
+    }
+
     public Title getTitle() {
         return this.title;
     }

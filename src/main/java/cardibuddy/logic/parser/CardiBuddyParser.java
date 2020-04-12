@@ -23,7 +23,7 @@ import cardibuddy.logic.commands.ExitCommand;
 import cardibuddy.logic.commands.FilterCommand;
 import cardibuddy.logic.commands.HelpCommand;
 import cardibuddy.logic.commands.HistoryCommand;
-import cardibuddy.logic.commands.InsertImageCommand;
+import cardibuddy.logic.commands.AddImagecardCommand;
 import cardibuddy.logic.commands.ListCommand;
 import cardibuddy.logic.commands.OpenCommand;
 import cardibuddy.logic.commands.RedoCommand;
@@ -94,7 +94,7 @@ public class CardiBuddyParser {
                 case AddFlashcardCommand.COMMAND_WORD:
                     return new AddFlashcardCommandParser(cardiBuddy, logicToUiManager).parse(arguments);
 
-                case InsertImageCommand.COMMAND_WORD:
+                case AddImagecardCommand.COMMAND_WORD:
                     return new InsertImageCommandParser(cardiBuddy, logicToUiManager).parse(arguments);
 
                 default:
@@ -105,7 +105,7 @@ public class CardiBuddyParser {
                 throw new ParseException(MESSAGE_INCOMPLETE_COMMAND + MESSAGE_DECK_OR_FLASHCARD_PREFIX);
             }
 
-        case InsertImageCommand.COMMAND_WORD:
+        case AddImagecardCommand.COMMAND_WORD:
             return new InsertImageCommandParser(cardiBuddy, logicToUiManager).parse(arguments);
 
         case EditCommand.COMMAND_WORD:

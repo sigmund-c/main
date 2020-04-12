@@ -14,9 +14,9 @@ import cardibuddy.model.Model;
 import cardibuddy.model.flashcard.Imagecard;
 
 /**
- * Adds a Flashcard to the specified deck.
+ * Adds a Flashcard(with image) to the specified deck.
  */
-public class InsertImageCommand extends AddCardCommand {
+public class AddImagecardCommand extends AddCardCommand {
 
     public static final String COMMAND_WORD = "p";
 
@@ -50,7 +50,7 @@ public class InsertImageCommand extends AddCardCommand {
 
     private LogicToUiManager logicToUiManager;
 
-    public InsertImageCommand(Imagecard imagecard, LogicToUiManager logicToUiManager) {
+    public AddImagecardCommand(Imagecard imagecard, LogicToUiManager logicToUiManager) {
         this.logicToUiManager = logicToUiManager;
         requireNonNull(imagecard);
         toAdd = imagecard;
@@ -77,7 +77,7 @@ public class InsertImageCommand extends AddCardCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof InsertImageCommand // instanceof handles nulls
-                && toAdd.equals(((InsertImageCommand) other).toAdd));
+                || (other instanceof AddImagecardCommand // instanceof handles nulls
+                && toAdd.equals(((AddImagecardCommand) other).toAdd));
     }
 }
