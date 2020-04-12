@@ -25,12 +25,18 @@ Package Flashcards {
 Class Flashcard
 Class Question
 Class Answer
-UniqueFlashcardList
+Class UniqueFlashcardList
 }
 
 Package Tag {
 Class Tag
 }
+
+Package TestSession {
+Class TestSession
+Class TestResult
+Enum Result <<Enum>>
+Enum AnswerType <<Enum>>
 }
 
 Class HiddenOutside #FFFFFF
@@ -38,11 +44,15 @@ HiddenOutside ..> Model
 
 CardiBuddy .up.|> ReadOnlyCardiBuddy
 
-ModelManager .up.|> Model
+
 Model .right.> ObservableList
-ModelManager o--> "1" CardiBuddy
-ModelManager o-left-> "1" UserPrefs
+ModelManager .up.|> Model
+ModelManager o-right-> "1" CardiBuddy
+ModelManager o--> "1" UserPrefs
+ModelManager -->"1" Deck : filtered list
+ModelManager o---> "1" TestSession : > manages
 UserPrefs .up.|> ReadOnlyUserPrefs
+
 
 CardiBuddy *--> "1" UniqueDeckList
 UniqueDeckList o--> "*" Deck
@@ -50,9 +60,14 @@ Deck *--> Title
 Deck *--> "*" Flashcard
 Deck *--> "*" Tag
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+TestSession --> "1" Deck
+TestSession o--> "1..*" TestResult
 
-ModelManager -->"1" Deck : filtered list
+
+TestResult o-> "1" Answer
+Flashcard o-right-> Question
+Flashcard o-left-> Answer
+
+
+
 @enduml
