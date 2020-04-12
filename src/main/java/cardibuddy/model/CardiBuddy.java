@@ -72,6 +72,9 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
         this.statistics = statistics;
     }
 
+    /**
+     * Sets all current data into another set of data. This includes the Decks, Cards, and Statistics.
+     */
     public void resetData(ReadOnlyCardiBuddy newData) {
         requireNonNull(newData);
 

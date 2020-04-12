@@ -1,15 +1,17 @@
 package cardibuddy.storage;
 
-import cardibuddy.model.deck.Statistics;
-
 import java.util.HashMap;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import cardibuddy.model.deck.Statistics;
+
+/**
+ * Jackson-friendly version of {@link Statistics}
+ */
 public class JsonAdaptedStatistic {
 
     private final String cardsAdded;
@@ -22,11 +24,17 @@ public class JsonAdaptedStatistic {
     private final String avgTriesToGetCorrect;
     private final HashMap<String, List<Double>> correctPercentageHistory = new HashMap<>();
 
+    /**
+     * Constructs a {@code JsonAdaptedStatistic} with the given json Statistic details.
+     */
     @JsonCreator
     public JsonAdaptedStatistic(
-                        @JsonProperty("cardsAdded") String cardsAdded, @JsonProperty("cardsDeleted") String cardsDeleted,
-                        @JsonProperty("decksAdded") String decksAdded, @JsonProperty("decksDeleted") String decksDeleted,
-                        @JsonProperty("timesPlayed") String timesPlayed, @JsonProperty("cardsPlayed") String cardsPlayed,
+                        @JsonProperty("cardsAdded") String cardsAdded,
+                        @JsonProperty("cardsDeleted") String cardsDeleted,
+                        @JsonProperty("decksAdded") String decksAdded,
+                        @JsonProperty("decksDeleted") String decksDeleted,
+                        @JsonProperty("timesPlayed") String timesPlayed,
+                        @JsonProperty("cardsPlayed") String cardsPlayed,
                         @JsonProperty("avgCorrectPercentage") String avgCorrectPercentage,
                         @JsonProperty("avgTriesToGetCorrect") String avgTriesToGetCorrect,
                         @JsonProperty("correctPercentageHistory")
@@ -44,6 +52,9 @@ public class JsonAdaptedStatistic {
         }
     }
 
+    /**
+     * Converts a given {@code Statistics} into this class for Jackson use.
+     */
     public JsonAdaptedStatistic(Statistics source) {
         cardsAdded = String.valueOf(source.getCardsAdded());
         cardsDeleted = String.valueOf(source.getCardsDeleted());
@@ -56,6 +67,9 @@ public class JsonAdaptedStatistic {
         correctPercentageHistory.putAll(source.getCorrectPercentageHistory());
     }
 
+    /**
+     * Converts this Jackson-friendly adapted statistics object into the model's {@code Statistics} object.
+     */
     public Statistics toModeltype() {
         Statistics toReturn = new Statistics();
         toReturn.setCardsAdded(Integer.parseInt(cardsAdded));
