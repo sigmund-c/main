@@ -15,7 +15,7 @@ public class McqAnswer implements Answer {
 
     private String original;
     private String correctAnswer; // should be "a" or "b" or "c" or ....
-    private List<String> answerList;
+    private List<String> A;
 
     public McqAnswer(String answer) {
         requireNonNull(answer);
@@ -30,7 +30,7 @@ public class McqAnswer implements Answer {
      * @param answer
      */
     private void separateIndexes(String answer) {
-        answerList = new ArrayList();
+        A = new ArrayList();
 
         int indexA = answer.indexOf("a)");
         int indexB = answer.indexOf("b)");
@@ -71,32 +71,32 @@ public class McqAnswer implements Answer {
     private void assignToList(int indexA, int indexB, int indexC,
                               int first, int second, int third, String answer) {
         if (indexA == first) {
-            answerList.add(answer.substring(indexA, second));
+            A.add(answer.substring(indexA, second));
         } else if (indexA == second) {
-            answerList.add(answer.substring(indexA, third));
+            A.add(answer.substring(indexA, third));
         } else {
-            answerList.add(answer.substring(indexA));
+            A.add(answer.substring(indexA));
         }
 
         if (indexB == first) {
-            answerList.add(answer.substring(indexB, second));
+            A.add(answer.substring(indexB, second));
         } else if (indexB == second) {
-            answerList.add(answer.substring(indexB, third));
+            A.add(answer.substring(indexB, third));
         } else {
-            answerList.add(answer.substring(indexB));
+            A.add(answer.substring(indexB));
         }
 
         if (indexC == first) {
-            answerList.add(answer.substring(indexC, second));
+            A.add(answer.substring(indexC, second));
         } else if (indexC == second) {
-            answerList.add(answer.substring(indexC, third));
+            A.add(answer.substring(indexC, third));
         } else {
-            answerList.add(answer.substring(indexC));
+            A.add(answer.substring(indexC));
         }
     }
 
     public List getAnswerList() {
-        return this.answerList;
+        return this.A;
     }
 
     /**
