@@ -311,6 +311,7 @@ public class ModelManager implements Model {
         // state check
         cardibuddy.model.ModelManager other = (cardibuddy.model.ModelManager) obj;
         return versionedCardiBuddy.equals(other.versionedCardiBuddy)
+                && cardiBuddy.equals(other.cardiBuddy)
                 && userPrefs.equals(other.userPrefs)
                 && filteredDecks.equals(other.filteredDecks)
                 && filteredFlashcards.equals(other.filteredFlashcards);

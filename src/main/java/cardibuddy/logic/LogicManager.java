@@ -58,7 +58,7 @@ public class LogicManager implements Logic {
             commandHistory.add(commandText);
         }
 
-        if (cardiBuddyModified) {
+        if (!cardiBuddyModified) {
             logger.info("CardiBuddy has been modified, saving to file.");
             try {
                 storage.saveCardiBuddy(model.getCardiBuddy());

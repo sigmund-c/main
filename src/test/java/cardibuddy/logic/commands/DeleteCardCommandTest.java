@@ -92,7 +92,7 @@ public class DeleteCardCommandTest {
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showCardatIndex(model, INDEX_FIRST_CARD;
 
-        Index outOfBoundIndex = INDEX_SECOND_DECK;
+        Index outOfBoundIndex = INDEX_SECOND_CARD;
         // ensures that outOfBoundIndex is still in bounds of cardibuddy list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getCardiBuddy().getDeckList().size());
 
