@@ -98,6 +98,10 @@ public class MainWindow extends UiPart<Stage> {
         this.commandBox = commandBox;
     }
 
+    public void setText(String message) {
+        resultDisplay.setFeedbackToUser(message);
+    }
+
     public Stage getPrimaryStage() {
         return primaryStage;
     }
