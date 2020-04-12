@@ -1,0 +1,42 @@
+@startuml
+(*)  --> "new test session for the given deck"
+If "deck is empty"
+-left-> throw EmptyDeckException
+else
+--> "initialise *testQueue and *testResults"
+--> remove the first Flashcard in testQueue
+--> return the Flashcard's Question
+
+-up-> "wait for command" as wait
+
+--> [user submits their answer] submitAnswer() called
+--> create tr
+If "this question was tested before"
+--> increase the number of tries recorded in tr by 1
+--> add current Flashcard, tr in testResults
+else
+--> add current Flashcard, tr in testResults
+endif
+
+If "the user answer is wrong"
+--> append the current Flashcard to the back in testQueue
+--> return tr
+else
+--> [the user answer is correct] return tr
+-up-> wait
+
+wait --> [user skips the question] skip() called
+--> modify tr to mark the current Flashcard as skipped in testResults
+-up-> wait
+
+wait --> [user asks to force correct] force() called
+--> modify tr to mark the current Flashcard as correct in testResults
+-up-> wait
+
+wait --> [user calls next] next() called
+If "testQueue is empty"
+-->(*)
+else
+--> [testQueue not empty] remove the first Flashcard in testQueue
+--> return the Flashcard's Question
+@enduml

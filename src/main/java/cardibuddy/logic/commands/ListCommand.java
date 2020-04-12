@@ -1,5 +1,6 @@
 package cardibuddy.logic.commands;
 
+import static cardibuddy.commons.core.Messages.MESSAGE_TEST_ONGOING;
 import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_DECKS;
 import static java.util.Objects.requireNonNull;
 
@@ -26,6 +27,9 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
+        if (model.hasOngoingTestSession()) {
+            throw new CommandException(MESSAGE_TEST_ONGOING);
+        }
         model.updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

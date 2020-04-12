@@ -2,11 +2,15 @@ package cardibuddy.model.testsession;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.logging.Logger;
 
+import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Card;
+import cardibuddy.model.flashcard.McqAnswer;
 import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.flashcard.TfAnswer;
 import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
 import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
@@ -33,7 +37,6 @@ public class TestSession {
 
     private Deck deck;
     private Card current;
-    private boolean isOngoing;
     private boolean hasAnswered;
     // public Statistic statistics; // for recording statistics
 
@@ -45,6 +48,7 @@ public class TestSession {
 
     // test queue
     private LinkedList<Card> testQueue;
+    private final Logger logger = LogsCenter.getLogger(TestSession.class.getName());
 
     /**
      * Constructor for test session. Initiates the test session.
@@ -59,6 +63,7 @@ public class TestSession {
         if (deck.getFlashcardList().isEmpty()) {
             throw new EmptyDeckException();
         }
+        logger.info("Started a test session.");
     }
 
     /**
@@ -69,6 +74,7 @@ public class TestSession {
     public Question getFirstQuestion() {
         current = testQueue.removeFirst();
         hasAnswered = false;
+        logger.info("Displayed first question.");
         return current.getQuestion();
     }
 
@@ -85,7 +91,7 @@ public class TestSession {
         }
         current = testQueue.removeFirst();
         hasAnswered = false; // reset the boolean as the user has not answered this new question
-
+        logger.info("Displayed the next question.");
         return current.getQuestion();
     }
 
@@ -109,11 +115,14 @@ public class TestSession {
         }
 
         if (hasAnswered) {
-            testQueue.removeLast(); // remove the prioritised flashcard
+            testQueue.removeLast(); // remove the flashcard that was set to be retested
+            logger.info("This flashcard removed from the back of the test queue (not being retested again).");
         }
 
         current = testQueue.removeFirst();
         hasAnswered = false;
+
+        logger.info("Skipped the question.");
 
         return current.getQuestion();
     }
@@ -135,6 +144,10 @@ public class TestSession {
         return testQueue.size();
     }
 
+    public LinkedList<Card> getTestQueue() {
+        return testQueue;
+    }
+
     /**
      * Performs the force correct option.
      * Allows the user to manually mark their answer as correct, if it was initially marked wrong by {@code TestResult}.
@@ -142,10 +155,12 @@ public class TestSession {
      */
     public void forceCorrect() throws UnansweredQuestionException, AlreadyCorrectException {
         if (!hasAnswered) { // cannot force correct a question you have not even answered
+            logger.throwing(TestSession.class.getName(),
+                    TestSession.class.getMethods()[6].getName(), new UnansweredQuestionException());
             throw new UnansweredQuestionException();
         }
         testQueue.removeLast(); // reverse the prioritisation
-        testResults.get(current).forceCorrect();
+        testResults.get(current).forceCorrect(); // call TestResult's forceCorrect method
     }
 
     /**
@@ -165,13 +180,17 @@ public class TestSession {
             TestResult prevResult = testResults.get(current);
             int numTries = prevResult.getNumTries();
             testResult.setNumTries(numTries + 1); // increase numTries by 1
+            logger.info("Submitting answer for a previously tested flashcard.");
         }
         testResults.put(current, testResult); // store the result
 
         // add the current flashcard back into the test queue
         if (testResult.getResult() == Result.WRONG) {
             testQueue.addLast(current);
+            logger.info("Answer is wrong, appending to back of test queue.");
         }
+
+        logger.info("Submitted answer. Returning the result.");
 
         hasAnswered = true; // note down that the user has answered the question
         return testResult;
@@ -179,6 +198,7 @@ public class TestSession {
 
     /**
      * Returns the session's results.
+     *
      * @return a Hashmap of TestResults corresponding to each question
      */
     public HashMap<Card, TestResult> getTestResults() {
@@ -187,6 +207,20 @@ public class TestSession {
 
     public Deck getDeck() {
         return deck;
+    }
+
+    /**
+     * Returns the {@code AnswerType} of the current flashcard, based on its Answer class.
+     */
+    public AnswerType getCurrentAnswerType() {
+        Answer answer = current.getAnswer();
+        if (answer instanceof TfAnswer) {
+            return AnswerType.TRUE_FALSE;
+        } else if (answer instanceof McqAnswer) {
+            return AnswerType.MCQ;
+        } else {
+            return AnswerType.SHORT_ANSWER;
+        }
     }
 
     @Override

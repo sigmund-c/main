@@ -111,6 +111,35 @@ image::DeleteSequenceDiagram.png[]
 
 NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+== LogicToUiManager
+This class serves as a bridge between relevant `Command` classes and the `Ui`, for use cases that do not update the `ObservableList`. It calls specific methods in the `MainWindow` class to modify the display to the user according to the `Command` executed.
+
+The `LogicToUiManager` object is created upon startup in the MainApp class, and there can exist only one instance of it throughout the use of CardiBuddy.
+
+*Commands that make use of `LogicToUiManager`:*
+
+. `OpenCommand`
+. `AddCommand`
+. `DeleteDeckCommand`
+. `DeleteCardCommand`
+. `TestCommand`
+. `AnswerCommand`
+. `NextCommand`
+. `QuitCommand`
+. `SkipCommand`
+. `SearchCardCommand`
+. `StatisticsCommand`
+. `ListCommand`
+
+The following sequence diagram illustrates how the `LogicToUiManager` can be used to modify the `MainWindow`, when CardiBuddy needs to display the flashcard question to the user during a `Test Session`. More details on `Test Session` in the section: <<test-session>>.
+
+This diagram is also an extension of the <<test-sequence-diagram, sequence diagram>> found in that section.
+
+.Sequence diagram showing how LogicToUiManager accesses the Ui to display a question during a test session.
+image::LogicToUiSequenceDiagram.png[]
+
+
+
 [[Design-Model]]
 === Model component
 
@@ -257,25 +286,92 @@ The `execute()` method is then called to filter the decks accordingly to the pre
 Future implementations would return flashcards and decks that are filtered accordingly to the predicate. (by v1.3)
 
 === Test feature
-Users can start a <<test-session>> with a chosen `Deck`:
+==== Design
+A flashcard application is not complete without the ability to test oneself.
 
-* The `index` of the deck will be provided by the user and parsed by Cardi Buddy. A `TestSession` object containing the indicated `Deck` is created.
-* The `TestSession` object creates a HashMap that contains `<Flashcard, TestResult>` for easy access to the testing history.
+===== Model Component
+The following classes can be found inside _cardibuddy/model/testsession_.
 
-The following is a UML Sequence Diagram of how CardiBuddy works when the `test INDEX` command is called:
+The test feature revolves around 2 classes: `TestSession` and `TestResult`.
 
-image::TestSequenceDiagram.png[]
+`TestSession` stores the tested deck, retrieves the questions to be tested, acts according to the user's commands and manages the <<test-queue, test queue>>.
 
-The Test feature also comes with many minor enhancements. An overview of the commands provided by this feature:
+`TestResult` stores the `Result` (explained below) of each _individual_ test on a flashcard. That is, whether the flashcard was answered wrongly, correctly, or was skipped. `Result` is an enums class to store these 3 outcomes.
+
+Another enums class used is `AnswerType` which contains 3 answering options to display to the user - True/False, MCQ or Short Answer.
+
+To ensure good design practice, `Test Session` is not exposed to the other classes, but is instead called using the `ModelManager`.
+
+Click <<Design-Model, here>> to view the class diagram for the `Model` component, to see how the above classes interact with other classes within `Model`.
+
+
+
+===== Logic Component
+The test feature makes use of a suite of `Command` classes exclusive to a `TestSession`. These `Command` classes are part of the *Logic* component of CardiBuddy, and can be found within the _cardibuddy/logic/testsession_ package.
+
+These commands allow the user to perform the following during a test session:
 
 * The user will enter `test INDEX` to start the test session for the deck at the `INDEX`.
 * The user will enter `ans` followed by their answer to the question.
 * The user can use the `next` command to view the next question.
 * The user can choose to `skip` questions
 * The user can choose to `quit` the session halfway
-* The user can choose to `force` correct their answer if they feel that their answer is acceptable and similar to the `flashcard` 's answer.
+* The user can choose to `force` correct their answer if they wish to manually mark their answer as correct.
 
-The following is an overview of the
+The above commands can only be triggered when certain conditions are met. The following table provides a summary of all the `Command` classes related to the test feature, as well as the conditions for their execution and exceptions thrown when these conditions are not met.
+
+.Summary of Test Feature Commands
+[width="59%",cols="5%,<5%,<25%,<60%,<5%",options="header",]
+|=======================================================================
+|Command Class|Corresponding user input|Description|Conditions|Exceptions Thrown
+|TestCommand|`test INDEX`|Creates a `TestSession` for the specified deck at that index.|-|EmptyDeckException
+|AnswerCommand|`ans USER_ANSWER`|Submits the user's answer to the `TestSession`.|The user has not already submitted an answer to the displayed question.|AlreadyAnsweredException
+|NextCommand|`next`|Displays the next question.|The user must already have answered the question.|UnansweredQuestionException
+|SkipCommand|`skip`|Skips the current question. Does not require the user to submit an answer.|The user must not have submitted a correct answer.|AlreadyCorrectException
+|QuitCommand|`quit`|Quits the test session.|-|-
+|ForceCommand|`force`|Forces CardiBuddy to mark the user's submitted answer as correct.|The user must have submitted an incorrect answer.|UnansweredQuestionException, AlreadyCorrectException
+|=======================================================================
+
+==== Using the test feature
+===== Starting a Test Session
+Users can start a TestSession with a chosen `Deck`:
+
+* The `index` of the deck will be provided by the user and parsed by Cardi Buddy. A `TestSession` object containing the indicated `Deck` is created.
+* The `TestSession` object creates a HashMap named `testResults` that contains `<Flashcard, TestResult>` for easy access to the testing history.
+
+The following is a UML Sequence Diagram of how a `TestSession` object is created when the `test INDEX` command is called:
+
+[[test-sequence-diagram]]
+
+
+.A sequence diagram illustrating the logic flow when a TestSession is created. The first question in the provided deck will immediately be displayed.
+image::TestSequenceDiagram.png[]
+
+===== Other commands included in the Test Feature
+Aside from `TestCommand` which is called to create the `TestSession`, there are specific commands that can be used only when a TestSession is running. These commands have certain *conditions* that must be met before they can be executed. Otherwise, they will throw a `CommandException`.
+
+For example, other application-wide commands, such as `add deck` and `delete card` will not be allowed to be executed during the TestSession.
+
+
+
+The following activity diagrams describe the logic flow.
+
+Note the following terminology used in the activity diagrams:
+
+* `tr` stands for a `TestResult` object
+* `testResults` stands for a `HashMap<Flashcard, TestResult>` object stored in the `TestSession` object
+* `testQueue` is a `LinkedList<Flashcard>` that stores the queue of flashcards to be tested.
+
+.Overall activity diagram for the different use cases, extension cases omitted.
+image::TestSessionActivityDiagram.png[]
+
+
+
+
+For more descriptive use case scenarios from a user perspectives, please take a look at <<Use Cases>>.
+
+
+
 
 
 === Logging
@@ -411,25 +507,22 @@ _{More to be added}_
 (For all use cases below, the *System* is the `CardiBuddy` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Start a test session
+=== Test Sessions
+
+=== Use case: Starting a test session
 
 *MSS*
 
-1.  User requests to start a test session with a chosen deck.
-2.  CardiBuddy shows the user the questions in the flashcards, one by one
-3.  User inputs the correct answer
-4.  CardiBuddy compares the user's input with the flashcard's stored answer, and shows the user the outcome (CORRECT) as well as the flashcard's stored answer.
-5. The user chooses to go to the next flashcard
-6. CardiBuddy removes the flashcard from the <<test-queue,test queue>>.
-7. CardiBuddy shows user the question on the next flashcard in the queue.
-
+1. User requests to start a test session with a chosen deck.
+2. CardiBuddy displays the test session page to the user, with the first question displayed.
+3. CardiBuddy awaits the user's answer.
 +
-Use case ends when there are no more flashcards in the test queue.
+Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. The given index is invalid.
+* 1a. The given index is invalid
 +
 ** i. CardiBuddy shows an error message
 +
@@ -441,20 +534,116 @@ Use case ends when there are no more flashcards in the test queue.
 +
 ** i. Use case ends.
 
+=== Use case: Submitting an answer
+
+*MSS*
+
+1. User submits their answer to a question not tested before.
+2. CardiBuddy gets the result of the user's answer. The user answered the question correctly.
+3. CardiBuddy creates a new record for this flashcard to save this correct result.
+4. CardiBuddy displays the result to the user.
++
+Use case ends.
+
 *Inclusions*
 [none]
-* 3a. The user inputs the wrong answer
+* 1a. The current flashcard has been answered before.
 +
-** i. When the user chooses to show the next flash card, CardiBuddy adds the flashcard that was wrongly answered to the back of the test queue, to test again later.
-** ii. Use case resumes at 4.
+** i. CardiBuddy modifies its records by increasing the number of tries logged for this flashcard.
++
+** ii. Use case resumes at step 3.
 
 [none]
-* 5a. The user forces CardiBuddy to mark the flashcard as correct, despite the user's answer and flashcard's answers not matching up. _(for non-MCQ and non-True-False questions)_
+* 2a. The user got the question wrong.
 +
-** i. Use case resumes at 6.
+** i. CardiBuddy creates a new record for this flashcard to save this wrong result.
++
+** ii. CardiBuddy appends this flashcard to the back of the queue for retesting later.
++
+** iii. Use case resumes at step 4.
 
 
+=== Use case: Skipping a question
 
+*MSS*
+
+1. User requests to skip the current question.
+2. CardiBuddy modifies its records to show that this flashcard was skipped
+3. CardiBuddy removes the next flashcard in the queue.
+4. CardiBuddy displays the question on this flashcard to the user.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The user has already answered this question correctly
++
+** i. CardiBuddy shows an error message and prompts user to type 'next' instead
++
+** ii. Use case ends.
+
+[none]
+*Inclusions*
+
+* 1a. The user has already answered this question wrongly
++
+** i. CardiBuddy removes this flashcard, that was set to be retested, from the back of the queue
++
+** ii. Use case resumes at step 2.
+
+=== Use case: Forcing a wrong answer to be marked correct
+
+*MSS*
+
+1. User requests to force their answer to be marked as correct
+2. CardiBuddy acknowledges the user's request and changes the recorded result for this flashcard
++ Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The user has not answered the question yet
++
+** i. CardiBuddy shows an error message and tells the user to answer the question first, or skip it
++
+** ii. Use case ends.
+
+[none]
+* 1a. The user is trying to force correct their already correct answer
++
+** i. CardiBuddy shows an error message and prompts the user to type 'next'
++
+** ii. Use case ends.
+
+=== Use case: Going to the next question
+
+*MSS*
+
+1. User requests to go to the next question.
+2. CardiBuddy removes the next flashcard in the queue and displays its question to the user.
++
+Use case ends.
+
+[none]
+*Inclusions*
+
+* 2a. There are no more flashcards in the queue
++
+** i. CardiBuddy ends the test session, and returns the user to the home page
++
+** ii. Use case ends.
+
+[none]
+*Extensions*
+
+* 1a. The user has not answered the question yet
++
+** i. CardiBuddy shows an error message and prompts the user to answer the question or skip it.
++
+** ii. Use case ends.
+
+==== Adding Decks and Flashcards
 [discrete]
 === Use case: Add a new deck
 

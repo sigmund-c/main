@@ -2,6 +2,7 @@ package cardibuddy.logic;
 
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.TestResult;
 
 public interface LogicToUi {
@@ -42,7 +43,7 @@ public interface LogicToUi {
      *
      * @param question {@code Question} is the questions being shown.
      */
-    public void showTestQuestion(Question question);
+    public void showTestQuestion(Question question, AnswerType answerType);
 
     /**
      * To show the status of the of test.

@@ -1,7 +1,11 @@
 package cardibuddy.model.testsession;
 
+import java.util.logging.Logger;
+
+import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
+
 
 /**
  * Test Result class. Stores the user's answer,
@@ -14,6 +18,7 @@ public class TestResult {
     public static final String WRONG_STRING = "Wrong! The answer is %s.\nType /n to go to the next question.";
     public static final String END_STRING = "Test complete!";
 
+    private final Logger logger = LogsCenter.getLogger(TestResult.class.getName());
     private Answer flashcardAnswer;
     //TODO: may remove this as the flashcard is already stored as
     //the key in the hashmap, so there is no need to store it again
@@ -34,6 +39,7 @@ public class TestResult {
         this.userAnswer = userAnswer;
         this.numTries = 1; // when first created, numTries = 1 by default
         result = this.computeResult();
+        logger.info("Result computed.");
     }
 
     /**
@@ -91,6 +97,7 @@ public class TestResult {
 
     public void setNumTries(int numTries) {
         this.numTries = numTries;
+        logger.info("Increasing the recorded number of tries.");
     }
 
     public Result getResult() {

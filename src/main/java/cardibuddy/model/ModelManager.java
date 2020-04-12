@@ -14,6 +14,7 @@ import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.TestSession;
 import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
@@ -171,6 +172,7 @@ public class ModelManager implements Model {
         versionedCardiBuddy.setFlashcard(target, editedFlashcard);
     }
 
+    // ======================== TEST SESSION METHODS =========================================================
     /**
      * Gets the number of flashcards left in the {@code testQueue}.
      * This method is used for the countdown.
@@ -258,6 +260,25 @@ public class ModelManager implements Model {
         statistics.recordHistory(testSession);
         testSession = null;
     }
+
+    /**
+     * Checks if there is an ongoing {@code TestSession}.
+     * @return boolean
+     */
+    @Override
+    public boolean hasOngoingTestSession() {
+        return testSession != null;
+    }
+
+    /**
+     * Retrieve's the current question's corresponding {@code AnswerType}.
+     */
+    @Override
+    public AnswerType getCurrentAnswerType() {
+        return testSession.getCurrentAnswerType();
+    }
+
+
 
     //=========== Filtered Flashcard List Accessors =============================================================
 

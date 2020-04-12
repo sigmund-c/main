@@ -1,4 +1,5 @@
 package cardibuddy.logic.commands;
+import static cardibuddy.commons.core.Messages.MESSAGE_TEST_ONGOING;
 import static java.util.Objects.requireNonNull;
 
 import cardibuddy.logic.CommandHistory;
@@ -17,6 +18,9 @@ public class ClearCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+        if (model.hasOngoingTestSession()) {
+            throw new CommandException(MESSAGE_TEST_ONGOING);
+        }
         requireNonNull(model);
         model.setCardiBuddy(new CardiBuddy());
         model.commitCardiBuddy();

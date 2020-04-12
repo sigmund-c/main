@@ -1,5 +1,6 @@
 package cardibuddy.logic.commands;
 
+import static cardibuddy.commons.core.Messages.MESSAGE_TEST_ONGOING;
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
 
 import cardibuddy.commons.core.Messages;
@@ -19,6 +20,9 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireAllNonNull(model);
         String lastCommand = commandHistory.getHistory().get(0);
+        if (model.hasOngoingTestSession()) {
+            throw new CommandException(MESSAGE_TEST_ONGOING);
+        }
 
         if (!model.canUndo()) {
             throw new CommandException(Messages.MESSAGE_NOTHING_TO_UNDO);
