@@ -71,24 +71,40 @@ public class LogicToUiManager {
         return this.inDeck;
     }
 
+    /**
+     * Displays the current question for the ongoing test session.
+     * This question is displayed on the left panel.
+     * @param question question belonging to the current flashcard being tested
+     */
     public void showTestQuestion(Question question) {
         ui.getMainWindow().fillInnerPartsWithQuestion(question);
     }
 
+    /**
+     * Displays the current status of the test (How many flashcards left, encouragement).
+     * This status is displayed on the right panel.
+     * @param testQueueSize the number of flashcards left to test, excluding the current one being tested
+     */
     public void showTestStatus(int testQueueSize) {
         ui.getMainWindow().showTestStatus(testQueueSize);
     }
 
+    /**
+     * Displays the result of the user's answering of the current flashcard being tested.
+     * This result replaces the question being displayed, in the left panel.
+     * @param testResult
+     */
     public void showTestResult(TestResult testResult) {
         ui.getMainWindow().fillInnerPartsWithResult(testResult);
     }
 
     /**
-     * To show the end of test.
+     * Displays the main page again.
+     * Adds the deck list back to the left panel, but clears the right panel.
      */
     public void showTestEnd() {
         ui.getMainWindow().fillInnerPartsWithDecks();
-
+        ui.getMainWindow().clearFlashcardListPanel();
     }
 
 }

@@ -43,6 +43,7 @@ public class TestCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
+
         List<Deck> lastShownList = model.getFilteredDeckList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {

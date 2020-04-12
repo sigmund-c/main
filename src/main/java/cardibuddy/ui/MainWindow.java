@@ -211,13 +211,21 @@ public class MainWindow extends UiPart<Stage> {
         flashcardListPanelPlaceholder.getChildren().setAll(statisticsPanel.getRoot());
     }
 
+    public void clearFlashcardListPanel() {
+        flashcardListPanelPlaceholder.getChildren().clear();
+    }
+
+    public void clearDeckListPanel() {
+        deckListPanelPlaceholder.getChildren().clear();
+    }
+    // =================================== TEST SESSION ================================================================
     /**
      * Fills the placeholder of this window with the Question of the current flashcard being tested.
      *
      * @param question the question belonging to the current flashcard tested
      */
     public void fillInnerPartsWithQuestion(Question question) {
-        deckListPanelPlaceholder.getChildren().clear();
+        clearDeckListPanel();
         flashcardListPanelPlaceholder.getChildren().clear();
         QuestionTestCard questionCard = new QuestionTestCard(question);
         deckListPanelPlaceholder.getChildren().add(questionCard.getRoot()); // TODO: make FXML file for test card
@@ -230,9 +238,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void showTestStatus(int testQueueSize) {
         TestStatusCard testStatusCard = new TestStatusCard(testQueueSize);
-        flashcardListPanelPlaceholder.getChildren().clear();
+        clearFlashcardListPanel();
         flashcardListPanelPlaceholder.getChildren().add(testStatusCard.getRoot());
-
     }
 
     /**
@@ -240,10 +247,11 @@ public class MainWindow extends UiPart<Stage> {
      * of the user's answer input against the current flashcard being tested.
      */
     public void fillInnerPartsWithResult(TestResult testResult) {
-        deckListPanelPlaceholder.getChildren().clear();
+        clearDeckListPanel();
         ResultCard resultCard = new ResultCard(testResult); // TODO: Create result card + FXML file
         deckListPanelPlaceholder.getChildren().add(resultCard.getRoot());
     }
+    // =================================================================================================================
 
     /**
      * Sets the default size based on {@code guiSettings}.

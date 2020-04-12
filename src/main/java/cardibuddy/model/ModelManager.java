@@ -171,6 +171,7 @@ public class ModelManager implements Model {
         versionedCardiBuddy.setFlashcard(target, editedFlashcard);
     }
 
+    // ======================== TEST SESSION METHODS =========================================================
     /**
      * Gets the number of flashcards left in the {@code testQueue}.
      * This method is used for the countdown.
@@ -258,6 +259,17 @@ public class ModelManager implements Model {
         statistics.recordHistory(testSession);
         testSession = null;
     }
+
+    /**
+     * Checks if there is an ongoing {@code TestSession}.
+     * @return boolean
+     */
+    @Override
+    public boolean hasOngoingTestSession() {
+        return testSession != null;
+    }
+
+
 
     //=========== Filtered Flashcard List Accessors =============================================================
 

@@ -5,13 +5,20 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":CardiBuddyParser" as CardiBuddyParser LOGIC_COLOR
 participant ":TestCommandParser" as TestCommandParser LOGIC_COLOR
-participant "d:TestCommand" as TestCommand LOGIC_COLOR
+participant ":TestCommand" as TestCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":logicToUiManager" as LogicToUiManager LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant "ts:TestSession" as TestSession MODEL_COLOR
 end box
+
+box Ui UI_COLOR_T1
+participant ":UiManager" as UiManager UI_COLOR
+participant ":MainWindow" as MainWindow UI_COLOR
+endbox
 
 [-> LogicManager : execute("test 1")
 activate LogicManager
@@ -33,10 +40,10 @@ create TestCommand
 TestCommandParser -> TestCommand
 activate TestCommand
 
-TestCommand --> TestCommandParser : t
+TestCommand --> TestCommandParser
 deactivate TestCommand
 
-TestCommandParser --> CardiBuddyParser : t
+TestCommandParser --> CardiBuddyParser
 deactivate TestCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 TestCommandParser -[hidden]-> CardiBuddyParser
@@ -48,12 +55,50 @@ deactivate CardiBuddyParser
 LogicManager -> TestCommand : execute()
 activate TestCommand
 
-TestCommand -> Model : testDeck(1)
+TestCommand -> Model : getFilteredDeckList()
 activate Model
 
-Model --> TestCommand
+Model --> TestCommand : lastShownList
 deactivate Model
 
+TestCommand -> Model : testDeck(deckToTest)
+activate Model
+
+create TestSession
+Model -> TestSession
+activate TestSession
+
+TestSession -> Model
+deactivate TestSession
+
+Model -> TestSession : getFirstQuestion()
+activate TestSession
+
+TestSession -> Model : firstQuestion
+deactivate TestSession
+
+Model -> TestCommand : firstQuestion
+deactivate Model
+
+TestCommand -> LogicToUiManager : showTestQuestion(firstQuestion)
+activate LogicToUiManager
+
+LogicToUiManager -> UiManager
+activate UiManager
+
+UiManager -> MainWindow
+activate MainWindow
+
+deactivate MainWindow
+deactivate UiManager
+
+note bottom
+    Modifying the left and right panels
+    contained in the MainWindow
+    to display the test session to the user
+end note
+
+deactivate LogicToUiManager
 create CommandResult
 TestCommand -> CommandResult
 activate CommandResult

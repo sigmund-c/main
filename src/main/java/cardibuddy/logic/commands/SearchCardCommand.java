@@ -1,11 +1,13 @@
 package cardibuddy.logic.commands;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_NOT_IN_DECK;
+import static cardibuddy.commons.core.Messages.MESSAGE_TEST_ONGOING;
 import static java.util.Objects.requireNonNull;
 
 import cardibuddy.commons.core.Messages;
 import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.LogicToUiManager;
+import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.exceptions.NotInDeckException;
 import cardibuddy.model.flashcard.SearchCardKeywordsPredicate;
@@ -35,8 +37,11 @@ public class SearchCardCommand extends SearchCommand {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws RuntimeException {
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws RuntimeException, CommandException {
         requireNonNull(model);
+        if (model.hasOngoingTestSession()) {
+            throw new CommandException(MESSAGE_TEST_ONGOING);
+        }
         assert true;
 
         if (!logicToUiManager.isInDeck()) {

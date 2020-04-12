@@ -28,9 +28,6 @@
           <Menu fx:id="exitButton" mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
-          <Menu fx:id="testButton" mnemonicParsing="false" text="Test">
-            <MenuItem fx:id="testMenuItem" mnemonicParsing="false" onAction="#handleTest" text="Start" />
-          </Menu>
           <Menu fx:id="imageButton" mnemonicParsing="false" text="Image">
             <MenuItem fx:id="imageMenuItem" mnemonicParsing="false" onAction="#handleInsert" text="Insert" />
           </Menu>

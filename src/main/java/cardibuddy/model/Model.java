@@ -120,6 +120,7 @@ public interface Model {
      */
     void setFlashcard(Card target, Card editedFlashcard);
 
+    // ======================== TEST SESSION METHODS =========================================================
     /**
      * Gets the number of flashcards left in the {@code testQueue}.
      * This method is used for the countdown.
@@ -160,6 +161,12 @@ public interface Model {
      * to test or when the user calls quit.
      */
     void clearTestSession();
+
+    /**
+     * Checks if there is an ongoing {@code TestSession}.
+     * @return boolean
+     */
+    boolean hasOngoingTestSession();
 
     /**
      * Returns an unmodifiable view of the filtered deck list
