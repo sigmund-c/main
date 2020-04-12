@@ -11,12 +11,12 @@ import java.util.List;
  */
 public class McqAnswer implements Answer {
     public static final String MESSAGE_CONSTRAINTS = "MCQ answers should be a single letter corresponding to answer.";
-    private static final String MCQ_REGEX = "[a][)].*|[b][)].*|[c][)].*";
+    private static final String MCQ_REGEX = "[A][)].*|[B][)].*|[C][)].*";
 
     protected ArrayList<String> answerList;
 
     private String original;
-    private String correctAnswer; // should be "a" or "b" or "c" or ....
+    private String correctAnswer; // should be "A" or "B" or "C"
 
     public McqAnswer(String answer) {
         requireNonNull(answer);
@@ -33,24 +33,24 @@ public class McqAnswer implements Answer {
     private void separateIndexes(String answer) {
         answerList = new ArrayList();
 
-        int indexA = answer.indexOf("a)");
-        int indexB = answer.indexOf("b)");
-        int indexC = answer.indexOf("c)");
+        int indexA = answer.indexOf("A)");
+        int indexB = answer.indexOf("B)");
+        int indexC = answer.indexOf("C)");
 
         int first = Math.min(indexA, Math.min(indexB, indexC));
         int second;
         int third;
 
         if (indexA == first) {
-            correctAnswer = "a";
+            correctAnswer = "A";
             second = Math.min(indexB, indexC);
             third = Math.max(indexB, indexC);
         } else if (indexB == first) {
-            correctAnswer = "b";
+            correctAnswer = "B";
             second = Math.min(indexA, indexC);
             third = Math.max(indexA, indexC);
         } else {
-            correctAnswer = "c";
+            correctAnswer = "C";
             second = Math.min(indexA, indexB);
             third = Math.max(indexA, indexB);
         }
@@ -129,17 +129,6 @@ public class McqAnswer implements Answer {
     @Override
     public String toString() {
         return original;
-    }
-
-    // returns the corresponding number for alphabetical letters, eg. a -> 1; b -> 2; c -> 3; ...
-    private int getNumberForChar(char c) {
-        int num = ((int) c) - 64;
-        return num > 0 && num < 27 ? num : -1;
-    }
-
-    // returns the corresponding alphabetical letter for numbers
-    private char getCharForNumber(int i) { // 1 -> a; 2 -> b; 3 -> c, ...
-        return i > 0 && i < 27 ? (char) (i + 64) : null;
     }
 
     @Override

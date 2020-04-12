@@ -14,7 +14,7 @@ public interface Answer {
 
     String MESSAGE_CONSTRAINTS = "A question should have an answer.";
     String TF_REGEX = "(?=.{1}$)^[TF]";
-    String MCQ_REGEX = "[a][)].*|[b][)].*|[c][)].*";
+    String MCQ_REGEX = "[A][)].*|[B][)].*|[C][)].*";
 
     /**
      * Checks if it is a valid short answer and not a true/false answer.
