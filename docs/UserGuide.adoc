@@ -120,20 +120,33 @@ Returns a new deck titled `CS2103`
 * `add d/CS1101S t/Easy t/Basics` +
 Adds a new deck titled `CS1101S` with the tags `Easy` and `Basics`
 
-==== Adding a normal card: `add c/DECK_INDEX q/QUESTION a/ANSWER`
+==== Adding a normal card: `add q/QUESTION a/ANSWER`
 
 Creates a new card to be added to the deck.
-Format: `add c/DECK_INDEX q/QUESTION a/ANSWER`
+Format: `add q/QUESTION a/ANSWER`
 
-* The deck specified in DECK_INDEX must be open for you to add a card.
+[TIP]
+These are the three types of `ANSWER` and their corresponding formats: +
+1. T/F -- `T` or `F` +
+2. MCQ -- `a)CHOICE_ONE b)CHOICE_TWO c)CHOICE_THREE` with the correct option being entered first, the order of the next two does not matter  +
+3. Short Answer -- `ANY_TEXT`
+
+* The deck to be added in must be open for you to add a card.
 
 Examples:
 
 * `open 2` +
-`add c/2 q/How does one go about solving recursion problems? a/Wishful thinking` +
-Adds a new card belonging to the deck indexed at 2.
+`add q/How does one go about solving recursion problems? a/Wishful thinking` +
+Adds a new card with a `Short Answer` type belonging to the opened deck indexed at 2.
 
-image::AddCard.png[width="800", align="center"]
+* `open 1` +
+`add q/Is defensive code desirable at all times? a/F` +
+Adds a new card with a `T/F` answer type belonging to the opened deck indexed at 1.
+
+* `open 1` +
+`add q/Is defensive code desirable at all times? a/F` +
+Adds a new card with a `T/F` answer type belonging to the opened deck indexed at 1.
+
 
 // tag::addingImage[]
 ==== Adding an image card: `add p/file:FILE_PATH_TO_IMAGE q/QUESTION a/ANSWER`
@@ -150,10 +163,10 @@ Format: `add p/file:FILE_PATH_TO_IMAGE q/QUESTION a/ANSWER`
 Examples:
 
 * `open 1` +
-`add p/file:/Users/qiujingying/Documents/GitHub/cs2103/main/docs/images/ArchitectureDiagram.png q/What type of diagram is this? a/Architecture Diagram` +
-Adds a new card with an image belonging to the opened deck.
+`add p/file:/Users/qiujingying/Documents/GitHub/cs2103/main/docs/images/ArchitectureDiagram.png q/What type of diagram is this? a/b)Architecture Diagram a)Sequence Diagram c)Object Diagram` +
+Adds a new card with an image and `MCQ` answer type belonging to the opened deck indexed at 1.
+Note that the correct answer is `b` as it is the first choice entered.
 
-image::AddImageCard.png[width="800", align="center"]
 
 [TIP]
 You can drag and drop the image you want to add into a terminal window to obtain its file path. File paths may differ across operating systems (Windows vs Mac).
