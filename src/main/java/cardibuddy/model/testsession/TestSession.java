@@ -35,7 +35,6 @@ public class TestSession {
 
     private Deck deck;
     private Card current;
-    private boolean isOngoing;
     private boolean hasAnswered;
     // public Statistic statistics; // for recording statistics
 
@@ -154,7 +153,8 @@ public class TestSession {
      */
     public void forceCorrect() throws UnansweredQuestionException, AlreadyCorrectException {
         if (!hasAnswered) { // cannot force correct a question you have not even answered
-            logger.throwing(TestSession.class.getName(), TestSession.class.getMethods()[6].getName(), new UnansweredQuestionException());
+            logger.throwing(TestSession.class.getName(),
+                    TestSession.class.getMethods()[6].getName(), new UnansweredQuestionException());
             throw new UnansweredQuestionException();
         }
         testQueue.removeLast(); // reverse the prioritisation
@@ -196,6 +196,7 @@ public class TestSession {
 
     /**
      * Returns the session's results.
+     *
      * @return a Hashmap of TestResults corresponding to each question
      */
     public HashMap<Card, TestResult> getTestResults() {

@@ -1,10 +1,11 @@
 package cardibuddy.model.testsession;
 
+import java.util.logging.Logger;
+
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
 
-import java.util.logging.Logger;
 
 /**
  * Test Result class. Stores the user's answer,
