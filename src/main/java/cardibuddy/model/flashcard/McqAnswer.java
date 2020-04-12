@@ -13,12 +13,23 @@ public class McqAnswer implements Answer {
     public static final String MESSAGE_CONSTRAINTS = "MCQ answers should be a single letter corresponding to answer.";
     private static final String MCQ_REGEX = "[a][)].*|[b][)].*|[c][)].*";
 
+    private String original;
     private String correctAnswer; // should be "a" or "b" or "c" or ....
     private List<String> answerList;
 
     public McqAnswer(String answer) {
         requireNonNull(answer);
         checkArgument(isValid(answer), MESSAGE_CONSTRAINTS);
+        original = answer;
+
+        separateIndexes(answer);
+    }
+
+    /**
+     * Separates indexes to be inserted into the list.
+     * @param answer
+     */
+    private void separateIndexes(String answer) {
         answerList = new ArrayList();
 
         int indexA = answer.indexOf("a)");
@@ -43,6 +54,22 @@ public class McqAnswer implements Answer {
             third = Math.max(indexA, indexB);
         }
 
+        assignToList(indexA, indexB, indexC, first, second, third, answer);
+
+    }
+
+    /**
+     * Assigns positions of choices a, b and c.
+     * @param indexA
+     * @param indexB
+     * @param indexC
+     * @param first
+     * @param second
+     * @param third
+     * @param answer
+     */
+    private void assignToList(int indexA, int indexB, int indexC,
+                              int first, int second, int third, String answer) {
         if (indexA == first) {
             answerList.add(answer.substring(indexA, second));
         } else if (indexA == second) {
@@ -100,7 +127,7 @@ public class McqAnswer implements Answer {
      */
     @Override
     public String toString() {
-        return correctAnswer;
+        return original;
     }
 
     // returns the corresponding number for alphabetical letters, eg. a -> 1; b -> 2; c -> 3; ...
