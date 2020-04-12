@@ -47,7 +47,7 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        cardiBuddyModified = false;
+        cardiBuddyModified = true;
 
         CommandResult commandResult;
 
@@ -58,7 +58,7 @@ public class LogicManager implements Logic {
             commandHistory.add(commandText);
         }
 
-        if (!cardiBuddyModified) {
+        if (cardiBuddyModified) {
             logger.info("CardiBuddy has been modified, saving to file.");
             try {
                 storage.saveCardiBuddy(model.getCardiBuddy());
