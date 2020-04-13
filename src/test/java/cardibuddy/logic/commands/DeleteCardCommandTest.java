@@ -2,7 +2,6 @@ package cardibuddy.logic.commands;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX;
 import static cardibuddy.logic.commands.CommandTestUtil.assertCommandFailure;
-import static cardibuddy.testutil.TypicalDecks.getTypicalCardiBuddy;
 import static cardibuddy.testutil.TypicalIndexes.INDEX_FIRST_CARD;
 import static cardibuddy.testutil.TypicalIndexes.INDEX_SECOND_CARD;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -19,14 +18,12 @@ import cardibuddy.logic.LogicManager;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.model.Model;
 import cardibuddy.model.ModelManager;
-import cardibuddy.model.UserPrefs;
 import cardibuddy.storage.CardiBuddyStorage;
 import cardibuddy.storage.JsonCardiBuddyStorage;
 import cardibuddy.storage.JsonUserPrefsStorage;
 import cardibuddy.storage.Storage;
 import cardibuddy.storage.StorageManager;
 import cardibuddy.storage.UserPrefsStorage;
-import cardibuddy.ui.Ui;
 import cardibuddy.ui.UiManager;
 
 import org.junit.jupiter.api.Test;

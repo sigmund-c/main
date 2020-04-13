@@ -1,7 +1,6 @@
 package cardibuddy.logic.commands;
 
 import static cardibuddy.logic.commands.CommandTestUtil.assertCommandFailure;
-import static cardibuddy.testutil.TypicalDecks.getTypicalCardiBuddy;
 import static cardibuddy.testutil.TypicalIndexes.INDEX_FIRST_DECK;
 import static cardibuddy.testutil.TypicalIndexes.INDEX_SECOND_DECK;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -18,14 +17,12 @@ import cardibuddy.logic.LogicManager;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.model.Model;
 import cardibuddy.model.ModelManager;
-import cardibuddy.model.UserPrefs;
 import cardibuddy.storage.CardiBuddyStorage;
 import cardibuddy.storage.JsonCardiBuddyStorage;
 import cardibuddy.storage.JsonUserPrefsStorage;
 import cardibuddy.storage.Storage;
 import cardibuddy.storage.StorageManager;
 import cardibuddy.storage.UserPrefsStorage;
-import cardibuddy.ui.Ui;
 import cardibuddy.ui.UiManager;
 
 import org.junit.jupiter.api.Test;
@@ -35,7 +32,7 @@ import org.junit.jupiter.api.Test;
  * {@code DeleteCommand}.
  */
 public class DeleteDeckCommandTest {
-    private CommandHistory commandHistory = new CommandHistory();    private CommandHistory commandHistory = new CommandHistory();
+    private CommandHistory commandHistory = new CommandHistory();   
     private Path userPrefsFilePath = Paths.get("preferences.json");
     private Path cardibuddyFilePath = Paths.get("data" , "cardibuddy.json");
     private CardiBuddyStorage cardiBuddyStorage = new JsonCardiBuddyStorage(cardibuddyFilePath);
