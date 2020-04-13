@@ -1,8 +1,5 @@
 package cardibuddy.storage;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -28,7 +25,6 @@ class JsonAdaptedFlashcard extends JsonAdaptedView {
     private final String question;
     private final String answer;
     private final String path;
-    private final List<cardibuddy.storage.JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedFlashcard} with the given flashcard details.

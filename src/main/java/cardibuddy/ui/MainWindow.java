@@ -98,6 +98,7 @@ public class MainWindow extends UiPart<Stage> {
     public void setCommandBox() {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         this.commandBox = commandBox;
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
     public void setText(String message) {
@@ -325,7 +326,7 @@ public class MainWindow extends UiPart<Stage> {
                             event.consume();
                             setCommandBox();
                         } catch (Exception e) {
-                            resultDisplay.setFeedbackToUser("Previous command aborted!");
+                            resultDisplay.setFeedbackToUser("Add image command aborted!");
                             setCommandBox();
                         }
                     }

@@ -12,8 +12,14 @@ import cardibuddy.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new DeleteDeckCommand object.
  */
 public class DeleteDeckCommandParser implements Parser<DeleteDeckCommand> {
-    private LogicToUiManager logicToUiManager;
 
+    public static final String COMMAND_WORD = "delete";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + "deck : Deletes a deck identified by the index number used in the displayed panel.\n"
+            + "Parameters: DECK_INDEX (must be a positive and valid integer)\n"
+            + "Example: " + COMMAND_WORD + " deck 1 \n";
+
+    private LogicToUiManager logicToUiManager;
     public DeleteDeckCommandParser(LogicToUiManager logicToUiManager) {
         this.logicToUiManager = logicToUiManager;
     }

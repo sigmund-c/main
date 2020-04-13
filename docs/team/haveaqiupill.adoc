@@ -28,8 +28,7 @@ to display images in the flashcard.
 * *Minor enhancement*: added an insert image button that shows a popup window for the user to choose the .png and .jpg
 files they want to insert into their flashcards so that they do not have to key in their filepath.
 
-* *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=haveaqiupill&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Functional code]]
-[https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=haveaqiupill&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Test code]]
+* *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=haveaqiupill&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Functional code]][https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=haveaqiupill&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Test code]]
 
 * *Other contributions*:
 
@@ -49,7 +48,7 @@ decks and cards that contains all of the keywords instead of any of the keywords
 
 ** Documentation:
 *** Did content and cosmetic tweaks to existing contents of the User Guide: https://github.com/AY1920S2-CS2103T-T10-2/main/pull/206[#206], https://github.com/AY1920S2-CS2103T-T10-2/main/pull/211[#211]
-*** Wrote the whole README and designed the Ui Mock-up: https://github.com/AY1920S2-CS2103T-T10-2/main/pull/54[#54], https://github.com/AY1920S2-CS2103T-T10-2/main/pull/57[#57]
+*** Wrote the whole README, AboutUs and designed the Ui Mock-up: https://github.com/AY1920S2-CS2103T-T10-2/main/pull/54[#54], https://github.com/AY1920S2-CS2103T-T10-2/main/pull/57[#57]
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/AY1920S2-CS2103T-T10-2/main/pull/119[#119]
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/41[1], https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/5[2])
@@ -77,7 +76,10 @@ include::../UserGuide.adoc[tag=filter]
 
 include::../DeveloperGuide.adoc[tag=jingying]
 
+|===
+|_Given below is a design consideration that I’ve included in the Developer Guide for a feature implemented._
+|===
 
-
+include::../DeveloperGuide.adoc[tag=design]
 
 ---

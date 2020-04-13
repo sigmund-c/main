@@ -15,7 +15,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Ashleigh Aathar
 image::airshhlay.png[width="150", align="left"]
-{empty}[https://github.com/airshhlay[Github]] [<<ashleigh#, Portfolio>>]
+{empty}[https://github.com/airshhlay[Github]] [<<airshhlay#, Portfolio>>]
 
 Role: Developer +
 Responsibilities: Prioritising + Testing Self
@@ -24,7 +24,7 @@ Responsibilities: Prioritising + Testing Self
 
 === Phaedra Tan
 image::phaebaez.png[width="150", align="left"]
-{empty}[http://github.com/phaebaez[Github]] [<<phaedra#, Portfolio>>]
+{empty}[http://github.com/phaebaez[Github]] [<<phaebaez#, Portfolio>>]
 
 Role: Developer +
 Responsibilities: Undo + Redo + Detect Duplicates
@@ -33,7 +33,7 @@ Responsibilities: Undo + Redo + Detect Duplicates
 
 === Qiu Jing Ying
 image::haveaqiupill.png[width="150", align="left"]
-{empty}[http://github.com/haveaqiupill[Github]] [<<jingying#, Portfolio>>]
+{empty}[http://github.com/haveaqiupill[Github]] [<<haveaqiupill#, Portfolio>>]
 
 Role: Developer +
 Responsibilities: Advanced Search + UI
@@ -42,7 +42,7 @@ Responsibilities: Advanced Search + UI
 
 === Sigmund Chianasta
 image::sigmund-c.png[width="150", align="left"]
-{empty}[http://github.com/sigmund-c[Github]] [<<sigmund#, Portfolio>>]
+{empty}[http://github.com/sigmund-c[Github]] [<<sigmund-c#, Portfolio>>]
 
 Role: Developer +
 Responsibilities: Inheritance of Cards from Deck + Statistics

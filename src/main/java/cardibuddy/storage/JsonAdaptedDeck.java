@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import cardibuddy.commons.exceptions.IllegalValueException;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Title;
-import cardibuddy.model.flashcard.Card;
+import cardibuddy.model.flashcard.exceptions.DuplicateFlashcardException;
 import cardibuddy.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Deck}
@@ -85,9 +85,12 @@ public class JsonAdaptedDeck extends JsonAdaptedView {
         final Set<Tag> modelTags = new HashSet<>(deckTags);
         Deck newDeck = new Deck(modelTitle, modelTags);
 
-        final List<Card> modelFlashcards = new ArrayList<>();
         for (JsonAdaptedFlashcard flashcard : flashcards) {
-            newDeck.addCard(flashcard.toModelType(newDeck));
+            try {
+                newDeck.addCard(flashcard.toModelType(newDeck));
+            } catch (DuplicateFlashcardException e) {
+                continue;
+            }
         }
         newDeck.setStatistics(statistics.toModeltype());
 

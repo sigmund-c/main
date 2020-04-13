@@ -16,6 +16,7 @@ import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.UniqueFlashcardList;
+import cardibuddy.model.flashcard.exceptions.DuplicateFlashcardException;
 import cardibuddy.model.tag.Tag;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -99,8 +100,14 @@ public class Deck {
      * @param card
      * @return the set of Cards from the Deck.
      */
-    public List<Card> addCard(Card card) {
-        flashcards.add(card);
+    public List<Card> addCard(Card card) throws DuplicateFlashcardException {
+        try {
+            flashcards.add(card);
+            UniqueFlashcardList flashcardList = new UniqueFlashcardList();
+            flashcardList.setFlashcards(flashcards);
+        } catch (DuplicateFlashcardException e) {
+            flashcards.remove(card);
+        }
         filteredFlashcards = new FilteredList<>(FXCollections.observableList(flashcards));
         return Collections.unmodifiableList(flashcards);
     }
