@@ -51,8 +51,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditDeckDescriptor DESC_DJANGO;
-    public static final EditCommand.EditDeckDescriptor DESC_REACT;
+    public static final EditDeckCommand.EditDeckDescriptor DESC_DJANGO;
+    public static final EditDeckCommand.EditDeckDescriptor DESC_REACT;
 
     static {
         DESC_DJANGO = new EditDeckDescriptorBuilder().withName(VALID_TITLE_DJANGO)
