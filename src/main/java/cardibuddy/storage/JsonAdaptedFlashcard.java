@@ -63,6 +63,7 @@ class JsonAdaptedFlashcard extends JsonAdaptedView {
         Question modelQuestion = new Question(question);
         ShortAnswer modelAnswer = new ShortAnswer(answer);
 
+        
         if (path.equals("")) {
             return new Flashcard(modelDeck, modelQuestion, modelAnswer, path);
         } else {
