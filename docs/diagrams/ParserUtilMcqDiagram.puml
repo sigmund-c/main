@@ -23,7 +23,7 @@ Answer --> ParserUtil : true
 deactivate Answer
 
 create McqAnswer
-ParserUtil -> McqAnswer : McqAnswer("B)Architecture\nC)Sequence A)Object")
+ParserUtil -> McqAnswer : McqAnswer("B)Architecture C)Sequence A)Object")
 activate McqAnswer
 
 McqAnswer -> McqAnswer : separateIndexes

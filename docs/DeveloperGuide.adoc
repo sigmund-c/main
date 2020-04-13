@@ -339,6 +339,11 @@ The following sequence diagram shows how the `ParserUtil` class creates a `Short
 
 image::ParserUtilShortAnsDiagram.png[]
 
+==== Design Considerations
+* Due to the similarities in characteristics of the different answers and cards classes, a `Card` and `Answer` abstract class was created. +
+* More specific exceptions were thrown such as `WrongMcqAnswerException` and `WrongTfAnswerException` due to the large number of classes involved in the creation of a `Card`
+to help in pinpointing the input errors.
+
 === Search and Filter feature
 ==== Design
 Users can choose to find a `Deck` or a `Flashcard` through:

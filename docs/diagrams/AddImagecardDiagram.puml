@@ -21,10 +21,10 @@ participant ":UiManager" as UiManager UI_COLOR
 participant ":MainWindow" as MainWindow UI_COLOR
 endbox
 
-[-> LogicManager : execute("add q/Is\ndefensive code desirable\nat all times? a/F")
+[-> LogicManager : execute("add q/Is defensive\n code desirable at all times? a/F")
 activate LogicManager
 
-LogicManager -> CardiBuddyParser : parseCommand("add q/Is\ndefensive code desirable\nat all times? a/F")
+LogicManager -> CardiBuddyParser : parseCommand("add q/Is defensive\n code desirable at all times? a/F")
 activate CardiBuddyParser
 
 create AddFlashcardCommandParser
@@ -87,12 +87,12 @@ activate Model
 Model --> AddFlashcardCommand
 deactivate Model
 
-AddFlashcardCommand -> LogicToUiManager : addCard(flashcard)
+AddFlashcardCommand -> LogicToUiManager : getDisplayedDeck()\n.addCard(flashcard)
 activate LogicToUiManager
 LogicToUiManager --> AddFlashcardCommand
 deactivate LogicToUiManager
 
-AddFlashcardCommand -> LogicToUiManager : updateFilteredFlashcardList
+AddFlashcardCommand -> LogicToUiManager : getDisplayedDeck()\n.updateFilteredFlashcardList()
 activate LogicToUiManager
 LogicToUiManager --> AddFlashcardCommand
 deactivate LogicToUiManager
