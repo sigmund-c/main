@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
+import cardibuddy.model.flashcard.CardType;
 import cardibuddy.model.testsession.AnswerType;
 import org.junit.jupiter.api.Test;
 
@@ -215,6 +216,16 @@ public class AddDeckCommandTest {
 
         @Override
         public AnswerType getCurrentAnswerType() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CardType getCurrentCardType() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getCurrentCardPath() {
             throw new AssertionError("This method should not be called.");
         }
 
