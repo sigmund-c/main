@@ -73,7 +73,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 ==== Viewing help : `help`
 
-Lists all the available commands that a user can enter. +
+Opens a help window with a link to the User Guide. +
 Format: `help`
 
 ==== Saving data
