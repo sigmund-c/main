@@ -111,6 +111,7 @@ image::DeleteSequenceDiagram.png[]
 
 NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+// tag::ash-logictoui[]
 == LogicToUiManager
 This class serves as a bridge between relevant `Command` classes and the `Ui`, for use cases that do not update the `ObservableList`. It calls specific methods in the `MainWindow` class to modify the display to the user according to the `Command` executed.
 
@@ -137,7 +138,7 @@ This diagram is also an extension of the <<test-sequence-diagram, sequence diagr
 
 .Sequence diagram showing how LogicToUiManager accesses the Ui to display a question during a test session.
 image::LogicToUiSequenceDiagram.png[]
-
+// end::ash-logictoui[]
 
 
 [[Design-Model]]
@@ -154,11 +155,6 @@ The `Model`,
 * stores the CardiBuddy data.
 * exposes an unmodifiable `ObservableList<Deck>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
 * does not depend on any of the other three components.
-
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `CardiBuddy`, which `Deck` can reference. This would allow `CardiBuddy` to only require one `Tag` object per unique `Tag`, instead of each `Deck` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:BetterModelClassDiagram.png[]
 
 [[Design-Storage]]
 === Storage component
@@ -285,6 +281,7 @@ The `execute()` method is then called to filter the decks accordingly to the pre
 
 Future implementations would return flashcards and decks that are filtered accordingly to the predicate. (by v1.3)
 
+// tag::ash-test-feature[]
 === Test feature
 ==== Design
 A flashcard application is not complete without the ability to test oneself.
@@ -368,10 +365,16 @@ image::TestSessionActivityDiagram.png[]
 
 
 
-For more descriptive use case scenarios from a user perspectives, please take a look at <<Use Cases>>.
+For more descriptive use case scenarios from a user's perspective, please take a look at <<Use Cases>>.
+// end::ash-test-feature[]
 
-
-
+==== Design considerations
+===== Aspect:
+* *Alternative 1 (current choice)*
++
+** Pros:
++
+** Cons:
 
 
 === Logging
@@ -406,6 +409,7 @@ Refer to the guide <<Testing#, here>>.
 
 Refer to the guide <<DevOps#, here>>.
 
+// tag::ash-product-scope[]
 [appendix]
 == Product Scope
 *Target users*: NUS School of Computing students
@@ -417,8 +421,8 @@ Refer to the guide <<DevOps#, here>>.
 * has a need for an effective way to revise and memorise content
 * values efficiency
 * prefer desktop apps over other types
-* can type fast
-* prefers typing over mouse input
+* able to type quickly
+* generally prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
 *Value proposition*:
@@ -432,7 +436,7 @@ Refer to the guide <<DevOps#, here>>.
 * Command words are intuitive and uncomplicated
 * Easy for computing students to learn and remember
 
-3. Prioritises cards
+3. Retests cards
 * More tests for flashcards that the student got wrong
 
 4. Flexible answering
@@ -440,7 +444,9 @@ Refer to the guide <<DevOps#, here>>.
 * No need for word-for-word answers
 * Accommodates different module types and scenarios eg. having to describe a situation, or a diagram
 * Paraphrasing is also a much more effective way to learn, compared to rote memorisation
+// end::ash-product-scope[]
 
+// tag::ash-user-stories[]
 [appendix]
 == User Stories
 
@@ -498,13 +504,14 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*`|student with a short attention span|add animations to my flashcards|remain entertained
 
 |=======================================================================
+// end::ash-user-stories[]
 
-_{More to be added}_
-
+// tag::ash-use-cases[]
 [appendix]
 == Use Cases
 
 (For all use cases below, the *System* is the `CardiBuddy` and the *Actor* is the `user`, unless specified otherwise)
+
 
 [discrete]
 === Test Sessions
@@ -642,9 +649,10 @@ Use case ends.
 ** i. CardiBuddy shows an error message and prompts the user to answer the question or skip it.
 +
 ** ii. Use case ends.
+// end::ash-use-cases[]
 
-==== Adding Decks and Flashcards
 [discrete]
+==== Adding Decks and Flashcards
 === Use case: Add a new deck
 
 *MSS*
@@ -672,6 +680,7 @@ Use case ends.
 
 _{More to be added}_
 
+// tag::ash-nfrs[]
 [appendix]
 == Non Functional Requirements
 
@@ -679,9 +688,9 @@ _{More to be added}_
 . Should be able to hold up to 100 decks without a noticeable sluggishness in performance for typical usage.
 . Each deck should be able to hold up to 100 flashcards without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+// end::ash-nfrs[]
 
-_{More to be added}_
-
+// tag::ash-glossary[]
 [appendix]
 == Glossary
 
@@ -717,7 +726,9 @@ A session started by the user when the user wishes to test themselves on the con
 
 [[test-queue]] Test Queue::
 A temporary queue created when a Test Session is started. It stores the flashcards that either have not been tested yet, or have been tested but the user got wrong.
+// end::ash-glossary[]
 
+// tag::ash-product-survey[]
 [appendix]
 == Product Survey
 
@@ -750,6 +761,7 @@ Cons:
 ** Had to explore many options before finding a "..." button at the top right hand corner, which displayed a dropdown list of options for the set. User has to select edit set, before being able to
 * More confusing naming
 ** Statistics (not seen, familiar, mastered for flashcards are nested under the option "Learn"
+// end::ash-product-survey[]
 
 [appendix]
 == Instructions for Manual Testing
@@ -782,7 +794,7 @@ _{ more test cases ... }_
 .. Prerequisites: List all decks using the `list` command. Multiple decks in the list.
 .. Test case: `delete deck 1` +
    Expected: First deck is deleted from the list. Details of the deleted deck shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete decl 0` +
+.. Test case: `delete deck 0` +
    Expected: No deck is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete deck commands to try: `delete deck`, `delete deck x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.

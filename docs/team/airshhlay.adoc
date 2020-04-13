@@ -9,55 +9,53 @@
 
 == Overview
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+CardiBuddy is a desktop flashcard application made with NUS Computing students in mind, and is a useful study aid. The user interacts with it using a CLI, and it has a GUI created with JavaFX. CardiBuddy is written in Java, and has about 10 kLoC.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to start a test session with a selected deck of flashcards.k*
-** What it does: allows the user to test themselves on their subject content by:
+* *Major enhancement*: Test Feature (_the ability to start a test session on selected flashcards_)
+
+** This feature allows the user to test themselves on their subject content by:
 *** 1. Fetching the flashcards of the deck at the user's specified index and displaying them question by question.
 *** 2. Adding flashcards back into the test session if they got it wrong **(retesting)**
-*** 3. Checking the user's answer with the flashcard's stored answer, and showing them the outcome (Right or Wrong).
-*** 4. Storing the test results (Number of tries, correct/wrong) to generate statistics for the user to view at the end of each test.
-*** 5. Giving users the ability to force correct answers if their answers differ from the flashcard's stored answer.
-*** 6. Giving users the ability to skip questions when needed.
+*** 3. Marking the user's answer, and showing them their result (Right or Wrong).
+*** 4. Storing the test results for each flashcard (number of tries for this flashcard, whether this flashcard was answered correctly / wrongly / was skipped) to generate statistics for the user to view at the end of each test.
+*** 5. Giving users the ability to force their initially marked wrong answers to be marked as correct, even if those answers differ from the flashcard's stored answer. **(force correct)**
+*** 6. Giving users the ability to skip questions when needed. **(skipping)**
 *** 7. Giving users the ability to quit the ongoing test session halfway.
-** Justification: This feature improves the product significantly as a flashcard application can not be without a testing feature. In addition, this feature provides certain enhancements on top of basic testing - such as prioritisation, skipping and the ability to force correct answers. This provides greater flexibility in how the user chooses to answer questions, and allows for paraphrasing of answers which improves information retention.
+** Justification: This feature improves the product significantly - a flashcard application can not be without a testing feature. In addition, this feature provides enhancements on top of basic testing - such as retesting, skipping and the ability to force correct answers.
+*** Retesting forces the student to revisit the questions they answered wrongly again, and the question will stop being retested only if the user finally manages to answer it correctly. This drilling and increased exposure to questions the user is unsure of will help him or her get more familiar with the concept being tested.
+*** Skipping and force correcting provides great flexibility in how the user chooses to answer questions, and allows for paraphrasing of answers to boost information retention.
+*** Quitting the test session halfway hands the power over to the user to decide when to stop the test session. This lets the user have greater control over their revision, and saves them the time needed to complete the test session in its entirety, if they have decided that they are sufficiently prepared.
 
-** Highlights: This enhancement is a major overhaul to the application, and required an in-depth analysis of design alternatives. The implementation was challenging as it required deep analysis of the application in order to figure out how to replace the existing JavaFX scene with the test session. In addition, the test session required tight integration with other aspects of the application such as Flashcards and Decks, and constant communication and clarification with the team was required.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+** Highlights: This enhancement is a major overhaul to the application, and required an in-depth analysis of design alternatives. All of the classes used for the test feature were not provided by the stock AddressBook3 application, but had to be created from scratch. The implementation was challenging as it required deep analysis of the application in order to figure out how to replace the existing JavaFX scene with the test session. In addition, the test session required tight integration with other aspects of the application such as Flashcards and Decks, and constant communication and clarification with the team was required.
 
-* *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=airshhlay&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Functional code]] [https://github.com[Test code]]
+* *Minor enhancement*: Created FXML files for the flashcard, flashcard list as part of the Ui component.
+
+* *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=airshhlay&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Functional code and Test code]]
 
 * *Other contributions*:
 
 ** Project management:
 *** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
 
 _{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide
 
-
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=delete]
+include::../UserGuide.adoc[tags=test]
 
 include::../UserGuide.adoc[tag=dataencryption]
 
@@ -67,6 +65,10 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=ash-logictoui]
+include::../DeveloperGuide.adoc[tag=ash-test-feature]
+include::../DeveloperGuide.adoc[tag=ash-user-stories]
+include::../DeveloperGuide.adoc[tag=ash-use-cases]
+include::../DeveloperGuide.adoc[tag=ash-product-scope]
+include::../DeveloperGuide.adoc[tag=ash-product-survey]
+include::../DeveloperGuide.adoc[tag=ash-nfrs]
