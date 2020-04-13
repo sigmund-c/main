@@ -1000,27 +1000,50 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the GUI with a set of 5 sample decks. The first deck will contain 4 sample flashcards, while the rest are empty.
 
 . Saving window preferences
 
-.. Resize the window to an optimum size. Move the window to a different location. Close the window.
+.. Resize the window to an optimum size. Move the window to a different location. Close the window or type `exit` into the command box.
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
 _{ more test cases ... }_
 
-=== Deleting a deck
+=== Modifying decks and flashcards
+. Adding a deck
 
-. Deleting a deck while all decks are listed
+.. Prerequisites: Not running a test session.
+.. Test case: `add d/NewDeck` +
+   Expected: Add a new deck to the bottom of the list called "NewDeck" with no tags and 0 cards. The status message will say that there are no tags and 0 cards on the deck, alongside the name of the deck.
 
-.. Prerequisites: List all decks using the `list` command. Multiple decks in the list.
-.. Test case: `delete deck 1` +
-   Expected: First deck is deleted from the list. Details of the deleted deck shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete deck 0` +
-   Expected: No deck is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete deck commands to try: `delete deck`, `delete deck x` (where x is larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
+. Open a deck
+.. Prerequisites: Not running a test session, has at least one deck.
+.. Test case: `open 1` +
+Expected: Shows up the list of flashcards in the first deck. Status message will notify which deck you have opened.
+
+. Adding a flashcard
+.. Prerequisites: Has a deck open with the `open` command.
+.. Test case: `add q/What is the powerhouse of the cell? a/Mitochondria` +
+Expected: List of flashcards should update with the newest card, showing the Question and answer.
+
+=== Running a Test Session
+
+. Running a test session
+
+.. Prerequisites: Has a deck with at least one flashcards.
+.. Test case: `test [DECK_INDEX]` +
+   Expected: The list of decks and cards should be covered by the test session panel. Status message will have instructions on how to proceed.
+.. Test case: `test [DECK_INDEX_WITHOUT_CARDS]` +
+   Expected: No new panel covering, status message notifies that there are no cards.
+
+. Answering a test session
+
+.. Prerequisites: Test session is running.
+.. Test case: `ans [CORRECT_ANSWER]` +
+Expected: Test panel notifies your correct answer, shows the whole question to recap, and urges to type in `next` to go to the next question.
+.. Test case `add d/Deck` +
+Expected: An error message appears, saying you can't modify the model while in a test session.
 
 _{ more test cases ... }_
 
