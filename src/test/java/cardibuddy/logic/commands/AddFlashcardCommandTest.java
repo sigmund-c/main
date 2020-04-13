@@ -20,7 +20,6 @@ import org.junit.jupiter.api.Test;
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.logic.CommandHistory;
-import cardibuddy.logic.Logic;
 import cardibuddy.logic.LogicManager;
 import cardibuddy.logic.LogicToUi;
 import cardibuddy.logic.LogicToUiManager;
@@ -40,12 +39,9 @@ import cardibuddy.model.tag.Tag;
 import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
-import cardibuddy.storage.CardiBuddyStorage;
 import cardibuddy.storage.JsonCardiBuddyStorage;
 import cardibuddy.storage.JsonUserPrefsStorage;
-import cardibuddy.storage.Storage;
 import cardibuddy.storage.StorageManager;
-import cardibuddy.storage.UserPrefsStorage;
 import cardibuddy.testutil.FlashcardBuilder;
 import cardibuddy.ui.UiManager;
 
@@ -60,9 +56,10 @@ public class AddFlashcardCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
     private Model model = new ModelManager();
-    private LogicToUiManager logicToUiManager = new LogicToUiManager(new UiManager(new LogicManager(model
+    private UiManager ui = new UiManager(new LogicManager(model
             , new StorageManager( new JsonCardiBuddyStorage(Paths.get("data" , "cardibuddy.json"))
-            , new JsonUserPrefsStorage(Paths.get("preferences.json"))))));
+            , new JsonUserPrefsStorage(Paths.get("preferences.json")))));
+    private LogicToUiManager logicToUiManager = new LogicToUiManager(ui);
 
     @Test
     public void equals() {
@@ -89,6 +86,9 @@ public class AddFlashcardCommandTest {
         assertFalse(addFlashcardf1Command.equals(addFlashcardf2Command));
     }
 
+    /**
+     * Deck class stub
+     */
     private class DeckStub extends Deck {
         // Identity fields
         private final Title title;
@@ -140,6 +140,9 @@ public class AddFlashcardCommandTest {
         }
     }
 
+    /**
+     * Logic to Ui stub
+     */
     private class LogicToUiStub implements LogicToUi {
 
         @Override

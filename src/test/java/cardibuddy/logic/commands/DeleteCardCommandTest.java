@@ -36,9 +36,10 @@ import org.junit.jupiter.api.Test;
 public class DeleteCardCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
     private Model model = new ModelManager();
-    private LogicToUiManager logicToUiManager = new LogicToUiManager(new UiManager(new LogicManager(model
+    private UiManager ui = new UiManager(new LogicManager(model
             , new StorageManager( new JsonCardiBuddyStorage(Paths.get("data" , "cardibuddy.json"))
-            , new JsonUserPrefsStorage(Paths.get("preferences.json"))))));
+            , new JsonUserPrefsStorage(Paths.get("preferences.json")))));
+    private LogicToUiManager logicToUiManager = new LogicToUiManager(ui);
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {

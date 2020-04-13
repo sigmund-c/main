@@ -2,28 +2,21 @@ package cardibuddy.logic.commands;
 
 import static cardibuddy.testutil.TypicalIndexes.INDEX_FIRST_CARD;
 import static cardibuddy.testutil.TypicalIndexes.INDEX_SECOND_CARD;
-import static cardibuddy.testutil.TypicalDecks.getTypicalCardiBuddy;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import cardibuddy.logic.CommandHistory;
 import static cardibuddy.logic.commands.CommandTestUtil.DESC_QUESTION1;
 import static cardibuddy.logic.commands.CommandTestUtil.DESC_QUESTION2;
-import cardibuddy.logic.Logic;
 import cardibuddy.logic.LogicManager;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.model.Model;
 import cardibuddy.model.ModelManager;
-import cardibuddy.model.UserPrefs;
-import cardibuddy.storage.CardiBuddyStorage;
 import cardibuddy.storage.JsonCardiBuddyStorage;
 import cardibuddy.storage.JsonUserPrefsStorage;
-import cardibuddy.storage.Storage;
 import cardibuddy.storage.StorageManager;
-import cardibuddy.storage.UserPrefsStorage;
 import cardibuddy.ui.UiManager;
 
 import org.junit.jupiter.api.Test;
@@ -34,9 +27,10 @@ import org.junit.jupiter.api.Test;
 public class EditCardCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
     private Model model = new ModelManager();
-    private LogicToUiManager logicToUiManager = new LogicToUiManager(new UiManager(new LogicManager(model
+    private UiManager ui = new UiManager(new LogicManager(model
             , new StorageManager( new JsonCardiBuddyStorage(Paths.get("data" , "cardibuddy.json"))
-            , new JsonUserPrefsStorage(Paths.get("preferences.json"))))));
+            , new JsonUserPrefsStorage(Paths.get("preferences.json")))));
+    private LogicToUiManager logicToUiManager = new LogicToUiManager(ui);
 
     @Test
     public void equals() {

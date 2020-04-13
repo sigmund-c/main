@@ -6,23 +6,18 @@ import static cardibuddy.testutil.TypicalIndexes.INDEX_SECOND_DECK;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import cardibuddy.commons.core.Messages;
 import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.CommandHistory;
-import cardibuddy.logic.Logic;
 import cardibuddy.logic.LogicManager;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.model.Model;
 import cardibuddy.model.ModelManager;
-import cardibuddy.storage.CardiBuddyStorage;
 import cardibuddy.storage.JsonCardiBuddyStorage;
 import cardibuddy.storage.JsonUserPrefsStorage;
-import cardibuddy.storage.Storage;
 import cardibuddy.storage.StorageManager;
-import cardibuddy.storage.UserPrefsStorage;
 import cardibuddy.ui.UiManager;
 
 import org.junit.jupiter.api.Test;
@@ -34,9 +29,10 @@ import org.junit.jupiter.api.Test;
 public class DeleteDeckCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
     private Model model = new ModelManager();
-    private LogicToUiManager logicToUiManager = new LogicToUiManager(new UiManager(new LogicManager(model
+    private UiManager ui = new UiManager(new LogicManager(model
             , new StorageManager( new JsonCardiBuddyStorage(Paths.get("data" , "cardibuddy.json"))
-            , new JsonUserPrefsStorage(Paths.get("preferences.json"))))));
+            , new JsonUserPrefsStorage(Paths.get("preferences.json")))));
+    private LogicToUiManager logicToUiManager = new LogicToUiManager(ui);
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
