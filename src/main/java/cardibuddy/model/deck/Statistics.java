@@ -179,4 +179,26 @@ public class Statistics {
 
         return sessionStatistics;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Statistics)) {
+            return false;
+        }
+
+        Statistics otherStats = (Statistics) other;
+        return otherStats.getCardsAdded() == getCardsAdded()
+                && otherStats.getCardsDeleted() == getCardsPlayed()
+                && otherStats.getDecksAdded() == getDecksAdded()
+                && otherStats.getDecksDeleted() == getDecksDeleted()
+                && otherStats.getTimesPlayed() == getTimesPlayed()
+                && otherStats.getCardsPlayed() == getCardsPlayed()
+                && otherStats.getAvgCorrectPercentage() == getAvgCorrectPercentage()
+                && otherStats.getAvgTriesToGetCorrect() == getAvgTriesToGetCorrect()
+                && otherStats.getCorrectPercentageHistory().equals(getCorrectPercentageHistory());
+    }
 }

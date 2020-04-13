@@ -70,7 +70,7 @@ public class JsonAdaptedStatistic {
     /**
      * Converts this Jackson-friendly adapted statistics object into the model's {@code Statistics} object.
      */
-    public Statistics toModeltype() {
+    public Statistics toModeltype() throws NumberFormatException {
         Statistics toReturn = new Statistics();
         toReturn.setCardsAdded(Integer.parseInt(cardsAdded));
         toReturn.setCardsDeleted(Integer.parseInt(cardsDeleted));
