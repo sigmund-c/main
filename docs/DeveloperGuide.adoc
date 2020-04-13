@@ -71,6 +71,8 @@ image::ArchitectureSequenceDiagram.png[]
 
 The sections below give more details of each component.
 
+{empty} +
+
 [[Design-Ui]]
 === UI component
 
@@ -111,6 +113,7 @@ image::DeleteSequenceDiagram.png[]
 
 NOTE: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+// tag::ash-logictoui[]
 == LogicToUiManager
 This class serves as a bridge between relevant `Command` classes and the `Ui`, for use cases that do not update the `ObservableList`. It calls specific methods in the `MainWindow` class to modify the display to the user according to the `Command` executed.
 
@@ -137,7 +140,7 @@ This diagram is also an extension of the <<test-sequence-diagram, sequence diagr
 
 .Sequence diagram showing how LogicToUiManager accesses the Ui to display a question during a test session.
 image::LogicToUiSequenceDiagram.png[]
-
+// end::ash-logictoui[]
 
 
 [[Design-Model]]
@@ -363,7 +366,9 @@ image::ParserUtilShortAnsDiagram.png[]
 Due to the similarities in method bodies of the different answers and cards classes, a `Card` and `Answer` abstract class was used instead of an interface. +
 
 // end::jingying[]
+{empty} +
 
+// tag::ash-test-feature[]
 === Test feature
 ==== Design
 A flashcard application is not complete without the ability to test oneself.
@@ -381,8 +386,12 @@ Another enums class used is `AnswerType` which contains 3 answering options to d
 
 To ensure good design practice, `Test Session` is not exposed to the other classes, but is instead called using the `ModelManager`.
 
-Click <<Design-Model, here>> to view the class diagram for the `Model` component, to see how the above classes interact with other classes within `Model`.
+The following figure is a more focused class diagram for the _cardibuddy/model/testsession_ package, and displays important methods and fields used.
 
+Click <<Design-Model, here>> to view the full class diagram for the `Model` component, to see all the classes within `Model` interact.
+
+.Class diagram for the test session package.
+image::TestFocusClassDiagram.png[]
 
 
 ===== Logic Component
@@ -404,7 +413,7 @@ The above commands can only be triggered when certain conditions are met. The fo
 |=======================================================================
 |Command Class|Corresponding user input|Description|Conditions|Exceptions Thrown
 |TestCommand|`test INDEX`|Creates a `TestSession` for the specified deck at that index.|-|EmptyDeckException
-|AnswerCommand|`ans USER_ANSWER`|Submits the user's answer to the `TestSession`.|The user has not already submitted an answer to the displayed question.|AlreadyAnsweredException
+|AnswerCommand|`ans USER_ANSWER`|Submits the user's answer to the `TestSession`.|The user has not already submitted an answer to the displayed question. The answer submitted must be comply with the question type (True False, MCQ, or Short Answer)|AlreadyAnsweredException, IncorrectAnswerFormatException
 |NextCommand|`next`|Displays the next question.|The user must already have answered the question.|UnansweredQuestionException
 |SkipCommand|`skip`|Skips the current question. Does not require the user to submit an answer.|The user must not have submitted a correct answer.|AlreadyCorrectException
 |QuitCommand|`quit`|Quits the test session.|-|-
@@ -447,11 +456,120 @@ image::TestSessionActivityDiagram.png[]
 
 
 
-For more descriptive use case scenarios from a user perspectives, please take a look at <<Use Cases>>.
+For more descriptive use case scenarios from a user's perspective, please take a look at <<Use Cases>>.
 
 
+==== Design considerations
+===== Aspect: Data structure for the test queue
+* *Alternative 1*
++
+* Use an ArrayList to store the flashcards in the test queue.
++
+** Pros:
++
+*** Makes use of the current data structure used to store flashcards in a list.
++
+*** Easy retrieval of flashcards at indices.
++
+*** Easy iteration of the flashcard list.
+** Cons:
++
+** Possible difficulties in designing how flashcards should be retested.
++
+** It is possible that we create a large ArrayList, and split it such that the first half is used for flashcards that have not been tested, and the second half be used for flashcards that are going to be retested.
++
+** However, this approach is unnecessarily complicated, and uses excessive memory space.
++
+** In addition, it is still difficult to check if flashcards have been tested before, which is part of our feature which counts the number of times a flashcard has been attempted.
 
+* *Alternative 2 (current choice)*
++
+* Use a LinkedList to store the flashcards in the test queue.
+** Pros:
++
+*** Easy insertion and removal of flashcards from the front and back of the queue, which is the main driver behind a test session.
+** Cons:
++
+*** Difficult to retrieve flashcards at indices, and check if a flashcard has been visited before
++
+*** In addition, other features of CardiBuddy require the easy retrieval of flashcards such as the get(index) method offered by ArrayList.
+** Why we went with this:
++
+*** Logically, a test session will not be used as often as the other commands that entail retrieval of elements at a specific index, such as the `edit` command.
++
+*** There may be some overhead in converting the ArrayList used to a LinkedList, but our tests have showed minimal lag in starting a test session.
++
+** Workarounds:
++
+*** To still retain the ability to check if a flashcard has been visited before, we use a separate HashMap data structure that makes use of flashcards that have been visited before as keys.
++
+** A HashMap will also allow us to link a flashcard to a specific TestResult, and modify it as needed (such as when a user calls force correct on the flashcard).
 
+{empty} +
+
+===== Aspect: How to store the results of each individual test on a flashcard
+* *Alternative 1*
++
+* Use a `Result` enums to indicate if the question was correct, wrong or skipped
++
+** Pros:
++
+*** An enums class improves code readability, and ensures that there are only 3 possible results linked to each flashcard.
++
+** Cons:
++
+*** Too simplistic and does not give room for further enhancements as described below.
+
+* *Alternative 2 (current choice)*
++
+* Use a custom `TestResult` class that stores the user answer, as well as the model flashcard answer
++
+** Pros:
++
+*** Provides room for further customisation, such as recording the number of attempts on the flashcard, which alternative 1 was unable to achieve.
++
+*** More Object-Oriented Design, and keeps `TestSession` from getting too cluttered.
++
+** Cons:
++
+*** Higher chance for error as more code and methods needed to be written.
+
+{empty} +
+
+==== Aspect: When to replace the `current` variable holding the latest flashcard that was tested
+
+* *Alternative 1*
++
+* Move on to the next question, hence replacing `current`, as soon as the user submits their answer.
+** Pros:
++
+*** Simple and easy to implement
++
+** Cons:
++
+*** This would have been fine in the initial stages, but would not work after further enhancements (`skip`, `force`) were added.
++
+*** The 2 mentioned enhancements require modifying of the `testResults` HashMap, and hence require the flashcard they are being used on as a key to retrieve and modify the TestResult.
+
+* *Alternative 2 (current choice)*
++
+* Only replace `current` with the next flashcard when `next` or `skip` is used.
++
+** Pros:
++
+*** These 2 commands are the ones that trigger the displaying of the next question in the queue to the user.
++
+*** This ensures that should there be a need to retrieve the current flashcard, such as in modifying the `testResults` HashMap as well as checking the flashcard's `CardType` (image or normal) and getting its `AnswerType`.
++
+** Cons:
++
+*** This complicates the code, and may possibly be difficult to understand for another developer.
++
+** Workarounds:
++
+*** Do our best to document the test feature in this Developer's Guide, and supplement it with activity diagrams and other explanations to help the reader better understand the workings of this feature.
+// end::ash-test-feature[]
+{empty} +
 
 === Statistics
 ==== Design
@@ -474,6 +592,7 @@ There's 2 different locations where a `Statistics` instance is stored:
 
 Each time the user does something that can be tracked, it updates both the universal `Statistics` and the `Statistics` of the `Deck` that he or she is using. The call to update both statistics is done simultaneously in the `CardiBuddy` model for adding/removing decks/cards, or in `ModelManager` for finishing a `TestSession`.
 
+{empty} +
 
 === Logging
 
@@ -507,6 +626,7 @@ Refer to the guide <<Testing#, here>>.
 
 Refer to the guide <<DevOps#, here>>.
 
+// tag::ash-product-scope[]
 [appendix]
 == Product Scope
 *Target users*: NUS School of Computing students
@@ -518,8 +638,8 @@ Refer to the guide <<DevOps#, here>>.
 * has a need for an effective way to revise and memorise content
 * values efficiency
 * prefer desktop apps over other types
-* can type fast
-* prefers typing over mouse input
+* able to type quickly
+* generally prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
 *Value proposition*:
@@ -533,7 +653,7 @@ Refer to the guide <<DevOps#, here>>.
 * Command words are intuitive and uncomplicated
 * Easy for computing students to learn and remember
 
-3. Prioritises cards
+3. Retests cards
 * More tests for flashcards that the student got wrong
 
 4. Flexible answering
@@ -541,7 +661,9 @@ Refer to the guide <<DevOps#, here>>.
 * No need for word-for-word answers
 * Accommodates different module types and scenarios eg. having to describe a situation, or a diagram
 * Paraphrasing is also a much more effective way to learn, compared to rote memorisation
+// end::ash-product-scope[]
 
+// tag::ash-user-stories[]
 [appendix]
 == User Stories
 
@@ -599,13 +721,14 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*`|student with a short attention span|add animations to my flashcards|remain entertained
 
 |=======================================================================
+// end::ash-user-stories[]
 
-_{More to be added}_
-
+// tag::ash-use-cases[]
 [appendix]
 == Use Cases
 
 (For all use cases below, the *System* is the `CardiBuddy` and the *Actor* is the `user`, unless specified otherwise)
+
 
 [discrete]
 === Test Sessions
@@ -743,9 +866,10 @@ Use case ends.
 ** i. CardiBuddy shows an error message and prompts the user to answer the question or skip it.
 +
 ** ii. Use case ends.
+// end::ash-use-cases[]
 
-==== Adding Decks and Flashcards
 [discrete]
+==== Adding Decks and Flashcards
 === Use case: Add a new deck
 
 *MSS*
@@ -773,6 +897,7 @@ Use case ends.
 
 _{More to be added}_
 
+// tag::ash-nfrs[]
 [appendix]
 == Non Functional Requirements
 
@@ -780,9 +905,9 @@ _{More to be added}_
 . Should be able to hold up to 100 decks without a noticeable sluggishness in performance for typical usage.
 . Each deck should be able to hold up to 100 flashcards without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+// end::ash-nfrs[]
 
-_{More to be added}_
-
+// tag::ash-glossary[]
 [appendix]
 == Glossary
 
@@ -818,7 +943,9 @@ A session started by the user when the user wishes to test themselves on the con
 
 [[test-queue]] Test Queue::
 A temporary queue created when a Test Session is started. It stores the flashcards that either have not been tested yet, or have been tested but the user got wrong.
+// end::ash-glossary[]
 
+// tag::ash-product-survey[]
 [appendix]
 == Product Survey
 
@@ -851,6 +978,7 @@ Cons:
 ** Had to explore many options before finding a "..." button at the top right hand corner, which displayed a dropdown list of options for the set. User has to select edit set, before being able to
 * More confusing naming
 ** Statistics (not seen, familiar, mastered for flashcards are nested under the option "Learn"
+// end::ash-product-survey[]
 
 [appendix]
 == Instructions for Manual Testing
@@ -883,7 +1011,7 @@ _{ more test cases ... }_
 .. Prerequisites: List all decks using the `list` command. Multiple decks in the list.
 .. Test case: `delete deck 1` +
    Expected: First deck is deleted from the list. Details of the deleted deck shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete decl 0` +
+.. Test case: `delete deck 0` +
    Expected: No deck is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete deck commands to try: `delete deck`, `delete deck x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
