@@ -2,7 +2,12 @@ package cardibuddy.testutil;
 
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Title;
-import cardibuddy.model.flashcard.*;
+import cardibuddy.model.flashcard.Answer;
+import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Imagecard;
+import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.flashcard.ShortAnswer;
+
 
 import java.util.HashSet;
 

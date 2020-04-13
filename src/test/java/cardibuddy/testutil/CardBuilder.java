@@ -1,7 +1,5 @@
 package cardibuddy.testutil;
 
-import java.util.Set;
-
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Card;

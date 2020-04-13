@@ -1,17 +1,9 @@
 package cardibuddy.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import cardibuddy.logic.commands.EditCardCommand;
-import cardibuddy.logic.commands.EditDeckCommand;
-import cardibuddy.model.deck.Deck;
-import cardibuddy.model.deck.Title;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.ShortAnswer;
-import cardibuddy.model.tag.Tag;
 
 /**a
  * A utility class to help with building EditDeckDescriptor objects.
