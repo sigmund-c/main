@@ -23,6 +23,8 @@ import cardibuddy.logic.commands.exceptions.CommandException;
 
 import cardibuddy.model.flashcard.Imagecard;
 import cardibuddy.model.testsession.AnswerType;
+import cardibuddy.testutil.FlashcardBuilder;
+import cardibuddy.testutil.ImagecardBuilder;
 import org.junit.jupiter.api.Test;
 
 import cardibuddy.commons.core.GuiSettings;
@@ -76,38 +78,10 @@ public class AddImagecardCommandTest {
     private UiManager ui = new UiManager(logic);
     private LogicToUiManager logicToUiManager = new LogicToUiManager((UiManager) ui);
 
-    //@Test
-    //public void constructor_nullFlashcard_throwsNullPointerException() {
-    //    assertThrows(NullPointerException.class, () -> new AddFlashcardCommand(null, null));
-    //}
-
-    //@Test
-    //public void execute_flashcardAcceptedByModel_addSuccessful() throws Exception {
-    //    ModelStub modelStub = new ModelStub();
-    //    Flashcard valid = new CardBuilder().build();
-
-    //    AddFlashcardCommand addFlashcardCommand = new AddFlashcardCommand(valid, logicToUiManager);
-    //    CommandResult commandResult = addFlashcardCommand.execute(modelStub, commandHistory);
-
-    //  assertEquals(String.format(AddFlashcardCommand.MESSAGE_SUCCESS, valid), commandResult.getFeedbackToUser());
-    //    assertEquals(Arrays.asList(valid), flashcardsAdded);
-    //    assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
-    //}
-
-    //@Test
-    //public void execute_duplicateFlashcard_throwsCommandException() {
-    //    Flashcard valid = new CardBuilder().build();
-    //    AddFlashcardCommand addFlashcardCommand = new AddFlashcardCommand(valid, logicToUiManager);
-    //    ModelStub modelStub = new ModelStubAcceptingFlashcardAdded();
-
-    //    assertThrows(CommandException.class, AddFlashcardCommand.MESSAGE_DUPLICATE_FLASHCARD, () ->
-    //           addFlashcardCommand.execute(modelStub, commandHistory));
-    //}
-
     @Test
     public void equals() {
-        Imagecard i1 = new CardBuilder().withQuestion("This card returns true").buildImagecard();
-        Imagecard i2 = new CardBuilder().withQuestion("This card returns false").buildImagecard();
+        Imagecard i1 = new ImagecardBuilder().withQuestion("This card returns true").build();
+        Imagecard i2 = new ImagecardBuilder().withQuestion("This card returns false").build();
 
         AddImageCardCommand addImagecardi1Command = new AddImageCardCommand(i1, logicToUiManager);
         AddImageCardCommand addImagecardi2Command = new AddImageCardCommand(i2, logicToUiManager);

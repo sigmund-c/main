@@ -18,7 +18,9 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import cardibuddy.model.flashcard.CardType;
 import cardibuddy.model.testsession.AnswerType;
+import cardibuddy.testutil.FlashcardBuilder;
 import org.junit.jupiter.api.Test;
 
 import cardibuddy.commons.core.GuiSettings;
@@ -48,7 +50,6 @@ import cardibuddy.storage.JsonUserPrefsStorage;
 import cardibuddy.storage.Storage;
 import cardibuddy.storage.StorageManager;
 import cardibuddy.storage.UserPrefsStorage;
-import cardibuddy.testutil.CardBuilder;
 import cardibuddy.ui.UiManager;
 
 import javafx.beans.property.ReadOnlyProperty;
@@ -72,38 +73,10 @@ public class AddFlashcardCommandTest {
     private UiManager ui = new UiManager(logic);
     private LogicToUiManager logicToUiManager = new LogicToUiManager(ui);
 
-    //@Test
-    //public void constructor_nullFlashcard_throwsNullPointerException() {
-    //    assertThrows(NullPointerException.class, () -> new AddFlashcardCommand(null, null));
-    //}
-
-    //@Test
-    //public void execute_flashcardAcceptedByModel_addSuccessful() throws Exception {
-    //    ModelStub modelStub = new ModelStub();
-    //    Flashcard valid = new CardBuilder().build();
-
-    //    AddFlashcardCommand addFlashcardCommand = new AddFlashcardCommand(valid, logicToUiManager);
-    //    CommandResult commandResult = addFlashcardCommand.execute(modelStub, commandHistory);
-
-    //  assertEquals(String.format(AddFlashcardCommand.MESSAGE_SUCCESS, valid), commandResult.getFeedbackToUser());
-    //    assertEquals(Arrays.asList(valid), flashcardsAdded);
-    //    assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
-    //}
-
-    //@Test
-    //public void execute_duplicateFlashcard_throwsCommandException() {
-    //    Flashcard valid = new CardBuilder().build();
-    //    AddFlashcardCommand addFlashcardCommand = new AddFlashcardCommand(valid, logicToUiManager);
-    //    ModelStub modelStub = new ModelStubAcceptingFlashcardAdded();
-
-    //    assertThrows(CommandException.class, AddFlashcardCommand.MESSAGE_DUPLICATE_FLASHCARD, () ->
-    //           addFlashcardCommand.execute(modelStub, commandHistory));
-    //}
-
     @Test
     public void equals() {
-        Flashcard f1 = new CardBuilder().withQuestion("This card returns true").buildFlashcard();
-        Flashcard f2 = new CardBuilder().withQuestion("This card returns false").buildFlashcard();
+        Flashcard f1 = new FlashcardBuilder().withQuestion("This card returns true").build();
+        Flashcard f2 = new FlashcardBuilder().withQuestion("This card returns false").build();
 
         AddFlashcardCommand addFlashcardf1Command = new AddFlashcardCommand(f1, logicToUiManager);
         AddFlashcardCommand addFlashcardf2Command = new AddFlashcardCommand(f2, logicToUiManager);
@@ -381,6 +354,16 @@ public class AddFlashcardCommandTest {
 
         @Override
         public AnswerType getCurrentAnswerType() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CardType getCurrentCardType() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getCurrentCardPath() {
             throw new AssertionError("This method should not be called.");
         }
 
