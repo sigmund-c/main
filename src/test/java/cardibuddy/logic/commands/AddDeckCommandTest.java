@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static cardibuddy.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -14,21 +13,20 @@ import org.junit.jupiter.api.Test;
 
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.logic.CommandHistory;
+import cardibuddy.model.CardiBuddy;
+import cardibuddy.model.Model;
+import cardibuddy.model.ReadOnlyCardiBuddy;
+import cardibuddy.model.ReadOnlyUserPrefs;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.CardType;
 import cardibuddy.model.flashcard.Question;
-import cardibuddy.model.CardiBuddy;
-import cardibuddy.model.ReadOnlyCardiBuddy;
-import cardibuddy.model.Model;
-import cardibuddy.model.ReadOnlyUserPrefs;
 import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
 import cardibuddy.testutil.DeckBuilder;
 
-import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 
 public class AddDeckCommandTest {

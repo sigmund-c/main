@@ -15,11 +15,11 @@ import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.CardiBuddy;
+import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.SearchDeckKeywordsPredicate;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.SearchCardKeywordsPredicate;
-import cardibuddy.model.Model;
 import cardibuddy.testutil.EditCardDescriptorBuilder;
 import cardibuddy.testutil.EditDeckDescriptorBuilder;
 

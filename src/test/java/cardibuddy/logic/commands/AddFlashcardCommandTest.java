@@ -2,10 +2,8 @@ package cardibuddy.logic.commands;
 
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-//import static cardibuddy.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,6 +25,10 @@ import cardibuddy.logic.LogicManager;
 import cardibuddy.logic.LogicToUi;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.model.CardiBuddy;
+import cardibuddy.model.Model;
+import cardibuddy.model.ModelManager;
+import cardibuddy.model.ReadOnlyCardiBuddy;
+import cardibuddy.model.ReadOnlyUserPrefs;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.deck.Title;
@@ -34,14 +36,10 @@ import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.CardType;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
-import cardibuddy.model.Model;
-import cardibuddy.model.ModelManager;
-import cardibuddy.model.ReadOnlyCardiBuddy;
-import cardibuddy.model.ReadOnlyUserPrefs;
 import cardibuddy.model.tag.Tag;
 import cardibuddy.model.testsession.AnswerType;
-import cardibuddy.model.testsession.exceptions.EmptyDeckException;
 import cardibuddy.model.testsession.TestResult;
+import cardibuddy.model.testsession.exceptions.EmptyDeckException;
 import cardibuddy.storage.CardiBuddyStorage;
 import cardibuddy.storage.JsonCardiBuddyStorage;
 import cardibuddy.storage.JsonUserPrefsStorage;
@@ -51,7 +49,6 @@ import cardibuddy.storage.UserPrefsStorage;
 import cardibuddy.testutil.FlashcardBuilder;
 import cardibuddy.ui.UiManager;
 
-import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -63,9 +60,9 @@ public class AddFlashcardCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
     private Path userPrefsFilePath = Paths.get("preferences.json");
-    private UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsFilePath);
     private Path cardibuddyFilePath = Paths.get("data" , "cardibuddy.json");
     private CardiBuddyStorage cardiBuddyStorage = new JsonCardiBuddyStorage(cardibuddyFilePath);
+    private UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsFilePath);
     private Storage storage = new StorageManager(cardiBuddyStorage, userPrefsStorage);
     private Model model = new ModelManager();
     private Logic logic = new LogicManager(model, storage);

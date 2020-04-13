@@ -7,7 +7,6 @@ import static cardibuddy.testutil.TypicalIndexes.INDEX_SECOND_DECK;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
 import java.nio.file.Paths;
 
 import cardibuddy.commons.core.Messages;
@@ -27,6 +26,8 @@ import cardibuddy.storage.StorageManager;
 import cardibuddy.storage.UserPrefsStorage;
 import cardibuddy.ui.Ui;
 import cardibuddy.ui.UiManager;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for

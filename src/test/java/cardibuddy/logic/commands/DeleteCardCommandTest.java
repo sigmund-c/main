@@ -1,5 +1,6 @@
 package cardibuddy.logic.commands;
 
+import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX;
 import static cardibuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static cardibuddy.testutil.TypicalDecks.getTypicalCardiBuddy;
 import static cardibuddy.testutil.TypicalIndexes.INDEX_FIRST_CARD;
@@ -7,7 +8,8 @@ import static cardibuddy.testutil.TypicalIndexes.INDEX_SECOND_CARD;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import cardibuddy.commons.core.Messages;
 import cardibuddy.commons.core.index.Index;
@@ -27,7 +29,8 @@ import cardibuddy.storage.UserPrefsStorage;
 import cardibuddy.ui.Ui;
 import cardibuddy.ui.UiManager;
 
-import java.nio.file.Paths;
+import org.junit.jupiter.api.Test;
+
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -35,14 +38,15 @@ import java.nio.file.Paths;
  */
 public class DeleteCardCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
-    UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(Paths.get("preferences.json"));
-    UserPrefs userPrefs = new UserPrefs();
-    CardiBuddyStorage cardiBuddyStorage = new JsonCardiBuddyStorage(userPrefs.getCardiBuddyFilePath());
+    private Path userPrefsFilePath = Paths.get("preferences.json");
+    private Path cardibuddyFilePath = Paths.get("data" , "cardibuddy.json");
+    private CardiBuddyStorage cardiBuddyStorage = new JsonCardiBuddyStorage(cardibuddyFilePath);
+    private UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsFilePath);
     private Storage storage = new StorageManager(cardiBuddyStorage, userPrefsStorage);
-    private Model model = new ModelManager(getTypicalCardiBuddy(), new UserPrefs());
+    private Model model = new ModelManager();
     private Logic logic = new LogicManager(model, storage);
-    private Ui ui = new UiManager(logic);
-    private LogicToUiManager logicToUiManager = new LogicToUiManager((UiManager) ui);
+    private UiManager ui = new UiManager(logic);
+    private LogicToUiManager logicToUiManager = new LogicToUiManager(ui);
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
@@ -50,7 +54,7 @@ public class DeleteCardCommandTest {
         DeleteCardCommand deleteCardCommand = new DeleteCardCommand(outOfBoundIndex, logicToUiManager);
 
         assertCommandFailure(deleteCardCommand, model, commandHistory,
-                Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
+                MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
     }
 
     @Test
@@ -95,5 +99,9 @@ public class DeleteCardCommandTest {
         model.updateFilteredFlashcardList(p -> false);
 
         assertTrue(model.getFilteredFlashcardList().isEmpty());
+    }
+
+    public void getUserPrefsStorage() {
+        this.userPrefsStorage;
     }
 }
