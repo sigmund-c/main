@@ -113,7 +113,7 @@ public class TestSessionTest {
     void testSubmitCorrectAnswer() {
         TestSession testSession = new TestSession(deck);
         testSession.getFirstQuestion();
-        testSession = submitCorrectAnswer(testSession, 0);
+        //testSession = submitCorrectAnswer(testSession, 0);
         int expectedTestQueueSize = deck.getFlashcardList().size() - 1;
         assertEquals(expectedTestQueueSize, testSession.getTestQueueSize());
     }
@@ -124,7 +124,7 @@ public class TestSessionTest {
     void testSubmitWrongAnswer() {
         TestSession testSession = new TestSession(deck);
         testSession.getFirstQuestion();
-        testSession = submitWrongAnswer(testSession);
+        //testSession = submitWrongAnswer(testSession);
         int expectedTestQueueSize = deck.getFlashcardList().size();
         assertEquals(expectedTestQueueSize, testSession.getTestQueueSize());
     }
@@ -134,7 +134,7 @@ public class TestSessionTest {
     void testSkipCorrectAnswer() {
         TestSession testSession = new TestSession(deck);
         testSession.getFirstQuestion();
-        testSession = submitCorrectAnswer(testSession, 0);
+        //testSession = submitCorrectAnswer(testSession, 0);
         assertThrows(AlreadyCorrectException.class, testSession::skipQuestion);
     }
 
@@ -165,9 +165,9 @@ public class TestSessionTest {
     void testAnsweringQuestions() {
         TestSession testSession = new TestSession(deck);
         testSession.getFirstQuestion();
-        testSession = submitCorrectAnswer(testSession, 0);
+        //testSession = submitCorrectAnswer(testSession, 0);
         testSession.getNextQuestion();
-        testSession = submitWrongAnswer(testSession);
+        //testSession = submitWrongAnswer(testSession);
         int resultsSize = testSession.getTestResults().size();
         assertEquals(2, resultsSize);
     }
@@ -196,7 +196,7 @@ public class TestSessionTest {
     void testForceCorrectThrowsAlreadyCorrectException() {
         TestSession testSession = new TestSession(deck);
         testSession.getFirstQuestion();
-        testSession = submitCorrectAnswer(testSession, 0);
+        //testSession = submitCorrectAnswer(testSession, 0);
         assertThrows(AlreadyCorrectException.class, testSession::forceCorrect);
     }
 
