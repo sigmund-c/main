@@ -49,7 +49,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 * *Decks* are the containers that contain the flashcard. A flashcard can only exist in a deck.
 * *Flashcards* are cards that contain revision materials, specifically a question and an answer.
-* *Statistics* is the numererical, summarized version of your data, based on your test history. Your statistics can serve as a guideline for you to decide which areas you need to work on, and which areas you are familiar with.
+* *Test Session* emulates how you would test yourself with a deck of flashcards in real life. You get to view each flashcard in a chosen deck one by one, question first. Once you have decided on your answer to it, you can 'flip' the flashcard and see the answer. See <<Testing, here>> for more details on using test sessions.
+* *Statistics* is the numerical, summarized version of your data, based on your test history. Your statistics can serve as a guideline for you to decide which areas you need to work on, and which areas you are familiar with.
+
 
 *Common Terminologies*
 
@@ -336,7 +338,9 @@ Displays decks with both the tags `hard` and `coremodule`.
 <<<<<<< HEAD
 // end::filter[]
 
+//tag::ash-testing[]
 === Testing
+==== Overview
 Of course, you did not create all those decks and flashcards just so you can admire them! It's time to get your revision on. Start a `test session` for a deck to begin testing yourself!
 
 A `test session` works just like how flashcard testing works in real life - You look at the question, think of the answer, and 'flip' the card around to see if your answer matches the one on the flashcard.
@@ -348,7 +352,7 @@ A `test session` in CardiBuddy is special - it includes a *retesting* feature to
 
 When you answer a flashcard's question wrongly, you will encounter it again later on in the same `test session`. There is no need to do this manually - CardiBuddy does this for you too.
 
-Hence if you keep getting a question wrong, a `test session` can go on and on forever - unless you finally get it right, or you quit the test session!
+Hence if you keep getting a question wrong, a `test session` can go on and on forever - unless you finally get it right, or you manually quit the `test session`!
 
 ==== Starting a test session for a deck: `test INDEX`
 To start your `test session`, replace `INDEX` with the index number of the deck you wish to test. This number will be to the _left_ of the title of your deck, when you are viewing all your decks as a list.
@@ -356,7 +360,7 @@ To start your `test session`, replace `INDEX` with the index number of the deck 
 What this command does:
 
 * A test session will immediately replace the normal deck and flashcard list view.
-* The first question of the test session will be displayed.
+* The first question of the test session will be shown to you.
 
 Example Usage:
 
@@ -415,7 +419,7 @@ Note:
 What this command does:
 
 * Allows you to quit the current test session even before it is completed.
-
+//end::ash-testing[]
 === Displaying History
 
 ==== Displaying the command history: 'history'

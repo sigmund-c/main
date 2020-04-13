@@ -322,7 +322,7 @@ The above commands can only be triggered when certain conditions are met. The fo
 |=======================================================================
 |Command Class|Corresponding user input|Description|Conditions|Exceptions Thrown
 |TestCommand|`test INDEX`|Creates a `TestSession` for the specified deck at that index.|-|EmptyDeckException
-|AnswerCommand|`ans USER_ANSWER`|Submits the user's answer to the `TestSession`.|The user has not already submitted an answer to the displayed question.|AlreadyAnsweredException
+|AnswerCommand|`ans USER_ANSWER`|Submits the user's answer to the `TestSession`.|The user has not already submitted an answer to the displayed question. The answer submitted must be comply with the question type (True False, MCQ, or Short Answer)|AlreadyAnsweredException, IncorrectAnswerFormatException
 |NextCommand|`next`|Displays the next question.|The user must already have answered the question.|UnansweredQuestionException
 |SkipCommand|`skip`|Skips the current question. Does not require the user to submit an answer.|The user must not have submitted a correct answer.|AlreadyCorrectException
 |QuitCommand|`quit`|Quits the test session.|-|-
