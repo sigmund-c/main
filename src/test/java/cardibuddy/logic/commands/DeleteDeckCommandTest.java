@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
  * {@code DeleteCommand}.
  */
 public class DeleteDeckCommandTest {
-    private CommandHistory commandHistory = new CommandHistory();   
+    private CommandHistory commandHistory = new CommandHistory();
     private Path userPrefsFilePath = Paths.get("preferences.json");
     private Path cardibuddyFilePath = Paths.get("data" , "cardibuddy.json");
     private CardiBuddyStorage cardiBuddyStorage = new JsonCardiBuddyStorage(cardibuddyFilePath);
