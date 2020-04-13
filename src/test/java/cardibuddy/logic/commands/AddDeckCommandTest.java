@@ -8,24 +8,22 @@ import static cardibuddy.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
-import cardibuddy.model.flashcard.CardType;
-import cardibuddy.model.testsession.AnswerType;
 import org.junit.jupiter.api.Test;
 
 import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.logic.CommandHistory;
-import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.deck.Deck;
-import cardibuddy.model.Model;
-import cardibuddy.model.ReadOnlyUserPrefs;
-import cardibuddy.model.CardiBuddy;
-import cardibuddy.model.ReadOnlyCardiBuddy;
 import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.flashcard.Card;
+import cardibuddy.model.flashcard.CardType;
 import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.CardiBuddy;
+import cardibuddy.model.ReadOnlyCardiBuddy;
+import cardibuddy.model.Model;
+import cardibuddy.model.ReadOnlyUserPrefs;
+import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
 import cardibuddy.testutil.DeckBuilder;
@@ -39,11 +37,6 @@ public class AddDeckCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
 
-    //@Test
-    //public void constructor_nullDeck_throwsNullPointerException() {
-    //    assertThrows(NullPointerException.class, () -> new AddDeckCommand(null));
-    //}
-
     @Test
     public void execute_deckAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingDeckAdded modelStub = new ModelStubAcceptingDeckAdded();
@@ -55,16 +48,6 @@ public class AddDeckCommandTest {
         //assertEquals(Arrays.asList(valid), modelStub.decksAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
-
-    //@Test
-    //public void execute_duplicateDeck_throwsCommandException() {
-    //    Deck valid = new DeckBuilder().build();
-    //    AddDeckCommand addDeckCommand = new AddDeckCommand(valid);
-    //    ModelStub modelStub = new ModelStubWithDeck(valid);
-
-        //assertThrows(CommandException.class, AddDeckCommand.MESSAGE_DUPLICATE_DECK, () ->
-        //       addDeckCommand.execute(modelStub, commandHistory));
-    //}
 
     @Test
     public void equals() {
