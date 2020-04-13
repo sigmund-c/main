@@ -1,9 +1,9 @@
 package cardibuddy.storage;
 
-import cardibuddy.commons.exceptions.IllegalValueException;
-import cardibuddy.model.deck.Statistics;
-import cardibuddy.model.deck.Title;
-import cardibuddy.model.tag.Tag;
+import static cardibuddy.storage.JsonAdaptedDeck.MISSING_FIELD_MESSAGE_FORMAT;
+import static cardibuddy.testutil.Assert.assertThrows;
+import static cardibuddy.testutil.TypicalDecks.POSTGRESQL;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +11,10 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-
-import static cardibuddy.storage.JsonAdaptedDeck.MISSING_FIELD_MESSAGE_FORMAT;
-import static cardibuddy.testutil.Assert.assertThrows;
-import static cardibuddy.testutil.TypicalDecks.POSTGRESQL;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import cardibuddy.commons.exceptions.IllegalValueException;
+import cardibuddy.model.deck.Statistics;
+import cardibuddy.model.deck.Title;
+import cardibuddy.model.tag.Tag;
 
 public class JsonAdaptedDeckTest {
     private static final String INVALID_TITLE = "CS!!";

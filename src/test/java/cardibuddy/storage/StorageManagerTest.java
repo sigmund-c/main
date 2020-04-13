@@ -1,10 +1,7 @@
 package cardibuddy.storage;
 
-import cardibuddy.commons.core.GuiSettings;
-import cardibuddy.model.CardiBuddy;
-import cardibuddy.model.ReadOnlyCardiBuddy;
-import cardibuddy.model.UserPrefs;
-import cardibuddy.model.deck.Deck;
+import static cardibuddy.testutil.TypicalDecks.getTypicalDecks;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
 
@@ -12,8 +9,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import static cardibuddy.testutil.TypicalDecks.getTypicalDecks;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import cardibuddy.commons.core.GuiSettings;
+import cardibuddy.model.CardiBuddy;
+import cardibuddy.model.ReadOnlyCardiBuddy;
+import cardibuddy.model.UserPrefs;
+import cardibuddy.model.deck.Deck;
 
 public class StorageManagerTest {
 

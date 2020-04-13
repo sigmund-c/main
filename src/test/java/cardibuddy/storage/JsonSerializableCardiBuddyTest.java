@@ -3,15 +3,15 @@ package cardibuddy.storage;
 import static cardibuddy.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import cardibuddy.commons.exceptions.IllegalValueException;
-import cardibuddy.commons.util.JsonUtil;
-import cardibuddy.model.CardiBuddy;
-import cardibuddy.testutil.TypicalDecks;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
+
+import cardibuddy.commons.exceptions.IllegalValueException;
+import cardibuddy.commons.util.JsonUtil;
+import cardibuddy.model.CardiBuddy;
+import cardibuddy.testutil.TypicalDecks;
 
 public class JsonSerializableCardiBuddyTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableCardiBuddyTest");

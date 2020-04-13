@@ -1,12 +1,11 @@
 package cardibuddy.testutil;
 
-import cardibuddy.model.deck.Deck;
-import cardibuddy.model.flashcard.Card;
-import cardibuddy.model.flashcard.Flashcard;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import cardibuddy.model.flashcard.Card;
+
 
 public class TypicalFlashcards {
 
