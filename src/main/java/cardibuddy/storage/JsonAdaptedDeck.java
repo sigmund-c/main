@@ -1,5 +1,6 @@
 package cardibuddy.storage;
 
+import cardibuddy.model.flashcard.exceptions.DuplicateFlashcardException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -81,13 +82,13 @@ public class JsonAdaptedDeck extends JsonAdaptedView {
         final Set<Tag> modelTags = new HashSet<>(deckTags);
         Deck newDeck = new Deck(modelTitle, modelTags);
 
-        final List<Card> modelFlashcards = new ArrayList<>();
         for (JsonAdaptedFlashcard flashcard : flashcards) {
-            newDeck.addCard(flashcard.toModelType(newDeck));
+            try {
+                newDeck.addCard(flashcard.toModelType(newDeck));
+            } catch (DuplicateFlashcardException e) {
+
+            }
         }
-
-        // TODO: add if conditions here to check formatting
-
         return newDeck; // TODO: to replace params with actual values
     }
 
