@@ -23,12 +23,12 @@ public class UniqueDeckListTest {
     private final UniqueDeckList uniqueDeckList = new UniqueDeckList();
 
     @Test
-    public void contains_nullDeck_throwsNullPointerException() {
+    public void containsNullDeckThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueDeckList.contains(null));
     }
 
     @Test
-    public void contains_deckNotInList_returnsFalse() {
+    public void containsDeckNotInListReturnsFalse() {
         assertFalse(uniqueDeckList.contains(DJANGO));
     }
 
@@ -39,7 +39,7 @@ public class UniqueDeckListTest {
     }
 
     @Test
-    public void contains_deckWithSameIdentityFieldsInList_returnsTrue() {
+    public void containsDeckWithSameIdentityFieldsInListReturnsTrue() {
         uniqueDeckList.add(DJANGO);
         Deck editedDjango = new DeckBuilder(DJANGO).withTags(VALID_TAG_HARD)
                 .build();
@@ -47,33 +47,33 @@ public class UniqueDeckListTest {
     }
 
     @Test
-    public void add_nullDeck_throwsNullPointerException() {
+    public void addNullDeckThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueDeckList.add(null));
     }
 
     @Test
-    public void add_duplicateDeck_throwsDuplicateDeckException() {
+    public void addDuplicateDeckThrowsDuplicateDeckException() {
         uniqueDeckList.add(DJANGO);
         assertThrows(DuplicateDeckException.class, () -> uniqueDeckList.add(DJANGO));
     }
 
     @Test
-    public void setDeck_nullTargetDeck_throwsNullPointerException() {
+    public void setDeckNullTargetDeckThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueDeckList.setDeck(null, DJANGO));
     }
 
     @Test
-    public void setDeck_nullEditedDeck_throwsNullPointerException() {
+    public void setDeckNullEditedDeckThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueDeckList.setDeck(DJANGO, null));
     }
 
     @Test
-    public void setDeck_targetDeckNotInList_throwsDeckNotFoundException() {
+    public void setDeckTargetDeckNotInListThrowsDeckNotFoundException() {
         assertThrows(DeckNotFoundException.class, () -> uniqueDeckList.setDeck(DJANGO, DJANGO));
     }
 
     @Test
-    public void setDeck_editedDeckIsSameDeck_success() {
+    public void setDeckEditedDeckIsSameDeckSuccess() {
         uniqueDeckList.add(DJANGO);
         uniqueDeckList.setDeck(DJANGO, DJANGO);
         UniqueDeckList expectedUniqueDeckList = new UniqueDeckList();
@@ -82,7 +82,7 @@ public class UniqueDeckListTest {
     }
 
     @Test
-    public void setDeck_editedDeckHasSameIdentity_success() {
+    public void setDeckEditedDeckHasSameIdentitySuccess() {
         uniqueDeckList.add(DJANGO);
         Deck editedDjango = new DeckBuilder(DJANGO).withTags(VALID_TAG_HARD)
                 .build();
@@ -93,7 +93,7 @@ public class UniqueDeckListTest {
     }
 
     @Test
-    public void setDeck_editedDeckHasDifferentIdentity_success() {
+    public void setDeckEditedDeckHasDifferentIdentitySuccess() {
         uniqueDeckList.add(DJANGO);
         uniqueDeckList.setDeck(DJANGO, REACT);
         UniqueDeckList expectedUniqueDeckList = new UniqueDeckList();
@@ -102,24 +102,24 @@ public class UniqueDeckListTest {
     }
 
     @Test
-    public void setDeck_editedDeckHasNonUniqueIdentity_throwsDuplicateDeckException() {
+    public void setDeckEditedDeckHasNonUniqueIdentityThrowsDuplicateDeckException() {
         uniqueDeckList.add(DJANGO);
         uniqueDeckList.add(REACT);
         assertThrows(DuplicateDeckException.class, () -> uniqueDeckList.setDeck(DJANGO, REACT));
     }
 
     @Test
-    public void remove_nullDeck_throwsNullPointerException() {
+    public void removeNullDeckThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueDeckList.remove(null));
     }
 
     @Test
-    public void remove_deckDoesNotExist_throwsDeckNotFoundException() {
+    public void removDeckDoesNotExistThrowsDeckNotFoundException() {
         assertThrows(DeckNotFoundException.class, () -> uniqueDeckList.remove(DJANGO));
     }
 
     @Test
-    public void remove_existingDeck_removesDeck() {
+    public void removeExistingDeckRemovesDeck() {
         uniqueDeckList.add(DJANGO);
         uniqueDeckList.remove(DJANGO);
         UniqueDeckList expectedUniqueDeckList = new UniqueDeckList();
@@ -127,12 +127,12 @@ public class UniqueDeckListTest {
     }
 
     @Test
-    public void setDecks_nullUniqueDeckList_throwsNullPointerException() {
+    public void setDecksNullUniqueDeckListThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueDeckList.setDecks((UniqueDeckList) null));
     }
 
     @Test
-    public void setDecks_uniqueDeckList_replacesOwnListWithProvidedUniqueDeckList() {
+    public void setDecksUniqueDeckListReplacesOwnListWithProvidedUniqueDeckList() {
         uniqueDeckList.add(DJANGO);
         UniqueDeckList expectedUniqueDeckList = new UniqueDeckList();
         expectedUniqueDeckList.add(REACT);
@@ -141,12 +141,12 @@ public class UniqueDeckListTest {
     }
 
     @Test
-    public void setDecks_nullList_throwsNullPointerException() {
+    public void setDecksNullListThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueDeckList.setDecks((List<Deck>) null));
     }
 
     @Test
-    public void setDecks_list_replacesOwnListWithProvidedList() {
+    public void setDecksListReplacesOwnListWithProvidedList() {
         uniqueDeckList.add(DJANGO);
         List<Deck> deckList = Collections.singletonList(REACT);
         uniqueDeckList.setDecks(deckList);
@@ -156,13 +156,13 @@ public class UniqueDeckListTest {
     }
 
     @Test
-    public void setDecks_listWithDuplicateDecks_throwsDuplicateDeckException() {
+    public void setDecksListWithDuplicateDeckThrowsDuplicateDeckException() {
         List<Deck> listWithDuplicateDecks = Arrays.asList(DJANGO, DJANGO);
         assertThrows(DuplicateDeckException.class, () -> uniqueDeckList.setDecks(listWithDuplicateDecks));
     }
 
     @Test
-    public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
+    public void asUnmodifiableObservableListModifyListThrowsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueDeckList.asUnmodifiableObservableList().remove(0));
     }
