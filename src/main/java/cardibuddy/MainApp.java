@@ -2,8 +2,8 @@ package cardibuddy;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.logging.Logger;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import cardibuddy.commons.core.Config;
 import cardibuddy.commons.core.LogsCenter;
@@ -49,7 +49,7 @@ public class MainApp extends Application {
     protected Config config;
 
     @Override
-     void init() throws Exception {
+    public void init() throws Exception {
         logger.info("=============================[ Initializing CardiBuddy ]===========================");
         super.init();
 
@@ -79,7 +79,7 @@ public class MainApp extends Application {
      * The data from the sample cardibuddy book will be used instead if {@code storage}'s cardibuddy book is not found,
      * or an empty cardibuddy book will be used instead if errors occur when reading {@code storage}'s cardibuddy book.
      */
-    public Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyCardiBuddy> cardiBuddyOptional;
         ReadOnlyCardiBuddy initialData;
         try {
@@ -99,7 +99,7 @@ public class MainApp extends Application {
         return new ModelManager(initialData, userPrefs);
     }
 
-    public void initLogging(Config config) {
+    private void initLogging(Config config) {
         LogsCenter.init(config);
     }
 
@@ -108,7 +108,7 @@ public class MainApp extends Application {
      * The default file path {@code Config#DEFAULT_CONFIG_FILE} will be used instead
      * if {@code configFilePath} is null.
      */
-    public Config initConfig(Path configFilePath) {
+    protected Config initConfig(Path configFilePath) {
         Config initializedConfig;
         Path configFilePathUsed;
 
@@ -144,7 +144,7 @@ public class MainApp extends Application {
      * or a new {@code UserPrefs} with default configuration if errors occur when
      * reading from the file.
      */
-    public UserPrefs initPrefs(UserPrefsStorage storage) {
+    protected UserPrefs initPrefs(UserPrefsStorage storage) {
         Path prefsFilePath = storage.getUserPrefsFilePath();
         logger.info("Using prefs file : " + prefsFilePath);
 
