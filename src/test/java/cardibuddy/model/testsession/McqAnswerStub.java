@@ -26,4 +26,3 @@ public class McqAnswerStub extends McqAnswer {
         return answer;
     }
 }
->>>>>>> upstream/master
