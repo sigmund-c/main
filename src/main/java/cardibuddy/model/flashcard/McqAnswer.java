@@ -118,9 +118,10 @@ public class McqAnswer implements Answer {
      * @param toCheck
      * @return true if answer is valid.
      */
-    public boolean checkAnswer(String toCheck) {
+    @Override
+    public boolean checkAnswer(String toCheck) throws IllegalArgumentException {
         requireNonNull(toCheck);
-        if (!toCheck.equals("A") && !toCheck.equals("B") && !toCheck.equals("C")) {
+        if (!(toCheck.equals("A") || toCheck.equals("B") || toCheck.equals("C"))) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
         return toCheck.equals(correctAnswer);
@@ -133,6 +134,11 @@ public class McqAnswer implements Answer {
     @Override
     public String toString() {
         return original;
+    }
+
+    @Override
+    public String getCorrectAnswer() {
+        return correctAnswer;
     }
 
     @Override

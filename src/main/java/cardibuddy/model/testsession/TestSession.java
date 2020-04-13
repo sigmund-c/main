@@ -13,6 +13,7 @@ import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.TfAnswer;
 import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
+import cardibuddy.model.testsession.exceptions.IncorrectAnswerFormatException;
 import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
 
 /**
@@ -107,16 +108,17 @@ public class TestSession {
                 // user should not be allowed to skip the question if they already got it correct
                 throw new AlreadyCorrectException();
             }
-            TestResult newTestResult = new TestResult(prevTestResult);
-            // call this other TestResult constructor to remember the number of attempts
+            TestResult newTestResult = new TestResult(Result.SKIPPED);
+            newTestResult.setNumTries(prevTestResult.getNumTries());
+            // set the number of tries to that of the previous result
             testResults.put(current, newTestResult);
         } else {
             testResults.put(current, new TestResult(Result.SKIPPED));
         }
 
-        if (hasAnswered) {
-            testQueue.removeLast(); // remove the flashcard that was set to be retested
-            logger.info("This flashcard removed from the back of the test queue (not being retested again).");
+        if (hasAnswered) { // if this flashcard was set to be retested
+            testQueue.removeLast(); // remove the flashcard from the back of test queue
+            logger.info("This flashcard is removed from the back of the test queue (not being retested again).");
         }
 
         current = testQueue.removeFirst();
@@ -170,11 +172,25 @@ public class TestSession {
      * @param userAnswer the String representation of the user's answer
      * @return the TestResult of the test
      */
-    public TestResult submitAnswer(String userAnswer) {
-        // compare the userAnswer, and get the result of the test
-        TestResult testResult = new TestResult(current.getAnswer(), userAnswer);
+    public TestResult submitAnswer(String userAnswer) throws IncorrectAnswerFormatException {
+        // check the result
+        boolean isCorrect;
+        try {
+            isCorrect = current.getAnswer().checkAnswer(userAnswer);
+        } catch (IllegalArgumentException e) {
+            throw new IncorrectAnswerFormatException();
+        }
+
+        TestResult testResult = new TestResult(current.getAnswer(), userAnswer); // create the new test result object
+
+        if (isCorrect) {
+            testResult.setResult(Result.CORRECT);
+        } else {
+            testResult.setResult(Result.WRONG);
+        }
+
         // if flashcard was already tested before, update the number of tries.
-        // There no need to update the number of tries if this is the first time testing the flashcard.
+        // There is no need to update the number of tries if this is the first time testing the flashcard.
         // By default, numTries is set to 1.
         if (testResults.containsKey(current)) {
             TestResult prevResult = testResults.get(current);
@@ -182,9 +198,10 @@ public class TestSession {
             testResult.setNumTries(numTries + 1); // increase numTries by 1
             logger.info("Submitting answer for a previously tested flashcard.");
         }
+
         testResults.put(current, testResult); // store the result
 
-        // add the current flashcard back into the test queue
+        // add the current flashcard back into the test queue if answered incorrectly
         if (testResult.getResult() == Result.WRONG) {
             testQueue.addLast(current);
             logger.info("Answer is wrong, appending to back of test queue.");
@@ -215,10 +232,13 @@ public class TestSession {
     public AnswerType getCurrentAnswerType() {
         Answer answer = current.getAnswer();
         if (answer instanceof TfAnswer) {
+            logger.info("Tf answer");
             return AnswerType.TRUE_FALSE;
         } else if (answer instanceof McqAnswer) {
+            logger.info("Mcq answer");
             return AnswerType.MCQ;
         } else {
+            logger.info("short answer");
             return AnswerType.SHORT_ANSWER;
         }
     }

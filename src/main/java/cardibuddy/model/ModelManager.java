@@ -20,6 +20,7 @@ import cardibuddy.model.testsession.TestSession;
 import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
 import cardibuddy.model.testsession.exceptions.EmptyTestQueueException;
+import cardibuddy.model.testsession.exceptions.IncorrectAnswerFormatException;
 import cardibuddy.model.testsession.exceptions.NoOngoingTestException;
 import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
 import javafx.collections.ObservableList;
@@ -232,7 +233,7 @@ public class ModelManager implements Model {
      * @return A Result enums that represents the result of the user's answer.
      */
     @Override
-    public TestResult submitAnswer(String userAnswer) {
+    public TestResult submitAnswer(String userAnswer) throws IncorrectAnswerFormatException {
         return testSession.submitAnswer(userAnswer);
     }
 

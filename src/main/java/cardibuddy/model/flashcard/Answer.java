@@ -48,6 +48,8 @@ public interface Answer {
         return text.matches(MCQ_REGEX);
     }
 
+    String getCorrectAnswer();
+
     boolean isValid(String test);
 
     boolean checkAnswer(String toCheck);
