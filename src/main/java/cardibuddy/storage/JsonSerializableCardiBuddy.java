@@ -24,7 +24,6 @@ class JsonSerializableCardiBuddy {
     private final List<JsonAdaptedDeck> decks = new ArrayList<>();
     private final List<JsonAdaptedFlashcard> flashcards = new ArrayList<>();
     private final JsonAdaptedStatistic statistics;
-    
     /**
      * Constructs a {@code JsonSerializableCardiBuddy} with the given flashcards.
      */

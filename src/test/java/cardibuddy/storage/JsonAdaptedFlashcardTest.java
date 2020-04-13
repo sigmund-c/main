@@ -2,7 +2,7 @@ package cardibuddy.storage;
 
 import static cardibuddy.storage.JsonAdaptedFlashcard.MISSING_FIELD_MESSAGE_FORMAT;
 import static cardibuddy.testutil.Assert.assertThrows;
-import static cardibuddy.testutil.TypicalFlashcards.POWERHOUSE;
+import static cardibuddy.testutil.TypicalFlashcards.HELLOWORLD;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
@@ -13,17 +13,17 @@ import cardibuddy.testutil.DeckBuilder;
 
 
 public class JsonAdaptedFlashcardTest {
-    private static final String VALID_DECK = POWERHOUSE.getDeck().toString();
-    private static final String VALID_QUESTION = POWERHOUSE.getQuestion().toString();
-    private static final String VALID_ANSWER = POWERHOUSE.getAnswer().toString();
-    private static final String VALID_PATH = POWERHOUSE.getPath();
+    private static final String VALID_DECK = HELLOWORLD.getDeck().toString();
+    private static final String VALID_QUESTION = HELLOWORLD.getQuestion().toString();
+    private static final String VALID_ANSWER = HELLOWORLD.getAnswer().toString();
+    private static final String VALID_PATH = HELLOWORLD.getPath();
 
     @Test
     public void toModelType_validFlashcardDetails_returnsFlashcard() throws Exception {
         JsonAdaptedFlashcard flashcard = new JsonAdaptedFlashcard(VALID_DECK, VALID_QUESTION, VALID_ANSWER, VALID_PATH);
         // The Deck to be input doesn't have to be the same as the one used for JsonAdaptedFlashcard constructor
         Deck deck = new DeckBuilder().build();
-        assertEquals(POWERHOUSE, flashcard.toModelType(deck));
+        assertEquals(HELLOWORLD, flashcard.toModelType(deck));
     }
 
     @Test
