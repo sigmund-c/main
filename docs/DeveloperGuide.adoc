@@ -351,27 +351,6 @@ image::ParserUtilShortAnsDiagram.png[]
 * More specific exceptions were thrown such as `WrongMcqAnswerException` and `WrongTfAnswerException` due to the large number of classes involved in the creation of a `Card`
 to help in pinpointing the input errors.
 
-=== Search and Filter feature
-==== Design
-Users can choose to find a `Deck` or a `Flashcard` through:
-
-* searching by keywords from the title of a `Deck` or from the `Question` from a `Flashcard`.
-* filtering by tags from the `Tag(s)` associated with a `Deck`
-
-Both `search` and `filter` have the and-or functionality where adding `&` between keywords returns decks and flashcards
-with both terms before and after the `&` symbol.
-For example, `filter Y1 & Hard` will return decks and flashcards that are tagged with both `Y1` and `hard`.
-
-The following sequence diagram shows how the `Search` command works:
-
-image::SearchFilterDiagram.png[]
-
-Figure X. Component interactions for a Search command
-
-Calling the `search` command creates a predicate based on the given keywords and passed as an argument to a `SearchCommand` object.
-The `execute()` method is then called to filter the decks accordingly to the predicate and it returns a `CommandResult` object.
-
-Future implementations would return flashcards and decks that are filtered accordingly to the predicate. (by v1.3)
 // end::jingying[]
 
 === Test feature
