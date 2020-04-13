@@ -11,6 +11,7 @@ import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.testsession.Result;
 import cardibuddy.model.testsession.TestResult;
+import cardibuddy.model.testsession.exceptions.IncorrectAnswerFormatException;
 
 /**
  * A class for the test command, used to initiate a test session.
@@ -26,6 +27,8 @@ public class AnswerCommand extends Command {
     public static final String MESSAGE_ANS_SUCCESS = "Answer submitted!"
             + "%s\nType next to move on to the next question.";
 
+    public static final String MESSAGE_INVALID_ANSWER_FORMAT = "Wrong answer format! "
+            + "Take note of the kind of question you are answering! (True False / MCQ / Short Answer)";
     private LogicToUiManager logicToUiManager;
     private String userAnswer;
 
@@ -56,6 +59,8 @@ public class AnswerCommand extends Command {
             }
         } catch (NullPointerException e) {
             throw new CommandException(MESSAGE_NO_TESTSESSION);
+        } catch (IncorrectAnswerFormatException e) {
+            throw new CommandException(MESSAGE_INVALID_ANSWER_FORMAT);
         }
     }
 

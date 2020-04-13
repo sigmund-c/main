@@ -7,6 +7,7 @@ import cardibuddy.commons.core.GuiSettings;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.flashcard.Card;
+import cardibuddy.model.flashcard.CardType;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.TestResult;
@@ -173,6 +174,17 @@ public interface Model {
      * Retrieve's the current question's answer type.
      */
     AnswerType getCurrentAnswerType();
+
+    /**
+     * Retrieve the current flashcard's card type.
+     */
+    CardType getCurrentCardType();
+
+    /**
+     * Get current card's path
+     */
+    String getCurrentCardPath();
+
     /**
      * Returns an unmodifiable view of the filtered deck list
      */

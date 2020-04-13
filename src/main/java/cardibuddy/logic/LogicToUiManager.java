@@ -82,6 +82,15 @@ public class LogicToUiManager implements LogicToUi {
     }
 
     /**
+     * Displays the current question for the ongoing test session.
+     * This question is displayed on the left panel.
+     * Also renders the image.
+     */
+    public void showTestQuestionWithImage(Question question, AnswerType answerType, String path) {
+        ui.getMainWindow().fillInnerPartsWithQuestionAndImage(question, answerType, path);
+    }
+
+    /**
      * Displays the current status of the test (How many flashcards left, encouragement).
      * This status is displayed on the right panel.
      * @param testQueueSize the number of flashcards left to test, excluding the current one being tested

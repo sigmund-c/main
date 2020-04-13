@@ -225,16 +225,30 @@ public class MainWindow extends UiPart<Stage> {
         deckListPanelPlaceholder.getChildren().clear();
     }
     // =================================== TEST SESSION ================================================================
+
     /**
-     * Fills the placeholder of this window with the Question of the current flashcard being tested.
+     * Fills the placeholder of the left panel with the Question of the current flashcard being tested.
      *
      * @param question the question belonging to the current flashcard tested
      */
     public void fillInnerPartsWithQuestion(Question question, AnswerType answerType) {
         clearDeckListPanel();
-        flashcardListPanelPlaceholder.getChildren().clear();
+        clearFlashcardListPanel();
         QuestionTestCard questionCard = new QuestionTestCard(question, answerType);
-        deckListPanelPlaceholder.getChildren().add(questionCard.getRoot()); // TODO: make FXML file for test card
+        deckListPanelPlaceholder.getChildren().add(questionCard.getRoot());
+    }
+
+    /**
+     * Fills the placeholder of the left panel
+     * with the Question of the current flashcard being tested, with the added image.
+     *
+     * @param question the question belonging to the current flashcard tested
+     */
+    public void fillInnerPartsWithQuestionAndImage(Question question, AnswerType answerType, String path) {
+        clearDeckListPanel();
+        clearFlashcardListPanel();
+        QuestionTestCardWithImage questionTestCardWithImage = new QuestionTestCardWithImage(question, answerType, path);
+        deckListPanelPlaceholder.getChildren().add(questionTestCardWithImage.getRoot());
     }
 
     /**
