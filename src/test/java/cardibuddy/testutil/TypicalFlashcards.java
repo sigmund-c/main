@@ -4,20 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import cardibuddy.model.flashcard.Card;
+import cardibuddy.model.flashcard.Flashcard;
 
-
+/**
+ * A utility class containing a list of {@code Flashcard} objects to be used in tests.
+ */
 public class TypicalFlashcards {
 
-    public static final Card POWERHOUSE = new CardBuilder().withQuestion("What is the powerhouse of the cell?")
-            .withAnswer("Mitochondria").build();
-    public static final Card SKY = new CardBuilder().withQuestion("What color is the sky?").withAnswer("Blue").build();
-    public static final Card STATEMENT = new CardBuilder().withQuestion("Is this statement true?")
-            .withAnswer("True").build();
+    public static final Flashcard HELLOWORLD = new FlashcardBuilder().withQuestion("What follows 'Hello'?")
+            .withAnswer("World").build();
 
-    private TypicalFlashcards() {}
-
-    public static List<Card> getTypicalFlashcards() {
-        return new ArrayList<Card>(Arrays.asList(POWERHOUSE, SKY, STATEMENT));
+    public static List<Flashcard> getTypicalFlashcards() {
+        return new ArrayList<>(Arrays.asList(HELLOWORLD));
     }
 }

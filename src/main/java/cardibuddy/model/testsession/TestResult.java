@@ -69,7 +69,7 @@ public class TestResult {
      * @return Result object (idk what to write here :( ).
      */
     public Result computeResult() {
-        if (flashcardAnswer.toString().equals(userAnswer)) {
+        if (flashcardAnswer.checkAnswer(userAnswer)) {
             return Result.CORRECT;
         } else {
             return Result.WRONG;

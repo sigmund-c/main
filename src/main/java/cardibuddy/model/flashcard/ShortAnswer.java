@@ -3,6 +3,8 @@ package cardibuddy.model.flashcard;
 import static cardibuddy.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 /**
  * Short Answer class for Flashcard.
  */
@@ -17,6 +19,11 @@ public class ShortAnswer implements Answer {
         requireNonNull(correctAnswer);
         checkArgument(isValid(correctAnswer), MESSAGE_CONSTRAINTS);
         this.correctAnswer = correctAnswer;
+    }
+
+    @Override
+    public List getAnswerList() {
+        return null;
     }
 
     /**

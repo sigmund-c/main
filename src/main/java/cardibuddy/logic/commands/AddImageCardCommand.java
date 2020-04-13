@@ -1,9 +1,8 @@
 package cardibuddy.logic.commands;
 
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_PATH;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 import static java.util.Objects.requireNonNull;
 
@@ -16,32 +15,18 @@ import cardibuddy.model.flashcard.Imagecard;
 /**
  * Adds a Flashcard to the specified deck.
  */
-public class InsertImageCommand extends AddCardCommand {
+public class AddImageCardCommand extends AddCardCommand {
 
     public static final String COMMAND_WORD = "p";
 
-    public static final String MESSAGE_USAGE = "add c/: Adds a flashcard to a deck. \n"
+    public static final String MESSAGE_USAGE = "add p/ q/ a/: Adds an imagecard to a deck. \n"
             + "Parameters: "
-            + PREFIX_FLASHCARD + "DECK_INDEX "
+            + PREFIX_PATH + "IMAGE_FILEPATH "
             + PREFIX_QUESTION + "QUESTION "
             + PREFIX_ANSWER + "ANSWER "
-            + "[" + PREFIX_TAG + "TAG]... \n"
-            + "Example (adding a flashcard): " + COMMAND_WORD + " "
-            + PREFIX_FLASHCARD + "1 "
+            + "Example (adding an imagecard): " + COMMAND_WORD + "/ "
             + PREFIX_QUESTION + "A queue cannot be implemented using an array "
-            + PREFIX_ANSWER + "False ";
-
-    public static final String MESSAGE_ADD_FLASHCARD = "To add a flashcard to the cardibuddy book. \n"
-            + "Parameters: "
-            + PREFIX_FLASHCARD + "DECK_INDEX "
-            + PREFIX_QUESTION + "QUESTION "
-            + PREFIX_ANSWER + "ANSWER"
-            + "[" + PREFIX_TAG + "TAG]... \n"
-            + "Example: add "
-            + PREFIX_FLASHCARD + "/ Java "
-            + PREFIX_QUESTION + "A queue cannot be implemented using an array "
-            + PREFIX_ANSWER + "False "
-            + PREFIX_TAG + "Programming";
+            + PREFIX_ANSWER + "F ";
 
     public static final String MESSAGE_SUCCESS = "New flashcard added: %1$s";
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the deck";
@@ -50,7 +35,7 @@ public class InsertImageCommand extends AddCardCommand {
 
     private LogicToUiManager logicToUiManager;
 
-    public InsertImageCommand(Imagecard imagecard, LogicToUiManager logicToUiManager) {
+    public AddImageCardCommand(Imagecard imagecard, LogicToUiManager logicToUiManager) {
         this.logicToUiManager = logicToUiManager;
         requireNonNull(imagecard);
         toAdd = imagecard;
@@ -77,7 +62,7 @@ public class InsertImageCommand extends AddCardCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof InsertImageCommand // instanceof handles nulls
-                && toAdd.equals(((InsertImageCommand) other).toAdd));
+                || (other instanceof AddImageCardCommand // instanceof handles nulls
+                && toAdd.equals(((AddImageCardCommand) other).toAdd));
     }
 }
