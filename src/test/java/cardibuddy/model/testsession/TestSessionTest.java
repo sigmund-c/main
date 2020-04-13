@@ -3,7 +3,6 @@ package cardibuddy.model.testsession;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import cardibuddy.model.flashcard.McqAnswer;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
