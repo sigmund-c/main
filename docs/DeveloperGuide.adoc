@@ -1008,7 +1008,10 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+. Saving decks, cards, and statistics
+
+.. Close and re-launch the program. +
+Expected: All the decks, cards and statistics should still be the same as before closing the program.
 
 === Modifying decks and flashcards
 . Adding a deck
@@ -1026,6 +1029,15 @@ Expected: Shows up the list of flashcards in the first deck. Status message will
 .. Prerequisites: Has a deck open with the `open` command.
 .. Test case: `add q/What is the powerhouse of the cell? a/Mitochondria` +
 Expected: List of flashcards should update with the newest card, showing the Question and answer.
+
+. Editing a deck
+.. Prerequisites: Not running a test session, has at least one deck.
+.. Test case `edit deck 1 d/ABC` +
+Expected: The name of the first deck should change to ABC, while retaining the cards and tags it had.
+
+. Clear
+.. Test case `clear` +
+Expected: Clears all the decks and cards. Type in `undo` to revert back before clearing.
 
 === Running a Test Session
 
@@ -1045,12 +1057,12 @@ Expected: Test panel notifies your correct answer, shows the whole question to r
 .. Test case `add d/Deck` +
 Expected: An error message appears, saying you can't modify the model while in a test session.
 
-_{ more test cases ... }_
 
 === Saving data
 
 . Dealing with missing/corrupted data files
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-
-_{ more test cases ... }_
+.. Corrupt the data files in a way that makes it impossible to be read. +
+Expected: When launched, the cardiBuddy will show no decks or cards. A new, empty data file will be created in place of the corrupted file.
+.. Change the file to have duplicate cards/decks. +
+Expected: Expected: When launched, the cardiBuddy will show no decks or cards. A new, empty data file will be created in place of the corrupted file.
