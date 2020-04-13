@@ -1,12 +1,13 @@
 package cardibuddy.logic.commands;
 
 import static cardibuddy.logic.commands.CommandTestUtil.assertCommandFailure;
+import static cardibuddy.testutil.TypicalDecks.getTypicalCardiBuddy;
 import static cardibuddy.testutil.TypicalIndexes.INDEX_FIRST_DECK;
 import static cardibuddy.testutil.TypicalIndexes.INDEX_SECOND_DECK;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static cardibuddy.testutil.TypicalDecks.getTypicalCardiBuddy;
 
+import org.junit.jupiter.api.Test;
 import java.nio.file.Paths;
 
 import cardibuddy.commons.core.Messages;

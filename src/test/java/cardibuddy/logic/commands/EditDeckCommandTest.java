@@ -3,6 +3,8 @@ package cardibuddy.logic.commands;
 import static cardibuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static cardibuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static cardibuddy.logic.commands.CommandTestUtil.showDeckAtIndex;
+import static cardibuddy.logic.commands.CommandTestUtil.DESC_DJANGO;
+import static cardibuddy.logic.commands.CommandTestUtil.DESC_REACT;
 import static cardibuddy.logic.commands.CommandTestUtil.VALID_TAG_HARD;
 import static cardibuddy.logic.commands.CommandTestUtil.VALID_TITLE_DJANGO;
 import static cardibuddy.testutil.TypicalIndexes.INDEX_FIRST_DECK;
