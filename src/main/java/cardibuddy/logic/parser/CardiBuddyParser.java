@@ -163,6 +163,7 @@ public class CardiBuddyParser {
             return new SkipCommand(logicToUiManager);
 
         case ClearCommand.COMMAND_WORD:
+            logicToUiManager.removeFlashcards();
             return new ClearCommand();
 
         case FilterCommand.COMMAND_WORD:

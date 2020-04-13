@@ -48,7 +48,7 @@ decks and cards that contains all of the keywords instead of any of the keywords
 
 ** Documentation:
 *** Did content and cosmetic tweaks to existing contents of the User Guide: https://github.com/AY1920S2-CS2103T-T10-2/main/pull/206[#206], https://github.com/AY1920S2-CS2103T-T10-2/main/pull/211[#211]
-*** Wrote the whole README and designed the Ui Mock-up: https://github.com/AY1920S2-CS2103T-T10-2/main/pull/54[#54], https://github.com/AY1920S2-CS2103T-T10-2/main/pull/57[#57]
+*** Wrote the whole README, AboutUs and designed the Ui Mock-up: https://github.com/AY1920S2-CS2103T-T10-2/main/pull/54[#54], https://github.com/AY1920S2-CS2103T-T10-2/main/pull/57[#57]
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/AY1920S2-CS2103T-T10-2/main/pull/119[#119]
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/41[1], https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/5[2])
