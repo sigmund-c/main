@@ -14,16 +14,21 @@ AddressBook - Level 3 is a desktop address book application used for teaching So
 == Summary of contributions
 
 * *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
+** What it does: allows the user to undo all previous deck-level commands one at a time. Preceding undo commands can be reversed by using the redo command.
 ** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
 ** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+** Credits: *AddressBook Level 4*
 
 * *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
 
 * *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=phaebaez&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
+* added an *open command* that allows the user to open decks to access card.
+* modified the *add command* and relevant classes (example *add command parser*) to ensure basic functionality of the application.
+* modified the *delete command* and relevant classes (example *delete command parser*) to ensure basic functionality of the application.
+* modified the *edit command* and relevant classes (example *edit command parser*) to ensure basic functionality of the application.
+* added deck and flashcard exceptions to ensure that the application is less buggy for the user. Examples of exceptions added are "Deck not found exception" and "Wrong Deck Exception".
 
 ** Project management:
 *** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
