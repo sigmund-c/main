@@ -351,6 +351,15 @@ The following sequence diagram shows how the `ParserUtil` class creates a `Short
 image::ParserUtilShortAnsDiagram.png[]
 
 ==== Design Considerations
+===== Aspect: How to implement the different card and answer types
+
+* **Alternative 1 (current choice):** Using an abstract class to contain general functionalities.
+** Pros: Easy to implement.
+** Cons: Does not support multiple inheritances.
+* **Alternative 2:** Using an interface class to contain general functionalities.
+** Pros: Supports multiple inheritances.
+** Cons: We must ensure that the implementation of each individual command is correct.
+
 * Due to the similarities in characteristics of the different answers and cards classes, a `Card` and `Answer` abstract class was created. +
 * More specific exceptions were thrown such as `WrongMcqAnswerException` and `WrongTfAnswerException` due to the large number of classes involved in the creation of a `Card`
 to help in pinpointing the input errors.
