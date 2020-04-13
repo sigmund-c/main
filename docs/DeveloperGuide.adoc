@@ -269,6 +269,22 @@ image::CommitActivityDiagram.png[]
 ==== Design
 Users are able to add two different types of cards -- cards with images and cards without. These cards have three types of answers -- True/False, MCQ and short answers.
 
+===== Model Component
+The following classes can be found inside _cardibuddy/model/flashcard_.
+
+The add feature revolves around 2 classes: `Card` and `Answer`.
+
+`TestSession` stores the tested deck, retrieves the questions to be tested, acts according to the user's commands and manages the <<test-queue, test queue>>.
+
+`TestResult` stores the `Result` (explained below) of each _individual_ test on a flashcard. That is, whether the flashcard was answered wrongly, correctly, or was skipped. `Result` is an enums class to store these 3 outcomes.
+
+Another enums class used is `AnswerType` which contains 3 answering options to display to the user - True/False, MCQ or Short Answer.
+
+To ensure good design practice, `Test Session` is not exposed to the other classes, but is instead called using the `ModelManager`.
+
+Click <<Design-Model, here>> to view the class diagram for the `Model` component, to see how the above classes interact with other classes within `Model`.
+===== Logic Component
+
 === Search and Filter feature
 ==== Design
 Users can choose to find a `Deck` or a `Flashcard` through:

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * McqAnswer class.
  */
-public class McqAnswer implements Answer {
+public class McqAnswer extends Answer {
     public static final String MESSAGE_CONSTRAINTS = "MCQ answers should be a single letter corresponding to answer.";
     private static final String MCQ_REGEX = "[A][)].*|[B][)].*|[C][)].*";
     private static final String ANS_REGEX = "(?=.{1}$)^[ABC]";
