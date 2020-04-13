@@ -1,28 +1,26 @@
 package cardibuddy.logic.commands;
 
-import static cardibuddy.logic.commands.CommandTestUtil.*;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static cardibuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static cardibuddy.logic.commands.CommandTestUtil.VALID_TAG_HARD;
+import static cardibuddy.logic.commands.CommandTestUtil.VALID_TITLE_DJANGO;
 import static cardibuddy.testutil.TypicalIndexes.INDEX_FIRST_DECK;
 import static cardibuddy.testutil.TypicalIndexes.INDEX_SECOND_DECK;
 import static cardibuddy.testutil.TypicalDecks.getTypicalCardiBuddy;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import cardibuddy.logic.*;
 import org.junit.jupiter.api.Test;
 
-import cardibuddy.commons.core.Messages;
 import cardibuddy.commons.core.index.Index;
+import cardibuddy.logic.CommandHistory;
+import cardibuddy.model.deck.Deck;
 import cardibuddy.model.CardiBuddy;
 import cardibuddy.model.Model;
 import cardibuddy.model.ModelManager;
 import cardibuddy.model.UserPrefs;
-import cardibuddy.model.deck.Deck;
-import cardibuddy.testutil.EditDeckDescriptorBuilder;
 import cardibuddy.testutil.DeckBuilder;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import cardibuddy.testutil.EditDeckDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
