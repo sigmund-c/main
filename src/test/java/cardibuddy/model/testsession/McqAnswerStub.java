@@ -9,7 +9,7 @@ import cardibuddy.model.flashcard.McqAnswer;
 public class McqAnswerStub extends McqAnswer {
     private String answer = "A";
 
-    public McqAnswerStub(String line) throws ParseException{
+    public McqAnswerStub(String line) throws ParseException {
         super(line);
     }
 

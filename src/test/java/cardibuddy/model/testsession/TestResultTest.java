@@ -1,15 +1,17 @@
 package cardibuddy.model.testsession;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Random;
 
-import cardibuddy.logic.parser.exceptions.ParseException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.flashcard.Answer;
 import jdk.jfr.Description;
+
 public class TestResultTest {
 
     private Answer flashcardAnswer;
@@ -51,8 +53,8 @@ public class TestResultTest {
     @Description("Test that constructor for a TestResult containing SKIPPED is correct.")
     @Test
     void testConstructorForSkippedResult() {
-       TestResult testResult = new TestResult(Result.SKIPPED);
-       assertEquals(Result.SKIPPED, testResult.getResult());
+        TestResult testResult = new TestResult(Result.SKIPPED);
+        assertEquals(Result.SKIPPED, testResult.getResult());
     }
 
     @Description("Test that number of tries is set correctly for one try.")

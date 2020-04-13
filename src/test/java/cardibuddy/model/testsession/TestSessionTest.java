@@ -9,12 +9,12 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import cardibuddy.logic.parser.exceptions.ParseException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import cardibuddy.commons.core.LogsCenter;
+import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Title;
 import cardibuddy.model.flashcard.Answer;
@@ -33,6 +33,7 @@ public class TestSessionTest {
     private String randomString2 = "abcdefghijklmnopqrstuvwxyz";
     private DeckStub deck = new DeckStub(new Title("HELLO"), new HashSet<>());
     private final Logger logger = LogsCenter.getLogger(TestSessionTest.class.getName());
+
     /**
      * A method to generate a flashcard of random type, and with a random question string.
      */
@@ -93,7 +94,7 @@ public class TestSessionTest {
      */
     TestSession submitWrongAnswer(TestSession testSession) {
         AnswerType answerType = testSession.getCurrentAnswerType();
-        switch(answerType) {
+        switch (answerType) {
         case MCQ:
             logger.info("Answering mcq wrongly");
             testSession.submitAnswer("C");
@@ -193,12 +194,12 @@ public class TestSessionTest {
     @Description("Test that the correct second question is returned.")
     @Test
     void testGetNextQuestion() {
-       TestSession testSession = new TestSession(deck);
-       testSession.getFirstQuestion();
-       testSession = submitWrongAnswer(testSession);
-       Question nextQuestion = testSession.getNextQuestion();
-       Question expectedQuestion = deck.getFlashcardList().get(1).getQuestion();
-       assertEquals(expectedQuestion, nextQuestion);
+        TestSession testSession = new TestSession(deck);
+        testSession.getFirstQuestion();
+        testSession = submitWrongAnswer(testSession);
+        Question nextQuestion = testSession.getNextQuestion();
+        Question expectedQuestion = deck.getFlashcardList().get(1).getQuestion();
+        assertEquals(expectedQuestion, nextQuestion);
     }
 
     @Description("Test that results of the test session are stored in the {@code HashMap}.")
@@ -224,12 +225,12 @@ public class TestSessionTest {
     @Description("Test that force correct leads to the test queue size decreasing by 1")
     @Test
     void testForceCorrectRemovesReAddedFlashcard() {
-       TestSession testSession = new TestSession(deck);
-       testSession.getFirstQuestion();
-      testSession = submitWrongAnswer(testSession);
-       testSession.forceCorrect();
-       int expectedTestQueueSize = deck.getFlashcardList().size() - 1;
-       assertEquals(expectedTestQueueSize, testSession.getTestQueueSize());
+        TestSession testSession = new TestSession(deck);
+        testSession.getFirstQuestion();
+        testSession = submitWrongAnswer(testSession);
+        testSession.forceCorrect();
+        int expectedTestQueueSize = deck.getFlashcardList().size() - 1;
+        assertEquals(expectedTestQueueSize, testSession.getTestQueueSize());
     }
 
     @Description("Test that force correct throws AlreadyCorrectException.")
