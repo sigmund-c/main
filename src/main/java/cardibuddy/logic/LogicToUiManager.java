@@ -7,9 +7,9 @@ import cardibuddy.model.testsession.TestResult;
 import cardibuddy.ui.UiManager;
 
 /**
- * Allows the Commands to control the change in view of the MainWindow panel.
+ * The LogicToUi manager of the application.
  */
-public class LogicToUiManager implements LogicToUi{
+public class LogicToUiManager implements LogicToUi {
 
     protected UiManager ui;
     private String openedDeck;

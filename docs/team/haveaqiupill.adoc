@@ -24,12 +24,13 @@ It required an in-depth analysis of design alternatives.
 The implementation too was challenging as it required changes to existing commands such as the add command and the
 creation of a new type of object (Imagecard object). In addition, changes were made to the UI in the FlashcardListPanel
 to display images in the flashcard.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
 * *Minor enhancement*: added a filter command that allows the user to filter decks via tags.
 
+* *Minor enhancement*: created three different answer types to questions in flashcards (T/F, MCQ and Short Answer) to make testing easier.
+
 * *Minor enhancement*: added an insert image button that shows a popup window for the user to choose the .png and .jpg
-files they want to insert into their flashcards.
+files they want to insert into their flashcards so that they do not have to key in their filepath.
 
 * *Code contributed*: [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=haveaqiupill&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Functional code]]
 [https://nus-cs2103-ay1920s2.github.io/tp-dashboard/#search=t10&sort=groupTitle&sortWithin=title&since=2020-02-14&timeframe=commit&mergegroup=false&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=haveaqiupill&tabRepo=AY1920S2-CS2103T-T10-2%2Fmain%5Bmaster%5D[Test code]]
@@ -41,23 +42,23 @@ files they want to insert into their flashcards.
 *** Managed releases `v1.3.1` (1 release) on GitHub for the product to be tested in the Mock Practical Examination
 
 ** Enhancements to existing features:
-*** Re-designed UI (Pull requests https://github.com/AY1920S2-CS2103T-T10-2/main/pull/114[#114], https://github.com/AY1920S2-CS2103T-T10-2/main/pull/199[#199])
+*** Re-designed UI (Pull requests https://github.com/AY1920S2-CS2103T-T10-2/main/pull/114[#114],
+https://github.com/AY1920S2-CS2103T-T10-2/main/pull/199[#199])
 *** Improved on existing find command (renamed to search command) that allows the user to search for
 decks and cards that contains all of the keywords instead of any of the keywords.
-*** Wrote additional tests for existing features to increase coverage from 13% to 27% (Pull requests https://github.com/AY1920S2-CS2103T-T10-2/main/pull/200[#200], https://github.com[#38])
+*** Refactored commands from AB3 such as AddCommand to AddDeckCommand, AddFlashcardCommand and AddImageCardCommand as well as the DeleteCommand to DeleteCardCommand and DeleteDeckCommand.
+*** Wrote additional tests for the classes in Deck, Tag and Flashcard folders to increase coverage from 13% to 27%
+(Pull requests https://github.com/AY1920S2-CS2103T-T10-2/main/pull/200[#200])
 
 
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/AY1920S2-CS2103T-T10-2/main/pull/211[#211]
 *** Wrote the whole README and designed the Ui mock-up: https://github.com/AY1920S2-CS2103T-T10-2/main/pull/54[#54], https://github.com/AY1920S2-CS2103T-T10-2/main/pull/57[#57]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** PRs reviewed (with non-trivial review comments): https://github.com/AY1920S2-CS2103T-T10-2/main/pull/119[#119]
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/41[1], https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/5[2])
 ** Tools:
 *** Integrated automated hosting platform (Netlify) to the project (https://github.com/AY1920S2-CS2103T-T10-2/main/pull/60[#60])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide
 
@@ -78,12 +79,9 @@ include::../UserGuide.adoc[tag=filter]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=jingying]
 
 
 
-== PROJECT: PowerPointLabs
 
 ---
-
-_{Optionally, you may include other projects in your portfolio.}_

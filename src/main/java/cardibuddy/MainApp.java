@@ -2,8 +2,8 @@ package cardibuddy;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.logging.Logger;
+import java.util.Optional;
 
 import cardibuddy.commons.core.Config;
 import cardibuddy.commons.core.LogsCenter;
@@ -46,10 +46,10 @@ public class MainApp extends Application {
     protected LogicToUiManager logicToUiManager;
     protected Storage storage;
     protected Model model;
-    public Config config;
+    protected Config config;
 
     @Override
-    public void init() throws Exception {
+     void init() throws Exception {
         logger.info("=============================[ Initializing CardiBuddy ]===========================");
         super.init();
 

@@ -16,8 +16,8 @@ public class DeckTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Deck person = new DeckBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+        Deck deck = new DeckBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> deck.getTags().remove(0));
     }
 
     @Test
@@ -62,7 +62,7 @@ public class DeckTest {
         // different type -> returns false
         assertFalse(ASYNCHRONOUS.equals(5));
 
-        // different person -> returns false
+        // different deck -> returns false
         assertFalse(ASYNCHRONOUS.equals(REACT));
 
         // different name -> returns false

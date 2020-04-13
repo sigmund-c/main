@@ -1,13 +1,9 @@
 package cardibuddy.logic.parser;
 
-import static cardibuddy.commons.core.Messages.MESSAGE_NOT_IN_DECK;
-import static cardibuddy.commons.core.Messages.MESSAGE_WRONG_DECK;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static java.util.Objects.requireNonNull;
 
-import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.AddFlashcardCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
@@ -16,7 +12,6 @@ import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
-import javafx.collections.ObservableList;
 
 /**
  * Parses input arguments and creates a new AddFlashcardCommand object.
@@ -36,23 +31,12 @@ public class AddFlashcardCommandParser extends AddCardCommandParser {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_FLASHCARD,
+                ArgumentTokenizer.tokenize(args,
                         PREFIX_QUESTION, PREFIX_ANSWER);
 
         //handleInputErrors(argMultimap);
 
-        Index deckIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_FLASHCARD).get());
-
-        int index = deckIndex.getZeroBased();
-        ObservableList<Deck> deckObservableList = cardiBuddy.getDeckList();
-        Deck deck = deckObservableList.get(index);
-
-        if (!logicToUiManager.isInDeck()) {
-            throw new ParseException(MESSAGE_NOT_IN_DECK);
-        }
-        if (!deck.equals(logicToUiManager.getDisplayedDeck())) {
-            throw new ParseException(MESSAGE_WRONG_DECK);
-        }
+        Deck deck = logicToUiManager.getDisplayedDeck();
 
         Question modelQuestion = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
         Answer modelAnswer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());

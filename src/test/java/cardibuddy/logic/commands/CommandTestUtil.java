@@ -1,6 +1,8 @@
 package cardibuddy.logic.commands;
 
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 //import static cardibuddy.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,6 +40,15 @@ public class CommandTestUtil {
 
     public static final String INVALID_TITLE_DESC = " " + PREFIX_DECK + "PHP&"; // '&' not allowed in names
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "Scripting*"; // '*' not allowed in tags
+
+    public static final String VALID_QUESTION_MODULECODE = "What is the module code of this module?";
+    public static final String VALID_ANSWER_CODE = "CS2103";
+
+    public static final String QUESTION_DESC_MODULECODE = " " + PREFIX_QUESTION + VALID_QUESTION_MODULECODE;
+    public static final String ANSWER_DESC_CODE = " " + PREFIX_ANSWER + VALID_ANSWER_CODE;
+
+    public static final String INVALID_QUESTION_DESC = " " + PREFIX_QUESTION + " "; // ' ' not allowed in questions
+    public static final String INVALID_ANSWER_DESC = " " + PREFIX_ANSWER + "True"; // 'True' not allowed in answers
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

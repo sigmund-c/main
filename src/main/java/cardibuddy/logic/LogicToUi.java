@@ -5,6 +5,9 @@ import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.TestResult;
 
+/**
+ * Allows the Commands to control the change in view of the MainWindow panel.
+ */
 public interface LogicToUi {
 
     public void openFlashcardPanel(int index);
