@@ -61,16 +61,16 @@ public class TestSessionTest {
         return new CardStub(deck, question, answer, "");
     }
 
-    TestSession submitCorrectAnswer(TestSession testSession, int index) {
-        String correctAnswer = deck.getFlashcardList().get(index).getAnswer().toString();
-        testSession.submitAnswer(correctAnswer);
-        return testSession;
-    }
+    //TestSession submitCorrectAnswer(TestSession testSession, int index) {
+    //    String correctAnswer = deck.getFlashcardList().get(index).getAnswer().toString();
+    //    testSession.submitAnswer(correctAnswer);
+    //    return testSession;
+    //}
 
-    TestSession submitWrongAnswer(TestSession testSession) {
-        testSession.submitAnswer("blahblahblahblah");
-        return testSession;
-    }
+    //TestSession submitWrongAnswer(TestSession testSession) {
+    //    testSession.submitAnswer("blahblahblahblah");
+    //    return testSession;
+    //}
 
     @BeforeEach
     void setUp() {
@@ -149,16 +149,16 @@ public class TestSessionTest {
         assertEquals(Result.SKIPPED, storedResult);
     }
 
-    @Description("Test that the correct second question is returned.")
-    @Test
-    void testGetNextQuestion() {
-        TestSession testSession = new TestSession(deck);
-        testSession.getFirstQuestion();
-        testSession = submitWrongAnswer(testSession);
-        Question nextQuestion = testSession.getNextQuestion();
-        Question expectedQuestion = deck.getFlashcardList().get(1).getQuestion();
-        assertEquals(expectedQuestion, nextQuestion);
-    }
+    //@Description("Test that the correct second question is returned.")
+    //@Test
+    //void testGetNextQuestion() {
+    //    TestSession testSession = new TestSession(deck);
+    //    testSession.getFirstQuestion();
+    //    testSession = submitWrongAnswer(testSession);
+    //    Question nextQuestion = testSession.getNextQuestion();
+    //    Question expectedQuestion = deck.getFlashcardList().get(1).getQuestion();
+    //    assertEquals(expectedQuestion, nextQuestion);
+    //}
 
     @Description("Test that results of the test session are stored in the {@code HashMap}.")
     @Test
@@ -180,16 +180,16 @@ public class TestSessionTest {
         assertThrows(UnansweredQuestionException.class, testSession::forceCorrect);
     }
 
-    @Description("Test that force correct leads to the test queue size decreasing by 1")
-    @Test
-    void testForceCorrectRemovesReAddedFlashcard() {
-        TestSession testSession = new TestSession(deck);
-        testSession.getFirstQuestion();
-        testSession = submitWrongAnswer(testSession);
-        testSession.forceCorrect();
-        int expectedTestQueueSize = deck.getFlashcardList().size() - 1;
-        assertEquals(expectedTestQueueSize, testSession.getTestQueueSize());
-    }
+    //@Description("Test that force correct leads to the test queue size decreasing by 1")
+    //@Test
+    //void testForceCorrectRemovesReAddedFlashcard() {
+    //    TestSession testSession = new TestSession(deck);
+    //    testSession.getFirstQuestion();
+    //   testSession = submitWrongAnswer(testSession);
+    //    testSession.forceCorrect();
+    //    int expectedTestQueueSize = deck.getFlashcardList().size() - 1;
+    //    assertEquals(expectedTestQueueSize, testSession.getTestQueueSize());
+    //}
 
     @Description("Test that force correct throws ALreadyCorrectException.")
     @Test
