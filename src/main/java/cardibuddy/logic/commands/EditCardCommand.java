@@ -5,7 +5,6 @@ import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static java.util.Objects.requireNonNull;
 
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 
