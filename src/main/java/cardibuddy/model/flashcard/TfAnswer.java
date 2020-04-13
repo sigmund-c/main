@@ -50,6 +50,11 @@ public class TfAnswer extends Answer {
     }
 
     @Override
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

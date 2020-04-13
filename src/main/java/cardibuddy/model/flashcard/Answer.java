@@ -51,6 +51,8 @@ public abstract class Answer {
         return text.matches(mcqRegex);
     }
 
+    public abstract String getCorrectAnswer();
+
     public abstract boolean isValid(String test);
 
     public abstract boolean checkAnswer(String toCheck);

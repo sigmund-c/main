@@ -15,6 +15,20 @@ public class TfAnswerStub extends TfAnswer {
     }
 
     @Override
+    public String getCorrectAnswer() {
+        return answer;
+    }
+
+    @Override
+    public boolean checkAnswer(String userAnswer) {
+        if (!(userAnswer.equals("T") || userAnswer.equals("F"))) {
+            throw new IllegalArgumentException();
+        } else {
+            return answer.equals(userAnswer);
+        }
+    }
+
+    @Override
     public String toString() {
         return answer;
     }
