@@ -446,6 +446,28 @@ For more descriptive use case scenarios from a user perspectives, please take a 
 
 
 
+=== Statistics
+==== Design
+The user's activities will be logged and stored in `Statistics`. It is entirely a data storage class, recording data wherever necessary.
+
+Currently, the actions that update the `Statistics` are:
+
+* Adding and removing a deck
+* Adding and removing a card
+* Finishing a `TestSession` - this updates a number of items, which are:
+** `TestSessions` finished
+** Total cards answered
+** Average correct percentage
+** Average tries to get correct
+
+There's 2 different locations where a `Statistics` instance is stored:
+
+* `CardiBuddy`: The Model of the program. Tracks user statistics across the whole program.
+* `Deck` : Each `Deck` also has a `Statistics` instance. This is to help identify which `Deck`s are used more often, are more difficult, etc.
+
+Each time the user does something that can be tracked, it updates both the universal `Statistics` and the `Statistics` of the `Deck` that he or she is using. The call to update both statistics is done simultaneously in the `CardiBuddy` model for adding/removing decks/cards, or in `ModelManager` for finishing a `TestSession`.
+
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
