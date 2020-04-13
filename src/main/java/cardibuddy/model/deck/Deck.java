@@ -3,7 +3,6 @@ package cardibuddy.model.deck;
 import static cardibuddy.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
 
-import cardibuddy.model.flashcard.exceptions.DuplicateFlashcardException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -17,6 +16,7 @@ import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.UniqueFlashcardList;
+import cardibuddy.model.flashcard.exceptions.DuplicateFlashcardException;
 import cardibuddy.model.tag.Tag;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -91,6 +91,10 @@ public class Deck {
         return statistics;
     }
 
+    public void setStatistics(Statistics statistics) {
+        this.statistics = statistics;
+    }
+
     /**
      * Adds a Card to a Deck.
      * @param card
@@ -101,7 +105,7 @@ public class Deck {
             flashcards.add(card);
             UniqueFlashcardList flashcardList = new UniqueFlashcardList();
             flashcardList.setFlashcards(flashcards);
-        } catch (DuplicateFlashcardException e){
+        } catch (DuplicateFlashcardException e) {
             flashcards.remove(card);
         }
         filteredFlashcards = new FilteredList<>(FXCollections.observableList(flashcards));

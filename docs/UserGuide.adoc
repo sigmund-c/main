@@ -73,7 +73,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 ==== Viewing help : `help`
 
-Opens a help window with a link to the User Guide. +
+Opens a window that links to this User Guide. +
 Format: `help`
 
 ==== Saving data
@@ -273,8 +273,8 @@ Deletes the 1st deck in the results of the search command.
 
 ==== Deleting a card: `delete card`
 
-Deletes the specified card from a specific deck.
-Format: `delete INDEX d/DECK_TITLE`
+Deletes the specified card from the currently open deck.
+Format: `delete INDEX`
 
 * You must open a deck before you can delete a flashcard. A flashcard can only exist inside a deck.
 * Deletes the card at the specified INDEX of the deck.
@@ -284,7 +284,7 @@ Format: `delete INDEX d/DECK_TITLE`
 Examples:
 
 * `open 1` +
-`delete card 2` d/cs2030 +
+`delete card 2` +
 Opens the first deck and deletes the 2nd flash card in the deck.
 
 * `search card java` +
