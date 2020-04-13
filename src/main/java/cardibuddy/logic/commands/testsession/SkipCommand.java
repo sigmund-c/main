@@ -11,6 +11,7 @@ import cardibuddy.logic.commands.CommandResult;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
 import cardibuddy.model.testsession.exceptions.EmptyTestQueueException;
 import cardibuddy.model.testsession.exceptions.NoOngoingTestException;
@@ -45,7 +46,8 @@ public class SkipCommand extends Command {
         requireNonNull(model);
         try {
             Question question = model.skipQuestion();
-            logicToUiManager.showTestQuestion(question);
+            AnswerType answerType = model.getCurrentAnswerType();
+            logicToUiManager.showTestQuestion(question, answerType);
             logicToUiManager.showTestStatus(model.getTestQueueSize());
             return new CommandResult(MESSAGE_SKIP_SUCCESS, false, false, false, false);
         } catch (EmptyTestQueueException e) {

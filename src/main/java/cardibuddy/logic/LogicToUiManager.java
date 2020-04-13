@@ -2,6 +2,7 @@ package cardibuddy.logic;
 
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.TestResult;
 import cardibuddy.ui.UiManager;
 
@@ -76,8 +77,8 @@ public class LogicToUiManager {
      * This question is displayed on the left panel.
      * @param question question belonging to the current flashcard being tested
      */
-    public void showTestQuestion(Question question) {
-        ui.getMainWindow().fillInnerPartsWithQuestion(question);
+    public void showTestQuestion(Question question, AnswerType answerType) {
+        ui.getMainWindow().fillInnerPartsWithQuestion(question, answerType);
     }
 
     /**
@@ -108,3 +109,4 @@ public class LogicToUiManager {
     }
 
 }
+
