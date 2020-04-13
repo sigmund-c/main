@@ -70,16 +70,15 @@ public class EditCardCommand extends EditCommand{
         Card cardToEdit = lastShownList.get(index.getZeroBased());
         Card editedCard = createEditedCard(cardToEdit, editCardDescriptor);
 
-        if(index.getZeroBased() < 0) {
-            throw new Error("Negative index");
-        }
+        requireNonNull(cardToEdit);
+        requireNonNull(editedCard);
 
         if (!cardToEdit.isSameFlashcard(editedCard) && model.hasFlashcard(editedCard)) {
             throw new CommandException(MESSAGE_DUPLICATE_CARD);
         }
 
         model.setFlashcard(cardToEdit, editedCard);
-        model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+        logicToUiManager.updateFlashcardPanel();
         model.commitCardiBuddy();
         return new CommandResult(String.format(MESSAGE_EDIT_CARD_SUCCESS, editedCard));
     }
@@ -91,10 +90,12 @@ public class EditCardCommand extends EditCommand{
     private static Card createEditedCard(Card cardToEdit, EditCardDescriptor editCardDescriptor) {
         assert cardToEdit != null;
 
+        Deck updatedDeck = cardToEdit.getDeck();
         Question updatedQuestion = editCardDescriptor.getQuestion().orElse(cardToEdit.getQuestion());
         Answer updatedAnswer = editCardDescriptor.getAnswer().orElse(cardToEdit.getAnswer());
+        String updatedPath = cardToEdit.getPath();
 
-        return new Flashcard(cardToEdit.getDeck() ,updatedQuestion, updatedAnswer, cardToEdit.getPath());
+        return new Flashcard(updatedDeck,updatedQuestion, updatedAnswer, updatedPath);
     }
 
     @Override

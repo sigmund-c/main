@@ -20,6 +20,8 @@ import cardibuddy.logic.commands.DeleteCardCommand;
 import cardibuddy.logic.commands.DeleteCommand;
 import cardibuddy.logic.commands.DeleteDeckCommand;
 import cardibuddy.logic.commands.EditCommand;
+import cardibuddy.logic.commands.EditCardCommand;
+import cardibuddy.logic.commands.EditDeckCommand;
 import cardibuddy.logic.commands.ExitCommand;
 import cardibuddy.logic.commands.FilterCommand;
 import cardibuddy.logic.commands.HelpCommand;
