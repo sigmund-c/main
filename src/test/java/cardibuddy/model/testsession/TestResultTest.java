@@ -42,26 +42,26 @@ public class TestResultTest {
         userAnswer = null;
     }
 
-    @Description("Test that the result is computed correctly.")
-    @Test
-    void testComputeResultGivesResultCorrect() {
-        TestResult testResult = new TestResult(flashcardAnswer, userAnswer);
-        assertEquals(Result.CORRECT, testResult.getResult());
-    }
+    //@Description("Test that the result is computed correctly.")
+    //@Test
+    //void testComputeResultGivesResultCorrect() {
+    //    TestResult testResult = new TestResult(flashcardAnswer, userAnswer);
+    //    assertEquals(Result.CORRECT, testResult.getResult());
+    //}
 
-    @Description("Test that constructor for a TestResult containing SKIPPED is correct.")
-    @Test
-    void testConstructorForSkippedResult() {
-        TestResult testResult = new TestResult(Result.SKIPPED);
-        assertEquals(Result.SKIPPED, testResult.getResult());
-    }
+    //@Description("Test that constructor for a TestResult containing SKIPPED is correct.")
+    //@Test
+    //void testConstructorForSkippedResult() {
+    //    TestResult testResult = new TestResult(Result.SKIPPED);
+    //    assertEquals(Result.SKIPPED, testResult.getResult());
+    //}
 
-    @Description("Test that the result is computed correctly.")
-    @Test
-    void testComputeResultGivesResultWrong() {
-        TestResult testResult = new TestResult(flashcardAnswer, "blah");
-        assertEquals(Result.WRONG, testResult.getResult());
-    }
+    //@Description("Test that the result is computed correctly.")
+    //@Test
+    //void testComputeResultGivesResultWrong() {
+    //    TestResult testResult = new TestResult(flashcardAnswer, "blah");
+    //    assertEquals(Result.WRONG, testResult.getResult());
+    //}
 
     @Description("Test that number of tries is set correctly for one try.")
     @Test

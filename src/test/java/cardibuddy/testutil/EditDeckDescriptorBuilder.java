@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import cardibuddy.logic.commands.EditCommand.EditDeckDescriptor;
+import cardibuddy.logic.commands.EditDeckCommand;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Title;
 import cardibuddy.model.tag.Tag;
@@ -14,21 +14,21 @@ import cardibuddy.model.tag.Tag;
  */
 public class EditDeckDescriptorBuilder {
 
-    private EditDeckDescriptor descriptor;
+    private EditDeckCommand.EditDeckDescriptor descriptor;
 
     public EditDeckDescriptorBuilder() {
-        descriptor = new EditDeckDescriptor();
+        descriptor = new EditDeckCommand.EditDeckDescriptor();
     }
 
-    public EditDeckDescriptorBuilder(EditDeckDescriptor descriptor) {
-        this.descriptor = new EditDeckDescriptor(descriptor);
+    public EditDeckDescriptorBuilder(EditDeckCommand.EditDeckDescriptor descriptor) {
+        this.descriptor = new EditDeckCommand.EditDeckDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditDeckDescriptor} with fields containing {@code deck}'s details
      */
     public EditDeckDescriptorBuilder(Deck deck) {
-        descriptor = new EditDeckDescriptor();
+        descriptor = new EditDeckCommand.EditDeckDescriptor();
         descriptor.setTitle(deck.getTitle());
         descriptor.setTags(deck.getTags());
     }
@@ -51,7 +51,7 @@ public class EditDeckDescriptorBuilder {
         return this;
     }
 
-    public EditDeckDescriptor build() {
+    public EditDeckCommand.EditDeckDescriptor build() {
         return descriptor;
     }
 }
