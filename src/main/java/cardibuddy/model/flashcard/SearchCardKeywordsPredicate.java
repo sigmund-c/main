@@ -43,8 +43,14 @@ public class SearchCardKeywordsPredicate implements Predicate<Card> {
      */
     private boolean searchOr(Card card, List<String> keywords) {
         boolean anyMatch = false;
+        String question = card.getQuestion().toString();
+        if (question.charAt(question.length() - 1) == '?' || question.charAt(question.length() - 1) == '.') {
+            question = question.substring(0, question.length() - 1);
+        }
+        final String filteredQues = question;
+
         anyMatch = new ArrayList<>(keywords).stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(card.getQuestion().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(filteredQues, keyword));
         return anyMatch;
     }
 
@@ -55,14 +61,21 @@ public class SearchCardKeywordsPredicate implements Predicate<Card> {
      */
     private boolean searchAnd(Card card, List<String> keywords) {
         boolean anyMatch = false;
+
+        String question = card.getQuestion().toString();
+        if (question.charAt(question.length() - 1) == '?' || question.charAt(question.length() - 1) == '.') {
+            question = question.substring(0, question.length() - 1);
+        }
+        final String filteredQues = question;
+
         List<List<String>> filteredKeywords = filterKeywords(keywords);
 
         for (List<String> keywordList : filteredKeywords) {
             boolean prevMatch = true;
             for (String keyword : keywordList) {
                 if (!anyMatch && prevMatch) {
-                    prevMatch = Arrays.stream(card.getQuestion().toString().split(" "))
-                            .anyMatch(question -> StringUtil.containsWordIgnoreCase(question, keyword));
+                    prevMatch = Arrays.stream(filteredQues.split(" "))
+                            .anyMatch(words -> StringUtil.containsWordIgnoreCase(words, keyword));
                 } else {
                     break;
                 }

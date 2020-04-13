@@ -24,6 +24,7 @@ public class JsonAdaptedDeck extends JsonAdaptedView {
      */
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Deck's %s field is missing!";
+    public static final String MESSAGE_DUPLICATE_FLASHCARDS = "Flashcards list contains duplicate flashcard(s).";
 
     private final String title;
     private final List<JsonAdaptedFlashcard> flashcards = new ArrayList<>();

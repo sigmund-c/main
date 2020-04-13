@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.CardType;
+import cardibuddy.model.flashcard.Flashcard;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -46,8 +47,16 @@ public class FlashcardListPanel extends UiPart<Region> {
                 FlashcardCard card = new FlashcardCard(flashcard, getIndex() + 1);
                 setGraphic(card.getRoot());
             } else {
-                ImagecardCard card = new ImagecardCard(flashcard, getIndex() + 1);
-                setGraphic(card.getRoot());
+                try {
+                    ImagecardCard card = new ImagecardCard(flashcard, getIndex() + 1);
+                    setGraphic(card.getRoot());
+                } catch (IllegalArgumentException exception) {
+                    Flashcard newCard = new Flashcard(flashcard.getDeck(), flashcard.getQuestion(),
+                            flashcard.getAnswer(), "");
+                    FlashcardCard newDisplayCard = new FlashcardCard(newCard, getIndex() + 1);
+                    setGraphic(newDisplayCard.getRoot());
+                    logger.info("Illegal values found in image path:" + exception.getMessage());
+                }
             }
         }
     }
