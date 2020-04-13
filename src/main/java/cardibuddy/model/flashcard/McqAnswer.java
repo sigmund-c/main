@@ -6,6 +6,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import cardibuddy.logic.parser.exceptions.ParseException;
+import cardibuddy.model.flashcard.exceptions.WrongMcqAnswerTypeException;
+
+
 /**
  * McqAnswer class.
  */
@@ -19,7 +23,7 @@ public class McqAnswer extends Answer {
     private String original;
     private String correctAnswer; // should be "A" or "B" or "C"
 
-    public McqAnswer(String answer) {
+    public McqAnswer(String answer) throws ParseException {
         requireNonNull(answer);
 
         if (answer.length() > 1) {
@@ -34,32 +38,36 @@ public class McqAnswer extends Answer {
      * Separates indexes to be inserted into the list.
      * @param answer
      */
-    private void separateIndexes(String answer) {
+    private void separateIndexes(String answer) throws ParseException {
         answerList = new ArrayList();
 
-        int indexA = answer.indexOf("A)");
-        int indexB = answer.indexOf("B)");
-        int indexC = answer.indexOf("C)");
+        try {
+            int indexA = answer.indexOf("A)");
+            int indexB = answer.indexOf("B)");
+            int indexC = answer.indexOf("C)");
 
-        int first = Math.min(indexA, Math.min(indexB, indexC));
-        int second;
-        int third;
+            int first = Math.min(indexA, Math.min(indexB, indexC));
+            int second;
+            int third;
 
-        if (indexA == first) {
-            correctAnswer = "A";
-            second = Math.min(indexB, indexC);
-            third = Math.max(indexB, indexC);
-        } else if (indexB == first) {
-            correctAnswer = "B";
-            second = Math.min(indexA, indexC);
-            third = Math.max(indexA, indexC);
-        } else {
-            correctAnswer = "C";
-            second = Math.min(indexA, indexB);
-            third = Math.max(indexA, indexB);
+            if (indexA == first) {
+                correctAnswer = "A";
+                second = Math.min(indexB, indexC);
+                third = Math.max(indexB, indexC);
+            } else if (indexB == first) {
+                correctAnswer = "B";
+                second = Math.min(indexA, indexC);
+                third = Math.max(indexA, indexC);
+            } else {
+                correctAnswer = "C";
+                second = Math.min(indexA, indexB);
+                third = Math.max(indexA, indexB);
+            }
+
+            assignToList(indexA, indexB, indexC, first, second, third, answer);
+        } catch (Exception e) {
+            throw new WrongMcqAnswerTypeException(e.getMessage());
         }
-
-        assignToList(indexA, indexB, indexC, first, second, third, answer);
 
     }
 

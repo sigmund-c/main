@@ -129,7 +129,7 @@ Format: `add q/QUESTION a/ANSWER`
 [TIP]
 These are the three types of `ANSWER` and their corresponding formats: +
 1. T/F -- `T` or `F` +
-2. MCQ -- `A)CHOICE_ONE B)CHOICE_TWO C)CHOICE_THREE` with the correct option being entered first, the order of the next two does not matter  +
+2. MCQ -- `A)CHOICE_A B)CHOICE_B C)CHOICE_C` with the correct option being entered first, the order of the next two does not matter  +
 3. Short Answer -- `ANY_TEXT`
 
 * The deck to be added in must be open for you to add a card.

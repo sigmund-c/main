@@ -265,25 +265,56 @@ image::CommitActivityDiagram.png[]
 // end::undoredo[]
 
 // tag::jingying[]
-=== Adding of Cards
+=== Flashcards
 ==== Design
 Users are able to add two different types of cards -- cards with images and cards without. These cards have three types of answers -- True/False, MCQ and short answers.
 
 ===== Model Component
 The following classes can be found inside _cardibuddy/model/flashcard_.
 
-The add feature revolves around 2 classes: `Card` and `Answer`.
+The add feature revolves around 2 abstract classes: `Card` and `Answer`.
 
-`TestSession` stores the tested deck, retrieves the questions to be tested, acts according to the user's commands and manages the <<test-queue, test queue>>.
+The `Card` class is extended by two card classes: `Flashcard` and `Imagecard`.
 
-`TestResult` stores the `Result` (explained below) of each _individual_ test on a flashcard. That is, whether the flashcard was answered wrongly, correctly, or was skipped. `Result` is an enums class to store these 3 outcomes.
+The `Answer` class is extended by three answer classes: `TfAnswer`, `McqAnswer` and `ShortAnswer`.
 
-Another enums class used is `AnswerType` which contains 3 answering options to display to the user - True/False, MCQ or Short Answer.
-
-To ensure good design practice, `Test Session` is not exposed to the other classes, but is instead called using the `ModelManager`.
-
-Click <<Design-Model, here>> to view the class diagram for the `Model` component, to see how the above classes interact with other classes within `Model`.
 ===== Logic Component
+To add a card, a deck must first be opened. This can be checked from accessing the `LogicToUiManager` which stores the currently opened deck.
+Subsequently, The `Parser` classes will separate the relevant arguments from the user input and execute commands from the `Command` classes.
+These `Parser` and Command` classes are part of the *Logic* component of CardiBuddy, and can be found within the _cardibuddy/logic_ package.
+
+These commands allow the user to add the different types of flashcards and answers into a deck:
+
+* The user will first open a deck.
+* _Adding a Flashcard:_ The user will enter `add` followed by `q/` with their question and `a/` with their answer.
+* _Adding an Imagecard:_ The user will enter `add` followed by `p/` with the filepath to the image, `q/` with their
+question and `a/` with their answer.
+* _Adding a TfAnswer_: The user will enter either `T` or `F` for their answer after the `a/` prefix.
+Only capital, single-lettered answers are accepted and a `WrongTfException` will be thrown if the user enters `t`, `f`, `True` or `False`.
+* _Adding an MCQAnswer_: The user will enter `A)CHOICE_A B)CHOICE_B C)CHOICE_C`, with the correct choice positioned first, for their answer after the `a/` prefix.
+In other words, if `C)CHOICE_C B)CHOICE_B A)CHOICE_A` is entered by the user, `C` will be taken as the correct answer.
+A `WrongMcqAnswerException` will be thrown if the user input does not have all three options in capital letters with parentheses.
+
+==== Types of Cards
+===== Flashcard
+To add a `Flashcard` in an opened deck, the user will enter `add q/QUESTION a/ANSWER`.
+A sample command would be `add q/Is defensive code desirable at all times? a/F`. +
+ +
+The following sequence diagram shows how a `Flashcard` is created from the above command and displayed immediately in the flashcard panel to the user:
+
+image::AddFlashcardDiagram.png[]
+
+===== Imagecard
+
+
+==== Types of Answers
+
+===== True/False
+
+===== MCQ
+
+===== Short Answer
+
 
 === Search and Filter feature
 ==== Design
