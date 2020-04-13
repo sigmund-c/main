@@ -25,7 +25,7 @@ import cardibuddy.model.tag.Tag;
 /**
  * Edits Deck {@code Title} or its {@code Tags}.
  */
-public class EditDeckCommand extends EditCommand{
+public class EditDeckCommand extends EditCommand {
 
     public static final String COMMAND_WORD = "deck";
 

@@ -1,8 +1,8 @@
 package cardibuddy.logic.parser;
 
-import static cardibuddy.commons.core.Messages.*;
-import static cardibuddy.logic.parser.CliSyntax.*;
+import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Optional;

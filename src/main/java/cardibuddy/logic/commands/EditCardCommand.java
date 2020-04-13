@@ -1,7 +1,8 @@
 package cardibuddy.logic.commands;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_TEST_ONGOING;
-import static cardibuddy.logic.parser.CliSyntax.*;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
@@ -15,12 +16,16 @@ import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
-import cardibuddy.model.flashcard.*;
+import cardibuddy.model.flashcard.Card;
+import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.flashcard.Answer;
+
 
 /**
  * Edits Card {@code Question} or {@code Answer}.
  */
-public class EditCardCommand extends EditCommand{
+public class EditCardCommand extends EditCommand {
 
     public static final String COMMAND_WORD = "card";
 
@@ -91,7 +96,7 @@ public class EditCardCommand extends EditCommand{
         Answer updatedAnswer = editCardDescriptor.getAnswer().orElse(cardToEdit.getAnswer());
         String updatedPath = cardToEdit.getPath();
 
-        return new Flashcard(updatedDeck,updatedQuestion, updatedAnswer, updatedPath);
+        return new Flashcard(updatedDeck, updatedQuestion, updatedAnswer, updatedPath);
     }
 
     @Override

@@ -1,9 +1,5 @@
 package cardibuddy.logic.commands;
 
-import cardibuddy.logic.CommandHistory;
-import cardibuddy.logic.commands.exceptions.CommandException;
-import cardibuddy.model.Model;
-
 /**
  * Represents an add command to be extended into add deck and add card commands.
  */

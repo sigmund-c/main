@@ -10,12 +10,10 @@ import java.util.Optional;
 import java.util.Set;
 
 import cardibuddy.commons.core.index.Index;
-import cardibuddy.logic.commands.EditCommand;
 import cardibuddy.logic.commands.EditDeckCommand;
-import cardibuddy.model.deck.Title;
 import cardibuddy.logic.parser.exceptions.ParseException;
+import cardibuddy.model.deck.Title;
 import cardibuddy.model.tag.Tag;
-import javafx.collections.ObservableList;
 
 /**
  * Parses input arguments and creates a new EditDeckCommand object
