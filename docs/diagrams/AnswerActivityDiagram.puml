@@ -1,4 +1,16 @@
 @startuml
-(*)  --> "new test session for the given deck"
+start
+ :parse answer;
 
-@enduml
+ if () then ([isTfAnswer])
+  : create TfAnswer object;
+   else ([else])
+   if () then ([isMcqAnswer])
+    : create McqAnswer object;
+        else ([else])
+         : create ShortAnswer object;
+        endif
+   endif
+
+ stop
+ @enduml

@@ -317,7 +317,11 @@ image::AddImagecardDiagram.png[]
 It is largely similar to the sequence diagram for the creation of a `Flashcard` but with an extra `IMAGE_FILEPATH` argument.
 
 ==== Types of Answers
-When adding cards, the ParserUtil will parse the different answer inputs to create one of the three different types of answers.
+When adding cards, the `ParserUtil` will parse the different answer inputs to create one of the three different types of answers.
+
+The following activity diagram shows how the `ParserUtil` chooses which type of answer object to create:
+
+image::AnswerActivityDiagram.png[]
 
 ===== TfAnswer
 For a `TfAnswer` to be associated with a `Card`, the user will have to enter either `T` or `F` after the answer prefix `a/`.

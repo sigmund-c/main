@@ -22,11 +22,6 @@ activate Answer
 Answer --> ParserUtil : false
 deactivate Answer
 
-ParserUtil -> Answer : isShortAnswer("Wishful thinking")
-activate Answer
-
-Answer --> ParserUtil : true
-deactivate Answer
 
 create ShortAnswer
 ParserUtil -> ShortAnswer : ShortAnswer("Wishful thinking")
