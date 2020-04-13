@@ -1,9 +1,7 @@
 package cardibuddy.logic.commands;
 
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_FLASHCARD;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 import static java.util.Objects.requireNonNull;
 
@@ -17,30 +15,15 @@ import cardibuddy.model.flashcard.Flashcard;
  * Adds a Flashcard (without image) to a deck.
  */
 public class AddFlashcardCommand extends AddCardCommand {
-    public static final String COMMAND_WORD = "c";
+    public static final String COMMAND_WORD = "q";
 
-    public static final String MESSAGE_USAGE = "add c/: Adds a flashcard to a deck. \n"
+    public static final String MESSAGE_USAGE = "add q/ a/: Adds a flashcard to a deck. \n"
             + "Parameters: "
-            + PREFIX_FLASHCARD + "DECK_INDEX "
             + PREFIX_QUESTION + "QUESTION "
             + PREFIX_ANSWER + "ANSWER "
-            + "[" + PREFIX_TAG + "TAG]... \n"
-            + "Example (adding a flashcard): " + COMMAND_WORD + " "
-            + PREFIX_FLASHCARD + "1 "
-            + PREFIX_QUESTION + "A queue cannot be implemented using an array "
-            + PREFIX_ANSWER + "False ";
-
-    public static final String MESSAGE_ADD_FLASHCARD = "To add a flashcard to the cardibuddy book. \n"
-            + "Parameters: "
-            + PREFIX_FLASHCARD + "DECK_INDEX "
-            + PREFIX_QUESTION + "QUESTION "
-            + PREFIX_ANSWER + "ANSWER"
-            + "[" + PREFIX_TAG + "TAG]... \n"
-            + "Example: add "
-            + PREFIX_FLASHCARD + "/ Java "
-            + PREFIX_QUESTION + "A queue cannot be implemented using an array "
-            + PREFIX_ANSWER + "False "
-            + PREFIX_TAG + "Programming";
+            + "Example (adding a flashcard): " + COMMAND_WORD + "/ "
+            + "A queue cannot be implemented using an array "
+            + PREFIX_ANSWER + "F ";
 
     public static final String MESSAGE_SUCCESS = "New flashcard added:\n%1$s";
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the deck";

@@ -146,7 +146,7 @@ image::LogicToUiSequenceDiagram.png[]
 .Structure of the Model Component
 image::ModelClassDiagram.png[]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
+*API* : link:{repoURL}/src/main/java/cardibuddy/model/Model.java[`Model.java`]
 
 The `Model`,
 
@@ -166,7 +166,7 @@ image:BetterModelClassDiagram.png[]
 .Structure of the Storage Component
 image::StorageClassDiagram.png[]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
+*API* : link:{repoURL}/src/main/java/cardibuddy/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
@@ -183,8 +183,8 @@ Classes used by multiple components are in the `cardibuddy.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 // tag::undoredo[]
-=== [Proposed] Undo/Redo feature
-==== Proposed Implementation
+=== Undo/Redo feature
+==== Design
 
 The undo/redo mechanism is facilitated by `VersionedCardiBuddy`.
 It extends `CardiBuddy` with an undo/redo history, stored internally as an `cardiBuddyStateList` and `currentStatePointer`.
@@ -264,15 +264,21 @@ image::CommitActivityDiagram.png[]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+// tag::jingying[]
+=== Adding of Cards
+==== Design
+Users are able to add two different types of cards -- cards with images and cards without. These cards have three types of answers -- True/False, MCQ and short answers.
+
 === Search and Filter feature
+==== Design
 Users can choose to find a `Deck` or a `Flashcard` through:
 
-* searching by keywords from the title of a `Deck` or from the `Question` or `Answer` from a `Flashcard`.
-* filtering by tags from the `Tag(s)` associated with a `Deck` or a `Flashcard`
+* searching by keywords from the title of a `Deck` or from the `Question` from a `Flashcard`.
+* filtering by tags from the `Tag(s)` associated with a `Deck`
 
 Both `search` and `filter` have the and-or functionality where adding `&` between keywords returns decks and flashcards
 with both terms before and after the `&` symbol.
-For example, `filter Y1 & hard` will return decks and flashcards that are tagged with both `Y1` and `hard`.
+For example, `filter Y1 & Hard` will return decks and flashcards that are tagged with both `Y1` and `hard`.
 
 The following sequence diagram shows how the `Search` command works:
 
@@ -284,6 +290,7 @@ Calling the `search` command creates a predicate based on the given keywords and
 The `execute()` method is then called to filter the decks accordingly to the predicate and it returns a `CommandResult` object.
 
 Future implementations would return flashcards and decks that are filtered accordingly to the predicate. (by v1.3)
+// end::jingying[]
 
 === Test feature
 ==== Design

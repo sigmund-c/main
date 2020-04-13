@@ -16,6 +16,7 @@ import cardibuddy.model.deck.exceptions.NotInDeckException;
 import cardibuddy.model.deck.exceptions.WrongDeckException;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
+import cardibuddy.model.flashcard.exceptions.WrongAnswerTypeException;
 import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.TestResult;
 import javafx.event.ActionEvent;
@@ -23,7 +24,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -97,6 +97,10 @@ public class MainWindow extends UiPart<Stage> {
     public void setCommandBox() {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         this.commandBox = commandBox;
+    }
+
+    public void setText(String message) {
+        resultDisplay.setFeedbackToUser(message);
     }
 
     public Stage getPrimaryStage() {
@@ -292,13 +296,9 @@ public class MainWindow extends UiPart<Stage> {
         boolean hasInput = false;
 
         if (file != null) {
-            Image image = new Image(file.toURI().toString());
-            //DragDropCard imageCard = new DragDropCard(image);
-            //imageCard.setCache(true);
-            //flashcardListPanelPlaceholder.getChildren().add(imageCard.getRoot());
-            resultDisplay.setFeedbackToUser("Type in the deck index, a question and an answer to be associated"
-                    + " with this image.\nParameters: c/DECK_INDEX q/QUESTION a/ANSWER\n\nNote: The deck indicated"
-                    + " in DECK_INDEX should be currently open for the command to work.");
+            resultDisplay.setFeedbackToUser("Type in the question and answer to be associated"
+                    + " with this image.\nParameters: q/QUESTION a/ANSWER\n\nNote: A deck to be added into"
+                    + " should be currently open for the command to work.");
             try {
                 EventHandler<KeyEvent> getQa = event -> {
                     if (event.getCode() == KeyCode.ENTER) {
@@ -318,7 +318,7 @@ public class MainWindow extends UiPart<Stage> {
                 commandBox.getCommandTextField().setOnKeyPressed(getQa);
             } catch (Exception e) {
                 resultDisplay.setFeedbackToUser("Invalid format to add a flashcard!\n"
-                        + "Parameters: c/DECK_INDEX q/QUESTION a/ANSWER");
+                        + "Parameters: q/QUESTION a/ANSWER");
             }
         } else {
             resultDisplay.setFeedbackToUser("Please attach a valid file. "
@@ -394,6 +394,10 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
+        } catch (WrongAnswerTypeException e) {
+            resultDisplay.setFeedbackToUser("This card has a T/F answer! Please type T or F instead of "
+                + e.getMessage() + ".");
+            throw e;
         } catch (CommandException | ParseException | DeckCannotBeCardException | InvalidDeckException
                 | InvalidFlashcardException | NotInDeckException | WrongDeckException e) {
             logger.info("Invalid command: " + commandText);

@@ -1,5 +1,7 @@
 package cardibuddy.ui;
 
+import java.util.List;
+
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Flashcard;
 import javafx.fxml.FXML;
@@ -42,7 +44,15 @@ public class FlashcardCard extends CardUi {
         id.setText(displayedIndex + ". ");
         question.setText(flashcard.getQuestion().toString());
         question.setWrapText(true);
-        answer.setText(flashcard.getAnswer().toString());
+        if (flashcard.getAnswer().getAnswerList() != null) {
+            List answerList = flashcard.getAnswer().getAnswerList();
+            String ans = answerList.get(0) + "\n" + answerList.get(1)
+                    + "\n" + answerList.get(2) + "\n" + flashcard.getAnswer().toString().charAt(0);
+            answer.setText(ans);
+        } else {
+            answer.setText(flashcard.getAnswer().toString());
+        }
+        answer.setWrapText(true);
     }
 
     @Override
