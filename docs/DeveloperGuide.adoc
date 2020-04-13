@@ -267,6 +267,7 @@ image::CommitActivityDiagram.png[]
 // tag::jingying[]
 === Adding of Cards
 ==== Design
+Users are able to add two different types of cards -- cards with images and cards without. These cards have three types of answers -- True/False, MCQ and short answers.
 
 === Search and Filter feature
 ==== Design

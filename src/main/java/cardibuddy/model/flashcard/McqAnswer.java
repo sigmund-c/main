@@ -12,6 +12,7 @@ import java.util.List;
 public class McqAnswer implements Answer {
     public static final String MESSAGE_CONSTRAINTS = "MCQ answers should be a single letter corresponding to answer.";
     private static final String MCQ_REGEX = "[A][)].*|[B][)].*|[C][)].*";
+    private static final String ANS_REGEX = "(?=.{1}$)^[ABC]";
 
     protected ArrayList<String> answerList;
 
@@ -20,10 +21,13 @@ public class McqAnswer implements Answer {
 
     public McqAnswer(String answer) {
         requireNonNull(answer);
-        checkArgument(isValid(answer), MESSAGE_CONSTRAINTS);
-        original = answer;
 
-        separateIndexes(answer);
+        if (answer.length() > 1) {
+            checkArgument(isValid(answer), MESSAGE_CONSTRAINTS);
+            separateIndexes(answer);
+            original = answer;
+        }
+
     }
 
     /**
