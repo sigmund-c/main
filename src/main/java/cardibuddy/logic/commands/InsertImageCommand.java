@@ -25,7 +25,6 @@ public class InsertImageCommand extends AddCardCommand {
             + PREFIX_FLASHCARD + "DECK_INDEX "
             + PREFIX_QUESTION + "QUESTION "
             + PREFIX_ANSWER + "ANSWER "
-            + "[" + PREFIX_TAG + "TAG]... \n"
             + "Example (adding a flashcard): " + COMMAND_WORD + " "
             + PREFIX_FLASHCARD + "1 "
             + PREFIX_QUESTION + "A queue cannot be implemented using an array "
@@ -36,12 +35,10 @@ public class InsertImageCommand extends AddCardCommand {
             + PREFIX_FLASHCARD + "DECK_INDEX "
             + PREFIX_QUESTION + "QUESTION "
             + PREFIX_ANSWER + "ANSWER"
-            + "[" + PREFIX_TAG + "TAG]... \n"
             + "Example: add "
             + PREFIX_FLASHCARD + "/ Java "
             + PREFIX_QUESTION + "A queue cannot be implemented using an array "
-            + PREFIX_ANSWER + "False "
-            + PREFIX_TAG + "Programming";
+            + PREFIX_ANSWER + "False ";
 
     public static final String MESSAGE_SUCCESS = "New flashcard added: %1$s";
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the deck";

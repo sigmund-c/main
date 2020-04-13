@@ -11,22 +11,23 @@ import java.util.Set;
 
 import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.commands.EditCommand;
-import cardibuddy.logic.commands.EditCommand.EditDeckDescriptor;
-import cardibuddy.logic.parser.exceptions.ParseException;
+import cardibuddy.logic.commands.EditDeckCommand;
 import cardibuddy.model.deck.Title;
+import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.tag.Tag;
+import javafx.collections.ObservableList;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditDeckCommand object
  */
-public class EditCommandParser implements Parser<EditCommand> {
+public class EditDeckCommandParser implements Parser<EditDeckCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditDeckCommand
+     * and returns an EditDeckCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException {
+    public EditDeckCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DECK, PREFIX_TAG);
@@ -36,19 +37,19 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDeckCommand.MESSAGE_USAGE), pe);
         }
 
-        EditDeckDescriptor editDeckDescriptor = new EditDeckDescriptor();
+        EditDeckCommand.EditDeckDescriptor editDeckDescriptor = new EditDeckCommand.EditDeckDescriptor();
 
         parseTitleForEdit(argMultimap.getValue(PREFIX_DECK).get()).ifPresent(editDeckDescriptor::setTitle);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editDeckDescriptor::setTags);
 
         if (!editDeckDescriptor.isFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditDeckCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editDeckDescriptor);
+        return new EditDeckCommand(index, editDeckDescriptor);
     }
 
     /**
@@ -81,5 +82,4 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
 }

@@ -1,0 +1,201 @@
+package cardibuddy.logic.commands;
+
+import static cardibuddy.commons.core.Messages.MESSAGE_TEST_ONGOING;
+import static cardibuddy.logic.parser.CliSyntax.*;
+import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_DECKS;
+import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
+import static java.util.Objects.requireNonNull;
+
+import java.lang.reflect.AnnotatedArrayType;
+import java.nio.file.Path;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+import cardibuddy.commons.core.Messages;
+import cardibuddy.commons.core.index.Index;
+import cardibuddy.commons.util.CollectionUtil;
+import cardibuddy.logic.CommandHistory;
+import cardibuddy.logic.commands.exceptions.CommandException;
+import cardibuddy.logic.parser.ParserUtil;
+import cardibuddy.model.Model;
+import cardibuddy.model.deck.Deck;
+import cardibuddy.model.deck.Title;
+import cardibuddy.model.flashcard.*;
+import cardibuddy.model.tag.Tag;
+
+/**
+ * Edits Card {@code Question} or {@code Answer}.
+ */
+public class EditCardCommand extends EditCommand{
+
+    public static final String COMMAND_WORD = "card";
+
+    public static final String MESSAGE_USAGE = ": Edits the details of the card identified "
+            + "by the index number used in the deck's list of displayed flashcards.\n"
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_QUESTION + "QUESTION"
+            + PREFIX_ANSWER + "ANSWER\n"
+            + "Example: edit 1 q/What does UML stand for?";
+
+    public static final String MESSAGE_EDIT_CARD_SUCCESS = "Edited card" + ": %1$s";
+    public static final String MESSAGE_NOT_EDITED = "All fields to edit must be provided.";
+    public static final String MESSAGE_DUPLICATE_CARD = "This card already exists in the deck.";
+
+    private final Index index;
+    private final EditCardDescriptor editCardDescriptor;
+
+    /**
+     * @param index of the deck in the filtered deck list to edit
+     * @param editCardDescriptor details to edit the deck with
+     */
+    public EditCardCommand(Index index, EditCardDescriptor editCardDescriptor) {
+        requireNonNull(index);
+        requireNonNull(editCardDescriptor);
+
+        this.index = index;
+        this.editCardDescriptor = new EditCardDescriptor(editCardDescriptor);
+    }
+
+    @Override
+    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+        requireNonNull(model);
+        if (model.hasOngoingTestSession()) {
+            throw new CommandException(MESSAGE_TEST_ONGOING);
+        }
+
+        List<Card> lastShownList = model.getFilteredFlashcardList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
+        }
+
+        Card cardToEdit = lastShownList.get(index.getZeroBased());
+        Card editedCard = createEditedCard(cardToEdit, editCardDescriptor);
+
+        if (!cardToEdit.isSameFlashcard(editedCard) && model.hasFlashcard(editedCard)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CARD);
+        }
+
+        model.setFlashcard(cardToEdit, editedCard);
+        model.updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
+        model.commitCardiBuddy();
+        return new CommandResult(String.format(MESSAGE_EDIT_CARD_SUCCESS, editedCard));
+    }
+
+    /**
+     * Creates and returns a {@code Card} with the details of {@code cardToEdit}
+     * edited with {@code editCardDescriptor}.
+     */
+    private static Card createEditedCard(Card cardToEdit, EditCardDescriptor editCardDescriptor) {
+        assert cardToEdit != null;
+
+        Question updatedQuestion = editCardDescriptor.getQuestion().orElse(cardToEdit.getQuestion());
+        Answer updatedAnswer = editCardDescriptor.getAnswer().orElse(cardToEdit.getAnswer());
+
+        return new Flashcard(cardToEdit.getDeck() ,updatedQuestion, updatedAnswer, "");
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditCardCommand)) {
+            return false;
+        }
+
+        // state check
+        EditCardCommand e = (EditCardCommand) other;
+        return index.equals(e.index)
+                && editCardDescriptor.equals(e.editCardDescriptor);
+    }
+
+    /**
+     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * corresponding field value of the person.
+     */
+    public static class EditCardDescriptor {
+        private Deck deck;
+        private Question question;
+        private Answer answer;
+        private Path path;
+
+        public EditCardDescriptor() {}
+
+        /**
+         * Copy constructor.
+         * A defensive copy of the parameters are used internally.
+         */
+        public EditCardDescriptor(EditCardDescriptor toCopy) {
+            setQuestion(toCopy.question);
+            setAnswer(toCopy.answer);
+        }
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isFieldEdited() {
+            return !(question == null) || !(answer == null);
+        }
+
+        /**
+         * Sets {@code question} to this object's {@code question}.
+         * A defensive copy of {@code question} is used internally.
+         */
+        public void setQuestion(Question question) {
+            this.question = question;
+        }
+
+        /**
+         * Sets {@code answer} to this object's {@code answer}.
+         * A defensive copy of {@code answer} is used internally.
+         */
+        public void setAnswer(Answer answer) {
+            this.answer = answer;
+        }
+
+        /**
+         * Returns an unmodifiable Question, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code question} is null.
+         */
+        public Optional<Question> getQuestion() {
+            return (question != null) ? Optional.of(question) : Optional.empty();
+        }
+
+        /**
+         * Returns an unmodifiable Answer, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code answer} is null.
+         */
+        public Optional<Answer> getAnswer() {
+            return (answer != null) ? Optional.of(answer) : Optional.empty();
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof EditCardDescriptor)) {
+                return false;
+            }
+
+            // state check
+            EditCardDescriptor e = (EditCardDescriptor) other;
+
+            return getQuestion().equals(e.getQuestion()) && getAnswer().equals(e.getAnswer());
+        }
+    }
+}
+

@@ -6,33 +6,12 @@ import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_TWO_WORD_COMMAND;
 import static cardibuddy.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cardibuddy.logic.LogicToUiManager;
-import cardibuddy.logic.commands.AddCommand;
-import cardibuddy.logic.commands.AddDeckCommand;
-import cardibuddy.logic.commands.AddFlashcardCommand;
-import cardibuddy.logic.commands.ClearCommand;
-import cardibuddy.logic.commands.Command;
-import cardibuddy.logic.commands.DeleteCardCommand;
-import cardibuddy.logic.commands.DeleteCommand;
-import cardibuddy.logic.commands.DeleteDeckCommand;
-import cardibuddy.logic.commands.EditCommand;
-import cardibuddy.logic.commands.ExitCommand;
-import cardibuddy.logic.commands.FilterCommand;
-import cardibuddy.logic.commands.HelpCommand;
-import cardibuddy.logic.commands.HistoryCommand;
-import cardibuddy.logic.commands.InsertImageCommand;
-import cardibuddy.logic.commands.ListCommand;
-import cardibuddy.logic.commands.OpenCommand;
-import cardibuddy.logic.commands.RedoCommand;
-import cardibuddy.logic.commands.SearchCardCommand;
-import cardibuddy.logic.commands.SearchCommand;
-import cardibuddy.logic.commands.SearchDeckCommand;
-import cardibuddy.logic.commands.StatisticsCommand;
-import cardibuddy.logic.commands.TestCommand;
-import cardibuddy.logic.commands.UndoCommand;
+import cardibuddy.logic.commands.*;
 import cardibuddy.logic.commands.testsession.AnswerCommand;
 import cardibuddy.logic.commands.testsession.ForceCommand;
 import cardibuddy.logic.commands.testsession.NextCommand;
@@ -108,12 +87,9 @@ public class CardiBuddyParser {
         case InsertImageCommand.COMMAND_WORD:
             return new InsertImageCommandParser(cardiBuddy, logicToUiManager).parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
         case DeleteCommand.COMMAND_WORD:
             try {
-                switch (arguments.substring(1, 5)) {
+                switch (arguments.substring(1, 7)) {
 
                 case DeleteDeckCommand.COMMAND_WORD:
                     return new DeleteDeckCommandParser(logicToUiManager).parse(arguments.substring(5));
@@ -123,6 +99,23 @@ public class CardiBuddyParser {
 
                 default:
                     throw new ParseException(MESSAGE_UNKNOWN_COMMAND + "\n" + MESSAGE_INVALID_TWO_WORD_COMMAND);
+
+                }
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new ParseException(MESSAGE_INCOMPLETE_COMMAND + MESSAGE_INVALID_TWO_WORD_COMMAND);
+            }
+
+        case EditCommand.COMMAND_WORD:
+            try {
+                switch (arguments.substring(1, 5)) {
+                    case EditDeckCommand.COMMAND_WORD: //d
+                        return new EditDeckCommandParser().parse(arguments.substring(5));
+
+                    case EditCardCommand.COMMAND_WORD: //c
+                        return new EditCardCommandParser(cardiBuddy, logicToUiManager).parse(arguments.substring(5));
+
+                    default:
+                        throw new ParseException(MESSAGE_UNKNOWN_COMMAND + "\n" + MESSAGE_INVALID_TWO_WORD_COMMAND);
 
                 }
             } catch (StringIndexOutOfBoundsException e) {
