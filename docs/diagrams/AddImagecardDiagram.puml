@@ -4,11 +4,10 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":CardiBuddyParser" as CardiBuddyParser LOGIC_COLOR
-participant ":AddFlashcardCommandParser" as AddFlashcardCommandParser LOGIC_COLOR
+participant ":AddImagecardCommandParser" as AddImagecardCommandParser LOGIC_COLOR
 participant ":ParserUtil" as ParserUtil LOGIC_COLOR
-participant ":Flashcard" as Flashcard LOGIC_COLOR
-participant ":AddFlashcardCommand" as AddFlashcardCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":Imagecard" as Imagecard LOGIC_COLOR
+participant ":AddImagecardCommand" as AddImagecardCommand LOGIC_COLOR
 participant ":logicToUiManager" as LogicToUiManager LOGIC_COLOR
 end box
 
@@ -21,83 +20,91 @@ participant ":UiManager" as UiManager UI_COLOR
 participant ":MainWindow" as MainWindow UI_COLOR
 endbox
 
-[-> LogicManager : execute("add q/Is defensive\n code desirable at all times? a/F")
+[-> LogicManager : execute("add p/path\nq/ques a/ans")
+note bottom
+    <b>These are the abbreviated command arguments:</b>
+    <b>path</b> = file:/Users/Jing/ArchitectureDiagram.png
+    <b>ques</b> = What kind of diagram is this?
+    <b>ans</b> = B)Architecture C)Sequence A)Object
+end note
+
 activate LogicManager
 
-LogicManager -> CardiBuddyParser : parseCommand("add q/Is defensive\n code desirable at all times? a/F")
+
+LogicManager -> CardiBuddyParser : parseCommand("add p/path\nq/ques a/ans")
 activate CardiBuddyParser
 
-create AddFlashcardCommandParser
-CardiBuddyParser -> AddFlashcardCommandParser
-activate AddFlashcardCommandParser
+create AddImagecardCommandParser
+CardiBuddyParser -> AddImagecardCommandParser
+activate AddImagecardCommandParser
 
-AddFlashcardCommandParser --> CardiBuddyParser
-deactivate AddFlashcardCommandParser
+AddImagecardCommandParser --> CardiBuddyParser
+deactivate AddImagecardCommandParser
 
-CardiBuddyParser -> AddFlashcardCommandParser : parse("q/Is defensive\n code desirable at all times? a/F")
-activate AddFlashcardCommandParser
+CardiBuddyParser -> AddImagecardCommandParser : parse("p/path\nq/ques a/ans")
+activate AddImagecardCommandParser
 
-AddFlashcardCommandParser -> LogicToUiManager : getDisplayedDeck()
+AddImagecardCommandParser -> LogicToUiManager : getDisplayedDeck()
 activate LogicToUiManager
 
-LogicToUiManager --> AddFlashcardCommandParser : displayedDeck
+LogicToUiManager --> AddImagecardCommandParser : deck
 deactivate LogicToUiManager
-deactivate AddFlashcardCommandParser
+deactivate AddImagecardCommandParser
 
-AddFlashcardCommandParser -> ParserUtil : parseQuestion("Is defensive\ncode desirable at all times?")
-activate AddFlashcardCommandParser
+AddImagecardCommandParser -> ParserUtil : parseQuestion("q/ques")
+activate AddImagecardCommandParser
 activate ParserUtil
 
-ParserUtil --> AddFlashcardCommandParser : question
+ParserUtil --> AddImagecardCommandParser : question
 deactivate ParserUtil
 
-AddFlashcardCommandParser -> ParserUtil : parseAnswer("F")
+AddImagecardCommandParser -> ParserUtil : parseAnswer("a/ans")
 activate ParserUtil
 
-ParserUtil --> AddFlashcardCommandParser : tfAnswer
+ParserUtil --> AddImagecardCommandParser : mcqAnswer
 deactivate ParserUtil
 
-create Flashcard
-AddFlashcardCommandParser -> Flashcard : displayedDeck, question, tfAnswer
-activate Flashcard
-Flashcard --> AddFlashcardCommandParser : flashcard
-deactivate Flashcard
+create Imagecard
+AddImagecardCommandParser -> Imagecard : deck, question, mcqAnswer, path
+activate Imagecard
+Imagecard --> AddImagecardCommandParser : imagecard
+deactivate Imagecard
 
-create AddFlashcardCommand
-AddFlashcardCommandParser -> AddFlashcardCommand : flashcard, logicToUiManager
-activate AddFlashcardCommand
+create AddImagecardCommand
+AddImagecardCommandParser -> AddImagecardCommand : imagecard, logicToUiManager
+activate AddImagecardCommand
 
-AddFlashcardCommand --> AddFlashcardCommandParser
-deactivate AddFlashcardCommand
+AddImagecardCommand --> AddImagecardCommandParser
+deactivate AddImagecardCommand
 
-AddFlashcardCommandParser --> CardiBuddyParser
-deactivate AddFlashcardCommandParser
+AddImagecardCommandParser --> CardiBuddyParser : addIcCommand
+deactivate AddImagecardCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-AddFlashcardCommandParser -[hidden]-> CardiBuddyParser
-destroy AddFlashcardCommandParser
+AddImagecardCommandParser -[hidden]-> CardiBuddyParser
+destroy AddImagecardCommandParser
 
-CardiBuddyParser --> LogicManager : t
+CardiBuddyParser --> LogicManager : addIcCommand
 deactivate CardiBuddyParser
 
-LogicManager -> AddFlashcardCommand : execute()
-activate AddFlashcardCommand
+LogicManager -> AddImagecardCommand : execute()
+activate AddImagecardCommand
 
-AddFlashcardCommand -> Model : addFlashcard(flashcard)
+AddImagecardCommand -> Model : addImagecard(imagecard)
 activate Model
-Model --> AddFlashcardCommand
+Model --> AddImagecardCommand
 deactivate Model
 
-AddFlashcardCommand -> LogicToUiManager : getDisplayedDeck()\n.addCard(flashcard)
+AddImagecardCommand -> LogicToUiManager : addCard(imagecard)
 activate LogicToUiManager
-LogicToUiManager --> AddFlashcardCommand
+LogicToUiManager --> AddImagecardCommand
 deactivate LogicToUiManager
 
-AddFlashcardCommand -> LogicToUiManager : getDisplayedDeck()\n.updateFilteredFlashcardList()
+AddImagecardCommand -> LogicToUiManager : updateFilteredFlashcardList
 activate LogicToUiManager
-LogicToUiManager --> AddFlashcardCommand
+LogicToUiManager --> AddImagecardCommand
 deactivate LogicToUiManager
 
-AddFlashcardCommand -> LogicToUiManager : updateFlashcardPanel()
+AddImagecardCommand -> LogicToUiManager : updateFlashcardPanel()
 activate LogicToUiManager
 
 LogicToUiManager -> UiManager : getMainWindow()
@@ -111,20 +118,14 @@ deactivate MainWindow
 UiManager --> LogicToUiManager
 deactivate UiManager
 
-LogicToUiManager --> AddFlashcardCommand
+LogicToUiManager --> AddImagecardCommand
 deactivate LogicToUiManager
 
 
 deactivate LogicToUiManager
-create CommandResult
-AddFlashcardCommand -> CommandResult
-activate CommandResult
 
-CommandResult --> AddFlashcardCommand
-deactivate CommandResult
-
-AddFlashcardCommand --> LogicManager : result
-deactivate AddFlashcardCommand
+AddImagecardCommand --> LogicManager : result
+deactivate AddImagecardCommand
 
 [<--LogicManager
 deactivate LogicManager

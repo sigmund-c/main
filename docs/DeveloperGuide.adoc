@@ -303,11 +303,18 @@ image::AddFlashcardDiagram.png[]
 ===== Imagecard
 To add an `Imagecard` in an opened deck, the user will enter `add p/file:IMAGE_FILEPATH q/QUESTION a/ANSWER`.
 A sample command would be `add p/file:/Users/Jing/ArchitectureDiagram.png q/What kind of diagram is this?
-a/B)Architecture C)Sequence A)Object`. If the file path is invalid, the middle part of the card will be blank and an image will not be shown. +
+a/B)Architecture C)Sequence A)Object`. +
+ +
+When an `ImagecardCard` is displayed in the `FlashcardPanel`, the image will be
+ retrieved via the stored `IMAGE_FILEPATH` from the user's computer.
+If the file path is invalid, the middle part of the card will be blank and an image will not be shown.
+ More information regarding the implementation of the `Ui` can be found inside _cardibuddy/ui/ImagecardCard_. +
  +
 The following sequence diagram shows how an `Imagecard` is created from the above command and displayed immediately in the flashcard panel to the user:
 
 image::AddImagecardDiagram.png[]
+
+It is largely similar to the sequence diagram for the creation of a `Flashcard` but with an extra `IMAGE_FILEPATH` argument.
 
 ==== Types of Answers
 When adding cards, the ParserUtil will parse the different answer inputs to create one of the three different types of answers.

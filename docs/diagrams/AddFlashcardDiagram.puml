@@ -8,7 +8,6 @@ participant ":AddFlashcardCommandParser" as AddFlashcardCommandParser LOGIC_COLO
 participant ":ParserUtil" as ParserUtil LOGIC_COLOR
 participant ":Flashcard" as Flashcard LOGIC_COLOR
 participant ":AddFlashcardCommand" as AddFlashcardCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
 participant ":logicToUiManager" as LogicToUiManager LOGIC_COLOR
 end box
 
@@ -31,7 +30,7 @@ create AddFlashcardCommandParser
 CardiBuddyParser -> AddFlashcardCommandParser
 activate AddFlashcardCommandParser
 
-AddFlashcardCommandParser --> CardiBuddyParser
+AddFlashcardCommandParser --> CardiBuddyParser :
 deactivate AddFlashcardCommandParser
 
 CardiBuddyParser -> AddFlashcardCommandParser : parse("q/Is defensive\n code desirable at all times? a/F")
@@ -70,13 +69,13 @@ activate AddFlashcardCommand
 AddFlashcardCommand --> AddFlashcardCommandParser
 deactivate AddFlashcardCommand
 
-AddFlashcardCommandParser --> CardiBuddyParser
+AddFlashcardCommandParser --> CardiBuddyParser : addFcCommand
 deactivate AddFlashcardCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 AddFlashcardCommandParser -[hidden]-> CardiBuddyParser
 destroy AddFlashcardCommandParser
 
-CardiBuddyParser --> LogicManager : t
+CardiBuddyParser --> LogicManager : addFcCommand
 deactivate CardiBuddyParser
 
 LogicManager -> AddFlashcardCommand : execute()
@@ -116,12 +115,6 @@ deactivate LogicToUiManager
 
 
 deactivate LogicToUiManager
-create CommandResult
-AddFlashcardCommand -> CommandResult
-activate CommandResult
-
-CommandResult --> AddFlashcardCommand
-deactivate CommandResult
 
 AddFlashcardCommand --> LogicManager : result
 deactivate AddFlashcardCommand
