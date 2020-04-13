@@ -32,18 +32,11 @@ import org.junit.jupiter.api.Test;
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
  */
 public class EditCardCommandTest {
-
-    private Model model = new ModelManager(getTypicalCardiBuddy(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
-
-    private Path userPrefsFilePath = Paths.get("preferences.json");
-    private UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsFilePath);
-    private Path cardibuddyFilePath = Paths.get("data" , "cardibuddy.json");
-    private CardiBuddyStorage cardiBuddyStorage = new JsonCardiBuddyStorage(cardibuddyFilePath);
-    private Storage storage = new StorageManager(cardiBuddyStorage, userPrefsStorage);
-    private Logic logic = new LogicManager(model, storage);
-    private UiManager ui = new UiManager(logic);
-    private LogicToUiManager logicToUiManager = new LogicToUiManager(ui);
+    private Model model = new ModelManager();
+    private LogicToUiManager logicToUiManager = new LogicToUiManager(new UiManager(new LogicManager(model
+            , new StorageManager( new JsonCardiBuddyStorage(Paths.get("data" , "cardibuddy.json"))
+            , new JsonUserPrefsStorage(Paths.get("preferences.json"))))));
 
     @Test
     public void equals() {

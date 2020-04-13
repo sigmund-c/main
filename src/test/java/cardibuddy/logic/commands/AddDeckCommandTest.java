@@ -36,18 +36,6 @@ public class AddDeckCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_deckAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingDeckAdded modelStub = new ModelStubAcceptingDeckAdded();
-        Deck valid = new DeckBuilder().build();
-
-        //CommandResult commandResult = new AddDeckCommand(valid).execute(modelStub, commandHistory);
-
-        //assertEquals(String.format(AddDeckCommand.MESSAGE_SUCCESS, valid), commandResult.getFeedbackToUser());
-        //assertEquals(Arrays.asList(valid), modelStub.decksAdded);
-        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
-    }
-
-    @Test
     public void equals() {
         Deck CS2103 = new DeckBuilder().withTitle("CS2103").build();
         Deck CS2101 = new DeckBuilder().withTitle("CS2101").build();
