@@ -38,7 +38,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Card> filteredFlashcards;
     private final FilteredList<Deck> filteredDecks;
-    private final Statistics statistics;
     private final VersionedCardiBuddy versionedCardiBuddy;
     private TestSession testSession;
 
@@ -56,8 +55,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredFlashcards = new FilteredList<Card>(this.versionedCardiBuddy.getFlashcardList());
         filteredDecks = new FilteredList<Deck>(this.versionedCardiBuddy.getDeckList());
-
-        this.statistics = new Statistics();
     }
 
     public ModelManager() {
@@ -120,18 +117,12 @@ public class ModelManager implements Model {
     @Override
     public void deleteDeck(Deck target) {
         versionedCardiBuddy.removeDeck(target);
-
-        target.getStatistics().trackDeckDeleted();
-        statistics.trackDeckDeleted();
     }
 
     @Override
     public void addDeck(Deck deck) {
         versionedCardiBuddy.addDeck(deck);
         updateFilteredDeckList(PREDICATE_SHOW_ALL_DECKS);
-
-        deck.getStatistics().trackDeckAdded();
-        statistics.trackDeckAdded();
     }
 
     @Override
@@ -148,9 +139,6 @@ public class ModelManager implements Model {
     @Override
     public void deleteFlashcard(Card target) {
         versionedCardiBuddy.removeFlashcard(target);
-
-        target.getDeck().getStatistics().trackCardDeleted();
-        statistics.trackCardDeleted();
     }
 
     /**
@@ -162,15 +150,11 @@ public class ModelManager implements Model {
     public void addFlashcard(Card flashcard) {
         versionedCardiBuddy.addFlashcard(flashcard);
         updateFilteredFlashcardList(PREDICATE_SHOW_ALL_FLASHCARDS);
-
-        flashcard.getDeck().getStatistics().trackCardAdded();
-        statistics.trackCardAdded();
     }
 
     @Override
     public void setFlashcard(Card target, Card editedFlashcard) {
         requireAllNonNull(target, editedFlashcard);
-
         versionedCardiBuddy.setFlashcard(target, editedFlashcard);
     }
 
@@ -259,7 +243,7 @@ public class ModelManager implements Model {
         }
 
         testSession.getDeck().getStatistics().recordHistory(testSession);
-        statistics.recordHistory(testSession);
+        cardiBuddy.getStatistics().recordHistory(testSession);
         testSession = null;
     }
 
@@ -332,7 +316,7 @@ public class ModelManager implements Model {
 
     @Override
     public Statistics getStatistics() {
-        return statistics;
+        return cardiBuddy.getStatistics();
     }
 
     @Override

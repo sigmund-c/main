@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.deck.UniqueDeckList;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.UniqueFlashcardList;
@@ -19,7 +20,7 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
 
     private final UniqueDeckList decks;
     private final UniqueFlashcardList flashcards;
-
+    private Statistics statistics;
     //private TestSession testSession;
 
     /*
@@ -32,6 +33,7 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
     {
         decks = new UniqueDeckList();
         flashcards = new UniqueFlashcardList();
+        statistics = new Statistics();
     }
 
     public CardiBuddy() {}
@@ -65,11 +67,20 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
     /**
      * Resets the existing data of this {@code CardiBuddy} with {@code newData}.
      */
+
+    public void setStatistics(Statistics statistics) {
+        this.statistics = statistics;
+    }
+
+    /**
+     * Sets all current data into another set of data. This includes the Decks, Cards, and Statistics.
+     */
     public void resetData(ReadOnlyCardiBuddy newData) {
         requireNonNull(newData);
 
         setDecks(newData.getDeckList());
         setFlashcards(newData.getFlashcardList());
+        setStatistics(newData.getStatistics());
     }
 
     //// deck-level operations
@@ -84,9 +95,13 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
     /**
      * Adds a deck to the cardibuddy.
      * The deck must not already exist in the cardibuddy.
+     * Also updates both universal {@code Statistics} and deck {@code Statistics}.
      */
     public void addDeck(Deck d) {
         decks.add(d);
+
+        d.getStatistics().trackDeckAdded();
+        statistics.trackDeckAdded();
     }
 
     /**
@@ -110,9 +125,13 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
     /**
      * Removes {@code key} from this {@code CardiBuddy}.
      * {@code key} must exist in the cardi buddy.
+     * Also updates both universal {@code Statistics} and deck {@code Statistics}.
      */
     public void removeDeck(Deck key) {
         decks.remove(key);
+
+        key.getStatistics().trackDeckDeleted();
+        statistics.trackDeckDeleted();
     }
 
     //// flashcard-level operations
@@ -127,9 +146,13 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
     /**
      * Adds a flashcard to the cardi buddy.
      * The flashcard must not already exist in the cardi buddy.
+     * Also updates both universal {@code Statistics} and deck {@code Statistics}.
      */
     public void addFlashcard(Card p) {
         flashcards.add(p);
+
+        p.getDeck().getStatistics().trackCardAdded();
+        statistics.trackCardAdded();
     }
 
     /**
@@ -147,9 +170,17 @@ public class CardiBuddy implements ReadOnlyCardiBuddy {
     /**
      * Removes {@code key} from this {@code CardiBuddy}.
      * {@code key} must exist in the cardi buddy.
+     * Also updates both universal {@code Statistics} and deck {@code Statistics}.
      */
     public void removeFlashcard(Card key) {
         flashcards.remove(key);
+
+        key.getDeck().getStatistics().trackCardDeleted();
+        statistics.trackCardDeleted();
+    }
+
+    public Statistics getStatistics() {
+        return statistics;
     }
 
     //// util methods
