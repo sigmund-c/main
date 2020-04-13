@@ -1,0 +1,166 @@
+{
+  "decks" : [ {
+    "title" : "CS2103",
+    "flashcards" : [ {
+      "deck" : "CS2103\nTags: [Compulsory][Hard]\nNo. of Cards: 4",
+      "question" : "What does UML stand for?",
+      "answer" : "Unified Modelling Language",
+      "path" : "",
+      "tagged" : [ ]
+    }, {
+      "deck" : "CS2103\nTags: [Compulsory][Hard]\nNo. of Cards: 4",
+      "question" : "As per the KISS principle, should one always prefer the simpler solution over more clever solutions?",
+      "answer" : "False",
+      "path" : "",
+      "tagged" : [ ]
+    }, {
+      "deck" : "CS2103\nTags: [Compulsory][Hard]\nNo. of Cards: 4",
+      "question" : "Do non-functional requirements specify the constraints under which system is developed and operated?",
+      "answer" : "True",
+      "path" : "",
+      "tagged" : [ ]
+    }, {
+      "deck" : "CS2103\nTags: [Compulsory][Hard]\nNo. of Cards: 4",
+      "question" : "Is defensive code desirable at all times?",
+      "answer" : "False",
+      "path" : "",
+      "tagged" : [ ]
+    } ],
+    "tagged" : [ "Compulsory", "Hard" ],
+    "statistics" : {
+      "cardsAdded" : "0",
+      "cardsDeleted" : "0",
+      "decksAdded" : "3",
+      "decksDeleted" : "3",
+      "timesPlayed" : "2",
+      "cardsPlayed" : "8",
+      "avgCorrectPercentage" : "0.625",
+      "avgTriesToGetCorrect" : "1.375",
+      "correctPercentageHistory" : {
+        "CS2103" : [ 0.75, 0.5 ]
+      }
+    }
+  }, {
+    "title" : "CS2040S",
+    "flashcards" : [ {
+      "deck" : "CS2040S\nTags: [Hard]\nNo. of Cards: 2",
+      "question" : "what",
+      "answer" : "ienjoy",
+      "path" : "file:/Users/sigmu/Pictures/ienjoy.png",
+      "tagged" : [ ]
+    }, {
+      "deck" : "CS2040S\nTags: [Hard]\nNo. of Cards: 2",
+      "question" : "chicken",
+      "answer" : "bowl",
+      "path" : "file:/C:/Users/sigmu/Pictures/chickenbowl.jpg",
+      "tagged" : [ ]
+    } ],
+    "tagged" : [ "Hard" ],
+    "statistics" : {
+      "cardsAdded" : "0",
+      "cardsDeleted" : "0",
+      "decksAdded" : "3",
+      "decksDeleted" : "3",
+      "timesPlayed" : "0",
+      "cardsPlayed" : "0",
+      "avgCorrectPercentage" : "0.0",
+      "avgTriesToGetCorrect" : "0.0",
+      "correctPercentageHistory" : { }
+    }
+  }, {
+    "title" : "Vuejs",
+    "flashcards" : [ ],
+    "tagged" : [ "CSS", "Javascript", "HTML", "Framework" ],
+    "statistics" : {
+      "cardsAdded" : "0",
+      "cardsDeleted" : "0",
+      "decksAdded" : "3",
+      "decksDeleted" : "3",
+      "timesPlayed" : "0",
+      "cardsPlayed" : "0",
+      "avgCorrectPercentage" : "0.0",
+      "avgTriesToGetCorrect" : "0.0",
+      "correctPercentageHistory" : { }
+    }
+  }, {
+    "title" : "PostgreSQL",
+    "flashcards" : [ ],
+    "tagged" : [ "Relational", "Database" ],
+    "statistics" : {
+      "cardsAdded" : "0",
+      "cardsDeleted" : "0",
+      "decksAdded" : "3",
+      "decksDeleted" : "3",
+      "timesPlayed" : "0",
+      "cardsPlayed" : "0",
+      "avgCorrectPercentage" : "0.0",
+      "avgTriesToGetCorrect" : "0.0",
+      "correctPercentageHistory" : { }
+    }
+  }, {
+    "title" : "Digital Ocean",
+    "flashcards" : [ ],
+    "tagged" : [ "Cloud", "Simple" ],
+    "statistics" : {
+      "cardsAdded" : "0",
+      "cardsDeleted" : "0",
+      "decksAdded" : "3",
+      "decksDeleted" : "3",
+      "timesPlayed" : "0",
+      "cardsPlayed" : "0",
+      "avgCorrectPercentage" : "0.0",
+      "avgTriesToGetCorrect" : "0.0",
+      "correctPercentageHistory" : { }
+    }
+  }, {
+    "title" : "starfox",
+    "flashcards" : [ {
+      "deck" : "starfox\nTags: None\nNo. of Cards: 3",
+      "question" : "fox",
+      "answer" : "mccloud",
+      "path" : "",
+      "tagged" : [ ]
+    }, {
+      "deck" : "starfox\nTags: None\nNo. of Cards: 3",
+      "question" : "falco",
+      "answer" : "lombardi",
+      "path" : "",
+      "tagged" : [ ]
+    }, {
+      "deck" : "starfox\nTags: None\nNo. of Cards: 3",
+      "question" : "slippy",
+      "answer" : "toad",
+      "path" : "",
+      "tagged" : [ ]
+    } ],
+    "tagged" : [ ],
+    "statistics" : {
+      "cardsAdded" : "3",
+      "cardsDeleted" : "0",
+      "decksAdded" : "3",
+      "decksDeleted" : "3",
+      "timesPlayed" : "2",
+      "cardsPlayed" : "6",
+      "avgCorrectPercentage" : "0.6666666666666666",
+      "avgTriesToGetCorrect" : "1.3333333333333333",
+      "correctPercentageHistory" : {
+        "starfox" : [ 0.6666666666666666, 0.6666666666666666 ]
+      }
+    }
+  } ],
+  "statistics" : {
+    "cardsAdded" : "3",
+    "cardsDeleted" : "0",
+    "decksAdded" : "6",
+    "decksDeleted" : "6",
+    "timesPlayed" : "4",
+    "cardsPlayed" : "14",
+    "avgCorrectPercentage" : "0.6458333333333333",
+    "avgTriesToGetCorrect" : "1.3541666666666667",
+    "correctPercentageHistory" : {
+      "starfox" : [ 0.6666666666666666, 0.6666666666666666 ],
+      "CS2103" : [ 0.75, 0.5 ]
+    }
+  },
+  "flashcards" : [ ]
+}
