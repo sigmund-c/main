@@ -28,7 +28,7 @@ public class JsonCardiBuddyStorageTest {
     public Path testFolder;
 
     @Test
-    public void readCardiBuddy_nullFilePath_throwsNullPointerException() {
+    public void readCardiBuddyNullFilePathThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> readCardiBuddy(null));
     }
 
@@ -43,22 +43,22 @@ public class JsonCardiBuddyStorageTest {
     }
 
     @Test
-    public void read_missingFile_emptyResult() throws Exception {
+    public void readMissingFileEmptyResult() throws Exception {
         assertFalse(readCardiBuddy("NonExistentFile.json").isPresent());
     }
 
     @Test
-    public void read_notJsonFormat_exceptionThrown() {
+    public void readNotJsonFormatExceptionThrown() {
         assertThrows(DataConversionException.class, () -> readCardiBuddy("notJsonFormatCardiBuddy.json"));
     }
 
     @Test
-    public void readCardiBuddy_invalidDeckCardiBuddy_throwDataConversionException() {
+    public void readCardiBuddyInvalidDeckCardiBuddyThrowDataConversionException() {
         assertThrows(DataConversionException.class, () -> readCardiBuddy("invalidDeckCardiBuddy.json"));
     }
 
     @Test
-    public void readAndSaveCardiBuddy_allInOrder_success() throws Exception {
+    public void readAndSaveCardiBuddyAllInOrderSuccess() throws Exception {
         Path filePath = testFolder.resolve("TempCardiBuddy.json");
         CardiBuddy original = getTypicalCardiBuddy();
         JsonCardiBuddyStorage jsonCardiBuddyStorage = new JsonCardiBuddyStorage(filePath);
@@ -84,7 +84,7 @@ public class JsonCardiBuddyStorageTest {
     }
 
     @Test
-    public void saveCardiBuddy_nullCardiBuddy_throwsNullPointerException() {
+    public void saveCardiBuddyNullCardiBuddyThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveCardiBuddy(null, "SomeFile.json"));
     }
 
@@ -101,7 +101,7 @@ public class JsonCardiBuddyStorageTest {
     }
 
     @Test
-    public void saveCardiBuddy_nullFilePath_throwsNullPointerException() {
+    public void saveCardiBuddyNullFilePathThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveCardiBuddy(new CardiBuddy(), null));
     }
 }
