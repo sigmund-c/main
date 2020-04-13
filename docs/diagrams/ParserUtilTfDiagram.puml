@@ -1,0 +1,29 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant ":Answer" as Answer LOGIC_COLOR
+participant ":TfAnswer" as TfAnswer LOGIC_COLOR
+end box
+
+[-> ParserUtil : parse("F")
+activate ParserUtil
+
+ParserUtil -> Answer : isTrueFalseAnswer("F")
+activate Answer
+
+Answer --> ParserUtil : true
+deactivate Answer
+
+create TfAnswer
+ParserUtil -> TfAnswer : TfAnswer("F")
+activate TfAnswer
+
+TfAnswer --> ParserUtil : tfAns
+deactivate TfAnswer
+
+[<-- ParserUtil : tfAns
+deactivate ParserUtil
+
+@enduml
