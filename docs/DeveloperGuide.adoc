@@ -349,8 +349,10 @@ A sample command would be `add q/How does one go about solving recursion problem
 The following sequence diagram shows how the `ParserUtil` class creates a `ShortAnswer` answer based on the given sample command:
 
 image::ParserUtilShortAnsDiagram.png[]
+// end::jingying[]
 
 ==== Design Considerations
+// tag::design[]
 ===== Aspect: How to implement the different card and answer types
 
 * **Alternative 1 (current choice):** Using an abstract class to contain general functionalities.
@@ -362,7 +364,7 @@ image::ParserUtilShortAnsDiagram.png[]
 
 Due to the similarities in method bodies of the different answers and cards classes, a `Card` and `Answer` abstract class was used instead of an interface. +
 
-// end::jingying[]
+// end::design[]
 
 === Test feature
 ==== Design
