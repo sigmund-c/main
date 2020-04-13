@@ -61,7 +61,7 @@ Deck *--> "*" Flashcard
 Deck *--> "*" Tag
 
 TestSession --> "1" Deck
-TestSession o--> "1..*" TestResult
+TestSession *--> "1..*" TestResult
 
 
 TestResult o-> "1" Answer
