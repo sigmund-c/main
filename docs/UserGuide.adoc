@@ -191,7 +191,7 @@ Adds a new card with an image and `MCQ` answer type belonging to the opened deck
 ==== Editing a deck: `edit`
 
 Edits an existing deck in the library.
-Format: `edit DECK_INDEX [d/TITLE] [t/TAG]…`
+Format: `edit deck DECK_INDEX [d/TITLE] [t/TAG]…`
 
 * Edits the decks at the specified DECK_INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
@@ -202,13 +202,13 @@ removed.
 
 Examples:
 
-* `edit 1 d/CS2103T` +
+* `edit deck 1 d/CS2103T` +
 Edits the title of the 1st deck to be `CS2103T` without removing existing tags.
 
-* `edit 2 d/CS2040 t/` +
+* `edit deck 2 d/CS2040 t/` +
 Edits the title of the 2nd deck to be `CS2040` and clears all existing tags.
 
-==== Editing a card: `edit card` [coming in v2.0]
+==== Editing a card: `edit card`
 
 Edits an existing card in the deck.
 Format: `edit card CARD_INDEX [q/QUESTION] [a/ANSWER] [t/TAG]…`

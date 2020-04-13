@@ -21,7 +21,7 @@ The implementation too was challenging as it required changes to existing comman
 creation of a new type of object (Imagecard object). In addition, changes were made to the UI in the FlashcardListPanel
 to display images in the flashcard.
 
-* *Minor enhancement*: added a filter command that allows the user to filter decks via tags.
+* *Minor enhancement*: added a filter command that allows the user to filter decks via tags and an and-or feature to the filter and search command.
 
 * *Minor enhancement*: created three different answer types to questions in flashcards (T/F, MCQ and Short Answer) to make testing easier.
 
@@ -40,7 +40,7 @@ files they want to insert into their flashcards so that they do not have to key 
 ** Enhancements to existing features:
 *** Re-designed UI (Pull requests https://github.com/AY1920S2-CS2103T-T10-2/main/pull/114[#114],
 https://github.com/AY1920S2-CS2103T-T10-2/main/pull/199[#199])
-*** Improved on existing find command (renamed to search command) that allows the user to search for
+*** Improved on existing find command (renamed to search command) with an and-or function that allows the user to search for
 decks and cards that contains all of the keywords instead of any of the keywords.
 *** Refactored commands from AB3 such as AddCommand to AddDeckCommand, AddFlashcardCommand and AddImageCardCommand as well as the DeleteCommand to DeleteCardCommand and DeleteDeckCommand.
 *** Wrote additional tests for the classes in Deck, Tag and Flashcard folders to increase coverage from 13% to 27%
@@ -48,8 +48,8 @@ decks and cards that contains all of the keywords instead of any of the keywords
 
 
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/AY1920S2-CS2103T-T10-2/main/pull/211[#211]
-*** Wrote the whole README and designed the Ui mock-up: https://github.com/AY1920S2-CS2103T-T10-2/main/pull/54[#54], https://github.com/AY1920S2-CS2103T-T10-2/main/pull/57[#57]
+*** Did content and cosmetic tweaks to existing contents of the User Guide: https://github.com/AY1920S2-CS2103T-T10-2/main/pull/206[#206], https://github.com/AY1920S2-CS2103T-T10-2/main/pull/211[#211]
+*** Wrote the whole README and designed the Ui Mock-up: https://github.com/AY1920S2-CS2103T-T10-2/main/pull/54[#54], https://github.com/AY1920S2-CS2103T-T10-2/main/pull/57[#57]
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com/AY1920S2-CS2103T-T10-2/main/pull/119[#119]
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/41[1], https://github.com/nus-cs2103-AY1920S2/addressbook-level3/pull/5[2])
