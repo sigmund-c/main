@@ -18,8 +18,8 @@ import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Flashcard;
-import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.Answer;
+import cardibuddy.model.flashcard.Question;
 
 
 /**
