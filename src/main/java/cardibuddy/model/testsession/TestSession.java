@@ -8,6 +8,7 @@ import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Card;
+import cardibuddy.model.flashcard.CardType;
 import cardibuddy.model.flashcard.McqAnswer;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.TfAnswer;
@@ -241,6 +242,20 @@ public class TestSession {
             logger.info("short answer");
             return AnswerType.SHORT_ANSWER;
         }
+    }
+
+    /**
+     * Returns the {@code CardType} of the current flashcard
+     */
+    public CardType getCurrentCardType() {
+        return current.getCardType();
+    }
+
+    /**
+     * Returns the image path of the current flashcard
+     */
+    public String getCurrentCardPath() {
+        return current.getPath();
     }
 
     @Override

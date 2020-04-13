@@ -13,6 +13,7 @@ import cardibuddy.commons.core.LogsCenter;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.flashcard.Card;
+import cardibuddy.model.flashcard.CardType;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.TestResult;
@@ -272,11 +273,27 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Retrieve's the current question's corresponding {@code AnswerType}.
+     * Retrieves the current question's corresponding {@code AnswerType}.
      */
     @Override
     public AnswerType getCurrentAnswerType() {
         return testSession.getCurrentAnswerType();
+    }
+
+    /**
+     * Retrieves the current flashcard's corresponding {@code CardType}.
+     */
+    @Override
+    public CardType getCurrentCardType() {
+        return testSession.getCurrentCardType();
+    }
+
+    /**
+     * Retrieves the current flashcard's image path, if any.
+     */
+    @Override
+    public String getCurrentCardPath() {
+        return testSession.getCurrentCardPath();
     }
 
 

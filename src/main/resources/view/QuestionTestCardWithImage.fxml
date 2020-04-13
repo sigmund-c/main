@@ -4,11 +4,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.image.ImageView?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane styleClass="test" HBox.hgrow="ALWAYS">
         <columnConstraints>
@@ -21,12 +22,13 @@
             <HBox spacing="5">
                 <Label fx:id="content" styleClass="label" text="\$first" wrapText="true" />
             </HBox>
+            <ImageView fx:id="imageView" fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" />
             <HBox spacing="5">
                 <Label fx:id="answerHint" styleClass="label" text="\$first" wrapText="true" />
             </HBox>
         </VBox>
-      <rowConstraints>
-         <RowConstraints />
-      </rowConstraints>
+        <rowConstraints>
+            <RowConstraints />
+        </rowConstraints>
     </GridPane>
 </HBox>
