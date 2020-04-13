@@ -2,7 +2,6 @@ package cardibuddy.logic.commands;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_TEST_ONGOING;
 import static cardibuddy.logic.parser.CliSyntax.*;
-import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
@@ -63,21 +62,18 @@ public class EditCardCommand extends EditCommand{
 
         List<Card> lastShownList = logicToUiManager.getDisplayedDeck().getFilteredFlashcardList();
 
-        if (index.getZeroBased() >= lastShownList.size()) { // index < size of last shown list
+        if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
         }
 
         Card cardToEdit = lastShownList.get(index.getZeroBased());
         Card editedCard = createEditedCard(cardToEdit, editCardDescriptor);
 
-        requireNonNull(cardToEdit);
-        requireNonNull(editedCard);
-
-        if (!cardToEdit.isSameFlashcard(editedCard) && model.hasFlashcard(editedCard)) {
+        if (logicToUiManager.getDisplayedDeck().hasFlashcard(editedCard)) {
             throw new CommandException(MESSAGE_DUPLICATE_CARD);
         }
 
-        model.setFlashcard(cardToEdit, editedCard);
+        logicToUiManager.getDisplayedDeck().setFlashcard(cardToEdit, editedCard);
         logicToUiManager.updateFlashcardPanel();
         model.commitCardiBuddy();
         return new CommandResult(String.format(MESSAGE_EDIT_CARD_SUCCESS, editedCard));

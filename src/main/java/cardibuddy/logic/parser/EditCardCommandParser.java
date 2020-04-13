@@ -6,20 +6,13 @@ import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Optional;
-import java.util.logging.Logger;
 
 import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.EditCardCommand;
-import cardibuddy.logic.commands.EditCommand;
-import cardibuddy.logic.commands.EditDeckCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
-import cardibuddy.model.ReadOnlyCardiBuddy;
-import cardibuddy.model.deck.Deck;
 import cardibuddy.model.flashcard.Answer;
-import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Question;
-import javafx.collections.ObservableList;
 
 /**
  * Parses input arguments and creates a new EditCardCommand object
