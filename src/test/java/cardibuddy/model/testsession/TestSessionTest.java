@@ -187,12 +187,12 @@ public class TestSessionTest {
     @Description("Test that the correct second question is returned.")
     @Test
     void testGetNextQuestion() {
-        TestSession testSession = new TestSession(deck);
-        testSession.getFirstQuestion();
-        testSession = submitWrongAnswer(testSession);
-        Question nextQuestion = testSession.getNextQuestion();
-        Question expectedQuestion = deck.getFlashcardList().get(1).getQuestion();
-        assertEquals(expectedQuestion, nextQuestion);
+       TestSession testSession = new TestSession(deck);
+       testSession.getFirstQuestion();
+       testSession = submitWrongAnswer(testSession);
+       Question nextQuestion = testSession.getNextQuestion();
+       Question expectedQuestion = deck.getFlashcardList().get(1).getQuestion();
+       assertEquals(expectedQuestion, nextQuestion);
     }
 
     @Description("Test that results of the test session are stored in the {@code HashMap}.")
@@ -218,12 +218,12 @@ public class TestSessionTest {
     @Description("Test that force correct leads to the test queue size decreasing by 1")
     @Test
     void testForceCorrectRemovesReAddedFlashcard() {
-        TestSession testSession = new TestSession(deck);
-        testSession.getFirstQuestion();
-        testSession = submitWrongAnswer(testSession);
-        testSession.forceCorrect();
-        int expectedTestQueueSize = deck.getFlashcardList().size() - 1;
-        assertEquals(expectedTestQueueSize, testSession.getTestQueueSize());
+       TestSession testSession = new TestSession(deck);
+       testSession.getFirstQuestion();
+      testSession = submitWrongAnswer(testSession);
+       testSession.forceCorrect();
+       int expectedTestQueueSize = deck.getFlashcardList().size() - 1;
+       assertEquals(expectedTestQueueSize, testSession.getTestQueueSize());
     }
 
     @Description("Test that force correct throws AlreadyCorrectException.")

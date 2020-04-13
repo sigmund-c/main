@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant ":Answer" as Answer LOGIC_COLOR
+participant ":ShortAnswer" as ShortAnswer LOGIC_COLOR
+end box
+
+[-> ParserUtil : parse("Wishful thinking")
+activate ParserUtil
+
+ParserUtil -> Answer : isTfAnswer("Wishful thinking")
+activate Answer
+
+Answer --> ParserUtil : false
+deactivate Answer
+
+ParserUtil -> Answer : isMcqAnswer("Wishful thinking")
+activate Answer
+
+Answer --> ParserUtil : false
+deactivate Answer
+
+
+create ShortAnswer
+ParserUtil -> ShortAnswer : ShortAnswer("Wishful thinking")
+activate ShortAnswer
+
+
+
+ShortAnswer --> ParserUtil : shortAns
+deactivate ShortAnswer
+
+[<-- ParserUtil : shortAns
+deactivate ParserUtil
+
+@enduml

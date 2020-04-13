@@ -19,7 +19,9 @@ import cardibuddy.logic.commands.Command;
 import cardibuddy.logic.commands.DeleteCardCommand;
 import cardibuddy.logic.commands.DeleteCommand;
 import cardibuddy.logic.commands.DeleteDeckCommand;
+import cardibuddy.logic.commands.EditCardCommand;
 import cardibuddy.logic.commands.EditCommand;
+import cardibuddy.logic.commands.EditDeckCommand;
 import cardibuddy.logic.commands.ExitCommand;
 import cardibuddy.logic.commands.FilterCommand;
 import cardibuddy.logic.commands.HelpCommand;
@@ -108,9 +110,6 @@ public class CardiBuddyParser {
         case AddImageCardCommand.COMMAND_WORD:
             return new AddImageCommandParser(cardiBuddy, logicToUiManager).parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
         case DeleteCommand.COMMAND_WORD:
             try {
                 switch (arguments.substring(1, 5)) {
@@ -124,6 +123,22 @@ public class CardiBuddyParser {
                 default:
                     throw new ParseException(MESSAGE_UNKNOWN_COMMAND + "\n" + MESSAGE_INVALID_TWO_WORD_COMMAND);
 
+                }
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new ParseException(MESSAGE_INCOMPLETE_COMMAND + MESSAGE_INVALID_TWO_WORD_COMMAND);
+            }
+
+        case EditCommand.COMMAND_WORD:
+            try {
+                switch (arguments.substring(1, 5)) {
+                case EditDeckCommand.COMMAND_WORD: //deck
+                    return new EditDeckCommandParser().parse(arguments.substring(5));
+
+                case EditCardCommand.COMMAND_WORD: //card
+                    return new EditCardCommandParser(logicToUiManager).parse(arguments.substring(5));
+
+                default:
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND + "\n" + MESSAGE_INVALID_TWO_WORD_COMMAND);
                 }
             } catch (StringIndexOutOfBoundsException e) {
                 throw new ParseException(MESSAGE_INCOMPLETE_COMMAND + MESSAGE_INVALID_TWO_WORD_COMMAND);

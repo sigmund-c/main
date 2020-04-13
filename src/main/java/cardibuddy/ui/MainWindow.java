@@ -16,7 +16,8 @@ import cardibuddy.model.deck.exceptions.NotInDeckException;
 import cardibuddy.model.deck.exceptions.WrongDeckException;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
-import cardibuddy.model.flashcard.exceptions.WrongAnswerTypeException;
+import cardibuddy.model.flashcard.exceptions.WrongMcqAnswerTypeException;
+import cardibuddy.model.flashcard.exceptions.WrongTfAnswerTypeException;
 import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.TestResult;
 import javafx.event.ActionEvent;
@@ -408,9 +409,13 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (WrongAnswerTypeException e) {
+        } catch (WrongTfAnswerTypeException e) {
             resultDisplay.setFeedbackToUser("This card has a T/F answer! Please type T or F instead of "
                     + e.getMessage() + ".");
+            throw e;
+        } catch (WrongMcqAnswerTypeException e) {
+            resultDisplay.setFeedbackToUser("There needs to be three options for MCQ! Please type in capital letters as"
+                    + " well. E.g. A)... B)... C)...");
             throw e;
         } catch (CommandException | ParseException | DeckCannotBeCardException | InvalidDeckException
                 | InvalidFlashcardException | NotInDeckException | WrongDeckException e) {

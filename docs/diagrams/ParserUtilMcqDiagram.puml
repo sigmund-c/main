@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant ":Answer" as Answer LOGIC_COLOR
+participant ":McqAnswer" as McqAnswer LOGIC_COLOR
+end box
+
+[-> ParserUtil : parse("B)Architecture\nC)Sequence A)Object")
+activate ParserUtil
+
+ParserUtil -> Answer : isTfAnswer("B)Architecture\nC)Sequence A)Object")
+activate Answer
+
+Answer --> ParserUtil : false
+deactivate Answer
+
+ParserUtil -> Answer : isMcqAnswer("B)Architecture\nC)Sequence A)Object")
+activate Answer
+
+Answer --> ParserUtil : true
+deactivate Answer
+
+create McqAnswer
+ParserUtil -> McqAnswer : McqAnswer("B)Architecture C)Sequence A)Object")
+activate McqAnswer
+
+McqAnswer -> McqAnswer : separateIndexes
+activate McqAnswer
+McqAnswer --> McqAnswer
+deactivate McqAnswer
+
+McqAnswer --> ParserUtil : mcqAns
+deactivate McqAnswer
+
+[<-- ParserUtil : mcqAns
+deactivate ParserUtil
+
+@enduml

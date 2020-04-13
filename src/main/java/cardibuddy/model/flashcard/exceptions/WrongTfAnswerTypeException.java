@@ -5,8 +5,8 @@ import cardibuddy.logic.parser.exceptions.ParseException;
 /**
  * Wrong answer type for true/false questions.
  */
-public class WrongAnswerTypeException extends ParseException {
-    public WrongAnswerTypeException(String message) {
+public class WrongTfAnswerTypeException extends ParseException {
+    public WrongTfAnswerTypeException(String message) {
         super(message);
     }
 }

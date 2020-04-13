@@ -28,7 +28,6 @@ public class AddImageCardCommand extends AddCardCommand {
             + PREFIX_QUESTION + "A queue cannot be implemented using an array "
             + PREFIX_ANSWER + "F ";
 
-
     public static final String MESSAGE_SUCCESS = "New flashcard added: %1$s";
     public static final String MESSAGE_DUPLICATE_FLASHCARD = "This flashcard already exists in the deck";
 
