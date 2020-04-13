@@ -1,6 +1,7 @@
 package cardibuddy.logic.commands;
 
 import static cardibuddy.logic.commands.CommandTestUtil.assertCommandFailure;
+import static cardibuddy.testutil.TypicalDecks.getTypicalCardiBuddy;
 import static cardibuddy.testutil.TypicalIndexes.INDEX_FIRST_CARD;
 import static cardibuddy.testutil.TypicalIndexes.INDEX_SECOND_CARD;
 import static org.junit.jupiter.api.Assertions.assertFalse;
