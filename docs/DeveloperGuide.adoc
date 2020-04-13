@@ -354,15 +354,13 @@ image::ParserUtilShortAnsDiagram.png[]
 ===== Aspect: How to implement the different card and answer types
 
 * **Alternative 1 (current choice):** Using an abstract class to contain general functionalities.
-** Pros: Easy to implement.
-** Cons: Does not support multiple inheritances.
-* **Alternative 2:** Using an interface class to contain general functionalities.
+** Pros: Can define method bodies general methods. Easier to make changes such as creating new methods which can be defined directly in the abstract class.
+** Cons: Child `Card` and `Answer` classes cannot extend multiple abstract classes.
+* **Alternative 2:** Using an interface to contain general functionalities.
 ** Pros: Supports multiple inheritances.
-** Cons: We must ensure that the implementation of each individual command is correct.
+** Cons: Cannot define method bodies in the interface.
 
-* Due to the similarities in characteristics of the different answers and cards classes, a `Card` and `Answer` abstract class was created. +
-* More specific exceptions were thrown such as `WrongMcqAnswerException` and `WrongTfAnswerException` due to the large number of classes involved in the creation of a `Card`
-to help in pinpointing the input errors.
+Due to the similarities in method bodies of the different answers and cards classes, a `Card` and `Answer` abstract class was used instead of an interface. +
 
 // end::jingying[]
 
