@@ -16,9 +16,9 @@ import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Flashcard;
-import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Question;
 
 
@@ -29,13 +29,10 @@ public class EditCardCommand extends EditCommand {
 
     public static final String COMMAND_WORD = "card";
 
-    public static final String MESSAGE_USAGE = ": Edits the details of the card identified "
-            + "by the index number used in the deck's list of displayed flashcards.\n"
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
             + PREFIX_QUESTION + "QUESTION"
             + PREFIX_ANSWER + "ANSWER\n"
-            + "Example: edit 1 q/What does UML stand for?";
+            + "Example: edit card 1 q/What does UML stand for?";
 
     public static final String MESSAGE_EDIT_CARD_SUCCESS = "Edited card" + ": %1$s";
     public static final String MESSAGE_NOT_EDITED = "All fields to edit must be provided.";

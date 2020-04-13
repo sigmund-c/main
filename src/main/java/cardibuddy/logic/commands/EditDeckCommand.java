@@ -29,13 +29,10 @@ public class EditDeckCommand extends EditCommand {
 
     public static final String COMMAND_WORD = "deck";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the deck identified "
-            + "by the index number used in the displayed deck list.\n"
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " "
             + PREFIX_DECK + "DECK_TITLE "
             + PREFIX_TAG + "TAG... or t/ to clear all existing tags\n"
-            + "Example: edit deck 1 d/ t/Hard";
+            + "Example: edit deck 1 t/Hard";
 
     public static final String MESSAGE_EDIT_DECK_SUCCESS = "Edited deck" + ": %1$s";
     public static final String MESSAGE_NOT_EDITED = "All fields to edit must be provided.";

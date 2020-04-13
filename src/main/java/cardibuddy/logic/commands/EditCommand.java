@@ -8,9 +8,9 @@ public abstract class EditCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits a deck or flashcard identified by the index number used in the displayed cardibuddy book.\n"
+            + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " deck 1 \n"
-            + "Example: " + COMMAND_WORD + " card 1 \n";
+            + "Example: " + COMMAND_WORD + " ";
 
     public abstract boolean equals(Object other);
 }
