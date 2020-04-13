@@ -58,12 +58,12 @@ public class UniqueFlashcardList implements Iterable<Card> {
     public void setFlashcard(Card target, Card editedFlashcard) {
         requireAllNonNull(target, editedFlashcard);
 
-        int index = internalList.indexOf(target);
+        int index = internalUnmodifiableList.indexOf(target);
         if (index == -1) {
             throw new FlashcardNotFoundException();
         }
 
-        if (!target.isSameFlashcard(editedFlashcard) && contains(editedFlashcard)) {
+        if (!target.isSameFlashcard(editedFlashcard) && internalList.contains(editedFlashcard)) {
             throw new DuplicateFlashcardException();
         }
 

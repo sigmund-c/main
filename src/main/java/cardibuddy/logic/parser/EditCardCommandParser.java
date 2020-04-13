@@ -26,7 +26,10 @@ import javafx.collections.ObservableList;
  */
 public class EditCardCommandParser implements Parser<EditCardCommand> {
 
-    public EditCardCommandParser() {
+    private LogicToUiManager logicToUiManager;
+
+    public EditCardCommandParser(LogicToUiManager logicToUiManager) {
+        this.logicToUiManager = logicToUiManager;
     }
 
     /**
@@ -56,7 +59,7 @@ public class EditCardCommandParser implements Parser<EditCardCommand> {
         if (!editCardDescriptor.isFieldEdited()) {
             throw new ParseException(EditCardCommand.MESSAGE_NOT_EDITED);
         }
-        return new EditCardCommand(index, editCardDescriptor);
+        return new EditCardCommand(index, editCardDescriptor, logicToUiManager);
     }
 
     /**

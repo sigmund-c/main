@@ -108,11 +108,11 @@ public class CardiBuddyParser {
         case EditCommand.COMMAND_WORD:
             try {
                 switch (arguments.substring(1, 5)) {
-                    case EditDeckCommand.COMMAND_WORD: //d
+                    case EditDeckCommand.COMMAND_WORD: //deck
                         return new EditDeckCommandParser().parse(arguments.substring(5));
 
-                    case EditCardCommand.COMMAND_WORD: //c
-                        return new EditCardCommandParser().parse(arguments.substring(5));
+                    case EditCardCommand.COMMAND_WORD: //card
+                        return new EditCardCommandParser(logicToUiManager).parse(arguments.substring(5));
 
                     default:
                         throw new ParseException(MESSAGE_UNKNOWN_COMMAND + "\n" + MESSAGE_INVALID_TWO_WORD_COMMAND);

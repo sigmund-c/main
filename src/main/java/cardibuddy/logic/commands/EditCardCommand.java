@@ -2,29 +2,21 @@ package cardibuddy.logic.commands;
 
 import static cardibuddy.commons.core.Messages.MESSAGE_TEST_ONGOING;
 import static cardibuddy.logic.parser.CliSyntax.*;
-import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_DECKS;
 import static cardibuddy.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 import static java.util.Objects.requireNonNull;
 
-import java.lang.reflect.AnnotatedArrayType;
 import java.nio.file.Path;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import cardibuddy.commons.core.Messages;
 import cardibuddy.commons.core.index.Index;
-import cardibuddy.commons.util.CollectionUtil;
 import cardibuddy.logic.CommandHistory;
+import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
-import cardibuddy.logic.parser.ParserUtil;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
-import cardibuddy.model.deck.Title;
 import cardibuddy.model.flashcard.*;
-import cardibuddy.model.tag.Tag;
 
 /**
  * Edits Card {@code Question} or {@code Answer}.
@@ -47,16 +39,18 @@ public class EditCardCommand extends EditCommand{
 
     private final Index index;
     private final EditCardDescriptor editCardDescriptor;
+    private LogicToUiManager logicToUiManager;
 
     /**
      * @param index of the deck in the filtered deck list to edit
      * @param editCardDescriptor details to edit the deck with
      */
-    public EditCardCommand(Index index, EditCardDescriptor editCardDescriptor) {
+    public EditCardCommand(Index index, EditCardDescriptor editCardDescriptor, LogicToUiManager logicToUiManager) {
         requireNonNull(index);
         requireNonNull(editCardDescriptor);
 
         this.index = index;
+        this.logicToUiManager = logicToUiManager;
         this.editCardDescriptor = new EditCardDescriptor(editCardDescriptor);
     }
 
@@ -67,14 +61,18 @@ public class EditCardCommand extends EditCommand{
             throw new CommandException(MESSAGE_TEST_ONGOING);
         }
 
-        List<Card> lastShownList = model.getFilteredFlashcardList();
+        List<Card> lastShownList = logicToUiManager.getDisplayedDeck().getFilteredFlashcardList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownList.size()) { // index < size of last shown list
             throw new CommandException(Messages.MESSAGE_INVALID_FLASHCARD_DISPLAYED_INDEX);
         }
 
         Card cardToEdit = lastShownList.get(index.getZeroBased());
         Card editedCard = createEditedCard(cardToEdit, editCardDescriptor);
+
+        if(index.getZeroBased() < 0) {
+            throw new Error("Negative index");
+        }
 
         if (!cardToEdit.isSameFlashcard(editedCard) && model.hasFlashcard(editedCard)) {
             throw new CommandException(MESSAGE_DUPLICATE_CARD);
@@ -96,7 +94,7 @@ public class EditCardCommand extends EditCommand{
         Question updatedQuestion = editCardDescriptor.getQuestion().orElse(cardToEdit.getQuestion());
         Answer updatedAnswer = editCardDescriptor.getAnswer().orElse(cardToEdit.getAnswer());
 
-        return new Flashcard(cardToEdit.getDeck() ,updatedQuestion, updatedAnswer, "");
+        return new Flashcard(cardToEdit.getDeck() ,updatedQuestion, updatedAnswer, cardToEdit.getPath());
     }
 
     @Override
