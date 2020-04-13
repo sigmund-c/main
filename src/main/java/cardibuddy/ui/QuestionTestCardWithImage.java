@@ -4,6 +4,8 @@ import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.AnswerType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
@@ -16,10 +18,9 @@ import javafx.scene.layout.Region;
  *
  * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
  */
-public class QuestionTestCard extends UiPart<Region> {
+public class QuestionTestCardWithImage extends UiPart<Region> {
 
-    private static final String FXML = "QuestionTestCard.fxml";
-    private Question question;
+    private static final String FXML = "QuestionTestCardWithImage.fxml";
 
     @FXML
     private HBox cardPane;
@@ -27,12 +28,17 @@ public class QuestionTestCard extends UiPart<Region> {
     private Label content;
     @FXML
     private Label answerHint;
+    @FXML
+    private ImageView imageView;
 
-    public QuestionTestCard(Question question, AnswerType answerType) {
+    public QuestionTestCardWithImage(Question question, AnswerType answerType, String path) {
         super(FXML);
-        this.question = question;
         content.setText("Question:" + "\n" + question.toString() + "\n\n");
         answerHint.setText(answerType.toString());
+        imageView.setImage(new Image(path));
+        imageView.setCache(true);
+        imageView.setFitWidth(400);
+        imageView.setPreserveRatio(true);
     }
 
     @Override
@@ -43,14 +49,15 @@ public class QuestionTestCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof QuestionTestCard)) {
+        if (!(other instanceof QuestionTestCardWithImage)) {
             return false;
         }
 
         // state check
-        QuestionTestCard card = (QuestionTestCard) other;
+        QuestionTestCardWithImage card = (QuestionTestCardWithImage) other;
         return content.getText().equals(card.content.getText())
-                && card.question.equals(this.question);
+                && card.answerHint.equals(this.answerHint)
+                && card.imageView.equals(this.imageView);
     }
 
 }

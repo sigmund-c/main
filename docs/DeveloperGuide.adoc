@@ -351,9 +351,16 @@ The following sequence diagram shows how the `ParserUtil` class creates a `Short
 image::ParserUtilShortAnsDiagram.png[]
 
 ==== Design Considerations
-* Due to the similarities in characteristics of the different answers and cards classes, a `Card` and `Answer` abstract class was created. +
-* More specific exceptions were thrown such as `WrongMcqAnswerException` and `WrongTfAnswerException` due to the large number of classes involved in the creation of a `Card`
-to help in pinpointing the input errors.
+===== Aspect: How to implement the different card and answer types
+
+* **Alternative 1 (current choice):** Using an abstract class to contain general functionalities.
+** Pros: Can define method bodies general methods. Easier to make changes such as creating new methods which can be defined directly in the abstract class.
+** Cons: Child `Card` and `Answer` classes cannot extend multiple abstract classes.
+* **Alternative 2:** Using an interface to contain general functionalities.
+** Pros: Supports multiple inheritances.
+** Cons: Cannot define method bodies in the interface.
+
+Due to the similarities in method bodies of the different answers and cards classes, a `Card` and `Answer` abstract class was used instead of an interface. +
 
 // end::jingying[]
 
@@ -444,6 +451,28 @@ For more descriptive use case scenarios from a user perspectives, please take a 
 
 
 
+
+
+=== Statistics
+==== Design
+The user's activities will be logged and stored in `Statistics`. It is entirely a data storage class, recording data wherever necessary.
+
+Currently, the actions that update the `Statistics` are:
+
+* Adding and removing a deck
+* Adding and removing a card
+* Finishing a `TestSession` - this updates a number of items, which are:
+** `TestSessions` finished
+** Total cards answered
+** Average correct percentage
+** Average tries to get correct
+
+There's 2 different locations where a `Statistics` instance is stored:
+
+* `CardiBuddy`: The Model of the program. Tracks user statistics across the whole program.
+* `Deck` : Each `Deck` also has a `Statistics` instance. This is to help identify which `Deck`s are used more often, are more difficult, etc.
+
+Each time the user does something that can be tracked, it updates both the universal `Statistics` and the `Statistics` of the `Deck` that he or she is using. The call to update both statistics is done simultaneously in the `CardiBuddy` model for adding/removing decks/cards, or in `ModelManager` for finishing a `TestSession`.
 
 
 === Logging

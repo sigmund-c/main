@@ -30,12 +30,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
+    public void setUserPrefsNullUserPrefsThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
     }
 
     @Test
-    public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
+    public void setUserPrefsValidUserPrefsCopiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setCardiBuddyFilePath(Paths.get("cardi/buddy/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
@@ -49,47 +49,47 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
+    public void setGuiSettingsNullGuiSettingsThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setGuiSettings(null));
     }
 
     @Test
-    public void setGuiSettings_validGuiSettings_setsGuiSettings() {
+    public void setGuiSettingsValidGuiSettingsSetsGuiSettings() {
         GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4);
         modelManager.setGuiSettings(guiSettings);
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }
 
     @Test
-    public void setCardiBuddyFilePath_nullPath_throwsNullPointerException() {
+    public void setCardiBuddyFilePathNullPathThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setCardiBuddyFilePath(null));
     }
 
     @Test
-    public void setCardiBuddyFilePath_validPath_setsCardiBuddyFilePath() {
+    public void setCardiBuddyFilePathValidPathSetsCardiBuddyFilePath() {
         Path path = Paths.get("cardi/buddy/file/path");
         modelManager.setCardiBuddyFilePath(path);
         assertEquals(path, modelManager.getCardiBuddyFilePath());
     }
 
     @Test
-    public void hasDeck_nullDeck_throwsNullPointerException() {
+    public void hasDeckNullDeckThrowsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasDeck(null));
     }
 
     @Test
-    public void hasDeck_deckNotInCardiBuddy_returnsFalse() {
+    public void hasDeckDeckNotInCardiBuddyReturnsFalse() {
         assertFalse(modelManager.hasDeck(ASYNCHRONOUS));
     }
 
     @Test
-    public void hasDeck_deckInCardiBuddy_returnsTrue() {
+    public void hasDeckDeckInCardiBuddyReturnsTrue() {
         modelManager.addDeck(ASYNCHRONOUS);
         assertTrue(modelManager.hasDeck(ASYNCHRONOUS));
     }
 
     @Test
-    public void getFilteredDeckList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredDeckListModifyListThrowsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredDeckList().remove(0));
     }
 

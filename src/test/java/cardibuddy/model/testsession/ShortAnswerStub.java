@@ -18,4 +18,14 @@ public class ShortAnswerStub extends ShortAnswer {
     public String toString() {
         return answer;
     }
+
+    @Override
+    public boolean checkAnswer(String userAnswer) {
+        return answer.equals(userAnswer);
+    }
+
+    @Override
+    public String getCorrectAnswer() {
+        return answer;
+    }
 }

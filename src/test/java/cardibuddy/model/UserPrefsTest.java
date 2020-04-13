@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 public class UserPrefsTest {
 
     @Test
-    public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
+    public void setGuiSettingsNullGuiSettingsThrowsNullPointerException() {
         UserPrefs userPref = new UserPrefs();
         assertThrows(NullPointerException.class, () -> userPref.setGuiSettings(null));
     }
 
     @Test
-    public void setCardiBuddyFilePath_nullPath_throwsNullPointerException() {
+    public void setCardiBuddyFilePathNullPathThrowsNullPointerException() {
         UserPrefs userPrefs = new UserPrefs();
         assertThrows(NullPointerException.class, () -> userPrefs.setCardiBuddyFilePath(null));
     }
