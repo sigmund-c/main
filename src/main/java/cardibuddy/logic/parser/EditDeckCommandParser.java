@@ -1,6 +1,7 @@
 package cardibuddy.logic.parser;
 import static cardibuddy.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static cardibuddy.logic.parser.CliSyntax.*;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_DECK;
+import static cardibuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
@@ -40,13 +41,13 @@ public class EditDeckCommandParser implements Parser<EditDeckCommand> {
 
         EditDeckCommand.EditDeckDescriptor editDeckDescriptor = new EditDeckCommand.EditDeckDescriptor();
 
-        if (argMultimap.getValue(PREFIX_DECK).isPresent() && !argMultimap.getValue(PREFIX_QUESTION).
-                equals(editDeckDescriptor.getTitle())) {
+        if (argMultimap.getValue(PREFIX_DECK).isPresent() && !argMultimap.getValue(PREFIX_DECK)
+                .equals(editDeckDescriptor.getTitle())) {
             parseTitleForEdit(argMultimap.getValue(PREFIX_DECK).get()).ifPresent(editDeckDescriptor::setTitle);
         }
 
-        if (argMultimap.getValue(PREFIX_TAG).isPresent() && !argMultimap.getValue(PREFIX_QUESTION).
-                equals(editDeckDescriptor.getTags())) {
+        if (argMultimap.getValue(PREFIX_TAG).isPresent() && !argMultimap.getValue(PREFIX_TAG)
+                .equals(editDeckDescriptor.getTags())) {
             parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editDeckDescriptor::setTags);
         }
 

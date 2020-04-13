@@ -47,13 +47,14 @@ public class EditCardCommandParser implements Parser<EditCardCommand> {
 
         EditCardCommand.EditCardDescriptor editCardDescriptor = new EditCardCommand.EditCardDescriptor();
 
-        if (argMultimap.getValue(PREFIX_QUESTION).isPresent() && !argMultimap.getValue(PREFIX_QUESTION).
-                equals(editCardDescriptor.getQuestion())) {
-            parseQuestionForEdit(argMultimap.getValue(PREFIX_QUESTION).get()).ifPresent(editCardDescriptor::setQuestion);
+        if (argMultimap.getValue(PREFIX_QUESTION).isPresent() && !argMultimap.getValue(PREFIX_QUESTION)
+                .equals(editCardDescriptor.getQuestion())) {
+            parseQuestionForEdit(argMultimap.getValue(PREFIX_QUESTION).get())
+                    .ifPresent(editCardDescriptor::setQuestion);
         }
 
-        if (argMultimap.getValue(PREFIX_ANSWER).isPresent() && !argMultimap.getValue(PREFIX_QUESTION).
-                equals(editCardDescriptor.getAnswer())) {
+        if (argMultimap.getValue(PREFIX_ANSWER).isPresent() && !argMultimap.getValue(PREFIX_ANSWER)
+                .equals(editCardDescriptor.getAnswer())) {
             parseAnswerForEdit(argMultimap.getValue(PREFIX_ANSWER).get()).ifPresent(editCardDescriptor::setAnswer);
         }
 
