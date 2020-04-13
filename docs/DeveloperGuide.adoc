@@ -264,6 +264,10 @@ image::CommitActivityDiagram.png[]
 ==== Design
 Users are able to add two different types of cards -- cards with images and cards without. These cards have three types of answers -- True/False, MCQ and short answers.
 
+The following is a Use Case Diagram for this feature:
+
+image::CardsAnswersUseCase.png[]
+
 ===== Model Component
 The following classes can be found inside _cardibuddy/model/flashcard_.
 

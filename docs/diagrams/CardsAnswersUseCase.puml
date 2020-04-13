@@ -1,0 +1,17 @@
+@startuml
+actor SocStudent
+rectangle CardiBuddy {
+SocStudent -> (Add Flashcard)
+SocStudent --> (Add Imagecard)
+(Add Imagecard) ..> (Add Answer) : <<include>>
+(Add Flashcard) ..> (Add Answer) : <<include>>
+SocStudent --> (Add Answer)
+(Add True/False answer) .> (Add Answer) : <<extend>>
+SocStudent -> (Add True/False answer)
+(Add MCQ answer) ..> (Add Answer) : <<extend>>
+SocStudent -> (Add MCQ answer)
+(Add short answer) ...> (Add Answer) : <<extend>>
+SocStudent -> (Add short answer)
+}
+
+@enduml
