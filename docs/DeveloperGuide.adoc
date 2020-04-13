@@ -147,7 +147,7 @@ image::LogicToUiSequenceDiagram.png[]
 .Structure of the Model Component
 image::ModelClassDiagram.png[]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
+*API* : link:{repoURL}/src/main/java/cardibuddy/model/Model.java[`Model.java`]
 
 The `Model`,
 
@@ -162,7 +162,7 @@ The `Model`,
 .Structure of the Storage Component
 image::StorageClassDiagram.png[]
 
-*API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
+*API* : link:{repoURL}/src/main/java/cardibuddy/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
@@ -179,8 +179,8 @@ Classes used by multiple components are in the `cardibuddy.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 // tag::undoredo[]
-=== [Proposed] Undo/Redo feature
-==== Proposed Implementation
+=== Undo/Redo feature
+==== Design
 
 The undo/redo mechanism is facilitated by `VersionedCardiBuddy`.
 It extends `CardiBuddy` with an undo/redo history, stored internally as an `cardiBuddyStateList` and `currentStatePointer`.
@@ -260,26 +260,103 @@ image::CommitActivityDiagram.png[]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-=== Search and Filter feature
-Users can choose to find a `Deck` or a `Flashcard` through:
+// tag::jingying[]
+=== Flashcards
+==== Design
+Users are able to add two different types of cards -- cards with images and cards without. These cards have three types of answers -- True/False, MCQ and short answers.
 
-* searching by keywords from the title of a `Deck` or from the `Question` or `Answer` from a `Flashcard`.
-* filtering by tags from the `Tag(s)` associated with a `Deck` or a `Flashcard`
+===== Model Component
+The following classes can be found inside _cardibuddy/model/flashcard_.
 
-Both `search` and `filter` have the and-or functionality where adding `&` between keywords returns decks and flashcards
-with both terms before and after the `&` symbol.
-For example, `filter Y1 & hard` will return decks and flashcards that are tagged with both `Y1` and `hard`.
+The add feature revolves around 2 abstract classes: `Card` and `Answer`.
 
-The following sequence diagram shows how the `Search` command works:
+The `Card` class is extended by two card classes: `Flashcard` and `Imagecard`.
 
-image::SearchFilterDiagram.png[]
+The `Answer` class is extended by three answer classes: `TfAnswer`, `McqAnswer` and `ShortAnswer`.
 
-Figure X. Component interactions for a Search command
+===== Logic Component
+To add a card, a deck must first be opened. This can be checked from accessing the `LogicToUiManager` which stores the currently opened deck.
+Subsequently, The `Parser` classes will separate the relevant arguments from the user input and execute commands from the `Command` classes.
+These `Parser` and Command` classes are part of the *Logic* component of CardiBuddy, and can be found within the _cardibuddy/logic_ package.
 
-Calling the `search` command creates a predicate based on the given keywords and passed as an argument to a `SearchCommand` object.
-The `execute()` method is then called to filter the decks accordingly to the predicate and it returns a `CommandResult` object.
+These commands allow the user to add the different types of flashcards and answers into a deck:
 
-Future implementations would return flashcards and decks that are filtered accordingly to the predicate. (by v1.3)
+* The user will first open a deck.
+* _Adding a Flashcard:_ The user will enter `add` followed by `q/` with their question and `a/` with their answer.
+* _Adding an Imagecard:_ The user will enter `add` followed by `p/` with the filepath to the image, `q/` with their
+question and `a/` with their answer.
+* _Adding a TfAnswer_: The user will enter either `T` or `F` for their answer after the `a/` prefix.
+Only capital, single-lettered answers are accepted and a `WrongTfException` will be thrown if the user enters `t`, `f`, `True` or `False`.
+* _Adding an MCQAnswer_: The user will enter `A)CHOICE_A B)CHOICE_B C)CHOICE_C`, with the correct choice positioned first, for their answer after the `a/` prefix.
+In other words, if `C)CHOICE_C B)CHOICE_B A)CHOICE_A` is entered by the user, `C` will be taken as the correct answer.
+A `WrongMcqAnswerException` will be thrown if the user input does not have all three options in capital letters with parentheses.
+
+==== Types of Cards
+
+===== Flashcard
+To add a `Flashcard` in an opened deck, the user will enter `add q/QUESTION a/ANSWER`.
+A sample command would be `add q/Is defensive code desirable at all times? a/F`. +
+ +
+The following sequence diagram shows how a `Flashcard` is created from the above command and displayed immediately in the flashcard panel to the user:
+
+image::AddFlashcardDiagram.png[]
+
+===== Imagecard
+To add an `Imagecard` in an opened deck, the user will enter `add p/file:IMAGE_FILEPATH q/QUESTION a/ANSWER`.
+A sample command would be `add p/file:/Users/Jing/ArchitectureDiagram.png q/What kind of diagram is this?
+a/B)Architecture C)Sequence A)Object`. +
+ +
+When an `ImagecardCard` is displayed in the `FlashcardPanel`, the image will be
+ retrieved via the stored `IMAGE_FILEPATH` from the user's computer.
+If the file path is invalid, the middle part of the card will be blank and an image will not be shown.
+ More information regarding the implementation of the `Ui` can be found inside _cardibuddy/ui/ImagecardCard_. +
+ +
+The following sequence diagram shows how an `Imagecard` is created from the above command and displayed immediately in the flashcard panel to the user:
+
+image::AddImagecardDiagram.png[]
+
+It is largely similar to the sequence diagram for the creation of a `Flashcard` but with an extra `IMAGE_FILEPATH` argument.
+
+==== Types of Answers
+When adding cards, the `ParserUtil` will parse the different answer inputs to create one of the three different types of answers.
+
+The following activity diagram shows how the `ParserUtil` chooses which type of answer object to create:
+
+image::AnswerActivityDiagram.png[]
+
+===== TfAnswer
+For a `TfAnswer` to be associated with a `Card`, the user will have to enter either `T` or `F` after the answer prefix `a/`.
+A sample command was mentioned in the example for `Flashcard` above: `add q/Is defensive code desirable at all times? a/F`.
+
+The following sequence diagram shows how the `ParserUtil` class creates a `TfAnswer` answer based on the given sample command:
+
+image::ParserUtilTfDiagram.png[]
+
+===== McqAnswer
+For an `McqAnswer` to be associated with a `Card`, the user will have to enter
+`A)CHOICE_A B)CHOICE_B C)CHOICE_C`, with the correct choice positioned first, for their answer after the answer prefix `a/`.
+A sample command was mentioned in the example for `Imagecard` above: `add p/file:/Users/Jing/ArchitectureDiagram.png q/What kind of diagram is this?
+a/B)Architecture C)Sequence A)Object`.
+
+The following sequence diagram shows how the `ParserUtil` class creates an `McqAnswer` answer based on the given sample command:
+
+image::ParserUtilMcqDiagram.png[]
+
+===== ShortAnswer
+For a `ShortAnswer` to be associated with a `Card`, the user will have to enter an answer that does not fulfil the
+requirements of both `TfAnswer` and `McqAnswer` after the answer prefix `a/`.
+A sample command would be `add q/How does one go about solving recursion problems? a/Wishful thinking`.
+
+The following sequence diagram shows how the `ParserUtil` class creates a `ShortAnswer` answer based on the given sample command:
+
+image::ParserUtilShortAnsDiagram.png[]
+
+==== Design Considerations
+* Due to the similarities in characteristics of the different answers and cards classes, a `Card` and `Answer` abstract class was created. +
+* More specific exceptions were thrown such as `WrongMcqAnswerException` and `WrongTfAnswerException` due to the large number of classes involved in the creation of a `Card`
+to help in pinpointing the input errors.
+
+// end::jingying[]
 
 // tag::ash-test-feature[]
 === Test feature

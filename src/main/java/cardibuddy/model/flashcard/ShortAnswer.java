@@ -3,10 +3,12 @@ package cardibuddy.model.flashcard;
 import static cardibuddy.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 /**
  * Short Answer class for Flashcard.
  */
-public class ShortAnswer implements Answer {
+public class ShortAnswer extends Answer {
 
     public static final String MESSAGE_CONSTRAINTS = "Short Answer should not be left blank";
     public static final String VALIDATION_REGEX = "[^\\s].*";
@@ -17,6 +19,11 @@ public class ShortAnswer implements Answer {
         requireNonNull(correctAnswer);
         checkArgument(isValid(correctAnswer), MESSAGE_CONSTRAINTS);
         this.correctAnswer = correctAnswer;
+    }
+
+    @Override
+    public List getAnswerList() {
+        return null;
     }
 
     /**
@@ -43,6 +50,11 @@ public class ShortAnswer implements Answer {
 
     @Override
     public String toString() {
+        return correctAnswer;
+    }
+
+    @Override
+    public String getCorrectAnswer() {
         return correctAnswer;
     }
 

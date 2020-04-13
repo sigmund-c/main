@@ -25,11 +25,14 @@ public class QuestionTestCard extends UiPart<Region> {
     private HBox cardPane;
     @FXML
     private Label content;
+    @FXML
+    private Label answerHint;
 
     public QuestionTestCard(Question question, AnswerType answerType) {
         super(FXML);
         this.question = question;
-        content.setText("Question:" + "\n" + question.toString() + "\n\n" + answerType.toString());
+        content.setText("Question:" + "\n" + question.toString() + "\n\n");
+        answerHint.setText(answerType.toString());
     }
 
     @Override

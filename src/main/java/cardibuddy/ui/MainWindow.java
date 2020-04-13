@@ -16,6 +16,8 @@ import cardibuddy.model.deck.exceptions.NotInDeckException;
 import cardibuddy.model.deck.exceptions.WrongDeckException;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.exceptions.InvalidFlashcardException;
+import cardibuddy.model.flashcard.exceptions.WrongMcqAnswerTypeException;
+import cardibuddy.model.flashcard.exceptions.WrongTfAnswerTypeException;
 import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.TestResult;
 import javafx.event.ActionEvent;
@@ -23,7 +25,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -97,6 +98,10 @@ public class MainWindow extends UiPart<Stage> {
     public void setCommandBox() {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         this.commandBox = commandBox;
+    }
+
+    public void setText(String message) {
+        resultDisplay.setFeedbackToUser(message);
     }
 
     public Stage getPrimaryStage() {
@@ -220,16 +225,30 @@ public class MainWindow extends UiPart<Stage> {
         deckListPanelPlaceholder.getChildren().clear();
     }
     // =================================== TEST SESSION ================================================================
+
     /**
-     * Fills the placeholder of this window with the Question of the current flashcard being tested.
+     * Fills the placeholder of the left panel with the Question of the current flashcard being tested.
      *
      * @param question the question belonging to the current flashcard tested
      */
     public void fillInnerPartsWithQuestion(Question question, AnswerType answerType) {
         clearDeckListPanel();
-        flashcardListPanelPlaceholder.getChildren().clear();
+        clearFlashcardListPanel();
         QuestionTestCard questionCard = new QuestionTestCard(question, answerType);
-        deckListPanelPlaceholder.getChildren().add(questionCard.getRoot()); // TODO: make FXML file for test card
+        deckListPanelPlaceholder.getChildren().add(questionCard.getRoot());
+    }
+
+    /**
+     * Fills the placeholder of the left panel
+     * with the Question of the current flashcard being tested, with the added image.
+     *
+     * @param question the question belonging to the current flashcard tested
+     */
+    public void fillInnerPartsWithQuestionAndImage(Question question, AnswerType answerType, String path) {
+        clearDeckListPanel();
+        clearFlashcardListPanel();
+        QuestionTestCardWithImage questionTestCardWithImage = new QuestionTestCardWithImage(question, answerType, path);
+        deckListPanelPlaceholder.getChildren().add(questionTestCardWithImage.getRoot());
     }
 
     /**
@@ -292,13 +311,9 @@ public class MainWindow extends UiPart<Stage> {
         boolean hasInput = false;
 
         if (file != null) {
-            Image image = new Image(file.toURI().toString());
-            //DragDropCard imageCard = new DragDropCard(image);
-            //imageCard.setCache(true);
-            //flashcardListPanelPlaceholder.getChildren().add(imageCard.getRoot());
-            resultDisplay.setFeedbackToUser("Type in the deck index, a question and an answer to be associated"
-                    + " with this image.\nParameters: c/DECK_INDEX q/QUESTION a/ANSWER\n\nNote: The deck indicated"
-                    + " in DECK_INDEX should be currently open for the command to work.");
+            resultDisplay.setFeedbackToUser("Type in the question and answer to be associated"
+                    + " with this image.\nParameters: q/QUESTION a/ANSWER\n\nNote: A deck to be added into"
+                    + " should be currently open for the command to work.");
             try {
                 EventHandler<KeyEvent> getQa = event -> {
                     if (event.getCode() == KeyCode.ENTER) {
@@ -318,7 +333,7 @@ public class MainWindow extends UiPart<Stage> {
                 commandBox.getCommandTextField().setOnKeyPressed(getQa);
             } catch (Exception e) {
                 resultDisplay.setFeedbackToUser("Invalid format to add a flashcard!\n"
-                        + "Parameters: c/DECK_INDEX q/QUESTION a/ANSWER");
+                        + "Parameters: q/QUESTION a/ANSWER");
             }
         } else {
             resultDisplay.setFeedbackToUser("Please attach a valid file. "
@@ -394,6 +409,14 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
+        } catch (WrongTfAnswerTypeException e) {
+            resultDisplay.setFeedbackToUser("This card has a T/F answer! Please type T or F instead of "
+                    + e.getMessage() + ".");
+            throw e;
+        } catch (WrongMcqAnswerTypeException e) {
+            resultDisplay.setFeedbackToUser("There needs to be three options for MCQ! Please type in capital letters as"
+                    + " well. E.g. A)... B)... C)...");
+            throw e;
         } catch (CommandException | ParseException | DeckCannotBeCardException | InvalidDeckException
                 | InvalidFlashcardException | NotInDeckException | WrongDeckException e) {
             logger.info("Invalid command: " + commandText);

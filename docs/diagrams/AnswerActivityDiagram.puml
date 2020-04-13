@@ -1,0 +1,16 @@
+@startuml
+start
+ :parse answer;
+
+ if () then ([isTfAnswer])
+  : create TfAnswer object;
+   else ([else])
+   if () then ([isMcqAnswer])
+    : create McqAnswer object;
+        else ([else])
+         : create ShortAnswer object;
+        endif
+   endif
+
+ stop
+ @enduml

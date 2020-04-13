@@ -41,6 +41,6 @@ public class ResultCard extends UiPart<Region> {
                 testResult.getUserAnswer()));
         flashcardAnswer.setText(String.format(
                 MESSAGE_FLASHCARD_ANSWER,
-                testResult.getFlashcardAnswer().toString()));
+                testResult.getFlashcardAnswer().getCorrectAnswer()));
     }
 }

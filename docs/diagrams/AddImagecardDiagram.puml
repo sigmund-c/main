@@ -1,0 +1,132 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CardiBuddyParser" as CardiBuddyParser LOGIC_COLOR
+participant ":AddImagecardCommandParser" as AddImagecardCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant ":Imagecard" as Imagecard LOGIC_COLOR
+participant ":AddImagecardCommand" as AddImagecardCommand LOGIC_COLOR
+participant ":logicToUiManager" as LogicToUiManager LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Ui UI_COLOR_T1
+participant ":UiManager" as UiManager UI_COLOR
+participant ":MainWindow" as MainWindow UI_COLOR
+endbox
+
+[-> LogicManager : execute("add p/path\nq/ques a/ans")
+note bottom
+    <b>These are the abbreviated command arguments:</b>
+    <b>path</b> = file:/Users/Jing/ArchitectureDiagram.png
+    <b>ques</b> = What kind of diagram is this?
+    <b>ans</b> = B)Architecture C)Sequence A)Object
+end note
+
+activate LogicManager
+
+
+LogicManager -> CardiBuddyParser : parseCommand("add p/path\nq/ques a/ans")
+activate CardiBuddyParser
+
+create AddImagecardCommandParser
+CardiBuddyParser -> AddImagecardCommandParser
+activate AddImagecardCommandParser
+
+AddImagecardCommandParser --> CardiBuddyParser
+deactivate AddImagecardCommandParser
+
+CardiBuddyParser -> AddImagecardCommandParser : parse("p/path\nq/ques a/ans")
+activate AddImagecardCommandParser
+
+AddImagecardCommandParser -> LogicToUiManager : getDisplayedDeck()
+activate LogicToUiManager
+
+LogicToUiManager --> AddImagecardCommandParser : deck
+deactivate LogicToUiManager
+deactivate AddImagecardCommandParser
+
+AddImagecardCommandParser -> ParserUtil : parseQuestion("q/ques")
+activate AddImagecardCommandParser
+activate ParserUtil
+
+ParserUtil --> AddImagecardCommandParser : question
+deactivate ParserUtil
+
+AddImagecardCommandParser -> ParserUtil : parseAnswer("a/ans")
+activate ParserUtil
+
+ParserUtil --> AddImagecardCommandParser : mcqAnswer
+deactivate ParserUtil
+
+create Imagecard
+AddImagecardCommandParser -> Imagecard : deck, question, mcqAnswer, path
+activate Imagecard
+Imagecard --> AddImagecardCommandParser : imagecard
+deactivate Imagecard
+
+create AddImagecardCommand
+AddImagecardCommandParser -> AddImagecardCommand : imagecard, logicToUiManager
+activate AddImagecardCommand
+
+AddImagecardCommand --> AddImagecardCommandParser
+deactivate AddImagecardCommand
+
+AddImagecardCommandParser --> CardiBuddyParser : addIcCommand
+deactivate AddImagecardCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddImagecardCommandParser -[hidden]-> CardiBuddyParser
+destroy AddImagecardCommandParser
+
+CardiBuddyParser --> LogicManager : addIcCommand
+deactivate CardiBuddyParser
+
+LogicManager -> AddImagecardCommand : execute()
+activate AddImagecardCommand
+
+AddImagecardCommand -> Model : addImagecard(imagecard)
+activate Model
+Model --> AddImagecardCommand
+deactivate Model
+
+AddImagecardCommand -> LogicToUiManager : addCard(imagecard)
+activate LogicToUiManager
+LogicToUiManager --> AddImagecardCommand
+deactivate LogicToUiManager
+
+AddImagecardCommand -> LogicToUiManager : updateFilteredFlashcardList
+activate LogicToUiManager
+LogicToUiManager --> AddImagecardCommand
+deactivate LogicToUiManager
+
+AddImagecardCommand -> LogicToUiManager : updateFlashcardPanel()
+activate LogicToUiManager
+
+LogicToUiManager -> UiManager : getMainWindow()
+activate UiManager
+UiManager -> MainWindow : updateCards
+activate MainWindow
+
+MainWindow --> UiManager
+deactivate MainWindow
+
+UiManager --> LogicToUiManager
+deactivate UiManager
+
+LogicToUiManager --> AddImagecardCommand
+deactivate LogicToUiManager
+
+
+deactivate LogicToUiManager
+
+AddImagecardCommand --> LogicManager : result
+deactivate AddImagecardCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

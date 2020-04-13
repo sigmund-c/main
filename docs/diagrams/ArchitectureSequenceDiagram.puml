@@ -7,10 +7,10 @@ Participant ":Logic" as cardibuddy.logic LOGIC_COLOR
 Participant ":Model" as model MODEL_COLOR
 Participant ":Storage" as storage STORAGE_COLOR
 
-user -[USER_COLOR]> ui : "delete 1"
+user -[UI_COLOR]> ui : "delete deck 1"
 activate ui UI_COLOR
 
-ui -[UI_COLOR]> cardibuddy.logic : execute("delete 1")
+ui -[UI_COLOR]> cardibuddy.logic : execute("delete deck 1")
 activate cardibuddy.logic LOGIC_COLOR
 
 cardibuddy.logic -[LOGIC_COLOR]> model : deleteDeck(d)
@@ -24,6 +24,8 @@ activate storage STORAGE_COLOR
 
 storage -[STORAGE_COLOR]> storage : Save to file
 activate storage STORAGE_COLOR_T1
+
+storage -[STORAGE_COLOR]--> storage
 deactivate storage
 
 storage --[STORAGE_COLOR]> cardibuddy.logic

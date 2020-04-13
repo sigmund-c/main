@@ -2,12 +2,15 @@ package cardibuddy.model.flashcard;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 /**
  * True False answer class.
  */
-public class TfAnswer implements Answer {
+public class TfAnswer extends Answer {
 
     public static final String MESSAGE_CONSTRAINTS = "True / False answers should either be \"T\" or \"F\"";
+    private static final String TF_REGEX = "(?=.{1}$)^[TF]";
 
     private String correctAnswer; // should be "T" or "F"
 
@@ -20,7 +23,7 @@ public class TfAnswer implements Answer {
     }
 
     public boolean isValid(String test) {
-        return test.equals("T") || test.equals("F");
+        return test.matches(TF_REGEX);
     }
 
     /**
@@ -37,7 +40,17 @@ public class TfAnswer implements Answer {
     }
 
     @Override
+    public List getAnswerList() {
+        return null;
+    }
+
+    @Override
     public String toString() {
+        return correctAnswer;
+    }
+
+    @Override
+    public String getCorrectAnswer() {
         return correctAnswer;
     }
 

@@ -8,11 +8,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import cardibuddy.commons.exceptions.IllegalValueException;
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Imagecard;
+import cardibuddy.model.flashcard.McqAnswer;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.ShortAnswer;
+import cardibuddy.model.flashcard.TfAnswer;
 
 /**
  * Jackson-friendly version of {@link Flashcard}.
@@ -56,7 +59,14 @@ class JsonAdaptedFlashcard extends JsonAdaptedView {
      */
     public Card toModelType(Deck modelDeck) throws IllegalValueException {
         Question modelQuestion = new Question(question);
-        ShortAnswer modelAnswer = new ShortAnswer(answer);
+        Answer modelAnswer;
+        if (Answer.isTrueFalseAnswer(answer)) {
+            modelAnswer = new TfAnswer(answer);
+        } else if (Answer.isMcqAnswer(answer)) {
+            modelAnswer = new McqAnswer(answer);
+        } else {
+            modelAnswer = new ShortAnswer(answer);
+        }
 
         if (deck == null || question == null || answer == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

@@ -22,7 +22,7 @@ public class DeleteCardCommand extends DeleteCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes a flashcard identified by the index number used in the displayed cardibuddy book.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + "1";
+            + "Example: delete " + COMMAND_WORD + "1";
 
     public static final String MESSAGE_DELETE_CARD_SUCCESS = "Deleted Card:\n%1$s";
 

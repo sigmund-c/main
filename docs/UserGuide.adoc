@@ -18,13 +18,13 @@ By: `Team T10-2`      Since: `Jan 2020`      Licence: `MIT`
 
 == Introduction
 
-Cardi Buddy (CardiB) is for students who *prefer to use a desktop app to store their revision materials as flashcards*. More importantly, CardiB is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CardiB can help you to store revision materials quickly. The self-testing features will definitely help you to ace your examinations as opposed to traditional ways of revision by re-reading lecture notes. Interested? Jump to <<Quick Start>> to get started. Enjoy!
+CardiBuddy (CardiB) is for students who *prefer to use a desktop app to store their revision materials as flashcards*. More importantly, CardiB is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CardiB can help you to store revision materials quickly. The self-testing features will definitely help you to ace your examinations as opposed to traditional ways of revision by re-reading lecture notes. Interested? Jump to <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
 .  Download the latest `cardibuddy.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Cardi Buddy.
+.  Copy the file to the folder you want to use as the home folder for your CardiBuddy.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790", align="center"]
@@ -34,7 +34,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all decks
-* **`add`**`d/CS1101S t/Basics` : adds an empty deck titled `CS1101S` to the Cardi Buddy.
+* **`add`**`d/CS1101S t/Basics` : adds an empty deck titled `CS1101S` to the CardiBuddy.
 * *`open 1`* : opens the 1st deck shown in the current list
 * **`delete deck`**`3` : deletes the 3rd deck shown in the current list
 * *`exit`* : exits the app
@@ -69,6 +69,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * :bulb: is used to signal information that is helpful for the users to know.
 ====
 
+{empty} +
+
 === Basic Features
 
 ==== Viewing help : `help`
@@ -87,15 +89,19 @@ There is no need to save manually.
 Exits the program.
 Format: `exit`
 
+{empty} +
+
 === Opening
 
 ==== Opening a deck: `open`
 
 Opens an existing deck in the library.
-Format: `open INDEX`
+Format: `open DECK_INDEX`
 
 Shows a list of all the cards in the deck. +
 Format: `open 1`
+
+{empty} +
 
 === Adding
 
@@ -116,28 +122,37 @@ Returns a new deck titled `CS2103`
 * `add d/CS1101S t/Easy t/Basics` +
 Adds a new deck titled `CS1101S` with the tags `Easy` and `Basics`
 
-==== Adding a normal card: `add c/DECK_INDEX q/QUESTION a/ANSWER`
+// tag::addingImage[]
+==== Adding a normal card: `add q/QUESTION a/ANSWER`
 
 Creates a new card to be added to the deck.
-Format: `add c/DECK_INDEX q/QUESTION a/ANSWER`
+Format: `add q/QUESTION a/ANSWER`
 
-* The deck specified in DECK_INDEX must be open for you to add a card.
+[TIP]
+These are the three types of `ANSWER` and their corresponding formats: +
+1. T/F -- `T` or `F` +
+2. MCQ -- `A)CHOICE_A B)CHOICE_B C)CHOICE_C` with the correct option being entered first, the order of the next two does not matter  +
+3. Short Answer -- `ANY_TEXT`
+
+* The deck to be added in must be opened for you to add a card.
 
 Examples:
 
 * `open 2` +
-`add c/2 q/How does one go about solving recursion problems? a/Wishful thinking` +
-Adds a new card belonging to the deck indexed at 2.
+`add q/How does one go about solving recursion problems? a/Wishful thinking` +
+Adds a new card with a `Short Answer` type belonging to the opened deck indexed at 2.
 
-image::AddCard.png[width="800", align="center"]
+* `open 1` +
+`add q/Is defensive code desirable at all times? a/F` +
+Adds a new card with a `T/F` answer type belonging to the opened deck indexed at 1.
 
-// tag::addingImage[]
-==== Adding an image card: `add p/file:FILE_PATH_TO_IMAGE c/DECK_INDEX q/QUESTION a/ANSWER`
+
+==== Adding an image card: `add p/file:FILE_PATH_TO_IMAGE q/QUESTION a/ANSWER`
 
 Creates a new image card to be added to the deck.
-Format: `add p/file:FILE_PATH_TO_IMAGE c/DECK_INDEX q/QUESTION a/ANSWER`
+Format: `add p/file:FILE_PATH_TO_IMAGE q/QUESTION a/ANSWER`
 
-* The deck specified in DECK_INDEX must be open for you to add a card.
+* The deck to be added in must be opened for you to add a card.
 
 * The images can only be PNG or JPG files.
 
@@ -146,36 +161,38 @@ Format: `add p/file:FILE_PATH_TO_IMAGE c/DECK_INDEX q/QUESTION a/ANSWER`
 Examples:
 
 * `open 1` +
-`add p/file:/Users/qiujingying/Documents/GitHub/cs2103/main/docs/images/ArchitectureDiagram.png c/1 q/What type of diagram is this? a/Architecture Diagram` +
-Adds a new card with an image belonging to the deck indexed at 1.
-
-image::AddImageCard.png[width="800", align="center"]
+`add p/file:/Users/qiujingying/Documents/GitHub/cs2103/main/docs/images/ArchitectureDiagram.png q/What type of diagram is this? a/B)Architecture Diagram A)Sequence Diagram C)Object Diagram` +
+Adds a new card with an image and `MCQ` answer type belonging to the opened deck indexed at 1.
+Note that the correct answer is `B` as it is the first choice entered.
 
 [TIP]
 You can drag and drop the image you want to add into a terminal window to obtain its file path. File paths may differ across operating systems (Windows vs Mac).
 
-==== Adding an image card via the Image button: `c/DECK_INDEX q/QUESTION a/ANSWER`
-Shortcut for users who do not want to search for the file path.
+==== Adding an image card via the Image button: `q/QUESTION a/ANSWER`
+This is a shortcut for users who do not want to search for the file path.
+Format: `q/QUESTION a/ANSWER`
 
+* The deck to be added in must be opened, before you click on the button, for you to add a card.
+
+* Do note the differences in the command to be entered. There is no `add` or `p/IMAGE_FILEPATH` inputs that are required.
+
+Examples:
+
+* `open 1` +
+_click on button and choose image_ +
+`q/What type of diagram is this? a/B)Architecture Diagram A)Sequence Diagram C)Object Diagram` +
+Adds a new card with an image and `MCQ` answer type belonging to the opened deck indexed at 1.
 
 // end::addingImage[]
 
-=== Opening
-
-==== Opening a deck: `open`
-
-Opens an existing deck in the library.
-Format: `open DECK_INDEX`
-
-Shows a list of all the cards in the deck. +
-Format: `open 1`
+{empty} +
 
 === Editing
 
 ==== Editing a deck: `edit`
 
 Edits an existing deck in the library.
-Format: `edit DECK_INDEX [d/TITLE] [t/TAG]…`
+Format: `edit deck DECK_INDEX [d/TITLE] [t/TAG]…`
 
 * Edits the decks at the specified DECK_INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
@@ -186,13 +203,13 @@ removed.
 
 Examples:
 
-* `edit 1 d/CS2103T` +
+* `edit deck 1 d/CS2103T` +
 Edits the title of the 1st deck to be `CS2103T` without removing existing tags.
 
-* `edit 2 d/CS2040 t/` +
+* `edit deck 2 d/CS2040 t/` +
 Edits the title of the 2nd deck to be `CS2040` and clears all existing tags.
 
-==== Editing a card: `edit card` [coming in v2.0]
+==== Editing a card: `edit card`
 
 Edits an existing card in the deck.
 Format: `edit card CARD_INDEX [q/QUESTION] [a/ANSWER] [t/TAG]…`
@@ -214,6 +231,8 @@ Opens the first deck and tEdits the question of the 1st card to be `What does MV
 `edit card 2 a/cs2040 t/` +
 Edits the answer of the 2nd card to be `cs2040` and clears all existing tags.
 
+{empty} +
+
 === Listing
 
 ==== Listing all decks: `list`
@@ -221,12 +240,16 @@ Edits the answer of the 2nd card to be `cs2040` and clears all existing tags.
 Shows a list of all the decks in the library and hides the displayed cards (if any). +
 Format: `list`
 
+{empty} +
+
 === Clearing
 
 ==== Clearing all decks: `clear`
 
 Clears all deck entries from the library. +
 Format: `clear`
+
+{empty} +
 
 === Deleting
 
@@ -270,6 +293,8 @@ Opens the first deck and deletes the 2nd flash card in the deck.
 Deletes the 1st card in the results of the search card command.
 
 // tag::search[]
+
+{empty} +
 
 === Searching
 
@@ -316,6 +341,8 @@ Displays cards with the word `principle` in the questions.
 Displays decks with both of the words `diagram` and `UML` in the questions.
 // end::search[]
 
+{empty} +
+
 // tag::filter[]
 === Filtering
 
@@ -335,8 +362,9 @@ Displays decks with the tag `hard`.
 
 * `filter hard & coremodule` +
 Displays decks with both the tags `hard` and `coremodule`.
-<<<<<<< HEAD
 // end::filter[]
+
+{empty} +
 
 //tag::ash-testing[]
 === Testing
@@ -419,13 +447,20 @@ Note:
 What this command does:
 
 * Allows you to quit the current test session even before it is completed.
+
 //end::ash-testing[]
+
+{empty} +
+
+
 === Displaying History
 
 ==== Displaying the command history: 'history'
 
 Displays all the commands that has been inputted by the user during the current session.
 Format: 'history'
+
+{empty} +
 
 === Undo/Redo
 
@@ -439,6 +474,8 @@ Format: `undo`
 Redoes latest command.
 Format: `redo`
 
+{empty} +
+
 === Detecting duplicates
 
 ==== Detecting duplicate deck
@@ -450,6 +487,8 @@ Upon adding a new deck, the application automatically checks if there are any ex
 Upon adding a new card to a specific deck, the application automatically checks if there are any existing cards with the same question in that deck. Only cards with unique questions can be successfully added.
 
 If there is a card with the same question but it is in a different deck, the card can still be successfully added.
+
+{empty} +
 
 === Statistics
 
@@ -483,7 +522,7 @@ Example:
 * `statistics 2 3` +
 Shows the statistics of the 3rd test session of the deck with the shown index of 2.
 
-
+{empty} +
 
 === Syncing across multiple platforms: sync [coming in v2.0]
 
@@ -496,16 +535,16 @@ Shows the statistics of the 3rd test session of the deck with the shown index of
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Cardi Buddy folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CardiBuddy folder.
 
 == Command Summary
 
 * *Add deck* : `add d/TITLE [t/TAG]...` +
 e.g. `add d/CS2030 t/Fundamentals t/Medium`
-* *Add normal card* : `add c/DECK_INDEX q/QUESTION a/ANSWER` +
-e.g. `add c/1 q/What does OOP stand for? a/Object Oriented Programming`
-* *Add image card* : `add p/file:FILE_PATH_TO_IMAGE c/DECK_INDEX q/QUESTION a/ANSWER` +
-e.g. `add p/file:/Users/foo/ObjectDiagram.png c/1 q/Which SOLID principle did the code not adhere to? a/Single Responsibility Principle`
+* *Add normal card* : `add q/QUESTION a/ANSWER` +
+e.g. `add q/What does OOP stand for? a/Object Oriented Programming`
+* *Add image card* : `add p/file:FILE_PATH_TO_IMAGE q/QUESTION a/ANSWER` +
+e.g. `add p/file:/Users/foo/ObjectDiagram.png q/Which SOLID principle did the code not adhere to? a/Single Responsibility Principle`
 * *Clear* : `clear`
 * *Delete deck/card* : `delete deck/card INDEX` +
 e.g. `delete deck 3`

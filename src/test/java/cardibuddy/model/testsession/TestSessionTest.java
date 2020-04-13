@@ -7,11 +7,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import cardibuddy.commons.core.LogsCenter;
+import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Title;
 import cardibuddy.model.flashcard.Answer;
@@ -20,6 +23,7 @@ import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
+import cardibuddy.model.testsession.exceptions.IncorrectAnswerFormatException;
 import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
 import jdk.jfr.Description;
 
@@ -28,26 +32,40 @@ public class TestSessionTest {
     private String randomString1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
     private String randomString2 = "abcdefghijklmnopqrstuvwxyz";
     private DeckStub deck = new DeckStub(new Title("HELLO"), new HashSet<>());
+    private final Logger logger = LogsCenter.getLogger(TestSessionTest.class.getName());
 
     /**
      * A method to generate a flashcard of random type, and with a random question string.
-     *
-     * @return
      */
     Flashcard generateRandomCard() {
         int option = new Random().nextInt(2 + 1);
+
+        return generateCard(option);
+    }
+
+    /**
+     * Generates a card based on the option provided.
+     */
+    Flashcard generateCard(int option) {
         int random1 = new Random().nextInt(26);
         int random2 = new Random().nextInt(26);
         int random3 = new Random().nextInt(26);
-        QuestionStub question;
-        Answer answer;
+
         String questionString = "HELLO" + randomString1.charAt(random1)
                 + randomString2.charAt(random2)
                 + randomString1.charAt(random3);
+
+        QuestionStub question;
+        Answer answer;
         switch (option) {
         case 0: // for MCQ questions
             question = new QuestionStub(questionString);
-            answer = new McqAnswerStub("A");
+            try {
+                answer = new McqAnswerStub("A)H B)E C)Y");
+            } catch (ParseException e) {
+                logger.info("Error in generate card");
+                answer = new TfAnswerStub("T");
+            }
             break;
         case 1: // For TF questions
             question = new QuestionStub(questionString);
@@ -61,14 +79,38 @@ public class TestSessionTest {
         return new CardStub(deck, question, answer, "");
     }
 
+    /**
+     * Submits the correct answer to the test session, based on the card in the deck.
+     */
     TestSession submitCorrectAnswer(TestSession testSession, int index) {
-        String correctAnswer = deck.getFlashcardList().get(index).getAnswer().toString();
+        String correctAnswer = deck.getFlashcardList().get(index).getAnswer().getCorrectAnswer();
         testSession.submitAnswer(correctAnswer);
         return testSession;
     }
 
+    /**
+     * Submits the wrong answer to the test session.
+     * Ensures that the answer's format still complies with the AnswerType.
+     */
     TestSession submitWrongAnswer(TestSession testSession) {
-        testSession.submitAnswer("blahblahblahblah");
+        AnswerType answerType = testSession.getCurrentAnswerType();
+        switch (answerType) {
+        case MCQ:
+            logger.info("Answering mcq wrongly");
+            testSession.submitAnswer("C");
+            break;
+        case TRUE_FALSE:
+            logger.info("Answering true false wrongly");
+            testSession.submitAnswer("F");
+            break;
+        case SHORT_ANSWER:
+            logger.info("Answering short answer wrongly");
+            testSession.submitAnswer("blahblahblah");
+            break;
+        default:
+            logger.info("Error, cannot get answer type.");
+            break;
+        }
         return testSession;
     }
 
@@ -191,7 +233,7 @@ public class TestSessionTest {
         assertEquals(expectedTestQueueSize, testSession.getTestQueueSize());
     }
 
-    @Description("Test that force correct throws ALreadyCorrectException.")
+    @Description("Test that force correct throws AlreadyCorrectException.")
     @Test
     void testForceCorrectThrowsAlreadyCorrectException() {
         TestSession testSession = new TestSession(deck);
@@ -204,7 +246,7 @@ public class TestSessionTest {
     @Test
     void testGetCurrentAnswerTypeTrueFalse() {
         DeckStub deck = new DeckStub(new Title("Hi"), new HashSet<>());
-        Card card = new CardStub(deck, new Question("Hello"), new TfAnswerStub("T"), "");
+        Card card = generateCard(1);
         deck.addCard(card);
         TestSession testSession = new TestSession(deck);
         testSession.getFirstQuestion();
@@ -215,7 +257,7 @@ public class TestSessionTest {
     @Test
     void testGetCurrentAnswerTypeMcq() {
         DeckStub deck = new DeckStub(new Title("Hi"), new HashSet<>());
-        Card card = new CardStub(deck, new Question("Hello"), new McqAnswerStub("B"), "");
+        Card card = generateCard(0);
         deck.addCard(card);
         TestSession testSession = new TestSession(deck);
         testSession.getFirstQuestion();
@@ -226,10 +268,34 @@ public class TestSessionTest {
     @Test
     void testGetCurrentAnswerTypeShortAnswer() {
         DeckStub deck = new DeckStub(new Title("Hi"), new HashSet<>());
-        Card card = new CardStub(deck, new Question("Hello"), new ShortAnswerStub("yes no"), "");
+        Card card = generateCard(2);
         deck.addCard(card);
         TestSession testSession = new TestSession(deck);
         testSession.getFirstQuestion();
         assertEquals(AnswerType.SHORT_ANSWER, testSession.getCurrentAnswerType());
+    }
+
+    @Description("Test that an IncorrectAnswerFormatException is "
+            + "thrown if the user submits an answer format that violates the True False requirements.")
+    @Test
+    void testSubmitAnswerThrowsIncorrectAnswerFormatExceptionTrueFalse() {
+        DeckStub deck = new DeckStub(new Title("Hi"), new HashSet<>());
+        Card card = generateCard(1);
+        deck.addCard(card);
+        TestSession testSession = new TestSession(deck);
+        testSession.getFirstQuestion();
+        assertThrows(IncorrectAnswerFormatException.class, () -> testSession.submitAnswer("hello"));
+    }
+
+    @Description("Test that an IncorrectAnswerFormatException is "
+            + "thrown if the user submits an answer format that violates the MCQ requirements.")
+    @Test
+    void testSubmitAnswerThrowsIncorrectAnswerFormatExceptionMcq() {
+        DeckStub deck = new DeckStub(new Title("Hi"), new HashSet<>());
+        Card card = generateCard(0);
+        deck.addCard(card);
+        TestSession testSession = new TestSession(deck);
+        testSession.getFirstQuestion();
+        assertThrows(IncorrectAnswerFormatException.class, () -> testSession.submitAnswer("hello"));
     }
 }

@@ -14,6 +14,7 @@ import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.exceptions.CommandException;
 import cardibuddy.model.Model;
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.flashcard.CardType;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.testsession.AnswerType;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
@@ -55,9 +56,15 @@ public class TestCommand extends Command {
                 lastShownList.get(targetIndex.getZeroBased());
 
         try {
-            Question firstQuestion = model.testDeck(deckToTest);
+            Question question = model.testDeck(deckToTest);
             AnswerType answerType = model.getCurrentAnswerType();
-            logicToUiManager.showTestQuestion(firstQuestion, answerType);
+            CardType cardType = model.getCurrentCardType();
+            // check to see if you need to display a question with image, or a normal question.
+            if (cardType == CardType.IMAGECARD) {
+                logicToUiManager.showTestQuestionWithImage(question, answerType, model.getCurrentCardPath());
+            } else {
+                logicToUiManager.showTestQuestion(question, answerType);
+            }
             logicToUiManager.showTestStatus(model.getTestQueueSize());
             return new CommandResult(MESSAGE_TEST_SESSION_SUCCESS, false, false, false, false);
         } catch (EmptyDeckException e) {

@@ -38,42 +38,17 @@ public class TestResult {
         this.flashcardAnswer = flashcardAnswer;
         this.userAnswer = userAnswer;
         this.numTries = 1; // when first created, numTries = 1 by default
-        result = this.computeResult();
         logger.info("Result computed.");
     }
 
     /**
      * Constructor for TestResult.
-     * Called if the user skips the question
-     * when they haven't answered it before in the Test Session.
+     * Called if the user skips the question.
+     * By default, number of tries is set to 1. This can be overriden.
      */
     public TestResult(Result skippedResult) {
         this.result = skippedResult;
         this.numTries = 1;
-    }
-
-    /**
-     * Constructor for TestResult.
-     * Called if the user has answered the question previously but now chooses to skip it.
-     * Records down the number of tries (including the try that the user skips)
-     * the user has made for that question before skipping it.
-     */
-    public TestResult(TestResult prevTestResult) {
-        this.result = Result.SKIPPED;
-        this.numTries = prevTestResult.getNumTries();
-    }
-
-    /**
-     * Result of test session.
-     *
-     * @return Result object (idk what to write here :( ).
-     */
-    public Result computeResult() {
-        if (flashcardAnswer.toString().equals(userAnswer)) {
-            return Result.CORRECT;
-        } else {
-            return Result.WRONG;
-        }
     }
 
     /**
