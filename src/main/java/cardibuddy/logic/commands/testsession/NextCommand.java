@@ -34,7 +34,7 @@ public class NextCommand extends Command {
             + "OR: " + COMMAND_WORD + " force";
 
     public static final String MESSAGE_NEXT_SUCCESS = "Answer the following question:"
-            + "\nFormat: 'ans YOUR ANSWER'";
+            + "\nFormat: 'ans YOUR_ANSWER'";
 
     private static final Logger logger = LogsCenter.getLogger(NextCommand.class);
 
