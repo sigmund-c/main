@@ -366,7 +366,7 @@ image::TestSessionActivityDiagram.png[]
 
 
 For more descriptive use case scenarios from a user's perspective, please take a look at <<Use Cases>>.
-// end::ash-test-feature[]
+
 
 ==== Design considerations
 ===== Aspect:
@@ -375,8 +375,7 @@ For more descriptive use case scenarios from a user's perspective, please take a
 ** Pros:
 +
 ** Cons:
-
-
+// end::ash-test-feature[]
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
