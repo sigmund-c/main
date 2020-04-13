@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import cardibuddy.logic.parser.exceptions.ParseException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -58,7 +59,12 @@ public class TestSessionTest {
         switch (option) {
         case 0: // for MCQ questions
             question = new QuestionStub(questionString);
-            answer = new McqAnswerStub("A)H B)E C)Y");
+            try {
+                answer = new McqAnswerStub("A)H B)E C)Y");
+            } catch (ParseException e) {
+                logger.info("Error in generate card");
+                answer = new TfAnswerStub("T");
+            }
             break;
         case 1: // For TF questions
             question = new QuestionStub(questionString);

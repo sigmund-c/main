@@ -1,5 +1,6 @@
 package cardibuddy.model.testsession;
 
+import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.flashcard.McqAnswer;
 
 /**
@@ -8,7 +9,7 @@ import cardibuddy.model.flashcard.McqAnswer;
 public class McqAnswerStub extends McqAnswer {
     private String answer = "A";
 
-    public McqAnswerStub(String line) {
+    public McqAnswerStub(String line) throws ParseException{
         super(line);
     }
 
