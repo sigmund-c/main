@@ -1,0 +1,45 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show members
+
+Package TestSession {
+Class TestSession {
+    - deck: Deck
+    - current: Card
+    - testResults: HashMap<Card, TestResult>
+    - testQueue: LinkedList<Card>
+    + getNextQuestion()
+    + skipQuestion()
+    + forceCorrect()
+    + submitAnswer()
+}
+
+Class TestResult {
+- flashcardAnswer:Answer
+- userAnswer: String
+- result: Result
+- numTries: int
+}
+Enum Result <<Enum>> {
+    CORRECT
+    WRONG
+    SKIPPED
+}
+Enum AnswerType <<Enum>> {
+TRUE_FALSE
+MCQ
+SHORT_ANSWER
+}
+
+}
+
+ModelManager --> "1" TestSession
+TestSession *--> "1..*" TestResult
+TestSession --> "1" Deck
+TestSession --> "1..*" Flashcard
+Deck *--> "*" Flashcard
+
+@enduml

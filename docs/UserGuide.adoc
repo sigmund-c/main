@@ -375,6 +375,8 @@ A `test session` works just like how flashcard testing works in real life - You 
 
 The difference here is that you do not need to manually keep track of how many flashcards you got right and wrong -- CardiBuddy does all that for you!
 
+In addition, you will also get to see a summary of how you've done at the end of your `test session`.
+
 ==== Retesting
 A `test session` in CardiBuddy is special - it includes a *retesting* feature to make sure you know your content well.
 
