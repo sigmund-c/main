@@ -18,7 +18,7 @@ import cardibuddy.model.flashcard.Answer;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
-import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
+//import cardibuddy.model.testsession.exceptions.AlreadyCorrectException;
 import cardibuddy.model.testsession.exceptions.EmptyDeckException;
 import cardibuddy.model.testsession.exceptions.UnansweredQuestionException;
 import jdk.jfr.Description;
