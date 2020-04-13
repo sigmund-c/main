@@ -155,11 +155,6 @@ The `Model`,
 * exposes an unmodifiable `ObservableList<Deck>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
 * does not depend on any of the other three components.
 
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `CardiBuddy`, which `Deck` can reference. This would allow `CardiBuddy` to only require one `Tag` object per unique `Tag`, instead of each `Deck` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:BetterModelClassDiagram.png[]
-
 [[Design-Storage]]
 === Storage component
 
@@ -308,7 +303,7 @@ image::AddFlashcardDiagram.png[]
 ===== Imagecard
 To add an `Imagecard` in an opened deck, the user will enter `add p/file:IMAGE_FILEPATH q/QUESTION a/ANSWER`.
 A sample command would be `add p/file:/Users/Jing/ArchitectureDiagram.png q/What kind of diagram is this?
-a/B) Architecture Diagram C) Sequence Diagram A) Object Diagram`. If the file path is invalid, the middle part of the card will be blank and an image will not be shown. +
+a/B)Architecture C)Sequence A)Object`. If the file path is invalid, the middle part of the card will be blank and an image will not be shown. +
  +
 The following sequence diagram shows how an `Imagecard` is created from the above command and displayed immediately in the flashcard panel to the user:
 
@@ -329,14 +324,20 @@ image::ParserUtilTfDiagram.png[]
 For an `McqAnswer` to be associated with a `Card`, the user will have to enter
 `A)CHOICE_A B)CHOICE_B C)CHOICE_C`, with the correct choice positioned first, for their answer after the answer prefix `a/`.
 A sample command was mentioned in the example for `Imagecard` above: `add p/file:/Users/Jing/ArchitectureDiagram.png q/What kind of diagram is this?
-a/B) Architecture Diagram C) Sequence Diagram A) Object Diagram`.
+a/B)Architecture C)Sequence A)Object`.
 
 The following sequence diagram shows how the `ParserUtil` class creates an `McqAnswer` answer based on the given sample command:
 
 image::ParserUtilMcqDiagram.png[]
 
 ===== ShortAnswer
+For a `ShortAnswer` to be associated with a `Card`, the user will have to enter an answer that does not fulfil the
+requirements of both `TfAnswer` and `McqAnswer` after the answer prefix `a/`.
+A sample command would be `add q/How does one go about solving recursion problems? a/Wishful thinking`.
 
+The following sequence diagram shows how the `ParserUtil` class creates a `ShortAnswer` answer based on the given sample command:
+
+image::ParserUtilShortAnsDiagram.png[]
 
 === Search and Filter feature
 ==== Design

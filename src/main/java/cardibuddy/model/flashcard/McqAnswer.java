@@ -128,7 +128,7 @@ public class McqAnswer extends Answer {
      */
     public boolean checkAnswer(String toCheck) {
         requireNonNull(toCheck);
-        if (!toCheck.equals("A") && !toCheck.equals("B") && !toCheck.equals("C")) {
+        if (!(toCheck.equals("A") || toCheck.equals("B") || toCheck.equals("C"))) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
         return toCheck.equals(correctAnswer);
