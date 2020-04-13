@@ -468,12 +468,12 @@ Format: 'history'
 
 ==== Undoing command: `undo`
 
-Undoes latest command.
+Undoes latest deck-level command.
 Format: `undo`
 
 ==== Redoing command: `redo`
 
-Redoes latest command.
+Redoes latest deck-level command.
 Format: `redo`
 
 {empty} +

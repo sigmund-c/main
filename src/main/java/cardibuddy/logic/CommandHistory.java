@@ -6,7 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * Represents the history of commands.
+ * Represents the history of exceptions.
  */
 public class CommandHistory {
 

@@ -9,7 +9,7 @@ import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Title;
 import cardibuddy.model.tag.Tag;
 
-/**
+/**a
  * A utility class to help with building EditDeckDescriptor objects.
  */
 public class EditDeckDescriptorBuilder {
@@ -34,9 +34,9 @@ public class EditDeckDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditDeckDescriptor} that we are building.
+     * Sets the {@code Title} of the {@code EditDeckDescriptor} that we are building.
      */
-    public EditDeckDescriptorBuilder withName(String name) {
+    public EditDeckDescriptorBuilder withTitle(String name) {
         descriptor.setTitle(new Title(name));
         return this;
     }

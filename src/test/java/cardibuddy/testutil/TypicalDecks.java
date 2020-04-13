@@ -41,11 +41,11 @@ public class TypicalDecks {
      * Returns an {@code CardiBuddy} with all the typical decks.
      */
     public static CardiBuddy getTypicalCardiBuddy() {
-        CardiBuddy ab = new CardiBuddy();
+        CardiBuddy cb = new CardiBuddy();
         for (Deck deck : getTypicalDecks()) {
-            ab.addDeck(deck);
+            cb.addDeck(deck);
         }
-        return ab;
+        return cb;
     }
 
     public static List<Deck> getTypicalDecks() {

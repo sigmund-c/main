@@ -1,7 +1,7 @@
 package cardibuddy.logic.commands;
 
 /**
- * Represents a delete command to be extended into search deck and search card commands.
+ * Represents a delete command to be extended into search deck and search card exceptions.
  */
 public abstract class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";

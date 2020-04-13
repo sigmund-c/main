@@ -36,33 +36,10 @@ public class AddDeckCommandParser implements Parser<AddDeckCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DECK, PREFIX_TAG);
 
-        //handleInputErrors(argMultimap);
-
         Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_DECK).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         List<Card> flashcards = new ArrayList<>();
 
         return new AddDeckCommand(new Deck(title, tagList, flashcards));
     }
-
-    ///**
-    // * Handles wrong input commands by user by throwing respective exceptions.
-    // * @param argMultimap Multimap of arguments.
-    // * @throws ParseException Respective exceptions.
-    // */
-    //private void handleInputErrors(ArgumentMultimap argMultimap) throws ParseException {
-    //    if (arePrefixesPresent(argMultimap, PREFIX_DECK)) {
-    //        // both PREFIX_DECK and PREFIX_FLASHCARD are present
-    //        throw new DeckCannotBeCardException(String.format(MESSAGE_DECK_CANNOT_BE_FLASHCARD
-    //                + "\n" + AddCommand.MESSAGE_USAGE));
-    //
-    //    } else if (arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_QUESTION, PREFIX_ANSWER)
-    //            | arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_QUESTION)
-    //            | arePrefixesPresent(argMultimap, PREFIX_DECK, PREFIX_ANSWER)) {
-    //        //trying to add a deck with a question and/or an answer
-    //        throw new InvalidDeckException(String.format(MESSAGE_INVALID_DECK + "\n"
-    //                + AddCommand.MESSAGE_ADD_DECK));
-    //
-    //    }
-    //}
 }

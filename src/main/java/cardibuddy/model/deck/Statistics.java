@@ -47,7 +47,7 @@ public class Statistics {
         logger.info("Created Statistics");
     }
 
-    // Edit commands ========================================================================
+    // Edit exceptions ========================================================================
 
     public void trackCardAdded() {
         cardsAdded++;
@@ -99,7 +99,7 @@ public class Statistics {
     }
 
 
-    // Get commands ========================================================================
+    // Get exceptions ========================================================================
 
     public int getCardsAdded() {
         return cardsAdded;

@@ -5,7 +5,6 @@ import static cardibuddy.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static cardibuddy.logic.parser.CliSyntax.PREFIX_QUESTION;
 import static java.util.Objects.requireNonNull;
 
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 
@@ -122,7 +121,7 @@ public class EditCardCommand extends EditCommand {
         private Deck deck;
         private Question question;
         private Answer answer;
-        private Path path;
+        private String path;
 
         public EditCardDescriptor() {}
 
@@ -165,6 +164,22 @@ public class EditCardCommand extends EditCommand {
          */
         public Optional<Question> getQuestion() {
             return (question != null) ? Optional.of(question) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code deck} to this object's {@code deck}.
+         * A defensive copy of {@code deck} is used internally.
+         */
+        public void getDeck(Deck deck) {
+            this.deck = deck;
+        }
+
+        /**
+         * Sets {@code path} to this object's {@code path}.
+         * A defensive copy of {@code path} is used internally.
+         */
+        public void getPath(String path) {
+            this.path = path;
         }
 
         /**

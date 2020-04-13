@@ -9,7 +9,7 @@ import cardibuddy.commons.util.StringUtil;
 
 
 /**
- * Tests that a {@code Card}'s {@code Title} matches any of the keywords given.
+ * Tests that a {@code Card}'s {@code Question} matches any of the keywords given.
  */
 public class SearchCardKeywordsPredicate implements Predicate<Card> {
     private final List<String> keywords;

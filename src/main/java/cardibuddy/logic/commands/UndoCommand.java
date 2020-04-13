@@ -14,7 +14,7 @@ import cardibuddy.model.Model;
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
-    public static final String MESSAGE_SUCCESS = "Undone last command: %1$s";
+    public static final String MESSAGE_SUCCESS = "New deck added: %1$s";
 
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {

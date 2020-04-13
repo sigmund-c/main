@@ -1,7 +1,7 @@
 package cardibuddy.logic.commands;
 
 /**
- * Represents a search command to be extended into search deck and search card commands.
+ * Represents a search command to be extended into search deck and search card exceptions.
  */
 public abstract class SearchCommand extends Command {
 
