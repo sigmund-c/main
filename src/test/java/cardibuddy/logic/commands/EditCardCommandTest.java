@@ -6,7 +6,8 @@ import static cardibuddy.testutil.TypicalDecks.getTypicalCardiBuddy;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import cardibuddy.logic.CommandHistory;
 import static cardibuddy.logic.commands.CommandTestUtil.DESC_QUESTION1;
@@ -25,8 +26,7 @@ import cardibuddy.storage.StorageManager;
 import cardibuddy.storage.UserPrefsStorage;
 import cardibuddy.ui.UiManager;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import org.junit.jupiter.api.Test;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.

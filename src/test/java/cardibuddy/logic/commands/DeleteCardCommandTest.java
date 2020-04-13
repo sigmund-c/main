@@ -101,7 +101,7 @@ public class DeleteCardCommandTest {
         assertTrue(model.getFilteredFlashcardList().isEmpty());
     }
 
-    public void getUserPrefsStorage() {
-        this.userPrefsStorage;
-    }
+//    public void getUserPrefsStorage() {
+//        this.userPrefsStorage;
+//    }
 }

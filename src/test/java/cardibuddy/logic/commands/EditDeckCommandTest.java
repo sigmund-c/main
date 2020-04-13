@@ -13,8 +13,6 @@ import static cardibuddy.testutil.TypicalDecks.getTypicalCardiBuddy;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-
 import cardibuddy.commons.core.index.Index;
 import cardibuddy.commons.core.Messages;
 import cardibuddy.logic.CommandHistory;
@@ -25,6 +23,8 @@ import cardibuddy.model.ModelManager;
 import cardibuddy.model.UserPrefs;
 import cardibuddy.testutil.DeckBuilder;
 import cardibuddy.testutil.EditDeckDescriptorBuilder;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.

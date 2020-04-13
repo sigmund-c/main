@@ -5,8 +5,8 @@ import static cardibuddy.logic.commands.CommandTestUtil.showDeckAtIndex;
 import static cardibuddy.testutil.TypicalIndexes.INDEX_FIRST_DECK;
 import static cardibuddy.testutil.TypicalDecks.getTypicalCardiBuddy;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import cardibuddy.logic.CommandHistory;
 import cardibuddy.logic.Logic;
@@ -18,9 +18,8 @@ import cardibuddy.model.UserPrefs;
 import cardibuddy.storage.*;
 import cardibuddy.ui.UiManager;
 
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.

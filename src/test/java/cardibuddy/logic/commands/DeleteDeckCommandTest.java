@@ -7,6 +7,7 @@ import static cardibuddy.testutil.TypicalIndexes.INDEX_SECOND_DECK;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import cardibuddy.commons.core.Messages;
@@ -34,15 +35,16 @@ import org.junit.jupiter.api.Test;
  * {@code DeleteCommand}.
  */
 public class DeleteDeckCommandTest {
-    private CommandHistory commandHistory = new CommandHistory();
-    UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(Paths.get("preferences.json"));
-    UserPrefs userPrefs = new UserPrefs();
-    CardiBuddyStorage cardiBuddyStorage = new JsonCardiBuddyStorage(userPrefs.getCardiBuddyFilePath());
+    private CommandHistory commandHistory = new CommandHistory();    private CommandHistory commandHistory = new CommandHistory();
+    private Path userPrefsFilePath = Paths.get("preferences.json");
+    private Path cardibuddyFilePath = Paths.get("data" , "cardibuddy.json");
+    private CardiBuddyStorage cardiBuddyStorage = new JsonCardiBuddyStorage(cardibuddyFilePath);
+    private UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsFilePath);
     private Storage storage = new StorageManager(cardiBuddyStorage, userPrefsStorage);
-    private Model model = new ModelManager(getTypicalCardiBuddy(), new UserPrefs());
+    private Model model = new ModelManager();
     private Logic logic = new LogicManager(model, storage);
-    private Ui ui = new UiManager(logic);
-    private LogicToUiManager logicToUiManager = new LogicToUiManager((UiManager) ui);
+    private UiManager ui = new UiManager(logic);
+    private LogicToUiManager logicToUiManager = new LogicToUiManager(ui);
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
