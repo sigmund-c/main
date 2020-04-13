@@ -12,6 +12,7 @@ import cardibuddy.commons.core.index.Index;
 import cardibuddy.logic.LogicToUiManager;
 import cardibuddy.logic.commands.EditCardCommand;
 import cardibuddy.logic.commands.EditCommand;
+import cardibuddy.logic.commands.EditDeckCommand;
 import cardibuddy.logic.parser.exceptions.ParseException;
 import cardibuddy.model.ReadOnlyCardiBuddy;
 import cardibuddy.model.deck.Deck;
@@ -24,12 +25,8 @@ import javafx.collections.ObservableList;
  * Parses input arguments and creates a new EditCardCommand object
  */
 public class EditCardCommandParser implements Parser<EditCardCommand> {
-    private LogicToUiManager logicToUiManager;
-    private ReadOnlyCardiBuddy cardiBuddy;
 
-    public EditCardCommandParser(ReadOnlyCardiBuddy cardiBuddy, LogicToUiManager logicToUiManager) {
-        this.logicToUiManager = logicToUiManager;
-        this.cardiBuddy = cardiBuddy;
+    public EditCardCommandParser() {
     }
 
     /**
@@ -43,13 +40,18 @@ public class EditCardCommandParser implements Parser<EditCardCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_QUESTION, PREFIX_ANSWER);
 
-        Index index = ParserUtil.parseIndex(args);
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCardCommand.MESSAGE_USAGE), pe);
+        }
 
         EditCardCommand.EditCardDescriptor editCardDescriptor = new EditCardCommand.EditCardDescriptor();
 
         parseQuestionForEdit(argMultimap.getValue(PREFIX_QUESTION).get()).ifPresent(editCardDescriptor::setQuestion);
         parseAnswerForEdit(argMultimap.getValue(PREFIX_ANSWER).get()).ifPresent(editCardDescriptor::setAnswer);
-
 
         if (!editCardDescriptor.isFieldEdited()) {
             throw new ParseException(EditCardCommand.MESSAGE_NOT_EDITED);

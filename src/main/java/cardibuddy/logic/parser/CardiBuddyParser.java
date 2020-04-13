@@ -89,7 +89,7 @@ public class CardiBuddyParser {
 
         case DeleteCommand.COMMAND_WORD:
             try {
-                switch (arguments.substring(1, 7)) {
+                switch (arguments.substring(1, 5)) {
 
                 case DeleteDeckCommand.COMMAND_WORD:
                     return new DeleteDeckCommandParser(logicToUiManager).parse(arguments.substring(5));
@@ -112,7 +112,7 @@ public class CardiBuddyParser {
                         return new EditDeckCommandParser().parse(arguments.substring(5));
 
                     case EditCardCommand.COMMAND_WORD: //c
-                        return new EditCardCommandParser(cardiBuddy, logicToUiManager).parse(arguments.substring(5));
+                        return new EditCardCommandParser().parse(arguments.substring(5));
 
                     default:
                         throw new ParseException(MESSAGE_UNKNOWN_COMMAND + "\n" + MESSAGE_INVALID_TWO_WORD_COMMAND);
