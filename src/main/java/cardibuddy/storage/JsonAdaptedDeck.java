@@ -29,6 +29,7 @@ public class JsonAdaptedDeck extends JsonAdaptedView {
     private final String title;
     private final List<JsonAdaptedFlashcard> flashcards = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final JsonAdaptedStatistic statistics;
 
     /**
      * Constructs a {@code JsonAdaptedFlashcard} with the given flashcard details.
@@ -36,7 +37,8 @@ public class JsonAdaptedDeck extends JsonAdaptedView {
     @JsonCreator
     public JsonAdaptedDeck(@JsonProperty("title") String title,
                            @JsonProperty("flashcards") List<JsonAdaptedFlashcard> flashcards,
-                           @JsonProperty("tagged") List<cardibuddy.storage.JsonAdaptedTag> tagged) {
+                           @JsonProperty("tagged") List<cardibuddy.storage.JsonAdaptedTag> tagged,
+                           @JsonProperty("statistics") JsonAdaptedStatistic statistics) {
         this.title = title;
         if (flashcards != null) {
             this.flashcards.addAll(flashcards);
@@ -44,6 +46,7 @@ public class JsonAdaptedDeck extends JsonAdaptedView {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.statistics = statistics;
     }
 
     /**
@@ -57,6 +60,7 @@ public class JsonAdaptedDeck extends JsonAdaptedView {
         tagged.addAll(source.getTags().stream()
                 .map(cardibuddy.storage.JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        this.statistics = new JsonAdaptedStatistic(source.getStatistics());
     }
 
     /**
@@ -85,6 +89,7 @@ public class JsonAdaptedDeck extends JsonAdaptedView {
         for (JsonAdaptedFlashcard flashcard : flashcards) {
             newDeck.addCard(flashcard.toModelType(newDeck));
         }
+        newDeck.setStatistics(statistics.toModeltype());
 
         // TODO: add if conditions here to check formatting
 

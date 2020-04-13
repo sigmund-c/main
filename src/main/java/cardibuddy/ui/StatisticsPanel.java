@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import cardibuddy.commons.core.LogsCenter;
-import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Statistics;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
@@ -34,8 +33,12 @@ public class StatisticsPanel extends UiPart<Region> {
 
     public StatisticsPanel(Statistics statistics) {
         super(FXML);
+
+        statsList.setStyle("-fx-control-inner-background: blue;");
+
         this.statistics = statistics;
         if (statistics.getCardsAdded() != 0) {
+
             statsList.getItems().add("No of Cards added: " + statistics.getCardsAdded());
         }
         if (statistics.getCardsDeleted() != 0) {
@@ -61,9 +64,9 @@ public class StatisticsPanel extends UiPart<Region> {
                                     + percentFormat.format(statistics.getAvgCorrectPercentage()));
         }
 
-        for (Map.Entry<Deck, List<Double>> deckHistory: statistics.getCorrectPercentageHistory().entrySet()) {
+        for (Map.Entry<String, List<Double>> deckHistory: statistics.getCorrectPercentageHistory().entrySet()) {
             XYChart.Series newSeries = new XYChart.Series();
-            newSeries.setName(deckHistory.getKey().getTitle().toString());
+            newSeries.setName(deckHistory.getKey());
 
             int recordIndex = 1;
             for (Double record : deckHistory.getValue()) {
@@ -75,6 +78,5 @@ public class StatisticsPanel extends UiPart<Region> {
         }
 
     }
-
 
 }

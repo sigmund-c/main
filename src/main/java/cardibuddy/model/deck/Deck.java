@@ -94,6 +94,10 @@ public class Deck {
         return statistics;
     }
 
+    public void setStatistics(Statistics statistics) {
+        this.statistics = statistics;
+    }
+
     /**
      * Adds a Card to a Deck.
      * @param card

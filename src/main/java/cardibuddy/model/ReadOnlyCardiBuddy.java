@@ -1,6 +1,7 @@
 package cardibuddy.model;
 
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.flashcard.Card;
 import javafx.collections.ObservableList;
 
@@ -20,5 +21,7 @@ public interface ReadOnlyCardiBuddy {
      * This list will not contain any duplicate flashcards.
      */
     ObservableList<Card> getFlashcardList();
+
+    Statistics getStatistics();
 
 }

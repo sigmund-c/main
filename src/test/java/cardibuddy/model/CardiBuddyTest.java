@@ -16,6 +16,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import cardibuddy.model.deck.Deck;
+import cardibuddy.model.deck.Statistics;
 import cardibuddy.model.deck.exceptions.DuplicateDeckException;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.testutil.DeckBuilder;
@@ -89,6 +90,7 @@ public class CardiBuddyTest {
     private static class CardiBuddyStub implements ReadOnlyCardiBuddy {
         private final ObservableList<Deck> decks = FXCollections.observableArrayList();
         private final ObservableList<Card> flashcards = FXCollections.observableArrayList();
+        private final Statistics statistics = new Statistics();
 
         CardiBuddyStub(Collection<Deck> decks) {
             this.decks.setAll(decks);
@@ -102,6 +104,11 @@ public class CardiBuddyTest {
         @Override
         public ObservableList<Card> getFlashcardList() {
             return flashcards;
+        }
+
+        @Override
+        public Statistics getStatistics() {
+            return statistics;
         }
     }
 

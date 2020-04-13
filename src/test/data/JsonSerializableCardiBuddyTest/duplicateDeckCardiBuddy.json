@@ -1,0 +1,57 @@
+{
+  "decks" : [ {
+    "title" : "PostgreSQL",
+    "flashcards" : [ {
+      "deck" : "PostgreSQL\nTags: [Relational][Database]\nNo. of Cards: 1",
+      "question" : "a",
+      "answer" : "b",
+      "path" : "",
+      "tagged" : [ ]
+    } ],
+    "tagged" : [ "Relational", "Database" ],
+    "statistics" : {
+      "cardsAdded" : "1",
+      "cardsDeleted" : "0",
+      "decksAdded" : "1",
+      "decksDeleted" : "1",
+      "timesPlayed" : "0",
+      "cardsPlayed" : "0",
+      "avgCorrectPercentage" : "0.0",
+      "avgTriesToGetCorrect" : "0.0",
+      "correctPercentageHistory" : { }
+    }
+  }, {
+    "title" : "PostgreSQL",
+    "flashcards" : [ {
+      "deck" : "PostgreSQL\nTags: [Relational][Database]\nNo. of Cards: 1",
+      "question" : "a",
+      "answer" : "b",
+      "path" : "",
+      "tagged" : [ ]
+    } ],
+    "tagged" : [ "Relational", "Database" ],
+    "statistics" : {
+      "cardsAdded" : "1",
+      "cardsDeleted" : "0",
+      "decksAdded" : "1",
+      "decksDeleted" : "1",
+      "timesPlayed" : "0",
+      "cardsPlayed" : "0",
+      "avgCorrectPercentage" : "0.0",
+      "avgTriesToGetCorrect" : "0.0",
+      "correctPercentageHistory" : { }
+    }
+  } ],
+  "statistics" : {
+    "cardsAdded" : "1",
+    "cardsDeleted" : "0",
+    "decksAdded" : "5",
+    "decksDeleted" : "5",
+    "timesPlayed" : "0",
+    "cardsPlayed" : "0",
+    "avgCorrectPercentage" : "0.0",
+    "avgTriesToGetCorrect" : "0.0",
+    "correctPercentageHistory" : { }
+  },
+  "flashcards" : [ ]
+}
