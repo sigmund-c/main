@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * True False answer class.
  */
-public class TfAnswer implements Answer {
+public class TfAnswer extends Answer {
 
     public static final String MESSAGE_CONSTRAINTS = "True / False answers should either be \"T\" or \"F\"";
     private static final String TF_REGEX = "(?=.{1}$)^[TF]";

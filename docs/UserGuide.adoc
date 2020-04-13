@@ -18,13 +18,13 @@ By: `Team T10-2`      Since: `Jan 2020`      Licence: `MIT`
 
 == Introduction
 
-Cardi Buddy (CardiB) is for students who *prefer to use a desktop app to store their revision materials as flashcards*. More importantly, CardiB is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CardiB can help you to store revision materials quickly. The self-testing features will definitely help you to ace your examinations as opposed to traditional ways of revision by re-reading lecture notes. Interested? Jump to <<Quick Start>> to get started. Enjoy!
+CardiBuddy (CardiB) is for students who *prefer to use a desktop app to store their revision materials as flashcards*. More importantly, CardiB is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CardiB can help you to store revision materials quickly. The self-testing features will definitely help you to ace your examinations as opposed to traditional ways of revision by re-reading lecture notes. Interested? Jump to <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
 .  Download the latest `cardibuddy.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Cardi Buddy.
+.  Copy the file to the folder you want to use as the home folder for your CardiBuddy.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790", align="center"]
@@ -34,7 +34,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all decks
-* **`add`**`d/CS1101S t/Basics` : adds an empty deck titled `CS1101S` to the Cardi Buddy.
+* **`add`**`d/CS1101S t/Basics` : adds an empty deck titled `CS1101S` to the CardiBuddy.
 * *`open 1`* : opens the 1st deck shown in the current list
 * **`delete deck`**`3` : deletes the 3rd deck shown in the current list
 * *`exit`* : exits the app
@@ -129,10 +129,10 @@ Format: `add q/QUESTION a/ANSWER`
 [TIP]
 These are the three types of `ANSWER` and their corresponding formats: +
 1. T/F -- `T` or `F` +
-2. MCQ -- `A)CHOICE_ONE B)CHOICE_TWO C)CHOICE_THREE` with the correct option being entered first, the order of the next two does not matter  +
+2. MCQ -- `A)CHOICE_A B)CHOICE_B C)CHOICE_C` with the correct option being entered first, the order of the next two does not matter  +
 3. Short Answer -- `ANY_TEXT`
 
-* The deck to be added in must be open for you to add a card.
+* The deck to be added in must be opened for you to add a card.
 
 Examples:
 
@@ -150,7 +150,7 @@ Adds a new card with a `T/F` answer type belonging to the opened deck indexed at
 Creates a new image card to be added to the deck.
 Format: `add p/file:FILE_PATH_TO_IMAGE q/QUESTION a/ANSWER`
 
-* The deck to be added in must be open for you to add a card.
+* The deck to be added in must be opened for you to add a card.
 
 * The images can only be PNG or JPG files.
 
@@ -168,8 +168,19 @@ Note that the correct answer is `B` as it is the first choice entered.
 You can drag and drop the image you want to add into a terminal window to obtain its file path. File paths may differ across operating systems (Windows vs Mac).
 
 ==== Adding an image card via the Image button: `q/QUESTION a/ANSWER`
-Shortcut for users who do not want to search for the file path.
+This is a shortcut for users who do not want to search for the file path.
+Format: `q/QUESTION a/ANSWER`
 
+* The deck to be added in must be opened, before you click on the button, for you to add a card.
+
+* Do note the differences in the command to be entered. There is no `add` or `p/IMAGE_FILEPATH` inputs that are required.
+
+Examples:
+
+* `open 1` +
+_click on button and choose image_ +
+`q/What type of diagram is this? a/B)Architecture Diagram A)Sequence Diagram C)Object Diagram` +
+Adds a new card with an image and `MCQ` answer type belonging to the opened deck indexed at 1.
 
 // end::addingImage[]
 
@@ -180,7 +191,7 @@ Shortcut for users who do not want to search for the file path.
 ==== Editing a deck: `edit`
 
 Edits an existing deck in the library.
-Format: `edit DECK_INDEX [d/TITLE] [t/TAG]…`
+Format: `edit deck DECK_INDEX [d/TITLE] [t/TAG]…`
 
 * Edits the decks at the specified DECK_INDEX. The index refers to the index number shown in the complete list of decks. The index must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
@@ -191,13 +202,13 @@ removed.
 
 Examples:
 
-* `edit 1 d/CS2103T` +
+* `edit deck 1 d/CS2103T` +
 Edits the title of the 1st deck to be `CS2103T` without removing existing tags.
 
-* `edit 2 d/CS2040 t/` +
+* `edit deck 2 d/CS2040 t/` +
 Edits the title of the 2nd deck to be `CS2040` and clears all existing tags.
 
-==== Editing a card: `edit card` [coming in v2.0]
+==== Editing a card: `edit card`
 
 Edits an existing card in the deck.
 Format: `edit card CARD_INDEX [q/QUESTION] [a/ANSWER] [t/TAG]…`
@@ -518,7 +529,7 @@ Shows the statistics of the 3rd test session of the deck with the shown index of
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Cardi Buddy folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CardiBuddy folder.
 
 == Command Summary
 

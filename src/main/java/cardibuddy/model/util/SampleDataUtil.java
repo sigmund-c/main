@@ -12,6 +12,7 @@ import cardibuddy.model.deck.Title;
 import cardibuddy.model.flashcard.Flashcard;
 import cardibuddy.model.flashcard.Question;
 import cardibuddy.model.flashcard.ShortAnswer;
+import cardibuddy.model.flashcard.TfAnswer;
 import cardibuddy.model.tag.Tag;
 
 /**
@@ -31,14 +32,14 @@ public class SampleDataUtil {
         Flashcard cardB = new Flashcard(deckA,
                 new Question("As per the KISS principle, should one always prefer the simpler solution over more"
                         + " clever solutions?"),
-                new ShortAnswer("False"), "");
+                new TfAnswer("F"), "");
         Flashcard cardC = new Flashcard(deckA,
                 new Question("Do non-functional requirements specify the constraints under which system is developed"
                         + " and operated?"),
-                new ShortAnswer("True"), "");
+                new TfAnswer("T"), "");
         Flashcard cardD = new Flashcard(deckA,
                 new Question("Is defensive code desirable at all times?"),
-                new ShortAnswer("False"), "");
+                new TfAnswer("F"), "");
         deckA.addCard(cardA);
         deckA.addCard(cardB);
         deckA.addCard(cardC);
