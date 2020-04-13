@@ -1,0 +1,124 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":CardiBuddyParser" as CardiBuddyParser LOGIC_COLOR
+participant ":AddFlashcardCommandParser" as AddFlashcardCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant ":Flashcard" as Flashcard LOGIC_COLOR
+participant ":AddFlashcardCommand" as AddFlashcardCommand LOGIC_COLOR
+participant ":logicToUiManager" as LogicToUiManager LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Ui UI_COLOR_T1
+participant ":UiManager" as UiManager UI_COLOR
+participant ":MainWindow" as MainWindow UI_COLOR
+endbox
+
+[-> LogicManager : execute("add q/Is\ndefensive code desirable\nat all times? a/F")
+activate LogicManager
+
+LogicManager -> CardiBuddyParser : parseCommand("add q/Is\ndefensive code desirable\nat all times? a/F")
+activate CardiBuddyParser
+
+create AddFlashcardCommandParser
+CardiBuddyParser -> AddFlashcardCommandParser
+activate AddFlashcardCommandParser
+
+AddFlashcardCommandParser --> CardiBuddyParser :
+deactivate AddFlashcardCommandParser
+
+CardiBuddyParser -> AddFlashcardCommandParser : parse("q/Is defensive\n code desirable at all times? a/F")
+activate AddFlashcardCommandParser
+
+AddFlashcardCommandParser -> LogicToUiManager : getDisplayedDeck()
+activate LogicToUiManager
+
+LogicToUiManager --> AddFlashcardCommandParser : displayedDeck
+deactivate LogicToUiManager
+deactivate AddFlashcardCommandParser
+
+AddFlashcardCommandParser -> ParserUtil : parseQuestion("Is defensive\ncode desirable at all times?")
+activate AddFlashcardCommandParser
+activate ParserUtil
+
+ParserUtil --> AddFlashcardCommandParser : question
+deactivate ParserUtil
+
+AddFlashcardCommandParser -> ParserUtil : parseAnswer("F")
+activate ParserUtil
+
+ParserUtil --> AddFlashcardCommandParser : tfAnswer
+deactivate ParserUtil
+
+create Flashcard
+AddFlashcardCommandParser -> Flashcard : displayedDeck, question, tfAnswer
+activate Flashcard
+Flashcard --> AddFlashcardCommandParser : flashcard
+deactivate Flashcard
+
+create AddFlashcardCommand
+AddFlashcardCommandParser -> AddFlashcardCommand : flashcard, logicToUiManager
+activate AddFlashcardCommand
+
+AddFlashcardCommand --> AddFlashcardCommandParser
+deactivate AddFlashcardCommand
+
+AddFlashcardCommandParser --> CardiBuddyParser : addFcCommand
+deactivate AddFlashcardCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddFlashcardCommandParser -[hidden]-> CardiBuddyParser
+destroy AddFlashcardCommandParser
+
+CardiBuddyParser --> LogicManager : addFcCommand
+deactivate CardiBuddyParser
+
+LogicManager -> AddFlashcardCommand : execute()
+activate AddFlashcardCommand
+
+AddFlashcardCommand -> Model : addFlashcard(flashcard)
+activate Model
+Model --> AddFlashcardCommand
+deactivate Model
+
+AddFlashcardCommand -> LogicToUiManager : addCard(flashcard)
+activate LogicToUiManager
+LogicToUiManager --> AddFlashcardCommand
+deactivate LogicToUiManager
+
+AddFlashcardCommand -> LogicToUiManager : updateFilteredFlashcardList
+activate LogicToUiManager
+LogicToUiManager --> AddFlashcardCommand
+deactivate LogicToUiManager
+
+AddFlashcardCommand -> LogicToUiManager : updateFlashcardPanel()
+activate LogicToUiManager
+
+LogicToUiManager -> UiManager : getMainWindow()
+activate UiManager
+UiManager -> MainWindow : updateCards
+activate MainWindow
+
+MainWindow --> UiManager
+deactivate MainWindow
+
+UiManager --> LogicToUiManager
+deactivate UiManager
+
+LogicToUiManager --> AddFlashcardCommand
+deactivate LogicToUiManager
+
+
+deactivate LogicToUiManager
+
+AddFlashcardCommand --> LogicManager : result
+deactivate AddFlashcardCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Short Answer class for Flashcard.
  */
-public class ShortAnswer implements Answer {
+public class ShortAnswer extends Answer {
 
     public static final String MESSAGE_CONSTRAINTS = "Short Answer should not be left blank";
     public static final String VALIDATION_REGEX = "[^\\s].*";
