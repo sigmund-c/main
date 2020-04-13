@@ -19,6 +19,7 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireAllNonNull(model);
+        String lastCommand = commandHistory.getHistory().get(0);
         if (model.hasOngoingTestSession()) {
             throw new CommandException(MESSAGE_TEST_ONGOING);
         }
@@ -29,6 +30,6 @@ public class UndoCommand extends Command {
 
         model.undo();
         model.updateFilteredDeckList(Model.PREDICATE_SHOW_ALL_DECKS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS + "\nUndone command: " + lastCommand);
     }
 }

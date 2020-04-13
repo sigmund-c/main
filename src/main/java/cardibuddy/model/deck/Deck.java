@@ -105,6 +105,16 @@ public class Deck {
         return Collections.unmodifiableList(flashcards);
     }
 
+    public void setFlashcard(Card cardToEdit, Card editedCard) {
+        if (flashcards.contains(cardToEdit)) {
+            int index = flashcards.indexOf(cardToEdit);
+            flashcards.set(index, editedCard);
+        }
+
+        filteredFlashcards = new FilteredList<>(FXCollections.observableList(flashcards));
+        //filteredFlashcards.setPredicate(predicate);
+    }
+
     /**
      * Checks if the Title of the Deck exists.
      * @param otherDeck the deck being compared to.
@@ -196,6 +206,4 @@ public class Deck {
 
         return builder.toString();
     }
-
-
 }
