@@ -6,15 +6,22 @@ import cardibuddy.model.flashcard.McqAnswer;
  * Stub class for McqAnswer.
  */
 public class McqAnswerStub extends McqAnswer {
-    private String answer;
+    private String answer = "A";
 
-    public McqAnswerStub(String answerString) {
-        super(answerString);
-        answer = answerString;
+    public McqAnswerStub(String line) {
+        super(line);
     }
 
     @Override
-    public String toString() {
+    public boolean checkAnswer(String toCheck) {
+        if (!(toCheck.equals("A") || toCheck.equals("B") || toCheck.equals("C"))) {
+            throw new IllegalArgumentException();
+        }
+        return answer.equals(toCheck);
+    }
+
+    @Override
+    public String getCorrectAnswer() {
         return answer;
     }
 }
