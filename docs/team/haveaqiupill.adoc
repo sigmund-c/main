@@ -3,13 +3,9 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: Cardi Buddy
-
----
-
 == Overview
 
-*Cardi Buddy (CardiB)* is a flash cards application that allows students to generate their own flash cards and test
+*CardiBuddy (CardiB)* is a flash cards application that allows students to generate their own flash cards and test
 themselves through a simple Command Line Interface. It is specially designed for SoC students as a desktop
 application as they are generally comfortable with typing.
 

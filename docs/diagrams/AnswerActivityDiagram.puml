@@ -1,0 +1,4 @@
+@startuml
+(*)  --> "new test session for the given deck"
+
+@enduml
