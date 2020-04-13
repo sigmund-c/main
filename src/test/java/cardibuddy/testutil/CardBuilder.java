@@ -7,6 +7,7 @@ import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.Title;
 import cardibuddy.model.flashcard.*;
 import cardibuddy.model.tag.Tag;
+import cardibuddy.model.testsession.CardStub;
 
 public class CardBuilder {
     public static final String DEFAULT_QUESTION = "Recursion  is a method of solving a problem where the solution " +
@@ -76,7 +77,7 @@ public class CardBuilder {
      * Sets the {@code Answer} of the {@code Flashcard} that we are building.
      */
     public CardBuilder withMcqAnswer(String answer) {
-        this.answer = new McqAnswer(answer);
+        //this.answer = new McqAnswer(answer);
         return this;
     }
 
@@ -102,5 +103,9 @@ public class CardBuilder {
 
     public Imagecard buildImagecard() {
         return new Imagecard(deck, question, answer, path);
+    }
+
+    public Card build() {
+        return new CardStub(deck, question, answer, path);
     }
 }

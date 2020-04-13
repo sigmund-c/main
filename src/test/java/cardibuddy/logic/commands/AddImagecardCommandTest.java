@@ -109,14 +109,14 @@ public class AddImagecardCommandTest {
         Imagecard i1 = new CardBuilder().withQuestion("This card returns true").buildImagecard();
         Imagecard i2 = new CardBuilder().withQuestion("This card returns false").buildImagecard();
 
-        AddImagecardCommand addImagecardi1Command = new AddImagecardCommand(i1, logicToUiManager);
-        AddImagecardCommand addImagecardi2Command = new AddImagecardCommand(i2, logicToUiManager);
+        AddImageCardCommand addImagecardi1Command = new AddImageCardCommand(i1, logicToUiManager);
+        AddImageCardCommand addImagecardi2Command = new AddImageCardCommand(i2, logicToUiManager);
 
         // same object -> returns true
         assertTrue(addImagecardi1Command.equals(addImagecardi1Command));
 
         // same values -> returns true
-        AddImagecardCommand addImagecardi1CommandCopy = new AddImagecardCommand(i1, logicToUiManager);
+        AddImageCardCommand addImagecardi1CommandCopy = new AddImageCardCommand(i1, logicToUiManager);
         assertTrue(addImagecardi1Command.equals(addImagecardi1CommandCopy));
 
         // different types -> returns false

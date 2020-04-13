@@ -21,6 +21,7 @@ import cardibuddy.model.deck.Deck;
 import cardibuddy.model.deck.SearchDeckKeywordsPredicate;
 import cardibuddy.model.flashcard.Card;
 import cardibuddy.model.flashcard.SearchCardKeywordsPredicate;
+import cardibuddy.testutil.EditCardDescriptorBuilder;
 import cardibuddy.testutil.EditDeckDescriptorBuilder;
 
 /**
@@ -43,6 +44,8 @@ public class CommandTestUtil {
 
     public static final String VALID_QUESTION_MODULECODE = "What is the module code of this module?";
     public static final String VALID_ANSWER_CODE = "CS2103";
+    public static final String VALID_QUESTION_MODULECODE2 = "What is the module code of this module's twin?";
+    public static final String VALID_ANSWER_CODE2 = "CS2101";
 
     public static final String QUESTION_DESC_MODULECODE = " " + PREFIX_QUESTION + VALID_QUESTION_MODULECODE;
     public static final String ANSWER_DESC_CODE = " " + PREFIX_ANSWER + VALID_ANSWER_CODE;
@@ -56,11 +59,18 @@ public class CommandTestUtil {
     public static final EditDeckCommand.EditDeckDescriptor DESC_DJANGO;
     public static final EditDeckCommand.EditDeckDescriptor DESC_REACT;
 
+    public static final EditCardCommand.EditCardDescriptor DESC_QUESTION1;
+    public static final EditCardCommand.EditCardDescriptor DESC_QUESTION2;
+
     static {
-        DESC_DJANGO = new EditDeckDescriptorBuilder().withName(VALID_TITLE_DJANGO)
+        DESC_DJANGO = new EditDeckDescriptorBuilder().withTitle(VALID_TITLE_DJANGO)
                 .withTags(VALID_TAG_FRONTEND).build();
-        DESC_REACT = new EditDeckDescriptorBuilder().withName(VALID_TITLE_REACT)
+        DESC_REACT = new EditDeckDescriptorBuilder().withTitle(VALID_TITLE_REACT)
                 .withTags(VALID_TAG_HARD, VALID_TAG_FRONTEND).build();
+        DESC_QUESTION1 = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_MODULECODE)
+                .withAnswer(VALID_ANSWER_CODE).build();
+        DESC_QUESTION2 = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_MODULECODE2)
+                .withAnswer(VALID_ANSWER_CODE2).build();
     }
 
     /**
