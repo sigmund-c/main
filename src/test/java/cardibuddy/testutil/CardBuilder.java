@@ -4,30 +4,31 @@ import java.util.HashSet;
 import java.util.Set;
 
 import cardibuddy.model.deck.Deck;
-import cardibuddy.model.deck.Title;
-import cardibuddy.model.flashcard.*;
-import cardibuddy.model.tag.Tag;
-import cardibuddy.model.testsession.CardStub;
+import cardibuddy.model.flashcard.Answer;
+import cardibuddy.model.flashcard.Card;
+import cardibuddy.model.flashcard.Flashcard;
+import cardibuddy.model.flashcard.Question;
+import cardibuddy.model.flashcard.ShortAnswer;
 
+/**
+ * A utility class to help with building Deck objects.
+ */
 public class CardBuilder {
-    public static final String DEFAULT_QUESTION = "Recursion  is a method of solving a problem where the solution " +
-            "depends on solutions to smaller instances of the same problem";
-    public static final String DEFAULT_ANSWER = "true";
+
+    public static final String DEFAULT_QUESTION = "What is the powerhouse of the cell?";
+    public static final String DEFAULT_ANSWER = "Mitochondria";
     public static final String DEFAULT_PATH = "";
 
-    private Title title = new Title("CS1101S");
-    private Set<Tag> tags = new HashSet<>();
-    private Deck deck;
     private Question question;
     private Answer answer;
+    private Deck deck;
     private String path;
 
     public CardBuilder() {
-        deck = new Deck(title, tags);
-        answer = new ShortAnswer(DEFAULT_ANSWER);
         question = new Question(DEFAULT_QUESTION);
+        answer = new ShortAnswer(DEFAULT_ANSWER);
+        deck = new DeckBuilder().build();
         path = DEFAULT_PATH;
-    }
 
     /**
      * Initializes the CardBuilder with the data of {@code flashcardToCopy}.
